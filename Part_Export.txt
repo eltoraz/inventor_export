@@ -1,0 +1,20 @@
+﻿
+	GoExcel.Open("I:\Cadd\_iLogic\Export\Part_Level.xls")
+	
+	GoExcel.CellValue("B2")=iProperties.Value("Project", "Part Number")
+	GoExcel.CellValue("D2") = iProperties.Value("Project", "Description")
+	GoExcel.CellValue("E2") = iProperties.Value("Custom", "ClassID")
+	GoExcel.CellValue("F2") = iProperties.Value("Custom", "UOM")
+	GoExcel.CellValue("G2") = iProperties.Value("Custom", "UOM")
+	GoExcel.CellValue("H2") = iProperties.Value("Custom", "Type")
+	GoExcel.CellValue("O2") = iProperties.Value("Custom", "Group")
+	GoExcel.CellValue("P2") = iProperties.Value("Custom", "Mfg.Comments")
+	GoExcel.CellValue("Q2") = iProperties.Value("Custom", "Purchase Comments")
+	GoExcel.CellValue("AR2") = iProperties.Value("Custom", "UOM")
+	GoExcel.CellValue("AV2") = iProperties.Value("Custom", "Use Part Rev")
+	GoExcel.CellValue("BS2") = iProperties.Value("Custom", "Serial Number")
+	GoExcel.CellValue("BT2") = iProperties.Value("Custom", "Base Number")
+
+	GoExcel.Save
+
+MessageBox.Show("iProperties successfully copied!")
