@@ -16,7 +16,7 @@ GoExcel.CellValue("E2") = iProperties.Value("Custom", "ClassID")
 GoExcel.CellValue("F2") = iProperties.Value("Custom", "UOM")
 GoExcel.CellValue("G2") = iProperties.Value("Custom", "UOM")
 
-PartType = Properties.Value("Custom", "Type")
+PartType = iProperties.Value("Custom", "Type")
 GoExcel.CellValue("H2") = PartType
 
 'I2: Price per grouping (currently: "E", but will this always be the case?)
@@ -33,7 +33,7 @@ GoExcel.CellValue("Q2") = "BBN"     'UOMClassID
 
 'R2/S2/T2: Serial Mask/Mask example/Net Weight UOM:
 'possibly only needed for manufactured parts (type "M")?
-If StrCmp(PartType, "M") Then
+If StrComp(PartType, "M") Then
     GoExcel.CellValue("R2") = "NF"
     GoExcel.CellValue("S2") = "NF9999999"
     GoExcel.CellValue("T2") = "LB"
