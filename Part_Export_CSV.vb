@@ -5,12 +5,12 @@ Dim Description, PartType
 'Open the CSV file (note: this will overwrite the file if it exists!)
 fso = CreateObject("Scripting.FileSystemObject")
 FileName = "I:\Cadd\_iLogic\Export\Part_Level.csv"
-csv = fso.OpenTextFile(FileName, 2, True, -1)
+csv = fso.OpenTextFile(FileName, 2, True, -2)
 
 Fields = "Company,PartNum,SearchWord,PartDescription,ClassID,IUM,PUM,TypeCode,PricePerCode,ProdCode,MfgComment,PurComment,SalesUM,UsePartRev,SNFormat,SNBaseDataType,UOMClassID,SNMask,SNMaskExample,NetWeightUOM"
 
 'Build string containing values in order expected by DMT (see Fields string)
-Data = "BBN"                                'A2: Company name (constant)
+Data = "BBN"                                'Company name (constant)
 Data = Data & "," & iProperties.Value("Project", "Part Number")
 
 Description = iProperties.Value("Project", "Description")
@@ -39,7 +39,7 @@ Data = Data & "," & "BBN"                   'UOMClassID
 
 'Serial Mask/Mask example/Net Weight UOM:
 'possibly only needed for manufactured parts (type "M")?
-If StrComp(PartType, "M") Then
+If StrComp(PartType, "M") = 0 Then
     Data = Data & "," & "NF"
     Data = Data & "," & "NF9999999"
     Data = Data & "," & "LB"
