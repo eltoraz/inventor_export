@@ -1,6 +1,6 @@
 ﻿Dim fso, FileName, csv
 Dim Fields, Data
-Dim Description, PartType
+Dim Description, PartType, UOM
 
 'Open the CSV file (note: this will overwrite the file if it exists!)
 fso = CreateObject("Scripting.FileSystemObject")
@@ -18,8 +18,15 @@ Data = Data & "," & Left(Description, 8)    'Search word, first 8 characters of 
 Data = Data & "," & Description
 
 Data = Data & "," & iProperties.Value("Custom", "ClassID")
-Data = Data & "," & iProperties.Value("Custom", "UOM")
-Data = Data & "," & iProperties.Value("Custom", "UOM")
+
+if StrComp(PartType, "M") = 0 Then
+    UOM = "EAM"
+ElseIf StrComp(PartType, "P") = 0 Then
+    UOM = "EAP"
+End If
+
+Data = Data & "," & UOM
+Data = Data & "," & UOM
 
 PartType = iProperties.Value("Custom", "Type")
 Data = Data & "," & PartType
@@ -30,7 +37,7 @@ Data = Data & "," & "E"
 Data = Data & "," & iProperties.Value("Custom", "Group")
 Data = Data & "," & iProperties.Value("Custom", "Mfg.Comments")
 Data = Data & "," & iProperties.Value("Custom", "Purchase Comments")
-Data = Data & "," & iProperties.Value("Custom", "UOM")
+Data = Data & "," & UOM
 Data = Data & "," & iProperties.Value("Custom", "Use Part Rev")
 Data = Data & "," & iProperties.Value("Custom", "Serial Number")
 Data = Data & "," & iProperties.Value("Custom", "Base Number")
