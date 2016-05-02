@@ -1,44 +1,53 @@
-﻿'Note: need to test whether GoExcel object works with CSV files
-'If not, can gather the data into a comma-delimited string and export manually
-GoExcel.Open("I:\Cadd\_iLogic\Export\Part_Level.csv")
-
+﻿Dim fso, FileName, csv
+Dim Fields, Data
 Dim Description, PartType
 
-'Write values in order expected by DMT
-GoExcel.CellValue("A2") = "BBN"     'A2: Company name (constant)
-GoExcel.CellValue("B2") = iProperties.Value("Project", "Part Number")
+'Open the CSV file (note: this will overwrite the file if it exists!)
+fso = CreateObject("Scripting.FileSystemObject")
+FileName = "I:\Cadd\_iLogic\Export\Part_Level.csv"
+csv = fso.OpenTextFile(FileName, 2, True, -1)
+
+Fields = "Company,PartNum,SearchWord,PartDescription,ClassID,IUM,PUM,TypeCode,PricePerCode,ProdCode,MfgComment,PurComment,SalesUM,UsePartRev,SNFormat,SNBaseDataType,UOMClassID,SNMask,SNMaskExample,NetWeightUOM"
+
+'Build string containing values in order expected by DMT (see Fields string)
+Data = "BBN"                                'A2: Company name (constant)
+Data = Data & "," & iProperties.Value("Project", "Part Number")
 
 Description = iProperties.Value("Project", "Description")
-GoExcel.CellValue("C2") = Left(Description, 8)  'Search word, first 8 characters of description
-GoExcel.CellValue("D2") = Description
+Data = Data & "," & Left(Description, 8)    'Search word, first 8 characters of description
+Data = Data & "," & Description
 
-GoExcel.CellValue("E2") = iProperties.Value("Custom", "ClassID")
-GoExcel.CellValue("F2") = iProperties.Value("Custom", "UOM")
-GoExcel.CellValue("G2") = iProperties.Value("Custom", "UOM")
+Data = Data & "," & iProperties.Value("Custom", "ClassID")
+Data = Data & "," & iProperties.Value("Custom", "UOM")
+Data = Data & "," & iProperties.Value("Custom", "UOM")
 
 PartType = iProperties.Value("Custom", "Type")
-GoExcel.CellValue("H2") = PartType
+Data = Data & "," & PartType
 
-'I2: Price per grouping (currently: "E", but will this always be the case?)
-GoExcel.CellValue("I2") = "E"
-GoExcel.CellValue("J2") = iProperties.Value("Custom", "Group")
-GoExcel.CellValue("K2") = iProperties.Value("Custom", "Mfg.Comments")
-GoExcel.CellValue("L2") = iProperties.Value("Custom", "Purchase Comments")
-GoExcel.CellValue("M2") = iProperties.Value("Custom", "UOM")
-GoExcel.CellValue("N2") = iProperties.Value("Custom", "Use Part Rev")
-GoExcel.CellValue("O2") = iProperties.Value("Custom", "Serial Number")
-GoExcel.CellValue("P2") = iProperties.Value("Custom", "Base Number")
+'Price per grouping (currently: "E", but will this always be the case?)
+Data = Data & "," & "E"
 
-GoExcel.CellValue("Q2") = "BBN"     'UOMClassID
+Data = Data & "," & iProperties.Value("Custom", "Group")
+Data = Data & "," & iProperties.Value("Custom", "Mfg.Comments")
+Data = Data & "," & iProperties.Value("Custom", "Purchase Comments")
+Data = Data & "," & iProperties.Value("Custom", "UOM")
+Data = Data & "," & iProperties.Value("Custom", "Use Part Rev")
+Data = Data & "," & iProperties.Value("Custom", "Serial Number")
+Data = Data & "," & iProperties.Value("Custom", "Base Number")
 
-'R2/S2/T2: Serial Mask/Mask example/Net Weight UOM:
+Data = Data & "," & "BBN"                   'UOMClassID
+
+'Serial Mask/Mask example/Net Weight UOM:
 'possibly only needed for manufactured parts (type "M")?
 If StrComp(PartType, "M") Then
-    GoExcel.CellValue("R2") = "NF"
-    GoExcel.CellValue("S2") = "NF9999999"
-    GoExcel.CellValue("T2") = "LB"
+    Data = Data & "," & "NF"
+    Data = Data & "," & "NF9999999"
+    Data = Data & "," & "LB"
 End If
 
-GoExcel.Save
+'Write field headers & data to file
+csv.WriteLine(Fields)
+csv.WriteLine(Data)
+csv.Close()
 
 MessageBox.Show("iProperties successfully copied!")
