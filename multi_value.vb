@@ -1,15 +1,6 @@
 Sub Main()
     'change Custom iProperty Name to desired Custom iProperty Name
     Dim propertyName1 As String = "Part Type"
-    dim oDoc As Document
-
-    oDoc = ThisDoc.Document
-
-    'Check to see if this is a part file
-    'If oDoc.DocumentType <> kPartDocumentObject Then
-    '    MessageBox.Show("This rule can only be run in a " & DocType & " file - exiting rule...")
-    '    Return
-    'End If
 
     createParam("PartType")
     createParam("Group")
@@ -39,18 +30,9 @@ End Sub
 
 Sub createParam(ByVal n As String)
     dim oDoc As Document
-    oDoc = ThisDoc.Document
 
-    Dim oPartCompDef As PartComponentDefinition = oDoc.ComponentDefinition
-    Dim oNewParameter As Parameters = oPartCompDef.Parameters
-    Dim oUParameter As UserParameters = oNewParameter.UserParameters
-    Dim oParam As Parameter
-    Dim oValue As String
+    oDoc = ThisApplication.ActiveDocument
+    Dim oParams As UserParameters = oDoc.Parameters.UserParameters
 
-    Try
-        oValue = ""
-        oParam = oNewParameter(n)
-    Catch
-        oParam = oUParameter.AddByValue(n, (oValue), "text")
-    End Try
+    Dim TestParam As UserParameter = oParams.AddByValue(n, "", UnitsTypeEnum.kTextUnits)
 End Sub
