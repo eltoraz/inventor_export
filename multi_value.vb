@@ -12,8 +12,8 @@ Sub Main()
     createParam(propertyName4, UnitsTypeEnum.kBooleanUnits)
 
     MultiValue.SetList(propertyName1, "M", "P")
-    MultiValue.SetList(propertyName2, "FSC Assemblies", "FSC Componenets", "NCA Assemblies", "NCA Components", "Purchases")
-    MultiValue.SetList(propertyName3, "Assemblies we sell", "Box Materials", "Components we sell", "Finish Materials", "Finished Components for kits", "Finished Components on shelf", "FSC Lumber", "Lumber", "Other Materials", "Tooling")
+    MultiValue.SetList(propertyName2, "FSC Assemblies", "FSC Components", "NCA Assemblies", "NCA Components", "Purchases")
+    MultiValue.SetList(propertyName3, "Assemblies we sell", "Box Materials", "Components we sell", "Finished Components for kits", "Finish Materials", "FSC Lumber", "Finished Components on shelf", "IT Supplies", "Lumber", "Office Supplies", "Other Materials", "Tooling")
 End Sub
 
 Sub createParam(ByVal n As String, ByVal paramType As UnitsTypeEnum)
