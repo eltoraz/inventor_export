@@ -27,7 +27,7 @@ Data = Data & "," & PartType
 'Price per grouping (currently: "E", but will this always be the case?)
 Data = Data & "," & "E"
 
-Data = Data & "," & iProperties.Value("Custom", "Group")
+Data = Data & "," & iProperties.Value("Custom", "ProdCode")
 Data = Data & "," & iProperties.Value("Custom", "Mfg.Comments")
 Data = Data & "," & iProperties.Value("Custom", "Purchase Comments")
 Data = Data & "," & iProperties.Value("Custom", "UOM")

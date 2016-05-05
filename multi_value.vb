@@ -2,7 +2,7 @@
 'Epicor DMT (the actual IDs the tool needs are set in set_props.vb)
 Sub Main()
     Dim propertyName1 As String = "PartType"
-    Dim propertyName2 As String = "Group"
+    Dim propertyName2 As String = "ProdCode"
     Dim propertyName3 As String = "ClassID"
     Dim propertyName4 As String = "UsePartRev"
 
