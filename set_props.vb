@@ -42,10 +42,12 @@ Sub Main()
         Else If StrComp(i, "ClassID") = 0 Then
             paramValue = ClassIDMap(paramValue)
         Else If StrComp(i, "MfgComment") = 0 Then
-            'note: Epicor MfgComment field supports up to 16000 chars)
+            'note: Epicor MfgComment and PurComment fields supports up to 16000 chars,
+            'and commas need to be stripped to avoid messing up the CSV
+            paramValue = Replace(paramValue, ",", "")
             paramValue = Left(paramValue, 16000)
         Else If StrComp(i, "PurComment") = 0 Then
-            'note: Epicor PurComment field supports up to 16000 chars)
+            paramValue = Replace(paramValue, ",", "")
             paramValue = Left(paramValue, 16000)
         End If
 
