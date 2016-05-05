@@ -17,10 +17,10 @@ Sub Main()
 End Sub
 
 Sub createParam(ByVal n As String, ByVal paramType As UnitsTypeEnum)
-    dim oDoc As Document
+    dim invDoc As Document
 
-    oDoc = ThisApplication.ActiveDocument
-    Dim oParams As UserParameters = oDoc.Parameters.UserParameters
+    invDoc = ThisApplication.ActiveDocument
+    Dim invParams As UserParameters = invDoc.Parameters.UserParameters
 
     Dim defaultValue
     If paramType = UnitsTypeEnum.kTextUnits Then
@@ -29,6 +29,6 @@ Sub createParam(ByVal n As String, ByVal paramType As UnitsTypeEnum)
         defaultValue = True
     End If
 
-    Dim TestParam As UserParameter = oParams.AddByValue(n, defaultValue, paramType)
+    Dim TestParam As UserParameter = invParams.AddByValue(n, defaultValue, paramType)
     'TestParam.ExposedAsProperty = True
 End Sub

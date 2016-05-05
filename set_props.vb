@@ -7,47 +7,50 @@ Sub Main()
 
     'mappings for human-readable values (i.e. in the dropdown boxes) -> keys
     'only necessary for ProdCode and ClassID
-    Dim ProdCodeMap As List(Of KeyValuePair(Of String, String)) =
-        New List(Of KeyValuePair(Of String, String))
-    ProdCodeMap.Add(New KeyValuePair(Of String, String)("FSC Assemblies", "FSC-ASBL"))
-    ProdCodeMap.Add(New KeyValuePair(Of String, String)("FSC Components", "FSC-COMP"))
-    ProdCodeMap.Add(New KeyValuePair(Of String, String)("NCA Assemblies", "NCA-ASBL"))
-    ProdCodeMap.Add(New KeyValuePair(Of String, String)("NCA Components", "NCA-COMP"))
-    ProdCodeMap.Add(New KeyValuePair(Of String, String)("Purchases", "PURCHASE"))
+    Dim ProdCodeMap As New Dictionary(Of String, String)
+    ProdCodeMap.Add("FSC Assemblies", "FSC-ASBL")
+    ProdCodeMap.Add("FSC Components", "FSC-COMP")
+    ProdCodeMap.Add("NCA Assemblies", "NCA-ASBL")
+    ProdCodeMap.Add("NCA Components", "NCA-COMP")
+    ProdCodeMap.Add("Purchases", "PURCHASE")
 
-    Dim ClassIDMap As List(Of KeyValuePair(Of String, String)) =
-        New List(Of KeyValuePair(Of String, String))
-    ClassIDMap.Add(New KeyValuePair(Of String, String)("Assemblies we sell", "ASBL"))
-    ClassIDMap.Add(New KeyValuePair(Of String, String)("Box Materials", "BOX"))
-    ClassIDMap.Add(New KeyValuePair(Of String, String)("Components we sell", "COMP"))
-    ClassIDMap.Add(New KeyValuePair(Of String, String)("Finished Components for kits", "FKIT"))
-    ClassIDMap.Add(New KeyValuePair(Of String, String)("Finish Materials", "FNSH"))
-    ClassIDMap.Add(New KeyValuePair(Of String, String)("FSC Lumber", "FSC"))
-    ClassIDMap.Add(New KeyValuePair(Of String, String)("Finished Components on shelf", "FSHL"))
-    ClassIDMap.Add(New KeyValuePair(Of String, String)("IT Supplies", "IT"))
-    ClassIDMap.Add(New KeyValuePair(Of String, String)("Lumber" "LUMB"))
-    ClassIDMap.Add(New KeyValuePair(Of String, String)("Office Supplies", "OFF"))
-    ClassIDMap.Add(New KeyValuePair(Of String, String)("Other Materials", "OTHR"))
-    ClassIDMap.Add(New KeyValuePair(Of String, String)("Tooling", "TOOL"))
+    Dim ClassIDMap As New Dictionary(Of String, String)
+    ClassIDMap.Add("Assemblies we sell", "ASBL")
+    ClassIDMap.Add("Box Materials", "BOX")
+    ClassIDMap.Add("Components we sell", "COMP")
+    ClassIDMap.Add("Finished Components for kits", "FKIT")
+    ClassIDMap.Add("Finish Materials", "FNSH")
+    ClassIDMap.Add("FSC Lumber", "FSC")
+    ClassIDMap.Add("Finished Components on shelf", "FSHL")
+    ClassIDMap.Add("IT Supplies", "IT")
+    ClassIDMap.Add("Lumber", "LUMB")
+    ClassIDMap.Add("Office Supplies", "OFF")
+    ClassIDMap.Add("Other Materials", "OTHR")
+    ClassIDMap.Add("Tooling", "TOOL")
+
+    For Each item As String in params
+        Dim paramVal
+    Next
 End Sub
 
-'TODO: call this after the parameters are set by the user to update the
-'      corresponding iProperty value, in case the parameter value can't be
-'      directly exported
-Sub addProp(ByVal n As String)
-    'define custom property collection
-    oCustomPropertySet = ThisDoc.Document.PropertySets.Item("Inventor User Defined Properties")
+Sub updateProp(ByVal n As String, ByVal paramVal As Variant)
+    'get the custom property collection
+    Dim invDoc As Document = ThisApplication.ActiveDocument
+    Dim invCustomPropertySet = invDoc.PropertySets.Item("Inventor User Defined Properties")
 
-    Try
-        'set property value
-        oProp = oCustomPropertySet.Item(n)
-    Catch
-        ' Assume error means not found so create it
-        oCustomPropertySet.Add("", n)
-    End Try
+    ' Attempt to get existing custom property
+    On Error Resume Next
+    Dim invProp As Property
+    Set invProperty = invCustomPropertySet.Item(n)
+    If Err.Number <> 0 Then
+        'Failed to get the property, which means it doesn't already exist,
+        'so we'll create it
+        Call invCustomPropertySet.Add(paramVal, n)
+    Else
+        'got the property so update the value
+        invProperty.value = paramVal
+    End If
 
-    'TODO: change UniqueFxName to the name of your User Defined Parameter
-    iProperties.Value("Custom", n) = UniqueFxName
     'processes update when rule is run so save doesn't have to occur to see change
-    iLogicVb.UpdateWhenDone = True
+    'iLogicVb.UpdateWhenDone = True
 End Sub
