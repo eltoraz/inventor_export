@@ -80,4 +80,14 @@ csv.WriteLine(Fields)
 csv.WriteLine(Data)
 csv.Close()
 
+'TODO: finish
+'Call the DMT on the generated CSV file
+Dim dmtShell, dmtPath, dmtFolder, dmtApp
+dmtShell = CreateObject("Shell.Application")
+dmtPath = "C:\Epicor\ERP10.1Client\Client"
+dmtFolder = dmtShell.Namespace(dmtPath)
+dmtApp = dmtFolder.ParseName("DMT.exe")
+
+Dim msgSuccess = "Part successfully imported into Epicor!"
+Dim msgFailure = "Error importing part into Epicor!"
 MessageBox.Show("iProperties successfully copied!")
