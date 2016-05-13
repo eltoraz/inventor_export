@@ -82,12 +82,14 @@ csv.Close()
 
 'TODO: finish
 'Call the DMT on the generated CSV file
-Dim dmtShell, dmtPath, dmtFolder, dmtApp
-dmtShell = CreateObject("Shell.Application")
-dmtPath = "C:\Epicor\ERP10.1Client\Client"
-dmtFolder = dmtShell.Namespace(dmtPath)
-dmtApp = dmtFolder.ParseName("DMT.exe")
+Dim dmt_loc = "C:\Epicor\ERP10.1Client\Client\DMT.exe"
+Dim psi As New System.Diagnostics.ProcessStartInfo(dmt_loc)
+psi.RedirectStandardOutput = True
+psi.WindowStyle = ProcessWindowStyle.Hidden
+psi.UseShellExecute = False
+Dim dmt As System.Diagnostics.Process
+dmt = System.Diagnostics.Process.Start(psi)
 
 Dim msgSuccess = "Part successfully imported into Epicor!"
 Dim msgFailure = "Error importing part into Epicor!"
-MessageBox.Show("iProperties successfully copied!")
+MsgBox("iProperties successfully copied!")
