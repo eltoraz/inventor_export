@@ -87,9 +87,28 @@ Dim psi As New System.Diagnostics.ProcessStartInfo(dmt_loc)
 psi.RedirectStandardOutput = True
 psi.WindowStyle = ProcessWindowStyle.Hidden
 psi.UseShellExecute = False
+
+Dim username, password As SecureString
+username = "DMT_USERNAME"
+password = "DMT_PASSWORD"
+Dim connection As String = "net.tcp://CHERRY/EpicorPilot10"
+psi.Arguments = "-NoUI=True -Import=""Part"" -Source=""" & FileName
+psi.Arguments = psi.Arguments & """ -Add=True -Update=True -user=" & username
+psi.Arguments = psi.Arguments & " -pass=" & password & " -ConnectionUrl="""
+psi.Arguments = psi.Arguments & connection & """"
+
 Dim dmt As System.Diagnostics.Process
 dmt = System.Diagnostics.Process.Start(psi)
+dmt.WaitForExit()
 
-Dim msgSuccess = "Part successfully imported into Epicor!"
-Dim msgFailure = "Error importing part into Epicor!"
-MsgBox("iProperties successfully copied!")
+Dim msgSuccess As String = "Part successfully imported into Epicor!"
+Dim msgFailure As String = "Error importing part into Epicor!"
+
+Dim resultmsg As String
+If dmt.ExitCode = 0 Then
+    resultmsg = msgSuccess
+Else
+    resultmsg = msgFailure
+End If
+
+MsgBox(resultmsg)
