@@ -80,7 +80,6 @@ csv.WriteLine(Fields)
 csv.WriteLine(Data)
 csv.Close()
 
-'TODO: finish
 'Call the DMT on the generated CSV file
 Dim dmt_loc = "C:\Epicor\ERP10.1Client\Client\DMT.exe"
 Dim psi As New System.Diagnostics.ProcessStartInfo(dmt_loc)
@@ -88,7 +87,7 @@ psi.RedirectStandardOutput = True
 psi.WindowStyle = ProcessWindowStyle.Hidden
 psi.UseShellExecute = False
 
-Dim username, password As SecureString
+Dim username, password As String
 username = "DMT_USERNAME"
 password = "DMT_PASSWORD"
 Dim connection As String = "net.tcp://CHERRY/EpicorPilot10"
