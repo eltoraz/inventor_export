@@ -87,11 +87,13 @@ psi.RedirectStandardOutput = True
 psi.WindowStyle = ProcessWindowStyle.Hidden
 psi.UseShellExecute = False
 
-Dim username, password, configfile As String
+'TODO: change in production to DMT user/password/environment
+Dim username, password, configfile, connection As String
 username = "DMT_USERNAME"
 password = "DMT_PASSWORD"
 configfile = "EpicorPilot10"
-Dim connection As String = "net.tcp://CHERRY/EpicorPilot10"
+connection = "net.tcp://CHERRY/EpicorPilot10"
+
 psi.Arguments = "-NoUI=True -Import=""Part"" -Source=""" & FileName
 psi.Arguments = psi.Arguments & """ -Add=True -Update=True -user=" & username
 psi.Arguments = psi.Arguments & " -pass=" & password & " -ConnectionUrl="""
