@@ -87,14 +87,16 @@ psi.RedirectStandardOutput = True
 psi.WindowStyle = ProcessWindowStyle.Hidden
 psi.UseShellExecute = False
 
-Dim username, password As String
+Dim username, password, configfile As String
 username = "DMT_USERNAME"
 password = "DMT_PASSWORD"
+configfile = "C:\Epicor\ERP10.1Client\Client\config\EpicorPilot10.sysconfig"
 Dim connection As String = "net.tcp://CHERRY/EpicorPilot10"
 psi.Arguments = "-NoUI=True -Import=""Part"" -Source=""" & FileName
 psi.Arguments = psi.Arguments & """ -Add=True -Update=True -user=" & username
 psi.Arguments = psi.Arguments & " -pass=" & password & " -ConnectionUrl="""
-psi.Arguments = psi.Arguments & connection & """ -ConfigValue=""EpicorPilot10.sysconfig"""
+psi.Arguments = psi.Arguments & connection & """ -ConfigValue="""
+psi.Arguments = psi.Arguments & configfile & """"
 
 Dim dmt As System.Diagnostics.Process
 dmt = System.Diagnostics.Process.Start(psi)
