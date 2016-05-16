@@ -1,0 +1,2 @@
+- move Design Data folder to network, configure clients to point to new location
+- add I:\Cadd\_iLogic\Export to External Rule Directories in Tools>Options>iLogic Configuration (in dropdown) for all Inventor installations

@@ -24,14 +24,20 @@ Sub createParam(ByVal n As String, ByVal paramType As UnitsTypeEnum)
 
     Dim invParams As UserParameters = invDoc.Parameters.UserParameters
 
-    Dim defaultValue
-    If paramType = UnitsTypeEnum.kTextUnits Then
-        defaultValue = ""
-    ElseIf paramType = UnitsTypeEnum.kBooleanUnits Then
-        defaultValue = True
-    End If
+    Dim TestParam As UserParameter
 
-    Dim TestParam As UserParameter = invParams.AddByValue(n, defaultValue, paramType)
+    'if the parameter doesn't already exist, UserParameters.Item will throw an error
+    Try
+        TestParam = invParams.Item(n)
+    Catch
+        Dim defaultValue
+        If paramType = UnitsTypeEnum.kTextUnits Then
+            defaultValue = ""
+        ElseIf paramType = UnitsTypeEnum.kBooleanUnits Then
+            defaultValue = True
+        End If
 
-    invDoc.Update
+        TestParam = invParams.AddByValue(n, defaultValue, paramType)
+        invDoc.Update
+    End Try
 End Sub
