@@ -90,7 +90,7 @@ psi.UseShellExecute = False
 Dim username, password, configfile As String
 username = "DMT_USERNAME"
 password = "DMT_PASSWORD"
-configfile = "C:\Epicor\ERP10.1Client\Client\config\EpicorPilot10.sysconfig"
+configfile = "EpicorPilot10"
 Dim connection As String = "net.tcp://CHERRY/EpicorPilot10"
 psi.Arguments = "-NoUI=True -Import=""Part"" -Source=""" & FileName
 psi.Arguments = psi.Arguments & """ -Add=True -Update=True -user=" & username
