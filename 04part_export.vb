@@ -94,7 +94,7 @@ Dim connection As String = "net.tcp://CHERRY/EpicorPilot10"
 psi.Arguments = "-NoUI=True -Import=""Part"" -Source=""" & FileName
 psi.Arguments = psi.Arguments & """ -Add=True -Update=True -user=" & username
 psi.Arguments = psi.Arguments & " -pass=" & password & " -ConnectionUrl="""
-psi.Arguments = psi.Arguments & connection & """"
+psi.Arguments = psi.Arguments & connection & """ -ConfigValue=""EpicorPilot10.sysconfig"""
 
 Dim dmt As System.Diagnostics.Process
 dmt = System.Diagnostics.Process.Start(psi)
