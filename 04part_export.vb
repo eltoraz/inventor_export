@@ -88,24 +88,25 @@ End Function
 
 Function Part_Rev(csv_path As String)
     Dim fields, data
-    Dim RevisionNum
+    Dim PartNum, RevisionNum
 
+    PartNum = iProperties.Value("Project", "Part Number")
     RevisionNum = iProperties.Value("Project", "Revision Number")
 
     fields = "Company,PartNum,RevisionNum,RevShortDesc,RevDescription,Approved,ApprovedDate,ApprovedBy,EffectiveDate,DrawNum,Plant,ProcessMode"
 
     data = "BBN"                        'Company name (constant)
-    data = data & "," & iProperties.Value("Project", "Part Number")
+    data = data & "," & PartNum
     data = data & "," & RevisionNum
     data = data & "," & "Revision " & RevisionNum
-    data = data & "," & ""              'TODO: RevDescription
+    data = data & "," & iProperties.Value("Custom", "RevDescription")
 
     data = data & "," & "True"          'Approved (always approved?)
     data = data & "," & ""              'TODO: ApprovedDate
     data = data & "," & ""              'TODO: ApprovedBy
     data = data & "," & ""              'TODO: EffectiveDate
 
-    data = data & "," & ""              'TODO: DrawNum
+    data = data & "," & PartNum         'DrawNum (same as part number)
     data = data & "," & "MfgSys"        'Plant (only one)
     data = data & "," & "S"             'ProcessMode (always sequential)
 

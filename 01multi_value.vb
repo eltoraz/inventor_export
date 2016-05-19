@@ -21,6 +21,7 @@ Sub Main()
     MultiValue.SetList("PartType", "M", "P")
     MultiValue.SetList("ProdCode", "FSC Assemblies", "FSC Components", "NCA Assemblies", "NCA Components", "Purchases")
     MultiValue.SetList("ClassID", "Assemblies we sell", "Box Materials", "Components we sell", "Finished Components for kits", "Finish Materials", "FSC Lumber", "Finished Components on shelf", "IT Supplies", "Lumber", "Office Supplies", "Other Materials", "Tooling")
+    'TODO: multi-value for approving engineer for revision?
 End Sub
 
 Sub createParam(ByVal n As String, ByVal paramType As UnitsTypeEnum)

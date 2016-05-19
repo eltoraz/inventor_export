@@ -28,6 +28,8 @@ Sub Main()
     ClassIDMap.Add("Other Materials", "OTHR")
     ClassIDMap.Add("Tooling", "TOOL")
 
+    'TODO: map approving engineers to Epicor IDs
+
     For Each i As String in params
         Dim invDoc As Document = ThisApplication.ActiveDocument
         Dim invParams As UserParameters = invDoc.Parameters.UserParameters
