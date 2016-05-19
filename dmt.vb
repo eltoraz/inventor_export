@@ -25,7 +25,7 @@ Public Class DMT
         dmt = System.Diagnostics.Process.Start(psi)
         dmt.WaitForExit()
 
-        Dim msgSuccess As String = "Part successfully imported into Epicor!"
+        Dim msgSuccess As String = csv & " successfully imported into Epicor!"
         Dim msgFailure As String = "Error importing part into Epicor!"
 
         Dim resultmsg As String
