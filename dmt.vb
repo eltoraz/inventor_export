@@ -1,6 +1,6 @@
 'call the DMT to add/update the specified part/revision (etc.)
 Public Class DMT
-    Function exec_DMT(csv As String, filename As String)
+    Public Shared Function exec_DMT(csv As String, filename As String)
         'Call the DMT on the passed CSV file
         Dim dmt_loc = "C:\Epicor\ERP10.1Client\Client\DMT.exe"
         Dim psi As New System.Diagnostics.ProcessStartInfo(dmt_loc)
