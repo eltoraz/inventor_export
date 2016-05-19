@@ -83,6 +83,6 @@ Sub Main()
     csv.WriteLine(Data)
     csv.Close()
 
-    Dim resultmsg As String = exec_DMT("Part", FileName)
+    Dim resultmsg As String = DMT.exec_DMT("Part", FileName)
     MsgBox(resultmsg)
 End Sub
