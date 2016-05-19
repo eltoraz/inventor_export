@@ -1,6 +1,13 @@
 ﻿AddVbFile "dmt.vb"
 
 Sub Main()
+    Dim dmt_log As String = ""
+
+    dmt_log = dmt_log & Part()
+    MsgBox(dmt_log)
+End Sub
+
+Function Part()
     Dim fso, FileName, csv
     Dim Fields, Data
     Dim Description, PartType, UOM, TrackSerialNum
@@ -84,5 +91,5 @@ Sub Main()
     csv.Close()
 
     Dim resultmsg As String = DMT.exec_DMT("Part", FileName)
-    MsgBox(resultmsg)
-End Sub
+    Return resultmsg
+End Function
