@@ -2,6 +2,7 @@
 'Epicor DMT (the actual IDs the tool needs are set in set_props.vb)
 Sub Main()
     Dim params As New Dictionary(Of String, UnitsTypeEnum)
+    'Part parameters
     params.Add("PartType", UnitsTypeEnum.kTextUnits)
     params.Add("ProdCode", UnitsTypeEnum.kTextUnits)
     params.Add("ClassID", UnitsTypeEnum.kTextUnits)
@@ -9,6 +10,9 @@ Sub Main()
     params.Add("MfgComment", UnitsTypeEnum.kTextUnits)
     params.Add("PurComment", UnitsTypeEnum.kTextUnits)
     params.Add("TrackSerialNum", UnitsTypeEnum.kBooleanUnits)
+
+    'Revision parameters
+    params.Add("RevDescription", UnitsTypeEnum.kTextUnits)
 
     For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in params
         createParam(kvp.Key, kvp.Value)

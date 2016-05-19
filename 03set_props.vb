@@ -3,7 +3,7 @@
 '      than the human-readable strings
 Sub Main()
     'list of parameters that need to be converted to iProperties
-    Dim params = New String() {"PartType", "ProdCode", "ClassID", "UsePartRev", "MfgComment", "PurComment", "TrackSerialNum"}
+    Dim params = New String() {"PartType", "ProdCode", "ClassID", "UsePartRev", "MfgComment", "PurComment", "TrackSerialNum", "RevDescription"}
 
     'mappings for human-readable values (i.e. in the dropdown boxes) -> keys
     'only necessary for ProdCode and ClassID
@@ -47,6 +47,9 @@ Sub Main()
             paramValue = Replace(paramValue, ",", "")
             paramValue = Left(paramValue, 16000)
         Else If StrComp(i, "PurComment") = 0 Then
+            paramValue = Replace(paramValue, ",", "")
+            paramValue = Left(paramValue, 16000)
+        Else If StrComp(i, "RevDescription") = 0 Then
             paramValue = Replace(paramValue, ",", "")
             paramValue = Left(paramValue, 16000)
         End If
