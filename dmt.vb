@@ -1,5 +1,7 @@
 'call the DMT to add/update the specified part/revision (etc.)
 Public Class DMT
+    Public Shared csv_path As String = "I:\Cadd\_iLogic\Export\"
+
     Public Shared Function exec_DMT(csv As String, filename As String)
         'Call the DMT on the passed CSV file
         Dim dmt_loc = "C:\Epicor\ERP10.1Client\Client\DMT.exe"
@@ -36,5 +38,22 @@ Public Class DMT
         End If
 
         Return resultmsg
+    End Function
+
+    Public Shared Function write_csv(fields As String, data As String)
+        Dim fso, file_name, csv
+
+        'Open the CSV file (note: this will overwrite the file if it exists!)
+        fso = CreateObject("Scripting.FileSystemObject")
+        file_name = csv_path & csv_name
+        csv = fso.OpenTextFile(file_name, 2, True, -2)
+
+        'Write field headers & data to file
+        csv.WriteLine(fields)
+        csv.WriteLine(data)
+        csv.Close()
+
+        'need to return the full path & filename to pass to DMT
+        Return file_name
     End Function
 End Class

@@ -4,13 +4,15 @@ Sub Main()
     Dim dmt_log As String = ""
 
     dmt_log = dmt_log & Part(csv_path) & Environment.NewLine
+    dmt_log = dmt_log & Part_Rev(csv_path)
     MsgBox(dmt_log)
 End Sub
 
 Function Part(csv_path As String)
-    Dim fields, data
-    Dim Description, PartType, UOM, TrackSerialNum
-    Dim SNFormat, SNBaseDataType, SNMask, SNMaskExample
+    Dim fields, data As String
+    Dim Description, PartType, UOM As String
+    Dim TrackSerialNum As Boolean
+    Dim SNFormat, SNBaseDataType, SNMask, SNMaskExample As String
 
     Description = iProperties.Value("Project", "Description")
     PartType = iProperties.Value("Custom", "PartType")
@@ -80,56 +82,8 @@ Function Part(csv_path As String)
     End If
 
     Dim file_name As String
-    file_name = write_csv("Part_Level.csv", fields, data)
+    file_name = DMT.write_csv("Part_Level.csv", fields, data)
 
     Dim resultmsg As String = DMT.exec_DMT("Part", file_name)
     Return resultmsg
-End Function
-
-Function Part_Rev(csv_path As String)
-    Dim fields, data
-    Dim PartNum, RevisionNum
-
-    PartNum = iProperties.Value("Project", "Part Number")
-    RevisionNum = iProperties.Value("Project", "Revision Number")
-
-    fields = "Company,PartNum,RevisionNum,RevShortDesc,RevDescription,Approved,ApprovedDate,ApprovedBy,EffectiveDate,DrawNum,Plant,ProcessMode"
-
-    data = "BBN"                        'Company name (constant)
-    data = data & "," & PartNum
-    data = data & "," & RevisionNum
-    data = data & "," & "Revision " & RevisionNum
-    data = data & "," & iProperties.Value("Custom", "RevDescription")
-
-    data = data & "," & "True"          'Approved (always approved?)
-    data = data & "," & ""              'TODO: ApprovedDate
-    data = data & "," & ""              'TODO: ApprovedBy
-    data = data & "," & ""              'TODO: EffectiveDate
-
-    data = data & "," & PartNum         'DrawNum (same as part number)
-    data = data & "," & "MfgSys"        'Plant (only one)
-    data = data & "," & "S"             'ProcessMode (always sequential)
-
-    Dim file_name As String
-    file_name = write_csv("Part_Rev.csv", fields, data)
-
-    Dim resultmsg As String = DMT.exec_DMT("Part Revision", file_name)
-End Function
-
-Function write_csv(csv_name As String, fields As String, data As String)
-    Dim fso, file_name, csv
-    Dim csv_path As String = "I:\Cadd\_iLogic\Export\"
-
-    'Open the CSV file (note: this will overwrite the file if it exists!)
-    fso = CreateObject("Scripting.FileSystemObject")
-    file_name = csv_path & csv_name
-    csv = fso.OpenTextFile(file_name, 2, True, -2)
-
-    'Write field headers & data to file
-    csv.WriteLine(fields)
-    csv.WriteLine(data)
-    csv.Close()
-
-    'need to return the full path & filename to pass to DMT
-    Return file_name
 End Function
