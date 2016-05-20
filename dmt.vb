@@ -39,7 +39,7 @@ Public Class DMT
         End If
 
         Dim event_time = DateTime.Now
-        resultmsg = event_time.ToString("HHmmss") & ": " & resultmsg
+        resultmsg = event_time.ToString("HH:mm:ss") & ": " & resultmsg
 
         dmt_log_event(resultmsg)
     End Sub
