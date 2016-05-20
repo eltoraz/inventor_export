@@ -1,3 +1,4 @@
+' <IsStraightVb>True</IsStraightVb>
 Imports Autodesk.iLogic.Interfaces
 Imports Imports Autodesk.iLogic.Runtime
 

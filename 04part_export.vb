@@ -1,4 +1,5 @@
-﻿Imports Autodesk.iLogic.Interfaces
+﻿' <IsStraightVb>True</IsStraightVb>
+Imports Autodesk.iLogic.Interfaces
 Imports Imports Autodesk.iLogic.Runtime
 
 Public Class Part_Export
