@@ -1,6 +1,7 @@
 'call the DMT to add/update the specified part/revision (etc.)
 Public Class DMT
     Public Shared csv_path As String = "I:\Cadd\_iLogic\Export\"
+    Public Shared dmt_log As String = ""
 
     Public Shared Function exec_DMT(csv As String, filename As String)
         'Call the DMT on the passed CSV file
