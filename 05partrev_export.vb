@@ -1,5 +1,3 @@
-AddVbFile "dmt.vb"
-
 Public Class Part_Rev_Export
     Public Shared Function Part_Rev()
         Dim fields, data As String

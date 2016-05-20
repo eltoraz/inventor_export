@@ -1,6 +1,4 @@
-﻿AddVbFile "dmt.vb"
-
-Public Class Part_Export
+﻿Public Class Part_Export
     Public Shared Function Part()
         Dim fields, data As String
         Dim Description, PartType, UOM As String
