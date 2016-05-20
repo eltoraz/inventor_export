@@ -1,4 +1,4 @@
-﻿AddVbFile "dmt.vb"
+Dim dmt_log As String = ""
 
 'Call the other rules in order
 iLogicVb.RunExternalRule("01multi_value.vb")
