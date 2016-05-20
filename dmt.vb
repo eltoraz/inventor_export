@@ -1,7 +1,8 @@
+' <IsStraightVb>True</IsStraightVb>
 'call the DMT to add/update the specified part/revision (etc.)
 Public Class DMT
     Public Shared csv_path As String = "I:\Cadd\_iLogic\Export\"
-    Private dmt_log_path As String = "I:\Cadd\_iLogic\Export\"
+    Private Shared dmt_log_path As String = "I:\Cadd\_iLogic\Export\"
 
     Public Shared Sub exec_DMT(csv As String, filename As String)
         'Call the DMT on the passed CSV file
@@ -61,7 +62,7 @@ Public Class DMT
         Return file_name
     End Function
 
-    Private Sub dmt_log_event(msg As String)
+    Private Shared Sub dmt_log_event(msg As String)
         Dim fso, file_name, log_file
         Dim log_date = DateTime.Now
 

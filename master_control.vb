@@ -6,5 +6,3 @@ iLogicForm.ShowGlobal("02part_properties", FormMode.Modal)
 iLogicVb.RunExternalRule("03set_props.vb")
 iLogicVb.RunExternalRule("04part_export.vb")
 iLogicVb.RunExternalRule("05partrev_export.vb")
-
-MsgBox(DMT.dmt_log)
