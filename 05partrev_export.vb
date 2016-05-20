@@ -1,3 +1,6 @@
+Imports Autodesk.iLogic.Interfaces
+Imports Imports Autodesk.iLogic.Runtime
+
 Public Class Part_Rev_Export
     Public Shared Function Part_Rev()
         Dim fields, data As String

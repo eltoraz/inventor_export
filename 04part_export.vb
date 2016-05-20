@@ -1,4 +1,7 @@
-﻿Public Class Part_Export
+﻿Imports Autodesk.iLogic.Interfaces
+Imports Imports Autodesk.iLogic.Runtime
+
+Public Class Part_Export
     Public Shared Function Part()
         Dim fields, data As String
         Dim Description, PartType, UOM As String
