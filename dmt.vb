@@ -40,7 +40,7 @@ Public Class DMT
         Return resultmsg
     End Function
 
-    Public Shared Function write_csv(fields As String, data As String)
+    Public Shared Function write_csv(csv_name As String, fields As String, data As String)
         Dim fso, file_name, csv
 
         'Open the CSV file (note: this will overwrite the file if it exists!)
