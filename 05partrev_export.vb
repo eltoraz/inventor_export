@@ -32,6 +32,5 @@ Sub Main()
     Dim file_name As String
     file_name = DMT.write_csv("Part_Rev.csv", fields, data)
 
-    Dim resultmsg As String = DMT.exec_DMT("Part Revision", file_name)
-    DMT.dmt_log = DMT.dmt_log & resultmsg & System.Environment.NewLine
+    DMT.exec_DMT("Part Revision", file_name)
 End Sub

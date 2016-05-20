@@ -1,17 +1,9 @@
 'call the DMT to add/update the specified part/revision (etc.)
 Public Class DMT
     Public Shared csv_path As String = "I:\Cadd\_iLogic\Export\"
-    Private Shared dmt_log_contents As String = ""
-    Public Shared Property dmt_log() As String
-        Get
-            Return dmt_log_contents
-        End Get
-        Set(ByVal s As String)
-            dmt_log_contents = s
-        End Set
-    End Property
+    Private dmt_log_path As String = "I:\Cadd\_iLogic\Export\"
 
-    Public Shared Function exec_DMT(csv As String, filename As String)
+    Public Shared Sub exec_DMT(csv As String, filename As String)
         'Call the DMT on the passed CSV file
         Dim dmt_loc = "C:\Epicor\ERP10.1Client\Client\DMT.exe"
         Dim psi As New System.Diagnostics.ProcessStartInfo(dmt_loc)
@@ -46,8 +38,11 @@ Public Class DMT
             resultmsg = msgFailure
         End If
 
-        Return resultmsg
-    End Function
+        Dim event_time = DateTime.Now
+        resultmsg = event_time.ToString("HHmmss") & ": " & resultmsg
+
+        dmt_log_event(resultmsg)
+    End Sub
 
     Public Shared Function write_csv(csv_name As String, fields As String, data As String)
         Dim fso, file_name, csv
@@ -65,4 +60,16 @@ Public Class DMT
         'need to return the full path & filename to pass to DMT
         Return file_name
     End Function
+
+    Private Sub dmt_log_event(msg As String)
+        Dim fso, file_name, log_file
+        Dim log_date = DateTime.Now
+
+        fso = CreateObject("Scripting.FileSystemObject")
+        file_name = dmt_log_path & log_date.ToString("yyyyMMdd") & "_dmtlog.txt"
+        log_file = fso.OpenTextFile(file_name, 8, True, -2)
+
+        log_file.WriteLine(msg)
+        log_file.Close()
+    End Sub
 End Class
