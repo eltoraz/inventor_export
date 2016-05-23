@@ -24,12 +24,15 @@ Public Class DMT
 
         Dim dmt As System.Diagnostics.Process
         dmt = System.Diagnostics.Process.Start(psi)
-        dmt.WaitForExit()
+        'Wait 30s (worst case) for DMT to exit - if it takes this long, something's wrong
+        dmt.WaitForExit(30000)
 
         Dim msgSuccess As String = csv & " successfully imported into Epicor!"
 
         Dim resultmsg As String
-        If dmt.ExitCode = 0 Then
+        If Not dmt.HasExited Then
+            resultmsg = "Warning: DMT has not finished after 30 seconds"
+        ElseIf dmt.ExitCode = 0 Then
             resultmsg = msgSuccess
         Else
             resultmsg = "Error: DMT exited with code " & dmt.ExitCode
