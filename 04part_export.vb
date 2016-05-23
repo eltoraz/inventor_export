@@ -76,5 +76,5 @@ Sub Main()
     Dim file_name As String
     file_name = DMT.write_csv("Part_Level.csv", fields, data)
 
-    DMT.exec_DMT("Part", file_name)
+    DMT.dmt_import("Part", file_name)
 End Sub

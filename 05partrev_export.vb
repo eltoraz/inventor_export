@@ -32,5 +32,5 @@ Sub Main()
     Dim file_name As String
     file_name = DMT.write_csv("Part_Rev.csv", fields, data)
 
-    DMT.exec_DMT("Part Revision", file_name)
+    DMT.dmt_import("Part Revision", file_name)
 End Sub

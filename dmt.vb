@@ -1,39 +1,61 @@
 ' <IsStraightVb>True</IsStraightVb>
+Imports System.Diagnostics
+
 'call the DMT to add/update the specified part/revision (etc.)
 Public Class DMT
-    Public Shared csv_path As String = "I:\Cadd\_iLogic\Export\"
-    Public Shared dmt_log_path As String = "I:\Cadd\_iLogic\Export\"
+    Public Shared dmt_loc As String = "C:\Epicor\ERP10.1Client\Client\DMT.exe"
+    Public Shared dmt_working_path As String = "I:\Cadd\_iLogic\Export\"
 
     'TODO: change in production to DMT user/password/environment
     Private Shared username As String = "DMT_USERNAME"
     Private Shared password As String = "DMT_PASSWORD"
-    Private Shared configfile = "EpicorPilot10"
-    Private Shared connection = "net.tcp://CHERRY/EpicorPilot10"
+    Private Shared configfile As String = "EpicorPilot10"
+    Private Shared connection As String = "net.tcp://CHERRY/EpicorPilot10"
     Private Shared dmt_base_args As String = "-NoUI -User=" & username & " -Pass=" & password & " -ConnectionURL=""" & connection & """ -ConfigValue=""" & configfile & """"
 
-    Public Shared Sub exec_DMT(csv As String, filename As String)
-        'Call the DMT on the passed CSV file
-        Dim dmt_loc = "C:\Epicor\ERP10.1Client\Client\DMT.exe"
-        Dim psi As New System.Diagnostics.ProcessStartInfo(dmt_loc)
+    'Run the DMT to import the specified CSV into Epicor
+    Public Shared Sub dmt_import(csv As String, filename As String)
+        Dim psi As New ProcessStartInfo(dmt_loc)
         psi.RedirectStandardOutput = True
         psi.WindowStyle = ProcessWindowStyle.Hidden
         psi.UseShellExecute = False
 
-        psi.Arguments = dmt_base_args & " Import=""" & csv & """ -Source="""
+        psi.Arguments = dmt_base_args & " -Import=""" & csv & """ -Source="""
         psi.Arguments = psi.Arguments & filename & """ -Add=True -Update=True"
 
-        Dim dmt As System.Diagnostics.Process
-        dmt = System.Diagnostics.Process.Start(psi)
+        Dim msgSuccess As String = csv & " successfully imported into Epicor!"
+
+        exec_dmt(psi, msgSuccess)
+    End Sub
+
+    'use the DMT to export data from Epicor based on existing BAQs
+    Public Shared Sub dmt_export()
+        'Mapping of queries in Epicor and the corresponding output files
+        Dim query_map As New Dictionary(Of String, String)
+        query_map.Add("DMTVendorExport", dmt_working_path & "\ref\Vendors.csv")
+
+        Dim psi As New ProcessStartInfo(dmt_loc)
+        psi.RedirectStandardOutput = True
+        psi.WindowStyle = ProcessWindowStyle.Hidden
+        psi.UseShellExecute = False
+
+        For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in query_map
+            psi.Arguments = dmt_base_args & " -Export -BAQ=""" & kvp.Key
+            psi.Arguments = psi.Arguments & """ -Target=""" & kvp.Value & """"
+        Next
+    Ends Sub
+
+    Public Shared Sub exec_dmt(psi As ProcessStartInfo, msg_succ As String)
+        Dim dmt As Process
+        dmt = Process.Start(psi)
         'Wait 30s (worst case) for DMT to exit - if it takes this long, something's wrong
         dmt.WaitForExit(30000)
-
-        Dim msgSuccess As String = csv & " successfully imported into Epicor!"
 
         Dim resultmsg As String
         If Not dmt.HasExited Then
             resultmsg = "Warning: DMT has not finished after 30 seconds"
         ElseIf dmt.ExitCode = 0 Then
-            resultmsg = msgSuccess
+            resultmsg = msg_succ
         Else
             resultmsg = "Error: DMT exited with code " & dmt.ExitCode
         End If
@@ -49,7 +71,7 @@ Public Class DMT
 
         'Open the CSV file (note: this will overwrite the file if it exists!)
         fso = CreateObject("Scripting.FileSystemObject")
-        file_name = csv_path & csv_name
+        file_name = dmt_working_path & csv_name
         csv = fso.OpenTextFile(file_name, 2, True, -2)
 
         'Write field headers & data to file
@@ -66,7 +88,7 @@ Public Class DMT
         Dim log_date = DateTime.Now
 
         fso = CreateObject("Scripting.FileSystemObject")
-        file_name = dmt_log_path & log_date.ToString("yyyyMMdd") & "_dmtlog.txt"
+        file_name = dmt_working_path & log_date.ToString("yyyyMMdd") & "_dmtlog.txt"
         log_file = fso.OpenTextFile(file_name, 8, True, -2)
 
         log_file.WriteLine(msg)
