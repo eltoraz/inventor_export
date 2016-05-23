@@ -44,8 +44,8 @@ Public Class DMT
         psi.UseShellExecute = False
 
         For Each kvp As KeyValuePair(Of String, String) in query_map
-            psi.Arguments = dmt_base_args & " -Export -BAQ=""" & export_path & kvp.Key
-            psi.Arguments = psi.Arguments & """ -Target=""" & kvp.Value & """"
+            psi.Arguments = dmt_base_args & " -Export -BAQ=""" & kvp.Key
+            psi.Arguments = psi.Arguments & """ -Target=""" & export_path & kvp.Value & """"
 
             msg_succ = "Successfully exported " & kvp.Key & " from Epicor"
             exec_dmt(psi, msg_succ)
