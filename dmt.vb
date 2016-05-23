@@ -30,7 +30,7 @@ Public Class DMT
 
     'use the DMT to export data from Epicor based on existing BAQs
     Public Shared Sub dmt_export()
-        Dim export_path = dmt_working_path & "\ref\"
+        Dim export_path = dmt_working_path & "ref\"
 
         'Mapping of queries in Epicor and the corresponding output files
         Dim query_map As New Dictionary(Of String, String)
@@ -43,14 +43,14 @@ Public Class DMT
         psi.WindowStyle = ProcessWindowStyle.Hidden
         psi.UseShellExecute = False
 
-        For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in query_map
+        For Each kvp As KeyValuePair(Of String, String) in query_map
             psi.Arguments = dmt_base_args & " -Export -BAQ=""" & export_path & kvp.Key
             psi.Arguments = psi.Arguments & """ -Target=""" & kvp.Value & """"
 
             msg_succ = "Successfully exported " & kvp.Key & " from Epicor"
-            dmt_exec(psi, msg_succ)
+            exec_dmt(psi, msg_succ)
         Next
-    Ends Sub
+    End Sub
 
     Public Shared Sub exec_dmt(psi As ProcessStartInfo, msg_succ As String)
         Dim dmt As Process

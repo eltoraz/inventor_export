@@ -2,7 +2,7 @@ AddVbFile "dmt.vb"
 
 'Pull latest data from Epicor
 'TODO: this shouldn't change often, so it shouldn't need to be called often
-DMT.dmt.export()
+DMT.dmt_export()
 
 'Call the other rules in order
 iLogicVb.RunExternalRule("01multi_value.vb")
