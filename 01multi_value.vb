@@ -15,6 +15,7 @@ Sub Main()
     params.Add("RevDescription", UnitsTypeEnum.kTextUnits)
     
     'Plant parameters
+    params.Add("LeadTime", UnitsTypeEnum.kUnitlessUnits)
 
     For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in params
         createParam(kvp.Key, kvp.Value)
@@ -44,6 +45,8 @@ Sub createParam(ByVal n As String, ByVal paramType As UnitsTypeEnum)
             defaultValue = ""
         ElseIf paramType = UnitsTypeEnum.kBooleanUnits Then
             defaultValue = True
+        ElseIf paramType = UnitsTypeEnum.kUnitlessUnits Then
+            defaultValue = 0
         End If
 
         TestParam = invParams.AddByValue(n, defaultValue, paramType)

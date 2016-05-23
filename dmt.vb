@@ -4,6 +4,13 @@ Public Class DMT
     Public Shared csv_path As String = "I:\Cadd\_iLogic\Export\"
     Public Shared dmt_log_path As String = "I:\Cadd\_iLogic\Export\"
 
+    'TODO: change in production to DMT user/password/environment
+    Private Shared username As String = "DMT_USERNAME"
+    Private Shared password As String = "DMT_PASSWORD"
+    Private Shared configfile = "EpicorPilot10"
+    Private Shared connection = "net.tcp://CHERRY/EpicorPilot10"
+    Private Shared dmt_base_args As String = "-NoUI -User=" & username & " -Pass=" & password & " -ConnectionURL=""" & connection & """ -ConfigValue=""" & configfile & """"
+
     Public Shared Sub exec_DMT(csv As String, filename As String)
         'Call the DMT on the passed CSV file
         Dim dmt_loc = "C:\Epicor\ERP10.1Client\Client\DMT.exe"
@@ -12,18 +19,8 @@ Public Class DMT
         psi.WindowStyle = ProcessWindowStyle.Hidden
         psi.UseShellExecute = False
 
-        'TODO: change in production to DMT user/password/environment
-        Dim username, password, configfile, connection As String
-        username = "DMT_USERNAME"
-        password = "DMT_PASSWORD"
-        configfile = "EpicorPilot10"
-        connection = "net.tcp://CHERRY/EpicorPilot10"
-
-        psi.Arguments = "-NoUI=True -Import=""" & csv & """ -Source=""" & filename
-        psi.Arguments = psi.Arguments & """ -Add=True -Update=True -user=" & username
-        psi.Arguments = psi.Arguments & " -pass=" & password & " -ConnectionUrl="""
-        psi.Arguments = psi.Arguments & connection & """ -ConfigValue="""
-        psi.Arguments = psi.Arguments & configfile & """"
+        psi.Arguments = dmt_base_args & " Import=""" & csv & """ -Source="""
+        psi.Arguments = psi.Arguments & filename & """ -Add=True -Update=True"
 
         Dim dmt As System.Diagnostics.Process
         dmt = System.Diagnostics.Process.Start(psi)
