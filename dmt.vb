@@ -23,16 +23,20 @@ Public Class DMT
         psi.Arguments = dmt_base_args & " -Import=""" & csv & """ -Source="""
         psi.Arguments = psi.Arguments & filename & """ -Add=True -Update=True"
 
-        Dim msgSuccess As String = csv & " successfully imported into Epicor!"
+        Dim msg_succ As String = csv & " successfully imported into Epicor!"
 
-        exec_dmt(psi, msgSuccess)
+        exec_dmt(psi, msg_succ)
     End Sub
 
     'use the DMT to export data from Epicor based on existing BAQs
     Public Shared Sub dmt_export()
+        Dim export_path = dmt_working_path & "\ref\"
+
         'Mapping of queries in Epicor and the corresponding output files
         Dim query_map As New Dictionary(Of String, String)
-        query_map.Add("DMTVendorExport", dmt_working_path & "\ref\Vendors.csv")
+        query_map.Add("DMTVendorExport", "Vendors.csv")
+        query_map.Add("DMTProdCode", "ProdCode.csv")
+        query_map.Add("DMTClasSID", "ClassID.csv")
 
         Dim psi As New ProcessStartInfo(dmt_loc)
         psi.RedirectStandardOutput = True
@@ -40,8 +44,11 @@ Public Class DMT
         psi.UseShellExecute = False
 
         For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in query_map
-            psi.Arguments = dmt_base_args & " -Export -BAQ=""" & kvp.Key
+            psi.Arguments = dmt_base_args & " -Export -BAQ=""" & export_path & kvp.Key
             psi.Arguments = psi.Arguments & """ -Target=""" & kvp.Value & """"
+
+            msg_succ = "Successfully exported " & kvp.Key & " from Epicor"
+            dmt_exec(psi, msg_succ)
         Next
     Ends Sub
 
