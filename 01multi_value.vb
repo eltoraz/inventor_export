@@ -1,3 +1,5 @@
+AddVbFile "dmt.vb"
+
 'create parameters with a restricted set of accepted values for import by
 'Epicor DMT (the actual IDs the tool needs are set in set_props.vb)
 Sub Main()
@@ -52,4 +54,24 @@ Sub createParam(ByVal n As String, ByVal paramType As UnitsTypeEnum)
         TestParam = invParams.AddByValue(n, defaultValue, paramType)
         invDoc.Update
     End Try
+End Sub
+
+'populate the list of options for parameter `n` from the CSV file `f`
+'CSV should be populated by dmt.vb's dmt_export() method
+Sub populate_multivalue(ByVal n As String, ByVal f As String)
+    Dim file_name As String = DMT.dmt_working_path & "ref\" & f
+
+    Using csv_reader As New Microsoft.VisualBasic.FileIO.TextFieldParser(file_name)
+        csv_reader.TextFieldType = FileIO.FieldType.Delimited
+        csv_reader.SetDelimiters(",")
+
+        Dim current_row As String()
+        While Not csv_reader.EndOfData
+            'TODO
+            Try
+                'TODO
+                current_row = csv_reader.ReadFields()
+            End Try
+        End While
+    End Using
 End Sub

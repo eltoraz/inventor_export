@@ -29,6 +29,7 @@ Public Class DMT
     End Sub
 
     'use the DMT to export data from Epicor based on existing BAQs
+    'the results of the queries is stored in the paired CSV files for later reading
     Public Shared Sub dmt_export()
         Dim export_path = dmt_working_path & "ref\"
 
