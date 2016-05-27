@@ -18,6 +18,9 @@ Sub Main()
     
     'Plant parameters
     params.Add("LeadTime", UnitsTypeEnum.kUnitlessUnits)
+    params.Add("VendorNum", UnitsTypeEnum.kTextUnits)
+    'vendor parameter will pass a number, but the selection box needs to be
+    'be human-readable and not just an ID
 
     For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in params
         createParam(kvp.Key, kvp.Value)
@@ -25,11 +28,11 @@ Sub Main()
 
     MultiValue.SetList("PartType", "M", "P")
     MultiValue.List("ProdCode") = fetch_list_values("ProdCode.csv")
-    'MultiValue.SetList("ProdCode", "FSC Assemblies", "FSC Components", "NCA Assemblies", "NCA Components", "Purchases")
-    MultiValue.SetList("ClassID", "Assemblies we sell", "Box Materials", "Components we sell", "Finished Components for kits", "Finish Materials", "FSC Lumber", "Finished Components on shelf", "IT Supplies", "Lumber", "Office Supplies", "Other Materials", "Tooling")
-    'TODO: multi-value for approving engineer for revision?
+    MultiValue.List("ClassID") = fetch_list_values("ClassID.csv")
+    
+    MultiValue.List("VendorNum") = fetch_list_values("VendorNum.csv")
 
-    'TODO: multi-value for vendors for purchased parts?
+    'TODO: multi-value for approving engineer for revision?
 End Sub
 
 Sub createParam(ByVal n As String, ByVal paramType As UnitsTypeEnum)
