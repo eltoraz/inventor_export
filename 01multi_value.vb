@@ -80,6 +80,8 @@ Function fetch_list_values(ByVal f As String) As ArrayList
                     'as the human-readable descriptions
                     current_row = csv_reader.ReadFields()
                     option_list.Add(current_row(0))
+                Catch ex As FileIO.MalformedLineException
+                    Debug.Write("CSV contained invalid line:" & ex.Message)
                 End Try
             End If
         End While
