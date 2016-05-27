@@ -21,6 +21,7 @@ Sub Main()
     params.Add("VendorNum", UnitsTypeEnum.kTextUnits)
     'vendor parameter will pass a number, but the selection box needs to be
     'be human-readable and not just an ID
+    'TODO: purchase point
 
     For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in params
         createParam(kvp.Key, kvp.Value)
