@@ -71,18 +71,19 @@ Function fetch_list_values(ByVal f As String) As ArrayList
         Dim current_row As String()
         Dim first_line As Boolean = True
         While Not csv_reader.EndOfData
-            'skip the header row
+            Try
+                current_row = csv_reader.ReadFields()
+            Catch ex As FileIO.MalformedLineException
+                Debug.Write("CSV contained invalid line:" & ex.Message)
+            End Try
+
             If first_line Then
+                'skip the header row
                 first_line = False
             Else
-                Try
-                    'we only need the first field here, which the queries export
-                    'as the human-readable descriptions
-                    current_row = csv_reader.ReadFields()
-                    option_list.Add(current_row(0))
-                Catch ex As FileIO.MalformedLineException
-                    Debug.Write("CSV contained invalid line:" & ex.Message)
-                End Try
+                'we only need the first field here, which the queries export
+                'as the human-readable descriptions
+                option_list.Add(current_row(0))
             End If
         End While
     End Using
