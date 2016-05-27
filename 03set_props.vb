@@ -5,13 +5,13 @@ AddVbFile "dmt.vb"
 '      than the human-readable strings
 Sub Main()
     'list of parameters that need to be converted to iProperties
-    Dim params = New String() {"PartType", "ProdCode", "ClassID", "UsePartRev", "MfgComment", "PurComment", "TrackSerialNum", "RevDescription"}
+    Dim params = New String() {"PartType", "ProdCode", "ClassID", "UsePartRev", "MfgComment", "PurComment", "TrackSerialNum", "RevDescription", "VendorNum"}
 
     'mappings for human-readable values (i.e. in the dropdown boxes) -> keys
     'only necessary for ProdCode and ClassID
-    Dim ProdCodeMap As New Dictionary(Of String, String) = fetch_list_mappings("ProdCode.csv")
-    Dim ClassIDMap As New Dictionary(Of String, String) = fetch_list_mappings("ClassI.csv")
-    Dim VendorNumMap As New Dictionary(Of String, Integer) = fetch_list_mappings("VendorNum.csv")
+    Dim ProdCodeMap As Dictionary(Of String, String) = fetch_list_mappings("ProdCode.csv")
+    Dim ClassIDMap As Dictionary(Of String, String) = fetch_list_mappings("ClassI.csv")
+    Dim VendorNumMap As Dictionary(Of String, Integer) = fetch_list_mappings("VendorNum.csv")
 
     'TODO: map approving engineers to Epicor IDs
 
