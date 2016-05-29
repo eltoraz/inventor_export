@@ -1,2 +1,6 @@
 # vim swapfiles
 *.swp
+
+# references & dynamically-generated CSV files
+old/
+ref/
