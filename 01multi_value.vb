@@ -18,10 +18,10 @@ Sub Main()
     
     'Plant parameters
     params.Add("LeadTime", UnitsTypeEnum.kUnitlessUnits)
-    params.Add("VendorNum", UnitsTypeEnum.kTextUnits)
     'vendor parameter will pass a number, but the selection box needs to be
     'be human-readable and not just an ID
-    'TODO: purchase point
+    params.Add("VendorNum", UnitsTypeEnum.kTextUnits)
+    params.Add("PurPoint", UnitsTypeEnum.kTextUnits)
 
     For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in params
         createParam(kvp.Key, kvp.Value)
@@ -30,10 +30,13 @@ Sub Main()
     MultiValue.SetList("PartType", "M", "P")
     MultiValue.List("ProdCode") = fetch_list_values("ProdCode.csv")
     MultiValue.List("ClassID") = fetch_list_values("ClassID.csv")
-    
-    MultiValue.List("VendorNum") = fetch_list_values("VendorNum.csv")
 
     'TODO: multi-value for approving engineer for revision?
+
+    MultiValue.List("VendorNum") = fetch_list_values("VendorNum.csv")
+    'TODO: need to check logic on this. ie, does each vendor have different options?
+    'TODO: add to form in Inventor
+    MultiValue.SetList("PurPoint", "NCA", "FSC")
 End Sub
 
 Sub createParam(ByVal n As String, ByVal paramType As UnitsTypeEnum)

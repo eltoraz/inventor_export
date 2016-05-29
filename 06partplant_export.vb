@@ -16,11 +16,12 @@ Sub Main()
     TrackSerialNum = iProperties.Value("Custom", "TrackSerialNum")
 
     If StrComp(PartType, "P") = 0 Then
-        'TODO: setup parameters/iProperties for LeadTime et al.
-        'TODO: come to think of it, will purchased parts go through Inventor at all?
+        LeadTime = iProperties.Value("Custom", "LeadTime")
+        VendorNum = iProperties.Value("Custom", "VendorNum")
+        PurPoint = iProperties.Value("Custom", "PurPoint")
     Else
-        LeadTime = 0
-        VendorNum = 0
+        LeadTime = ""
+        VendorNum = ""
         PurPoint = ""
     End If
 

@@ -6,7 +6,7 @@ AddVbFile "dmt.vb"
 Sub Main()
     'TODO: add purchase point and lead time once implemented
     'list of parameters that need to be converted to iProperties
-    Dim params = New String() {"PartType", "ProdCode", "ClassID", "UsePartRev", "MfgComment", "PurComment", "TrackSerialNum", "RevDescription", "VendorNum"}
+    Dim params = New String() {"PartType", "ProdCode", "ClassID", "UsePartRev", "MfgComment", "PurComment", "TrackSerialNum", "RevDescription", "LeadTime", "VendorNum", "PurPoint"}
 
     'mappings for human-readable values (i.e. in the dropdown boxes) -> keys
     'only necessary for ProdCode and ClassID
