@@ -1,32 +1,18 @@
+AddVbFile "dmt.vb"
+
 'set iProperties with values the user has defined in a form
 'note: these values will mostly be the IDs the Epicor DMT is expecting rather
 '      than the human-readable strings
 Sub Main()
+    'TODO: add purchase point and lead time once implemented
     'list of parameters that need to be converted to iProperties
-    Dim params = New String() {"PartType", "ProdCode", "ClassID", "UsePartRev", "MfgComment", "PurComment", "TrackSerialNum", "RevDescription"}
+    Dim params = New String() {"PartType", "ProdCode", "ClassID", "UsePartRev", "MfgComment", "PurComment", "TrackSerialNum", "RevDescription", "VendorNum"}
 
     'mappings for human-readable values (i.e. in the dropdown boxes) -> keys
     'only necessary for ProdCode and ClassID
-    Dim ProdCodeMap As New Dictionary(Of String, String)
-    ProdCodeMap.Add("FSC Assemblies", "FSC-ASBL")
-    ProdCodeMap.Add("FSC Components", "FSC-COMP")
-    ProdCodeMap.Add("NCA Assemblies", "NCA-ASBL")
-    ProdCodeMap.Add("NCA Components", "NCA-COMP")
-    ProdCodeMap.Add("Purchases", "PURCHASE")
-
-    Dim ClassIDMap As New Dictionary(Of String, String)
-    ClassIDMap.Add("Assemblies we sell", "ASBL")
-    ClassIDMap.Add("Box Materials", "BOX")
-    ClassIDMap.Add("Components we sell", "COMP")
-    ClassIDMap.Add("Finished Components for kits", "FKIT")
-    ClassIDMap.Add("Finish Materials", "FNSH")
-    ClassIDMap.Add("FSC Lumber", "FSC")
-    ClassIDMap.Add("Finished Components on shelf", "FSHL")
-    ClassIDMap.Add("IT Supplies", "IT")
-    ClassIDMap.Add("Lumber", "LUMB")
-    ClassIDMap.Add("Office Supplies", "OFF")
-    ClassIDMap.Add("Other Materials", "OTHR")
-    ClassIDMap.Add("Tooling", "TOOL")
+    Dim ProdCodeMap As Dictionary(Of String, String) = fetch_list_mappings("ProdCode.csv")
+    Dim ClassIDMap As Dictionary(Of String, String) = fetch_list_mappings("ClassID.csv")
+    Dim VendorNumMap As Dictionary(Of String, String) = fetch_list_mappings("VendorNum.csv")
 
     'TODO: map approving engineers to Epicor IDs
 
@@ -43,6 +29,8 @@ Sub Main()
             paramValue = ProdCodeMap(paramValue)
         Else If StrComp(i, "ClassID") = 0 Then
             paramValue = ClassIDMap(paramValue)
+        Else If StrComp(i, "VendorNum") = 0 Then
+            paramValue = VendorNumMap(paramValue)
         Else If StrComp(i, "MfgComment") = 0 Then
             'note: Epicor MfgComment and PurComment fields supports up to 16000 chars,
             'and commas need to be stripped to avoid messing up the CSV
@@ -81,3 +69,33 @@ Sub updateProp(ByVal n As String, ByVal paramVal As Object)
         invProp.value = paramVal
     End If
 End Sub
+
+'Map the description in the parameter to the DB friendly ID expected by Epicor
+Function fetch_list_mappings(ByVal f As String) As Dictionary(Of String, String)
+    Dim file_name As String = DMT.dmt_working_path & "ref\" & f
+    Dim mapping As New Dictionary(Of String, String)
+
+    Using csv_reader As New FileIO.TextFieldParser(file_name)
+        csv_reader.TextFieldType = FileIO.FieldType.Delimited
+        csv_reader.SetDelimiters(",")
+
+        Dim current_row As String()
+        Dim first_line As Boolean = True
+        While Not csv_reader.EndOfData
+            Try
+                current_row = csv_reader.ReadFields()
+            Catch ex As FileIO.MalformedLineException
+                Debug.Write("CSV contained invalid line:" & ex.Message)
+            End Try
+
+            If first_line Then
+                'skip headers
+                first_line = False
+            Else
+                mapping.Add(current_row(0), current_row(1))
+            End If
+        End While
+    End Using
+
+    Return mapping
+End Function
