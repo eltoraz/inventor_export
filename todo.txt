@@ -1,4 +1,4 @@
 - move Design Data folder to network, configure clients to point to new location
   - see: https://knowledge.autodesk.com/support/inventor-products/learn-explore/caas/CloudHelp/cloudhelp/2017/ENU/Inventor-Help/files/GUID-35327F99-72FC-4154-BFB0-6E46E20B9E76-htm.html
-- add I:\Cadd\_iLogic\Export to External Rule Directories in Tools>Options>iLogic Configuration (in dropdown) for all Inventor installations
   - default directory: C:\Users\Public\Documents\Autodesk\Inventor 2016\Design Data\iLogic\UI
+- add I:\Cadd\_iLogic\Export to External Rule Directories in Tools>Options>iLogic Configuration (in dropdown) for all Inventor installations
