@@ -5,10 +5,10 @@ AddVbFile "dmt.vb"
 'DMT.dmt_export()
 
 'Call the other rules in order
-iLogicVb.RunExternalRule("01multi_value.vb")
+iLogicVb.RunExternalRule("10multi_value.vb")
 iLogicForm.ShowGlobal("02part_properties", FormMode.Modal)
-iLogicVb.RunExternalRule("03set_props.vb")
-iLogicVb.RunExternalRule("04part_export.vb")
-iLogicVb.RunExternalRule("05partrev_export.vb")
+iLogicVb.RunExternalRule("30set_props.vb")
+iLogicVb.RunExternalRule("40part_export.vb")
+iLogicVb.RunExternalRule("50partrev_export.vb")
 
 'TODO: display message box about DMT state - maybe last 3 lines of logfile
