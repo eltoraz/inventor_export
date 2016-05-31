@@ -4,9 +4,9 @@ AddVbFile "dmt.vb"
 'note: these values will mostly be the IDs the Epicor DMT is expecting rather
 '      than the human-readable strings
 Sub Main()
-    'TODO: add purchase point and lead time once implemented
     'list of parameters that need to be converted to iProperties
-    Dim params = New String() {"PartType", "ProdCode", "ClassID", "UsePartRev", "MfgComment", "PurComment", "TrackSerialNum", "RevDescription", "LeadTime", "VendorNum", "PurPoint"}
+    Dim inv_doc As Document = ThisApplication.ActiveDocument
+    Dim inv_params As UserParameters = inv_doc.Parameters.UserParameters
 
     'mappings for human-readable values (i.e. in the dropdown boxes) -> keys
     'only necessary for ProdCode and ClassID
@@ -16,35 +16,34 @@ Sub Main()
 
     'TODO: map approving engineers to Epicor IDs
 
-    For Each i As String in params
-        Dim invDoc As Document = ThisApplication.ActiveDocument
-        Dim invParams As UserParameters = invDoc.Parameters.UserParameters
-
+    For i = 1 To inv_params.Count
         'if Epicor requires a short ID, convert the human-readable value via
         'the appropriate mapping (see above)
         'required for: ProdCode, ClasID
-        Dim param As Parameter = invParams.Item(i)
-        Dim paramValue = param.Value
-        If StrComp(i, "ProdCode") = 0 Then
-            paramValue = ProdCodeMap(paramValue)
-        Else If StrComp(i, "ClassID") = 0 Then
-            paramValue = ClassIDMap(paramValue)
-        Else If StrComp(i, "VendorNum") = 0 Then
-            paramValue = VendorNumMap(paramValue)
-        Else If StrComp(i, "MfgComment") = 0 Then
+        Dim param As Parameter = inv_params.Item(i)
+        Dim param_name As String = param.Name
+        Dim param_value = param.Value
+
+        If StrComp(param_name, "ProdCode") = 0 Then
+            param_value = ProdCodeMap(param_value)
+        Else If StrComp(param_name, "ClassID") = 0 Then
+            param_value = ClassIDMap(param_value)
+        Else If StrComp(param_name, "VendorNum") = 0 Then
+            param_value = VendorNumMap(param_value)
+        Else If StrComp(param_name, "MfgComment") = 0 Then
             'note: Epicor MfgComment and PurComment fields supports up to 16000 chars,
             'and commas need to be stripped to avoid messing up the CSV
-            paramValue = Replace(paramValue, ",", "")
-            paramValue = Left(paramValue, 16000)
-        Else If StrComp(i, "PurComment") = 0 Then
-            paramValue = Replace(paramValue, ",", "")
-            paramValue = Left(paramValue, 16000)
-        Else If StrComp(i, "RevDescription") = 0 Then
-            paramValue = Replace(paramValue, ",", "")
-            paramValue = Left(paramValue, 16000)
+            param_value = Replace(param_value, ",", "")
+            param_value = Left(param_value, 16000)
+        Else If StrComp(param_name, "PurComment") = 0 Then
+            param_value = Replace(param_value, ",", "")
+            param_value = Left(param_value, 16000)
+        Else If StrComp(param_name, "RevDescription") = 0 Then
+            param_value = Replace(param_value, ",", "")
+            param_value = Left(param_value, 16000)
         End If
 
-        updateProp(i, paramValue)
+        updateProp(param_name, param_value)
 
         invDoc.Update
     Next

@@ -23,6 +23,9 @@ Sub Main()
     params.Add("VendorNum", UnitsTypeEnum.kTextUnits)
     params.Add("PurPoint", UnitsTypeEnum.kTextUnits)
 
+    'internal logic control parameters
+    params.Add("IsPartPurchased", UnitsTypeEnum.kBooleanUnits)
+
     For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in params
         createParam(kvp.Key, kvp.Value)
     Next
