@@ -5,8 +5,7 @@ Sub Main()
     Dim PartType As String
 
     'fields for purchased parts
-    Dim LeadTime, VendorNum As Integer
-    Dim PurPoint As String
+    Dim LeadTime, VendorNum, PurPoint As String
 
     'fields for manufactured parts
     Dim TrackSerialNumber As Boolean
@@ -20,6 +19,7 @@ Sub Main()
     VendorNum = ""
     PurPoint = ""
 
+    'logic TODO: verify logic that serial numbers will only be tracked for M parts
     If TrackSerialNumber And StrComp(PartType, "M") = 0 Then
         SNMask = "NF"
         SNMaskExample = "NF9999999"

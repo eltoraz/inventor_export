@@ -18,8 +18,10 @@ Sub Main()
     End If
 
     TrackSerialNum = iProperties.Value("Custom", "TrackSerialNum")
+
     'if serial number is being tracked, a bunch of fields are enabled
-    If TrackSerialNum Then
+    'logic TODO: serial numbers only for M parts?
+    If TrackSerialNum And StrComp(PartType, "M") = 0 Then
         SNFormat = "NF#######"
         SNBaseDataType = "MASK"
         SNMask = "NF"

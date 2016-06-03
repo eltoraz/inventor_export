@@ -14,7 +14,7 @@ Sub Main()
     Dim ClassIDMap As Dictionary(Of String, String) = fetch_list_mappings("ClassID.csv")
     Dim VendorNumMap As Dictionary(Of String, String) = fetch_list_mappings("VendorNum.csv")
 
-    'TODO: map approving engineers to Epicor IDs
+    'TODO: map approving engineers to Epicor IDs?
 
     For i = 1 To inv_params.Count
         'if Epicor requires a short ID, convert the human-readable value via
