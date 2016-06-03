@@ -36,7 +36,7 @@ Sub Main()
 
     data = "BBN"                                    'Company name (constant)
     data = data & "," & "MfgSys"                    'Plant (only one for this company)
-    data = data & "," & iProperties.Value("Project", "Part Number')
+    data = data & "," & iProperties.Value("Project", "Part Number")
     data = data & "," & "453"                       'PrimWhse (just one warehouse)
 
     data = data & "," & LeadTime
