@@ -7,7 +7,7 @@ AddVbFile "dmt.vb"
 'Call the other rules in order
 iLogicVb.RunExternalRule("10multi_value.vb")
 iLogicForm.ShowGlobal("20part_properties", FormMode.Modal)
-iLogicVb.RunExternalRule("21logic_check.vb")
+'iLogicVb.RunExternalRule("21logic_check.vb")
 iLogicVb.RunExternalRule("30set_props.vb")
 iLogicVb.RunExternalRule("40part_export.vb")
 iLogicVb.RunExternalRule("50partrev_export.vb")
