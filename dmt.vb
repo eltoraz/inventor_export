@@ -4,7 +4,7 @@ Imports System.Diagnostics
 'call the DMT to add/update the specified part/revision (etc.)
 Public Class DMT
     Public Shared dmt_loc As String = "C:\Epicor\ERP10.1Client\Client\DMT.exe"
-    Public Shared dmt_working_path As String = "I:\Cadd\_iLogic\Export\"
+    Public Shared dmt_working_path As String = "I:\Cadd\_Epicor\"
 
     'TODO: change in production to DMT user/password/environment
     Private Shared username As String = "DMT_USERNAME"
