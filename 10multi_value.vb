@@ -37,9 +37,6 @@ Sub Main()
     'TODO: multi-value for approving engineer for revision?
 
     MultiValue.List("VendorNum") = fetch_list_values("VendorNum.csv")
-    'TODO: need to check logic on this. ie, does each vendor have different options?
-    'TODO: add to form in Inventor
-    MultiValue.SetList("PurPoint", "NCA", "FSC")
 End Sub
 
 Sub createParam(ByVal n As String, ByVal paramType As UnitsTypeEnum)
@@ -57,7 +54,7 @@ Sub createParam(ByVal n As String, ByVal paramType As UnitsTypeEnum)
         If paramType = UnitsTypeEnum.kTextUnits Then
             defaultValue = ""
         ElseIf paramType = UnitsTypeEnum.kBooleanUnits Then
-            defaultValue = True
+            defaultValue = False
         ElseIf paramType = UnitsTypeEnum.kUnitlessUnits Then
             defaultValue = 0
         End If
