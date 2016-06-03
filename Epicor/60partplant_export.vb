@@ -56,5 +56,5 @@ Sub Main()
     file_name = DMT.write_csv("Part_Plant.csv", fields, data)
 
     'TODO: verify this is the correct table name in DMT
-    DMT.exec_DMT("Part Plant", file_name)
+    DMT.dmt_import("Part Plant", file_name)
 End Sub
