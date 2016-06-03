@@ -16,13 +16,6 @@ Sub Main()
     'Revision parameters
     params.Add("RevDescription", UnitsTypeEnum.kTextUnits)
     
-    'Plant parameters
-    params.Add("LeadTime", UnitsTypeEnum.kUnitlessUnits)
-    'vendor parameter will pass a number, but the selection box needs to be
-    'be human-readable and not just an ID
-    params.Add("VendorNum", UnitsTypeEnum.kTextUnits)
-    params.Add("PurPoint", UnitsTypeEnum.kTextUnits)
-
     'internal logic control parameters
     params.Add("IsPartPurchased", UnitsTypeEnum.kBooleanUnits)
 
@@ -35,8 +28,6 @@ Sub Main()
     MultiValue.List("ClassID") = fetch_list_values("ClassID.csv")
 
     'TODO: multi-value for approving engineer for revision?
-
-    MultiValue.List("VendorNum") = fetch_list_values("VendorNum.csv")
 End Sub
 
 Sub createParam(ByVal n As String, ByVal paramType As UnitsTypeEnum)

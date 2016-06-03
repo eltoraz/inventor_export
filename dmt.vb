@@ -35,10 +35,8 @@ Public Class DMT
 
         'Mapping of queries in Epicor and the corresponding output files
         Dim query_map As New Dictionary(Of String, String)
-        query_map.Add("DMTVendorExport", "VendorNum.csv")
         query_map.Add("DMTProdCode", "ProdCode.csv")
         query_map.Add("DMTClasSID", "ClassID.csv")
-        query_map.Add("DMTPurPoint", "PurPoint.csv")
 
         Dim psi As New ProcessStartInfo(dmt_loc)
         psi.RedirectStandardOutput = True

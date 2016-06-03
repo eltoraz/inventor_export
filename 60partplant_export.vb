@@ -15,15 +15,10 @@ Sub Main()
     PartType = iProperties.Value("Custom", "PartType")
     TrackSerialNum = iProperties.Value("Custom", "TrackSerialNum")
 
-    If StrComp(PartType, "P") = 0 Then
-        LeadTime = iProperties.Value("Custom", "LeadTime")
-        VendorNum = iProperties.Value("Custom", "VendorNum")
-        PurPoint = iProperties.Value("Custom", "PurPoint")
-    Else
-        LeadTime = ""
-        VendorNum = ""
-        PurPoint = ""
-    End If
+    'fields that won't get filled when making the parts in Inventor
+    LeadTime = ""
+    VendorNum = ""
+    PurPoint = ""
 
     If TrackSerialNumber And StrComp(PartType, "M") = 0 Then
         SNMask = "NF"
