@@ -45,7 +45,7 @@ Sub Main()
 
         updateProp(param_name, param_value)
 
-        invDoc.Update
+        inv_doc.Update
     Next
 End Sub
 
