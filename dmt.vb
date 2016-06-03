@@ -91,11 +91,15 @@ Public Class DMT
     End Function
 
     Public Shared Sub dmt_log_event(msg As String)
-        Dim fso, file_name, log_file
+        Dim fso, file_path, file_name, log_file
         Dim log_date = DateTime.Now
 
+        'create log directory - no filesystem changes will be made if it exists already
+        file_path = dmt_working_path & "log\"
+        System.IO.Directory.CreateDirectory(file_path)
+
         fso = CreateObject("Scripting.FileSystemObject")
-        file_name = dmt_working_path & "log\" & log_date.ToString("yyyyMMdd") & "_dmtlog.txt"
+        file_name = file_path & log_date.ToString("yyyyMMdd") & "_dmtlog.txt"
         log_file = fso.OpenTextFile(file_name, 8, True, -2)
 
         log_file.WriteLine(msg)
