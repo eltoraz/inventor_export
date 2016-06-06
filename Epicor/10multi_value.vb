@@ -1,4 +1,5 @@
-AddVbFile "dmt.vb"
+AddVbFile "dmt.vb"                  'DMT.dmt_workin_path
+AddVbFile "inventor_common.vb"      'create_param()
 
 'create parameters with a restricted set of accepted values for import by
 'Epicor DMT (the actual IDs the tool needs are set in set_props.vb)
@@ -20,7 +21,7 @@ Sub Main()
     params.Add("IsPartPurchased", UnitsTypeEnum.kBooleanUnits)
 
     For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in params
-        createParam(kvp.Key, kvp.Value)
+        create_param(kvp.Key, kvp.Value)
     Next
 
     MultiValue.SetList("PartType", "M", "P")
@@ -28,31 +29,6 @@ Sub Main()
     MultiValue.List("ClassID") = fetch_list_values("ClassID.csv")
 
     'TODO: multi-value for approving engineer for revision?
-End Sub
-
-Sub createParam(ByVal n As String, ByVal paramType As UnitsTypeEnum)
-    dim invDoc As Document = ThisApplication.ActiveDocument
-
-    Dim invParams As UserParameters = invDoc.Parameters.UserParameters
-
-    Dim TestParam As UserParameter
-
-    'if the parameter doesn't already exist, UserParameters.Item will throw an error
-    Try
-        TestParam = invParams.Item(n)
-    Catch
-        Dim defaultValue
-        If paramType = UnitsTypeEnum.kTextUnits Then
-            defaultValue = ""
-        ElseIf paramType = UnitsTypeEnum.kBooleanUnits Then
-            defaultValue = False
-        ElseIf paramType = UnitsTypeEnum.kUnitlessUnits Then
-            defaultValue = 0
-        End If
-
-        TestParam = invParams.AddByValue(n, defaultValue, paramType)
-        invDoc.Update
-    End Try
 End Sub
 
 'populate the list of options from the CSV file specified by `f`

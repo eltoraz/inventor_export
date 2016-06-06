@@ -1,4 +1,5 @@
 AddVbFile "dmt.vb"
+AddVbFile "inventor_common.vb"      '
 
 'set iProperties with values the user has defined in a form
 'note: these values will mostly be the IDs the Epicor DMT is expecting rather
@@ -43,30 +44,10 @@ Sub Main()
             param_value = Left(param_value, 16000)
         End If
 
-        updateProp(param_name, param_value)
+        update_prop(param_name, param_value)
 
         inv_doc.Update
     Next
-End Sub
-
-Sub updateProp(ByVal n As String, ByVal paramVal As Object)
-    'get the custom property collection
-    Dim invDoc As Document = ThisApplication.ActiveDocument
-    Dim invCustomPropertySet As PropertySet 
-    invCustomPropertySet = invDoc.PropertySets.Item("Inventor User Defined Properties")
-
-    ' Attempt to get existing custom property
-    On Error Resume Next
-    Dim invProp
-    invProp = invCustomPropertySet.Item(n)
-    If Err.Number <> 0 Then
-        'Failed to get the property, which means it doesn't already exist,
-        'so we'll create it
-        invCustomPropertySet.Add(paramVal, n)
-    Else
-        'got the property so update the value
-        invProp.value = paramVal
-    End If
 End Sub
 
 'Map the description in the parameter to the DB friendly ID expected by Epicor
