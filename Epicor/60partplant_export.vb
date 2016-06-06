@@ -19,8 +19,8 @@ Sub Main()
     VendorNum = ""
     PurPoint = ""
 
-    'logic TODO: verify logic that serial numbers will only be tracked for M parts
-    If TrackSerialNumber And StrComp(PartType, "M") = 0 Then
+    Dim serial_num As Boolean = TrackSerialNumber And (Strcomp(PartType, "M") = 0)
+    If serial_num Then
         SNMask = "NF"
         SNMaskExample = "NF9999999"
         SNBaseDataType = "MASK"
