@@ -10,3 +10,6 @@
   - raw materials still get added AND updated through Inventor
 
 - expand process to include Quoting spreadsheet generation (see example in N:\CompanyResources\Quoting\Rejuvenation\Island Collection\RM Spreadsheets)
+
+- validate data input in form in 21...
+  - test that DMT accepts CSVs containing escaped commas & quotes (and write appropriate substitution code if so)
