@@ -21,7 +21,7 @@ Sub Main()
     params.Add("IsPartPurchased", UnitsTypeEnum.kBooleanUnits)
 
     For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in params
-        create_param(kvp.Key, kvp.Value)
+        InventorOps.create_param(kvp.Key, kvp.Value)
     Next
 
     MultiValue.SetList("PartType", "M", "P")

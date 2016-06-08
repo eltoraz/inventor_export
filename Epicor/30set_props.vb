@@ -44,7 +44,7 @@ Sub Main()
             param_value = Left(param_value, 16000)
         End If
 
-        update_prop(param_name, param_value)
+        InventorOps.update_prop(param_name, param_value)
 
         inv_doc.Update
     Next
