@@ -13,7 +13,6 @@ Sub Main()
     'only necessary for ProdCode and ClassID
     Dim ProdCodeMap As Dictionary(Of String, String) = fetch_list_mappings("ProdCode.csv")
     Dim ClassIDMap As Dictionary(Of String, String) = fetch_list_mappings("ClassID.csv")
-    Dim VendorNumMap As Dictionary(Of String, String) = fetch_list_mappings("VendorNum.csv")
 
     'TODO: map approving engineers to Epicor IDs?
 
@@ -25,6 +24,8 @@ Sub Main()
         Dim param_name As String = param.Name
         Dim param_value = param.Value
 
+        'TODO: try enclosing user-entered fields in quotes (making sure to
+        '      escape entered quotes) so as not to need to strip commas
         If StrComp(param_name, "ProdCode") = 0 Then
             param_value = ProdCodeMap(param_value)
         Else If StrComp(param_name, "ClassID") = 0 Then
