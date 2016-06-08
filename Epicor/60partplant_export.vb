@@ -19,7 +19,7 @@ Sub Main()
     VendorNum = ""
     PurPoint = ""
 
-    Dim serial_num As Boolean = TrackSerialNumber And (Strcomp(PartType, "M") = 0)
+    Dim serial_num As Boolean = TrackSerialNumber AndAlso (Strcomp(PartType, "M") = 0)
     If serial_num Then
         SNMask = "NF"
         SNMaskExample = "NF9999999"

@@ -21,7 +21,7 @@ Sub Main()
 
     'if serial number is being tracked, a bunch of fields are enabled
     'logic TODO: serial numbers only for M parts?
-    If TrackSerialNum And StrComp(PartType, "M") = 0 Then
+    If TrackSerialNum AndAlso StrComp(PartType, "M") = 0 Then
         SNFormat = "NF#######"
         SNBaseDataType = "MASK"
         SNMask = "NF"
