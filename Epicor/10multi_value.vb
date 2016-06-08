@@ -1,5 +1,5 @@
 AddVbFile "dmt.vb"                  'DMT.dmt_workin_path
-AddVbFile "inventor_common.vb"      'create_param()
+AddVbFile "inventor_common.vb"      'InventorOps.create_param()
 
 'create parameters with a restricted set of accepted values for import by
 'Epicor DMT (the actual IDs the tool needs are set in set_props.vb)

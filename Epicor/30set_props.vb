@@ -1,5 +1,5 @@
-AddVbFile "dmt.vb"
-AddVbFile "inventor_common.vb"      '
+AddVbFile "dmt.vb"                  'DMT.dmt_working_path
+AddVbFile "inventor_common.vb"      'InventorOps.update_prop
 
 'set iProperties with values the user has defined in a form
 'note: these values will mostly be the IDs the Epicor DMT is expecting rather
