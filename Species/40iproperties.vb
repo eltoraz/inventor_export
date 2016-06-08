@@ -17,7 +17,7 @@ Sub Main()
 
         'TODO: validate that the corresponding "Part"/"Mat" parameters have
         '      been populated if the flag is true, and also that they have the
-        '      correct formatting
+        '      correct formatting (XX-###)
         If StrComp(Left(param_name, 4), "Flag") = 0 AndAlso param_value = True Then
             Dim species_name = Replace(param_name, "4", "-").Substring(4)
 
