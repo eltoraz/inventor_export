@@ -32,7 +32,7 @@
       </Font>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>PartAsh</Name>
+      <Name>Part (Ash)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -49,7 +49,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>MatAsh</Name>
+      <Name>Material (Ash)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -66,7 +66,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>PartBirch4Baltic</Name>
+      <Name>Part (Birch-Baltic)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -83,7 +83,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>MatBirch4Baltic</Name>
+      <Name>Material (Birch-Baltic)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -100,7 +100,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>PartCherry</Name>
+      <Name>Part (Cherry)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -117,7 +117,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>MatCherry</Name>
+      <Name>Material (Cherry)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -134,7 +134,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>PartMaple4Hard</Name>
+      <Name>Part (Maple-Hard)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -151,7 +151,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>MatMaple4Hard</Name>
+      <Name>Material (Maple-Hard)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -168,7 +168,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>PartMaple4Soft</Name>
+      <Name>Part (Maple-Soft)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -185,7 +185,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>MatMaple4Soft</Name>
+      <Name>Material (Maple-Soft)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -202,7 +202,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>PartOak4Red</Name>
+      <Name>Part (Oak-Red)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -219,7 +219,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>MatOak4Red</Name>
+      <Name>Material (Oak-Red)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -236,7 +236,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>PartOak4White</Name>
+      <Name>Part (Oak-White)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -253,7 +253,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>MatOak4White</Name>
+      <Name>Material (Oak-White)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -270,7 +270,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>PartPine</Name>
+      <Name>Part (Pine)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -287,7 +287,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>MatPine</Name>
+      <Name>Material (Pine)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -304,7 +304,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>PartPoplar</Name>
+      <Name>Part (Poplar)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -321,7 +321,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>MatPoplar</Name>
+      <Name>Material (Poplar)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -338,7 +338,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>PartWalnut</Name>
+      <Name>Part (Walnut)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -355,7 +355,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>MatWalnut</Name>
+      <Name>Material (Walnut)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -372,7 +372,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>PartHardware</Name>
+      <Name>Part (Hardware)</Name>
       <ToolTip />
       <Font>
         <FamilyName />
