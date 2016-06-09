@@ -1,10 +1,12 @@
 ' <IsStraightVb>True</IsStraightVb>
 'Inventor parameter/iProperty manipulation functions
+Imports Inventor
 
 Public Class InventorOps
     'initialize parameter `n` as type `paramType`
-    Public Shared Sub create_param(ByVal n As String, ByVal paramType As UnitsTypeEnum)
-        dim invDoc As Document = ThisApplication.ActiveDocument
+    Public Shared Sub create_param(ByVal n As String, ByVal paramType As UnitsTypeEnum, _
+                                   ByRef app As Inventor.Application)
+        dim invDoc As Document = app.ActiveDocument
 
         Dim invParams As UserParameters = invDoc.Parameters.UserParameters
 
@@ -29,9 +31,10 @@ Public Class InventorOps
     End Sub
 
     'update iProperty `n` with value `paramVal`, creating it if it doesn't exist
-    Public Shared Sub update_prop(ByVal n As String, ByVal paramVal As Object)
+    Public Shared Sub update_prop(ByVal n As String, ByVal paramVal As Object, _
+                                  ByRef app As Inventor.Application)
         'get the custom property collection
-        Dim invDoc As Document = ThisApplication.ActiveDocument
+        Dim invDoc As Document = app.ActiveDocument
         Dim invCustomPropertySet As PropertySet 
         invCustomPropertySet = invDoc.PropertySets.Item("Inventor User Defined Properties")
 

@@ -7,7 +7,8 @@ AddVbFile "inventor_common.vb"      'InventorOps.update_prop
 'create/update iProperties with the values entered in form 30 (enabled in form 20)
 Sub Main()
     'list of parameters that need to be converted to iProperties
-    Dim inv_doc As Document = ThisApplication.ActiveDocument
+    Dim inv_app As Inventor.Application = ThisApplication
+    Dim inv_doc As Document = inv_app.ActiveDocument
     Dim inv_params As UserParameters = inv_doc.Parameters.UserParameters
 
     For i = 1 To inv_params.Count
@@ -24,13 +25,13 @@ Sub Main()
             'part
             Dim part_param As Parameter = inv_params.Item("Part" & param_name)
             Dim part_value As String = part_param.Value
-            InventorOps.update_prop("Part (" & species_name & ")", part_value)
+            InventorOps.update_prop("Part (" & species_name & ")", part_value, inv_app)
 
             'material: skip for "Hardware"
             If StrComp(species_name, "Hardware") <> 0 Then
                 Dim mat_param As Parameter = inv_params.Item("Mat" & param_name)
                 Dim mat_value As String = mat_param.Value
-                InventorOps.update_prop("Material (" & species_name & ")", mat_value)
+                InventorOps.update_prop("Material (" & species_name & ")", mat_value, inv_app)
             End If
         End If
     Next

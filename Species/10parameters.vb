@@ -19,15 +19,16 @@ Sub Main()
     species.Add("Poplar")
     species.Add("Walnut")
 
+    Dim inv_app As Inventor.Application = ThisApplication
     For Each s As String in species:
         Dim subst As String = Replace(s, "-", "4")
-        InventorOps.create_param("Flag" & subst, UnitsTypeEnum.kBooleanUnits)
-        InventorOps.create_param("Part" & subst, UnitsTypeEnum.kTextUnits)
-        InventorOps.create_param("Mat" & subst, UnitsTypeEnum.kTextUnits)
+        InventorOps.create_param("Flag" & subst, UnitsTypeEnum.kBooleanUnits, inv_app)
+        InventorOps.create_param("Part" & subst, UnitsTypeEnum.kTextUnits, inv_app)
+        InventorOps.create_param("Mat" & subst, UnitsTypeEnum.kTextUnits, inv_app)
     Next
 
     'special case: "Hardware", to be handled on an individual basis
     Dim hw As String = "Hardware"
-    InventorOps.create_param("Flag" & hw, UnitsTypeEnum.kBooleanUnits)
-    InventorOps.create_param("Part" & hw, UnitsTypeEnum.kTextUnits)
+    InventorOps.create_param("Flag" & hw, UnitsTypeEnum.kBooleanUnits, inv_app)
+    InventorOps.create_param("Part" & hw, UnitsTypeEnum.kTextUnits, inv_app)
 End Sub

@@ -20,8 +20,9 @@ Sub Main()
     'internal logic control parameters
     params.Add("IsPartPurchased", UnitsTypeEnum.kBooleanUnits)
 
+    Dim inv_app As Inventor.Application = ThisApplication
     For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in params
-        InventorOps.create_param(kvp.Key, kvp.Value)
+        InventorOps.create_param(kvp.Key, kvp.Value, inv_app)
     Next
 
     MultiValue.SetList("PartType", "M", "P")
