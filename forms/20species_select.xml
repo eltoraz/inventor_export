@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FormSpecification xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>20species_select</Name>
+  <Font>
+    <Size>0</Size>
+    <Bold>false</Bold>
+    <Italic>false</Italic>
+  </Font>
+  <ContentsFont>
+    <Size>0</Size>
+    <Bold>false</Bold>
+    <Italic>false</Italic>
+  </ContentsFont>
+  <ContentsTextLocation>Left</ContentsTextLocation>
+  <Items>
+    <UiElementSpec xsi:type="BooleanParameterControlSpec">
+      <Name>Ash</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>FlagAsh</ParameterName>
+      <EditControlType>CheckBox</EditControlType>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="BooleanParameterControlSpec">
+      <Name>Birch-Baltic</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>FlagBirch4Baltic</ParameterName>
+      <EditControlType>CheckBox</EditControlType>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="BooleanParameterControlSpec">
+      <Name>Cherry</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>FlagCherry</ParameterName>
+      <EditControlType>CheckBox</EditControlType>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="BooleanParameterControlSpec">
+      <Name>Maple-Hard</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>FlagMaple4Hard</ParameterName>
+      <EditControlType>CheckBox</EditControlType>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="BooleanParameterControlSpec">
+      <Name>Maple-Soft</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>FlagMaple4Soft</ParameterName>
+      <EditControlType>CheckBox</EditControlType>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="BooleanParameterControlSpec">
+      <Name>Oak-Red</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>FlagOak4Red</ParameterName>
+      <EditControlType>CheckBox</EditControlType>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="BooleanParameterControlSpec">
+      <Name>Oak-White</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>FlagOak4White</ParameterName>
+      <EditControlType>CheckBox</EditControlType>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="BooleanParameterControlSpec">
+      <Name>Pine</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>FlagPine</ParameterName>
+      <EditControlType>CheckBox</EditControlType>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="BooleanParameterControlSpec">
+      <Name>Poplar</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>FlagPoplar</ParameterName>
+      <EditControlType>CheckBox</EditControlType>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="BooleanParameterControlSpec">
+      <Name>Walnut</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>FlagWalnut</ParameterName>
+      <EditControlType>CheckBox</EditControlType>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="EmptySpaceSpec">
+      <Name>Empty Space 1</Name>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <MinimumWidth>0</MinimumWidth>
+      <MaximumWidth>0</MaximumWidth>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="BooleanParameterControlSpec">
+      <Name>Hardware</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>FlagHardware</ParameterName>
+      <EditControlType>CheckBox</EditControlType>
+    </UiElementSpec>
+  </Items>
+  <StyleAndSkinName>
+    <StyleName>Default</StyleName>
+  </StyleAndSkinName>
+  <AllowCustomization>true</AllowCustomization>
+  <PredefinedButtons>Done</PredefinedButtons>
+  <Modal>false</Modal>
+  <ItemBordersVisible>false</ItemBordersVisible>
+  <IsLauncherPage>false</IsLauncherPage>
+  <ShowOnPlaceComponent>false</ShowOnPlaceComponent>
+  <Guid>c59fcd90-4a4d-4da1-a368-c39e5db18a6b</Guid>
+</FormSpecification>

@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FormSpecification xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>30species_partnum</Name>
+  <Font>
+    <Size>0</Size>
+    <Bold>false</Bold>
+    <Italic>false</Italic>
+  </Font>
+  <ContentsFont>
+    <Size>0</Size>
+    <Bold>false</Bold>
+    <Italic>false</Italic>
+  </ContentsFont>
+  <ContentsTextLocation>Left</ContentsTextLocation>
+  <Items>
+    <UiElementSpec xsi:type="LabelSpec">
+      <Name>Enter data only for the species this part will use</Name>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="LabelSpec">
+      <Name>Format: ZZ-###</Name>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>PartAsh</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagAsh</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>PartAsh</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>MatAsh</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagAsh</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>MatAsh</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>PartBirch4Baltic</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagBirch4Baltic</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>PartBirch4Baltic</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>MatBirch4Baltic</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagBirch4Baltic</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>MatBirch4Baltic</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>PartCherry</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagCherry</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>PartCherry</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>MatCherry</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagCherry</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>MatCherry</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>PartMaple4Hard</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagMaple4Hard</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>PartMaple4Hard</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>MatMaple4Hard</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagMaple4Hard</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>MatMaple4Hard</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>PartMaple4Soft</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagMaple4Sort</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>PartMaple4Soft</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>MatMaple4Soft</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagMaple4Soft</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>MatMaple4Soft</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>PartOak4Red</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagOak4Red</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>PartOak4Red</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>MatOak4Red</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagOak4Red</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>MatOak4Red</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>PartOak4White</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagOak4White</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>PartOak4White</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>MatOak4White</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagOak4White</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>MatOak4White</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>PartPine</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagPine</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>PartPine</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>MatPine</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagPine</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>MatPine</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>PartPoplar</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagPoplar</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>PartPoplar</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>MatPoplar</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagPoplar</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>MatPoplar</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>PartWalnut</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagWalnut</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>PartWalnut</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>MatWalnut</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagWalnut</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>MatWalnut</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>PartHardware</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <EnablingParameterName>FlagHardware</EnablingParameterName>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>PartHardware</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+  </Items>
+  <StyleAndSkinName>
+    <StyleName>Default</StyleName>
+  </StyleAndSkinName>
+  <AllowCustomization>true</AllowCustomization>
+  <PredefinedButtons>Done</PredefinedButtons>
+  <Modal>false</Modal>
+  <ItemBordersVisible>false</ItemBordersVisible>
+  <IsLauncherPage>false</IsLauncherPage>
+  <ShowOnPlaceComponent>false</ShowOnPlaceComponent>
+  <Guid>caeb66f5-dde9-4ea8-b353-0363af6fc299</Guid>
+</FormSpecification>
