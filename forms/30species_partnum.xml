@@ -14,15 +14,6 @@
   <ContentsTextLocation>Left</ContentsTextLocation>
   <Items>
     <UiElementSpec xsi:type="LabelSpec">
-      <Name>Enter data only for the species this part will use</Name>
-      <Font>
-        <FamilyName />
-        <Size>0</Size>
-        <Bold>false</Bold>
-        <Italic>false</Italic>
-      </Font>
-    </UiElementSpec>
-    <UiElementSpec xsi:type="LabelSpec">
       <Name>Format: ZZ-###</Name>
       <Font>
         <FamilyName />
@@ -176,7 +167,7 @@
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagMaple4Sort</EnablingParameterName>
+      <EnablingParameterName>FlagMaple4Soft</EnablingParameterName>
       <TextLocation>Left</TextLocation>
       <ReadOnly>false</ReadOnly>
       <AlwaysReadOnly>false</AlwaysReadOnly>
