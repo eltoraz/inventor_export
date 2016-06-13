@@ -1,10 +1,10 @@
-﻿AddVbFile "dmt.vb"
+﻿Imports Inventor
 
 Public Class PartExport
     Sub Main()
     End Sub
 
-    Public Shared Function part_export()
+    Public Shared Function part_export(ByRef dmt_obj As DMT)
         Dim fields, data As String
         Dim Description, PartType, UOM As String
         Dim TrackSerialNum As Boolean
@@ -80,8 +80,8 @@ Public Class PartExport
         End If
 
         Dim file_name As String
-        file_name = DMT.write_csv("Part_Level.csv", fields, data)
+        file_name = dmt_obj.write_csv("Part_Level.csv", fields, data)
 
-        Return DMT.dmt_import("Part", file_name)
+        Return dmt_obj.dmt_import("Part", file_name)
     End Function
 End Class

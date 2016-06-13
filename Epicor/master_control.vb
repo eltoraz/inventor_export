@@ -13,10 +13,15 @@ iLogicVb.RunExternalRule("30set_props.vb")
 
 'if part export fails, abort - this will usually mean the part is already
 'in the DB and so the straight add operation failed
-Dim ret_value = PartExport.part_export()
+Dim dmt_obj As New DMT()
+Dim ret_value = PartExport.part_export(dmt_obj)
 If ret_value = 0 Then
     iLogicVb.RunExternalRule("50partrev_export.vb")
     iLogicVb.RunExternalRule("60partplant_export.vb")
+ElseIf ret_value = -1 Then
+    MsgBox("Error: DMT timed out. Aborting...")
+Else
+    MsgBox("Warning: this part is already present in Epicor. Aborting...")
 End If
 
 'TODO: display message box about DMT state - maybe last 3 lines of logfile

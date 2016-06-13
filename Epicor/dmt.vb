@@ -7,15 +7,15 @@ Public Class DMT
     Public Shared dmt_working_path As String = "I:\Cadd\_Epicor\"
 
     'TODO: change in production to DMT user/password/environment
-    Private Shared username As String = "DMT_USERNAME"
-    Private Shared password As String = "DMT_PASSWORD"
-    Private Shared configfile As String = "EpicorPilot10"
-    Private Shared connection As String = "net.tcp://CHERRY/EpicorPilot10"
-    Private Shared dmt_base_args As String = "-NoUI -User=" & username & " -Pass=" & password & " -ConnectionURL=""" & connection & """ -ConfigValue=""" & configfile & """"
+    Private username As String = "DMT_USERNAME"
+    Private password As String = "DMT_PASSWORD"
+    Private configfile As String = "EpicorPilot10"
+    Private connection As String = "net.tcp://CHERRY/EpicorPilot10"
+    Private dmt_base_args As String = "-NoUI -User=" & username & " -Pass=" & password & " -ConnectionURL=""" & connection & """ -ConfigValue=""" & configfile & """"
 
     'Run the DMT to import the specified CSV into Epicor
     'pass along the return code from the DMT (-1 if it timed out)
-    Public Shared Function dmt_import(csv As String, filename As String)
+    Public Function dmt_import(csv As String, filename As String)
         Dim psi As New ProcessStartInfo(dmt_loc)
         psi.RedirectStandardOutput = True
         psi.WindowStyle = ProcessWindowStyle.Hidden
@@ -32,7 +32,7 @@ Public Class DMT
     'use the DMT to export data from Epicor based on existing BAQs
     'the results of the queries is stored in the paired CSV files for later reading
     'pass along the return code from the DMT (-1 if it timed out)
-    Public Shared Function dmt_export()
+    Public Function dmt_export()
         Dim export_path = dmt_working_path & "ref\"
 
         'Mapping of queries in Epicor and the corresponding output files
@@ -56,7 +56,7 @@ Public Class DMT
 
     'return -1 if DMT times out, otherwise pass on DMT's return value (as per
     'convention, 0 is success and >0 is an error, though I've only ever seen 1)
-    Public Shared Function exec_dmt(psi As ProcessStartInfo, msg_succ As String)
+    Public Function exec_dmt(psi As ProcessStartInfo, msg_succ As String)
         Dim dmt As Process
         dmt = Process.Start(psi)
         'Wait 30s (worst case) for DMT to exit - if it takes this long, something's wrong
@@ -83,7 +83,7 @@ Public Class DMT
     End Function
 
     'return the full path & filename
-    Public Shared Function write_csv(csv_name As String, fields As String, data As String)
+    Public Function write_csv(csv_name As String, fields As String, data As String)
         Dim fso, file_name, csv
 
         'Open the CSV file (note: this will overwrite the file if it exists!)
@@ -100,7 +100,7 @@ Public Class DMT
         Return file_name
     End Function
 
-    Public Shared Sub dmt_log_event(msg As String)
+    Public Sub dmt_log_event(msg As String)
         Dim fso, file_path, file_name, log_file
         Dim log_date = DateTime.Now
 
