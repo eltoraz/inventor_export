@@ -14,7 +14,7 @@ iLogicVb.RunExternalRule("30set_props.vb")
 'if part export fails, abort - this will usually mean the part is already
 'in the DB and so the straight add operation failed
 Dim dmt_obj As New DMT()
-Dim ret_value = PartExport.part_export(dmt_obj)
+Dim ret_value = PartExport.part_export(ThisApplication, dmt_obj)
 If ret_value = 0 Then
     iLogicVb.RunExternalRule("50partrev_export.vb")
     iLogicVb.RunExternalRule("60partplant_export.vb")
