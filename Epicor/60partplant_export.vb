@@ -1,3 +1,5 @@
+Imports Inventor
+
 Public Class PartPlantExport
     Sub Main()
     End Sub

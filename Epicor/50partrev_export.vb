@@ -1,3 +1,5 @@
+Imports Inventor
+
 Public Class PartRevExport
     Sub Main()
     End Sub
