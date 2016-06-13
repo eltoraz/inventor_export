@@ -14,7 +14,8 @@ Public Class DMT
     Private Shared dmt_base_args As String = "-NoUI -User=" & username & " -Pass=" & password & " -ConnectionURL=""" & connection & """ -ConfigValue=""" & configfile & """"
 
     'Run the DMT to import the specified CSV into Epicor
-    Public Shared Sub dmt_import(csv As String, filename As String)
+    'pass along the return code from the DMT (-1 if it timed out)
+    Public Shared Function dmt_import(csv As String, filename As String)
         Dim psi As New ProcessStartInfo(dmt_loc)
         psi.RedirectStandardOutput = True
         psi.WindowStyle = ProcessWindowStyle.Hidden
@@ -25,12 +26,13 @@ Public Class DMT
 
         Dim msg_succ As String = csv & " successfully imported into Epicor!"
 
-        exec_dmt(psi, msg_succ)
-    End Sub
+        Return exec_dmt(psi, msg_succ)
+    End Function
 
     'use the DMT to export data from Epicor based on existing BAQs
     'the results of the queries is stored in the paired CSV files for later reading
-    Public Shared Sub dmt_export()
+    'pass along the return code from the DMT (-1 if it timed out)
+    Public Shared Function dmt_export()
         Dim export_path = dmt_working_path & "ref\"
 
         'Mapping of queries in Epicor and the corresponding output files
@@ -50,29 +52,37 @@ Public Class DMT
             msg_succ = "Successfully exported " & kvp.Key & " from Epicor"
             exec_dmt(psi, msg_succ)
         Next
-    End Sub
+    End Function
 
-    Public Shared Sub exec_dmt(psi As ProcessStartInfo, msg_succ As String)
+    'return -1 if DMT times out, otherwise pass on DMT's return value (as per
+    'convention, 0 is success and >0 is an error, though I've only ever seen 1)
+    Public Shared Function exec_dmt(psi As ProcessStartInfo, msg_succ As String)
         Dim dmt As Process
         dmt = Process.Start(psi)
         'Wait 30s (worst case) for DMT to exit - if it takes this long, something's wrong
         dmt.WaitForExit(30000)
 
         Dim resultmsg As String
+        Dim ret_value As Integer
         If Not dmt.HasExited Then
             resultmsg = "Warning: DMT has not finished after 30 seconds"
+            ret_value = -1
         ElseIf dmt.ExitCode = 0 Then
             resultmsg = msg_succ
+            ret_value = dmt.ExitCode
         Else
             resultmsg = "Error: DMT exited with code " & dmt.ExitCode
+            ret_value = dmt.ExitCode
         End If
 
         Dim event_time = DateTime.Now
         resultmsg = event_time.ToString("HH:mm:ss") & ": " & resultmsg
 
         dmt_log_event(resultmsg)
-    End Sub
+        Return ret_value
+    End Function
 
+    'return the full path & filename
     Public Shared Function write_csv(csv_name As String, fields As String, data As String)
         Dim fso, file_name, csv
 
