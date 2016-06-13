@@ -1,5 +1,7 @@
 AddVbFile "dmt.vb"
 AddVbFile "40part_export.vb"
+AddVbFile "50partrev_export.vb"
+AddVbFile "60partplant_export.vb"
 
 'Pull latest data from Epicor
 'this data shouldn't change often, so the rule shouldn't need to be called often
@@ -16,8 +18,8 @@ iLogicVb.RunExternalRule("30set_props.vb")
 Dim dmt_obj As New DMT()
 Dim ret_value = PartExport.part_export(ThisApplication, dmt_obj)
 If ret_value = 0 Then
-    iLogicVb.RunExternalRule("50partrev_export.vb")
-    iLogicVb.RunExternalRule("60partplant_export.vb")
+    PartRevExport.part_rev_export(ThisApplication, dmt_obj)
+    PartPlantExport.part_plant_export(ThisApplication, dmt_obj)
 ElseIf ret_value = -1 Then
     MsgBox("Error: DMT timed out. Aborting...")
 Else

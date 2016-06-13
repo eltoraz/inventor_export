@@ -1,36 +1,49 @@
-AddVbFile "dmt.vb"
+Public Class PartRevExport
+    Sub Main()
+    End Sub
 
-Sub Main()
-    Dim fields, data As String
-    Dim PartNum, RevisionNum As String
-    Dim ApprovedDate As Date
+    Public Shared Function part_rev_export(ByRef app As Inventor.Application, _
+                                           ByRef dmt_obj As DMT)
+        Dim fields, data As String
+        Dim PartNum, RevisionNum As String
+        Dim ApprovedDate As Date
 
-    PartNum = iProperties.Value("Project", "Part Number")
-    RevisionNum = iProperties.Value("Project", "Revision Number")
-    ApprovedDate = iProperties.Value("Status", "Eng. Approved Date")
+        Dim inv_doc As Document = app.ActiveDocument
+        Dim summary_props, design_props, custom_props As PropertySet
 
-    fields = "Company,PartNum,RevisionNum,RevShortDesc,RevDescription,Approved,ApprovedDate,ApprovedBy,EffectiveDate,DrawNum,Plant,ProcessMode"
+        summary_props = inv_doc.PropertySets.Item("Inventor Summary Information")
+        design_props = inv_doc.PropertySets.Item("Design Tracking Properties")
+        custom_props = inv_doc.PropertySets.Item("Inventor User Defined Properties")
 
-    data = "BBN"                        'Company name (constant)
-    data = data & "," & PartNum
-    data = data & "," & RevisionNum
-    data = data & "," & "Revision " & RevisionNum
-    data = data & "," & iProperties.Value("Custom", "RevDescription")
+        'TODO: this is the drawing number, need to get the actual part number
+        '      once the species populator is finished
+        PartNum = design_props.Item("Part Number").Value
+        RevisionNum = summary_props.Item("Revision Number").Value
+        ApprovedDate = design_props.Item("Engr Date Approved").Value
 
-    'Logic TODO: Approved & ApprovedBy hardcoded for now
-    'Logic TODO: is there any reason for the user to specify EffectiveDate as
-    '            anything different from ApprovedDate?
-    data = data & "," & "True"          'Approved
-    data = data & "," & ApprovedDate    'ApprovedDate
-    data = data & "," & "d.laforce"     'ApprovedBy
-    data = data & "," & ApprovedDate    'EffectiveDate
+        fields = "Company,PartNum,RevisionNum,RevShortDesc,RevDescription,Approved,ApprovedDate,ApprovedBy,EffectiveDate,DrawNum,Plant,ProcessMode"
 
-    data = data & "," & PartNum         'DrawNum (same as part number)
-    data = data & "," & "MfgSys"        'Plant (only one)
-    data = data & "," & "S"             'ProcessMode (always sequential)
+        data = "BBN"                        'Company name (constant)
+        data = data & "," & PartNum
+        data = data & "," & RevisionNum
+        data = data & "," & "Revision " & RevisionNum
+        data = data & "," & custom_props.Item("RevDescription").Value
 
-    Dim file_name As String
-    file_name = DMT.write_csv("Part_Rev.csv", fields, data)
+        'Logic TODO: Approved hardcoded for now
+        'Logic TODO: is there any reason for the user to specify EffectiveDate as
+        '            anything different from ApprovedDate?
+        data = data & "," & "True"          'Approved
+        data = data & "," & ApprovedDate    'ApprovedDate
+        data = data & "," & "d.laforce"     'ApprovedBy
+        data = data & "," & ApprovedDate    'EffectiveDate
 
-    DMT.dmt_import("Part Revision", file_name)
-End Sub
+        data = data & "," & PartNum         'DrawNum (same as part number)
+        data = data & "," & "MfgSys"        'Plant (only one)
+        data = data & "," & "S"             'ProcessMode (always sequential)
+
+        Dim file_name As String
+        file_name = dmt_obj.write_csv("Part_Rev.csv", fields, data)
+
+        Return dmt_obj.dmt_import("Part Revision", file_name)
+    End Function
+End Class
