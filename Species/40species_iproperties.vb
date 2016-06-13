@@ -16,7 +16,7 @@ Sub Main()
         '      correct formatting (XX-###)
         If StrComp(Left(param_name, 4), "Flag") = 0 AndAlso param_value = True Then
             'get the proper species name (remove "Flag" and replace placeholder "4")
-            Dim param_species As String = Left(param_name, 4)
+            Dim param_species As String = param_name.Substring(4)
             Dim species_name As String = Replace(param_name, "4", "-").Substring(4)
 
             'part
