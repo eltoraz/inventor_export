@@ -31,8 +31,6 @@ Sub Main()
             param_value = ProdCodeMap(param_value)
         Else If StrComp(param_name, "ClassID") = 0 Then
             param_value = ClassIDMap(param_value)
-        Else If StrComp(param_name, "VendorNum") = 0 Then
-            param_value = VendorNumMap(param_value)
         Else If StrComp(param_name, "MfgComment") = 0 Then
             'note: Epicor MfgComment and PurComment fields supports up to 16000 chars,
             'and commas need to be stripped to avoid messing up the CSV
