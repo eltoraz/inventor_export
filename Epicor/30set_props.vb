@@ -7,8 +7,18 @@ AddVbFile "inventor_common.vb"      'InventorOps.update_prop
 Sub Main()
     'list of parameters that need to be converted to iProperties
     Dim inv_app As Inventor.Application = ThisApplication
-    Dim inv_doc As Document = inv_app.ActiveDocument
-    Dim inv_params As UserParameters = inv_doc.Parameters.UserParameters
+    Dim inv_doc As Document = inv_app.ActiveEditDocument
+    Dim inv_params As UserParameters
+
+    If TypeOf inv_doc Is PartDocument Then
+        part_doc = app.ActiveEditDocument
+        inv_params = part_doc.ComponentDefinition.Parameters.UserParameters
+    ElseIf TypeOf inv_doc Is AssemblyDocument Then
+        assm_doc = app.ActiveEditDocument
+        inv_params = assm_doc.ComponentDefinition.Parameters.UserParameters
+    Else
+        inv_params = inv_doc.ComponentDefinition.Parameters.UserParameters
+    End If
 
     'mappings for human-readable values (i.e. in the dropdown boxes) -> keys
     'only necessary for ProdCode and ClassID
