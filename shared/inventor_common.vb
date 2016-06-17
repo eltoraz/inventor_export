@@ -12,10 +12,10 @@ Public Class InventorOps
         Dim inv_params As UserParameters
 
         'need to treat part and assembly documents slightly differently
-        If inv_doc.DocumentType = kPartDocumentObject Then
+        If TypeOf inv_doc Is PartDocument Then
             part_doc = app.ActiveEditDocument
             inv_params = part_doc.ComponentDefinition.Parameters.UserParameters
-        Else If inv_doc.DocumentType = kAssemblyDocumentObject Then
+        ElseIf TypeOf inv_doc Is AssemblyDocument Then
             assm_doc = app.ActiveEditDocument
             inv_params = assm_doc.ComponentDefinition.Parameters.UserParameters
         Else
