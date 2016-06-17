@@ -8,7 +8,7 @@ Public Class InventorOps
                                    ByRef app As Inventor.Application)
         dim invDoc As Document = app.ActiveDocument
 
-        Dim invParams As UserParameters = invDoc.Parameters.UserParameters
+        Dim invParams As UserParameters = invDoc.ComponentDefinition.Parameters.UserParameters
 
         Dim TestParam As UserParameter
 
