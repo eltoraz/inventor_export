@@ -7,6 +7,7 @@ AddVbFile "inventor_common.vb"      'InventorOps.update_prop, get_param_set
 Sub Main()
     'list of parameters that need to be converted to iProperties
     Dim app As Inventor.Application = ThisApplication
+    Dim inv_doc As Document = app.ActiveDocument
     Dim inv_params As UserParameters = InventorOps.get_param_set(app)
 
     'mappings for human-readable values (i.e. in the dropdown boxes) -> keys
