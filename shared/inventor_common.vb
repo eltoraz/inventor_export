@@ -6,6 +6,7 @@ Public Class InventorOps
     'initialize parameter `n` as type `param_type`
     Public Shared Sub create_param(ByVal n As String, ByVal param_type As UnitsTypeEnum, _
                                    ByRef app As Inventor.Application)
+        Dim inv_doc As Document = app.ActiveDocument
         Dim inv_params As UserParameters = get_param_set(app)
 
         Dim test_param As UserParameter
