@@ -1,4 +1,5 @@
 AddVbFile "inventor_common.vb"      'InventorOps.update_prop
+AddVbFile "species_list.vb"         'Species.species_list
 
 'create/update iProperties with the values entered in form 30 (enabled in form 20)
 Sub Main()
@@ -18,29 +19,26 @@ Sub Main()
         inv_params = inv_doc.ComponentDefinition.Parameters.UserParameters
     End If
 
-    For i = 1 To inv_params.Count
-        Dim param As Parameter = inv_params.Item(i)
-        Dim param_name As String = param.Name
-        Dim param_value = param.Value
+    For Each s As String In Species.species_list
+        Dim subst As String = Replace(s, "-", "4")
+
+        Dim flag_param As Parameter = inv_params.Item("Flag" & subst)
+        Dim flag_value = flag_param.Value
 
         'TODO: validate that the corresponding "Part"/"Mat" parameters have
         '      been populated if the flag is true, and also that they have the
         '      correct formatting (XX-###)
-        If StrComp(Left(param_name, 4), "Flag") = 0 AndAlso param_value = True Then
-            'get the proper species name (remove "Flag" and replace placeholder "4")
-            Dim param_species As String = param_name.Substring(4)
-            Dim species_name As String = Replace(param_name, "4", "-").Substring(4)
-
+        If flag_value Then
             'part
-            Dim part_param As Parameter = inv_params.Item("Part" & param_species)
+            Dim part_param As Parameter = inv_params.Item("Part" & subst)
             Dim part_value As String = part_param.Value
-            InventorOps.update_prop("Part (" & species_name & ")", part_value, inv_app)
+            InventorOps.update_prop("Part (" & s & ")", part_value, inv_app)
 
             'material: skip for "Hardware"
-            If StrComp(species_name, "Hardware") <> 0 Then
-                Dim mat_param As Parameter = inv_params.Item("Mat" & param_species)
+            If StrComp(s, "Hardware") <> 0 Then
+                Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
                 Dim mat_value As String = mat_param.Value
-                InventorOps.update_prop("Material (" & species_name & ")", mat_value, inv_app)
+                InventorOps.update_prop("Material (" & s & ")", mat_value, inv_app)
             End If
         End If
     Next

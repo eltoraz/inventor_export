@@ -18,4 +18,6 @@ Sub Main()
 
     Dim needs_reentry As NewArrayList()
     For i = 1 To inv_params.Count
+        'stuff
+    Next
 End Sub
