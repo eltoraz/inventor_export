@@ -1,23 +1,10 @@
-AddVbFile "inventor_common.vb"      'InventorOps.update_prop
+AddVbFile "inventor_common.vb"      'InventorOps.update_prop, get_param_set
 AddVbFile "species_list.vb"         'Species.species_list
 
 'create/update iProperties with the values entered in form 30 (enabled in form 20)
 Sub Main()
-    Dim inv_app As Inventor.Application = ThisApplication
-    Dim inv_doc As Document = inv_app.ActiveEditDocument
-    Dim part_doc As PartDocument
-    Dim assm_doc As AssemblyDocument
-    Dim inv_params As UserParameters
-
-    If TypeOf inv_doc Is PartDocument Then
-        part_doc = inv_app.ActiveEditDocument
-        inv_params = part_doc.ComponentDefinition.Parameters.UserParameters
-    ElseIf TypeOf inv_doc Is AssemblyDocument Then
-        assm_doc = inv_app.ActiveEditDocument
-        inv_params = assm_doc.ComponentDefinition.Parameters.UserParameters
-    Else
-        inv_params = inv_doc.ComponentDefinition.Parameters.UserParameters
-    End If
+    Dim app As Inventor.Application = ThisApplication
+    Dim inv_params As UserParameters = InventorOps.get_param_set(app)
 
     For Each s As String In Species.species_list
         Dim subst As String = Replace(s, "-", "4")

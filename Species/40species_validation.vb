@@ -1,3 +1,4 @@
+AddVbFile "inventor_common.vb"      'InventorOps.get_param_set
 AddVbFile "species_list.vb"         'Species.species_list
 
 Imports System.Text.RegularExpressions
@@ -5,20 +6,7 @@ Imports System.Text.RegularExpressions
 'validate the parameters for enabled species, and relaunch the form if necessary
 Sub Main()
     Dim app As Application = ThisApplication
-    Dim inv_doc As Document = app.ActiveEditDocument
-    Dim part_doc As PartDocument
-    Dim assm_doc As AssemblyDocument
-    Dim inv_params As UserParameters
-
-    If TypeOf inv_doc Is PartDocument Then
-        part_doc = app.ActiveEditDocument
-        inv_params = part_doc.ComponentDefinition.Parameters.UserParameters
-    ElseIf TypeOf inv_doc Is AssemblyDocument Then
-        assm_doc = app.ActiveEditDocument
-        inv_params = assm_doc.ComponentDefinition.Parameters.UserParameters
-    Else
-        inv_params = inv_doc.ComponentDefinition.Parameters.UserParameters
-    End If
+    Dim inv_params As UserParameters = InventorOps.get_param_set(app)
 
     'regular expression to match the part number format AZ-123
     Dim partno_pattern As String = "^[a-zA-Z]{2}-[0-9]{3}$"

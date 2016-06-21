@@ -6,22 +6,7 @@ Public Class InventorOps
     'initialize parameter `n` as type `param_type`
     Public Shared Sub create_param(ByVal n As String, ByVal param_type As UnitsTypeEnum, _
                                    ByRef app As Inventor.Application)
-        Dim inv_doc As Document = app.ActiveEditDocument
-        Dim part_doc As PartDocument
-        Dim assm_doc As AssemblyDocument
-        Dim inv_params As UserParameters
-
-        'need to treat part and assembly documents slightly differently
-        If TypeOf inv_doc Is PartDocument Then
-            part_doc = app.ActiveEditDocument
-            inv_params = part_doc.ComponentDefinition.Parameters.UserParameters
-        ElseIf TypeOf inv_doc Is AssemblyDocument Then
-            assm_doc = app.ActiveEditDocument
-            inv_params = assm_doc.ComponentDefinition.Parameters.UserParameters
-        Else
-            MsgBox("Warning: this is neither a part nor assembly document. Things may misbehave.")
-            inv_params = inv_doc.ComponentDefinition.Parameters.UserParameters
-        End If
+        Dim inv_params As UserParameters = get_param_set(app)
 
         Dim test_param As UserParameter
 
@@ -64,4 +49,26 @@ Public Class InventorOps
             prop.value = param_val
         End If
     End Sub
+
+    'common method to get the document's custom parameter set
+    Public Shared Function get_param_set(ByRef app As Inventor.Application) As UserParameters
+        Dim inv_doc As Document = app.ActiveEditDocument
+        Dim part_doc As PartDocument
+        Dim assm_doc As AssemblyDocument
+        Dim inv_params As UserParameters
+
+        'need to treat part and assembly documents slightly differently
+        If TypeOf inv_doc Is PartDocument Then
+            part_doc = app.ActiveEditDocument
+            inv_params = part_doc.ComponentDefinition.Parameters.UserParameters
+        ElseIf TypeOf inv_doc Is AssemblyDocument Then
+            assm_doc = app.ActiveEditDocument
+            inv_params = assm_doc.ComponentDefinition.Parameters.UserParameters
+        Else
+            'MsgBox("Warning: this is neither a part nor assembly document. Things may misbehave.")
+            inv_params = inv_doc.ComponentDefinition.Parameters.UserParameters
+        End If
+
+        Return inv_params
+    End Function
 End Class
