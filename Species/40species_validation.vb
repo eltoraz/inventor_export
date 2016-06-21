@@ -21,7 +21,7 @@ Sub Main()
     End If
 
     'regular expression to match the part number format AZ-123
-    Dim partno_pattern As String = "[a-zA-Z]{2}-[0-9]{3}"
+    Dim partno_pattern As String = "^[a-zA-Z]{2}-[0-9]{3}$"
     Dim partno_regex As New Regex(partno_pattern)
     Dim fails_validation As Boolean = False
 
