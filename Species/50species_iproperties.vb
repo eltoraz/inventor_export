@@ -25,19 +25,16 @@ Sub Main()
         Dim flag_param As Parameter = inv_params.Item("Flag" & subst)
         Dim flag_value = flag_param.Value
 
-        'TODO: validate that the corresponding "Part"/"Mat" parameters have
-        '      been populated if the flag is true, and also that they have the
-        '      correct formatting (XX-###)
         If flag_value Then
-            'part
+            'part (convert lower-case to upper on the way too)
             Dim part_param As Parameter = inv_params.Item("Part" & subst)
-            Dim part_value As String = part_param.Value
+            Dim part_value As String = part_param.Value.ToUpper()
             InventorOps.update_prop("Part (" & s & ")", part_value, inv_app)
 
             'material: skip for "Hardware"
             If StrComp(s, "Hardware") <> 0 Then
                 Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
-                Dim mat_value As String = mat_param.Value
+                Dim mat_value As String = mat_param.Value.ToUpper()
                 InventorOps.update_prop("Material (" & s & ")", mat_value, inv_app)
             End If
         End If
