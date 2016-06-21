@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FormSpecification xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>35epicor_partselect</Name>
+  <Font>
+    <Size>0</Size>
+    <Bold>false</Bold>
+    <Italic>false</Italic>
+  </Font>
+  <ContentsFont>
+    <Size>0</Size>
+    <Bold>false</Bold>
+    <Italic>false</Italic>
+  </ContentsFont>
+  <ContentsTextLocation>Left</ContentsTextLocation>
+  <Items>
+    <UiElementSpec xsi:type="LabelSpec">
+      <Name>Please select the part number to export to Epicor:</Name>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="MultiValueTextParameterControlSpec">
+      <Name>Part Number</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>PartNumberToUse</ParameterName>
+      <EditControlType>ComboBox</EditControlType>
+      <AllowCustomValues>false</AllowCustomValues>
+      <MinimumItemsToShow>2</MinimumItemsToShow>
+      <RadioGroupColumnCount>1</RadioGroupColumnCount>
+    </UiElementSpec>
+  </Items>
+  <StyleAndSkinName>
+    <StyleName>Default</StyleName>
+  </StyleAndSkinName>
+  <AllowCustomization>true</AllowCustomization>
+  <PredefinedButtons>Done</PredefinedButtons>
+  <Modal>false</Modal>
+  <ItemBordersVisible>false</ItemBordersVisible>
+  <IsLauncherPage>false</IsLauncherPage>
+  <ShowOnPlaceComponent>false</ShowOnPlaceComponent>
+  <Guid>b3804514-9be9-4b9a-ad9b-50c311461105</Guid>
+</FormSpecification>
