@@ -30,7 +30,6 @@ Public Class PartExport
         TrackSerialNum = custom_props.Item("TrackSerialNum").Value
 
         'if serial number is being tracked, a bunch of fields are enabled
-        'logic TODO: verify this works
         If TrackSerialNum AndAlso StrComp(PartType, "M") = 0 Then
             SNFormat = "NF#######"
             SNBaseDataType = "MASK"
