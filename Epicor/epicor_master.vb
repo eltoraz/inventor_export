@@ -48,6 +48,21 @@ If active_parts.Count = 0 Then
 End If
 MultiValue.List("PartNumberToUse") = active_parts
 
+'TODO: allow cancelling form here to abort
+Dim part_selected As Boolean = False
+Dim pn As String = ""
+Do
+    iLogicForm.ShowGlobal("35epicor_partselect", FormMode.Modal)
+
+    pn = inv_params.Item("PartNumberToUse").Value
+    If StrComp(pn, "") <> 0 Then
+        part_selected = True
+    Else
+        MsgBox("Please select a part to continue with the Epicor export.")
+        iLogicVb.RunExternalRule("dummy.vb")
+    End If
+Loop While Not part_selected
+
 'if part export fails, abort - this will usually mean the part is already
 'in the DB and so the straight add operation failed
 Dim dmt_obj As New DMT()
