@@ -43,8 +43,8 @@ Sub Main()
 
     'can't proceed if there isn't a part number for at least one species
     If active_parts.Count = 0 Then
-        MsgBox("Warning: there are no species defined for this part. Please run " & _
-               "the BBN Species Setup first.")
+        MsgBox("Warning: there are no species defined for this part. Please " & _
+               "run the BBN Species Setup first.")
         Return
     End If
     MultiValue.List("PartNumberToUse") = active_parts
