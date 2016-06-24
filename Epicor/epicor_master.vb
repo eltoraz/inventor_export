@@ -12,7 +12,7 @@ Sub Main()
 
     'Call the other rules in order
     iLogicVb.RunExternalRule("10multi_value.vb")
-    iLogicForm.ShowGlobal("20part_properties", FormMode.Modal)
+    iLogicForm.ShowGlobal("epicor_20part_properties", FormMode.Modal)
     'iLogicVb.RunExternalRule("21logic_check.vb")
     iLogicVb.RunExternalRule("30set_props.vb")
 
@@ -61,7 +61,7 @@ Sub Main()
     Dim part_selected As Boolean = False
     Dim pn As String = ""
     Do
-        iLogicForm.ShowGlobal("35epicor_partselect", FormMode.Modal)
+        iLogicForm.ShowGlobal("epicor_35part_select", FormMode.Modal)
 
         pn = inv_params.Item("PartNumberToUse").Value
         If StrComp(pn, "") <> 0 Then

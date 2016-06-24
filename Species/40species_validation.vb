@@ -51,7 +51,7 @@ Sub Main()
         If fails_validation Then
             MsgBox("Some entered part numbers don't fit the formatting requirements:" & _
                    needs_reentry)
-            iLogicForm.ShowGlobal("30species_partnum", FormMode.Modal)
+            iLogicForm.ShowGlobal("species_30partnum", FormMode.Modal)
             iLogicVb.RunExternalRule("dummy.vb")
         End If
     Loop While fails_validation
