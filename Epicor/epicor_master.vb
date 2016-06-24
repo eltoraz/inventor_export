@@ -10,16 +10,11 @@ Sub Main()
     'this data shouldn't change often, so the rule shouldn't need to be called often
     'DMT.dmt_export()
 
-    'Call the other rules in order
-    iLogicVb.RunExternalRule("10multi_value.vb")
-    iLogicForm.ShowGlobal("epicor_20part_properties", FormMode.Modal)
-    iLogicVb.RunExternalRule("25logic_check.vb")
-    iLogicVb.RunExternalRule("30set_props.vb")
-
     'populate the PartNumberToUse param multi-value with the activated part numbers
     Dim app As Inventor.Application = ThisApplication
     Dim inv_params As UserParameters = InventorOps.get_param_set(app)
 
+    'select the part we'll be working with here
     Dim active_parts As New ArrayList()
     Dim no_species As Boolean = False
 
@@ -61,7 +56,7 @@ Sub Main()
     Dim part_selected As Boolean = False
     Dim pn As String = ""
     Do
-        iLogicForm.ShowGlobal("epicor_35part_select", FormMode.Modal)
+        iLogicForm.ShowGlobal("epicor_15part_select", FormMode.Modal)
 
         pn = inv_params.Item("PartNumberToUse").Value
         If StrComp(pn, "") <> 0 Then
@@ -71,6 +66,12 @@ Sub Main()
             iLogicVb.RunExternalRule("dummy.vb")
         End If
     Loop While Not part_selected
+
+    'Call the other rules in order
+    iLogicVb.RunExternalRule("10multi_value.vb")
+    iLogicForm.ShowGlobal("epicor_20part_properties", FormMode.Modal)
+    iLogicVb.RunExternalRule("25logic_check.vb")
+    iLogicVb.RunExternalRule("30set_props.vb")
 
     'if part export fails, abort - this will usually mean the part is already
     'in the DB and so the straight add operation failed
