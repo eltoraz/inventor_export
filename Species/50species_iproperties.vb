@@ -16,13 +16,13 @@ Sub Main()
             'part (convert lower-case to upper on the way too)
             Dim part_param As Parameter = inv_params.Item("Part" & subst)
             Dim part_value As String = part_param.Value.ToUpper()
-            InventorOps.update_prop("Part (" & s & ")", part_value, inv_app)
+            InventorOps.update_prop("Part (" & s & ")", part_value, app)
 
             'material: skip for "Hardware"
             If StrComp(s, "Hardware") <> 0 Then
                 Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
                 Dim mat_value As String = mat_param.Value.ToUpper()
-                InventorOps.update_prop("Material (" & s & ")", mat_value, inv_app)
+                InventorOps.update_prop("Material (" & s & ")", mat_value, app)
             End If
         End If
     Next
