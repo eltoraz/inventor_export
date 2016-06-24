@@ -24,7 +24,7 @@ Sub Main()
     'the dropdowns
     Do
         Dim error_log As String = ""
-        For Each kvp As KeyValuePair(Of String, String in required_params
+        For Each kvp As KeyValuePair(Of String, String) in required_params
             If StrComp(inv_params.Item(kvp.Key).Value, "") = 0 Then
                 error_log = error_log & System.Environment.Newline & _
                             "- Select a value for " & kvp.Value
