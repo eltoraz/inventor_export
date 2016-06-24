@@ -21,28 +21,36 @@ Sub Main()
     Dim inv_params As UserParameters = InventorOps.get_param_set(app)
 
     Dim active_parts As New ArrayList()
-    For Each s As String in Species.species_list
-        Dim subst As String = Replace(s, "-", "4")
+    Dim no_species As Boolean = False
 
-        Dim flag_param As Parameter = inv_params.Item("Flag" & subst)
-        Dim flag_value = flag_param.Value
+    Try
+        For Each s As String in Species.species_list
+            Dim subst As String = Replace(s, "-", "4")
 
-        If flag_value Then
-            'add active parts and materials to the list to present to the user
-            Dim part_param As Parameter = inv_params.Item("Part" & subst)
-            Dim part_value As String = part_param.Value
-            active_parts.Add(part_value)
+            Dim flag_param As Parameter = inv_params.Item("Flag" & subst)
+            Dim flag_value = flag_param.Value
 
-            If StrComp(s, "Hardware") <> 0 Then
-                Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
-                Dim mat_value As String = mat_param.Value
-                active_parts.Add(mat_value)
+            If flag_value Then
+                'add active parts and materials to the list to present to the user
+                Dim part_param As Parameter = inv_params.Item("Part" & subst)
+                Dim part_value As String = part_param.Value
+                active_parts.Add(part_value)
+
+                If StrComp(s, "Hardware") <> 0 Then
+                    Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
+                    Dim mat_value As String = mat_param.Value
+                    active_parts.Add(mat_value)
+                End If
             End If
-        End If
-    Next
+        Next
+    Catch e As ArgumentException
+        'exception thrown when using UserParameters.Item above and trying to
+        'get a parameter that doesn't exist
+        no_species = True
+    End Try
 
     'can't proceed if there isn't a part number for at least one species
-    If active_parts.Count = 0 Then
+    If no_species OrElse active_parts.Count = 0 Then
         MsgBox("Warning: there are no species defined for this part. Please " & _
                "run the BBN Species Setup first.")
         Return
