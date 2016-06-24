@@ -1,3 +1,4 @@
+AddVbFile "inventor_common.vb"          'InventorOps.get_param_set
 Imports Inventor
 
 Public Class PartPlantExport
@@ -7,13 +8,16 @@ Public Class PartPlantExport
     Public Shared Function part_plant_export(ByRef app As Inventor.Application, _
                                              ByRef dmt_obj As DMT)
         Dim fields, data As String
-        Dim PartType As String
+        Dim PartNum, PartType As String
 
         Dim inv_doc As Document = app.ActiveDocument
+        Dim inv_params As UserParameters = InventorOps.get_param_set(app)
         Dim design_props, custom_props As PropertySet
 
         design_props = inv_doc.PropertySets.Item("Design Tracking Properties")
         custom_props = inv_doc.PropertySets.Item("Inventor User Defined Properties")
+
+        PartNum = inv_params.Item("PartNumberToUse").Value
 
         'fields for purchased parts
         Dim LeadTime, VendorNum, PurPoint As String
@@ -46,9 +50,7 @@ Public Class PartPlantExport
 
         data = "BBN"                                    'Company name (constant)
         data = data & "," & "MfgSys"                    'Plant (only one for this company)
-        'TODO: this is the drawing number, need to get the actual part number
-        '      once the species populator is finished
-        data = data & "," & design_props.Item("Part Number").Value
+        data = data & "," & PartNum
         data = data & "," & "453"                       'PrimWhse (just one warehouse)
 
         data = data & "," & LeadTime

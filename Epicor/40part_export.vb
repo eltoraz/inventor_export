@@ -1,4 +1,6 @@
-﻿Imports Inventor
+﻿AddVbFile "inventor_common.vb"          'InventorOps.get_param_set
+
+Imports Inventor
 
 Public Class PartExport
     Sub Main()
@@ -6,16 +8,18 @@ Public Class PartExport
 
     Public Shared Function part_export(ByRef app As Inventor.Application, ByRef dmt_obj As DMT)
         Dim fields, data As String
-        Dim Description, PartType, UOM As String
+        Dim PartNum, Description, PartType, UOM As String
         Dim TrackSerialNum As Boolean
         Dim SNFormat, SNBaseDataType, SNMask, SNMaskExample As String
 
         Dim inv_doc As Document = app.ActiveDocument
+        Dim inv_params As UserParameters = InventorOps.get_param_set(app)
         Dim design_props, custom_props As PropertySet
 
         design_props = inv_doc.PropertySets.Item("Design Tracking Properties")
         custom_props = inv_doc.PropertySets.Item("Inventor User Defined Properties")
 
+        PartNum = inv_params.Item("PartNumberToUse").Value
         Description = design_props.Item("Description").Value
         PartType = custom_props.Item("PartType").Value
 
@@ -46,9 +50,7 @@ Public Class PartExport
 
         'Build string containing values in order expected by DMT (see fields string)
         data = "BBN"                                'Company name (constant)
-        'TODO: this is actuall the drawing number, and the part number will be
-        '      found in a custom iProperty populated by the species chooser
-        data = data & "," & design_props.Item("Part Number").Value
+        data = data & "," & PartNum
 
         data = data & "," & Left(Description, 8)    'Search word, first 8 characters of description
         data = data & "," & Description
