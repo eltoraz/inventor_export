@@ -5,4 +5,6 @@ Sub Main()
     iLogicForm.ShowGlobal("species_30partnum", FormMode.Modal)
     iLogicVb.RunExternalRule("40species_validation.vb")
     iLogicVb.RunExternalRule("50species_iproperties.vb")
+
+    MsgBox("Part number iProperties successfully updated.")
 End Sub
