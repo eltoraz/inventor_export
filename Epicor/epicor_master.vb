@@ -13,7 +13,7 @@ Sub Main()
     'Call the other rules in order
     iLogicVb.RunExternalRule("10multi_value.vb")
     iLogicForm.ShowGlobal("epicor_20part_properties", FormMode.Modal)
-    'iLogicVb.RunExternalRule("21logic_check.vb")
+    iLogicVb.RunExternalRule("25logic_check.vb")
     iLogicVb.RunExternalRule("30set_props.vb")
 
     'populate the PartNumberToUse param multi-value with the activated part numbers
