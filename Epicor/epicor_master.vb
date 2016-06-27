@@ -19,11 +19,12 @@ Sub Main()
     Dim active_parts As New ArrayList()
     Dim no_species As Boolean = False
 
+    Dim form_result As FormResult
+
     Do
         Try
             For Each s As String in Species.species_list
                 Dim subst As String = Replace(s, "-", "4")
-                Dim form_result As FormReturnValue
 
                 Dim flag_param As Parameter = inv_params.Item("Flag" & subst)
                 Dim flag_value = flag_param.Value
@@ -56,10 +57,10 @@ Sub Main()
 
         'can't proceed if there isn't a part number for at least one species
         If no_species Then
-            form_result = iLogicForm.ShowGlobal("epicor_13launch_species")
+            form_result = iLogicForm.ShowGlobal("epicor_13launch_species").Result
             iLogicVb.RunExternalRule("dummy.vb")
 
-            If form_result.Result = FormResult.Cancel Then
+            If form_result = FormResult.Cancel Then
                 Return
             End If
         End If
@@ -70,8 +71,7 @@ Sub Main()
     Dim part_selected As Boolean = False
     Dim pn As String = ""
     Do
-        Dim form_result As FormReturnValue
-        form_result = iLogicForm.ShowGlobal("epicor_15part_select", FormMode.Modal)
+        form_result = iLogicForm.ShowGlobal("epicor_15part_select", FormMode.Modal).Result
 
         If form_result.Result = FormResult.Cancel Then
             Return
@@ -86,16 +86,15 @@ Sub Main()
         End If
     Loop While Not part_selected
 
-    Dim form_result As FormReturnValue
     'Call the other rules in order
     iLogicVb.RunExternalRule("10multi_value.vb")
-    form_result = iLogicForm.ShowGlobal("epicor_20part_properties", FormMode.Modal)
+    form_result = iLogicForm.ShowGlobal("epicor_20part_properties", FormMode.Modal).Result
 
     If form_result = FormResult.Cancel Then
         Return
     End If
 
-    form_result = logic_check(app)
+    form_result = check_logic(app)
     
     If form_result = FormResult.Cancel Then
         Return
@@ -119,11 +118,10 @@ Sub Main()
     'TODO: display message box about DMT state - maybe last 3 lines of logfile
 End Sub
 
-Function logic_check(ByRef app As Inventor.Application) As FormReturnValue
+Function check_logic(ByRef app As Inventor.Application) As FormResult
     'set a few parameters depending on data entered in first form
     Dim inv_params As UserParameters = InventorOps.get_param_set(app)
     Dim is_part_purchased As Boolean
-
 
     If StrComp(inv_params.Item("PartType").Value, "P") = 0
         is_part_purchased = True
@@ -133,7 +131,7 @@ Function logic_check(ByRef app As Inventor.Application) As FormReturnValue
 
     inv_params.Item("IsPartPurchased").Value = is_part_purchased
 
-    Dim form_result As FormReturnValue = FormResult.OK
+    Dim form_result As FormResult = FormResult.OK
 
     Dim fails_validation As Boolean = False
     Dim required_params As New Dictionary(Of String, String) From _

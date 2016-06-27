@@ -4,29 +4,28 @@ AddVbFile "species_list.vb"         'Species.species_list
 Imports System.Text.RegularExpressions
 
 Sub Main()
-    Dim form_result As FormReturnValue
+    Dim form_result As FormResult
     'call the rules/open the forms in order to setup the iProperties properly
     iLogicVb.RunExternalRule("10species_parameters.vb")
-    form_result = iLogicForm.ShowGlobal("species_20select", FormMode.Modal)
+    form_result = iLogicForm.ShowGlobal("species_20select", FormMode.Modal).Result
 
     If form_result = FormResult.Cancel Then
         Return
     End If
 
-    form_result = iLogicForm.ShowGlobal("species_30partnum", FormMode.Modal)
+    form_result = iLogicForm.ShowGlobal("species_30partnum", FormMode.Modal).Result
 
     If form_result = FormResult.Cancel Then
         Return
     End If
 
-    iLogicVb.RunExternalRule("40species_validation.vb")
     iLogicVb.RunExternalRule("50species_iproperties.vb")
 
     MsgBox("Part number iProperties successfully updated.")
 End Sub
 
 'validate the parameters for enabled species, and relaunch the form if necessary
-Function validate_species() As FormReturnValue
+Function validate_species() As FormResult
     Dim app As Application = ThisApplication
     Dim inv_params As UserParameters = InventorOps.get_param_set(app)
 
@@ -35,7 +34,7 @@ Function validate_species() As FormReturnValue
     Dim partno_regex As New Regex(partno_pattern)
     Dim fails_validation As Boolean = False
 
-    Dim form_result As FormReturnValue = FormResult.OK
+    Dim form_result As FormResult = FormResult.OK
 
     Do          'loop first for initial validation, check condition later
         Dim needs_reentry As String = ""
@@ -75,7 +74,7 @@ Function validate_species() As FormReturnValue
         If fails_validation Then
             MsgBox("Some entered part numbers don't fit the formatting requirements:" & _
                    needs_reentry)
-            form_result = iLogicForm.ShowGlobal("species_30partnum", FormMode.Modal)
+            form_result = iLogicForm.ShowGlobal("species_30partnum", FormMode.Modal).Result
             iLogicVb.RunExternalRule("dummy.vb")
 
             If form_result = FormResult.Cancel Then
@@ -84,5 +83,5 @@ Function validate_species() As FormReturnValue
         End If
     Loop While fails_validation
 
-    Return form_result
+    Return form_result.Result
 End Function
