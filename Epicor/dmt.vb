@@ -24,9 +24,9 @@ Public Class DMT
         psi.Arguments = dmt_base_args & " -Import=""" & csv & """ -Source="""
         psi.Arguments = psi.Arguments & filename & """ -Add=True"
 
-        Dim msg_succ As String = csv & " successfully imported into Epicor!"
+        Dim msg_succ As String = "Successfully imported into Epicor!"
 
-        Return exec_dmt(psi, msg_succ)
+        Return exec_dmt(psi, csv, msg_succ)
     End Function
 
     'use the DMT to export data from Epicor based on existing BAQs
@@ -49,14 +49,14 @@ Public Class DMT
             psi.Arguments = dmt_base_args & " -Export -BAQ=""" & kvp.Key
             psi.Arguments = psi.Arguments & """ -Target=""" & export_path & kvp.Value & """"
 
-            msg_succ = "Successfully exported " & kvp.Key & " from Epicor"
-            exec_dmt(psi, msg_succ)
+            msg_succ = "Successfully exported CSV from Epicor"
+            exec_dmt(psi, kvp.Key, msg_succ)
         Next
     End Function
 
     'return -1 if DMT times out, otherwise pass on DMT's return value (as per
     'convention, 0 is success and >0 is an error, though I've only ever seen 1)
-    Public Function exec_dmt(psi As ProcessStartInfo, msg_succ As String)
+    Public Function exec_dmt(psi As ProcessStartInfo, prefix As String, msg_succ As String)
         Dim dmt As Process
         dmt = Process.Start(psi)
         'Wait 30s (worst case) for DMT to exit - if it takes this long, something's wrong
@@ -78,7 +78,7 @@ Public Class DMT
         Dim event_time = DateTime.Now
         resultmsg = event_time.ToString("HH:mm:ss") & ": " & resultmsg
 
-        dmt_log_event(resultmsg)
+        dmt_log_event(prefix, resultmsg)
         Return ret_value
     End Function
 
@@ -100,7 +100,7 @@ Public Class DMT
         Return file_name
     End Function
 
-    Public Sub dmt_log_event(msg As String)
+    Public Sub dmt_log_event(prefix As String, msg As String)
         Dim fso, file_path, file_name, log_file
         Dim log_date = DateTime.Now
 
@@ -112,7 +112,7 @@ Public Class DMT
         file_name = file_path & log_date.ToString("yyyyMMdd") & "_dmtlog.txt"
         log_file = fso.OpenTextFile(file_name, 8, True, -2)
 
-        log_file.WriteLine(msg)
+        log_file.WriteLine(prefix & ": " & msg)
         log_file.Close()
     End Sub
 End Class
