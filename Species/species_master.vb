@@ -4,7 +4,7 @@ AddVbFile "species_list.vb"         'Species.species_list
 Imports System.Text.RegularExpressions
 
 Sub Main()
-    Dim form_result As FormResult
+    Dim form_result As FormResult = FormResult.OK
     'call the rules/open the forms in order to setup the iProperties properly
     iLogicVb.RunExternalRule("10species_parameters.vb")
     form_result = iLogicForm.ShowGlobal("species_20select", FormMode.Modal).Result

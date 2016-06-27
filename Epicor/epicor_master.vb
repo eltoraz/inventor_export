@@ -18,7 +18,7 @@ Sub Main()
     Dim active_parts As New ArrayList()
     Dim no_species As Boolean = False
 
-    Dim form_result As FormResult
+    Dim form_result As FormResult = FormResult.OK
 
     'setup the parameters this module needs
     iLogicVb.RunExternalRule("10multi_value.vb")
