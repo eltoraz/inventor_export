@@ -18,7 +18,6 @@ Sub Main()
     params.Add("RevDescription", UnitsTypeEnum.kTextUnits)
     
     'internal logic control parameters
-    params.Add("IsPartPurchased", UnitsTypeEnum.kBooleanUnits)
     params.Add("PartNumberToUse", UnitsTypeEnum.kTextUnits)
 
     Dim inv_app As Inventor.Application = ThisApplication

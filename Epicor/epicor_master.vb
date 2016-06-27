@@ -118,18 +118,12 @@ Sub Main()
     'TODO: display message box about DMT state - maybe last 3 lines of logfile
 End Sub
 
+'validate the form logic, and return a form result (if reentry required) that
+' lets the user abort
 Function check_logic(ByRef app As Inventor.Application) As FormResult
     'set a few parameters depending on data entered in first form
     Dim inv_params As UserParameters = InventorOps.get_param_set(app)
-    Dim is_part_purchased As Boolean
-
-    If StrComp(inv_params.Item("PartType").Value, "P") = 0
-        is_part_purchased = True
-    Else
-        is_part_purchased = False
-    End If
-
-    inv_params.Item("IsPartPurchased").Value = is_part_purchased
+    Dim design_props As PropertySet = app.ActiveDocument.PropertySets.Item("Design Tracking Properties")
 
     Dim form_result As FormResult = FormResult.OK
 
@@ -143,6 +137,14 @@ Function check_logic(ByRef app As Inventor.Application) As FormResult
     'the dropdowns
     Do
         Dim error_log As String = ""
+        Dim description As String = design_props.Item("Description").Value
+
+        If StrComp(description, "") = 0 Then
+            error_log = error_log & System.Enviornment.Newline & _
+                        "- Enter a description"
+            fails_validation = True
+        End If
+
         For Each kvp As KeyValuePair(Of String, String) in required_params
             If StrComp(inv_params.Item(kvp.Key).Value, "") = 0 Then
                 error_log = error_log & System.Environment.Newline & _

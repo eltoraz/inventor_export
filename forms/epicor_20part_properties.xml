@@ -22,6 +22,20 @@
         <Italic>false</Italic>
       </Font>
     </UiElementSpec>
+    <UiElementSpec xsi:type="TextPropertyControlSpec">
+      <Name>Description</Name>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <PropertyName>Description</PropertyName>
+      <PropertySetName>Project</PropertySetName>
+    </UiElementSpec>
     <UiElementSpec xsi:type="MultiValueTextParameterControlSpec">
       <Name>Part Type</Name>
       <ToolTip />
@@ -214,15 +228,6 @@
       <AlwaysReadOnly>false</AlwaysReadOnly>
       <PropertyName>Eng. Approved Date</PropertyName>
       <PropertySetName>Status</PropertySetName>
-    </UiElementSpec>
-    <UiElementSpec xsi:type="LabelSpec">
-      <Name>*Note: commas in the comments will be removed in the database</Name>
-      <Font>
-        <FamilyName />
-        <Size>0</Size>
-        <Bold>false</Bold>
-        <Italic>false</Italic>
-      </Font>
     </UiElementSpec>
   </Items>
   <StyleAndSkinName>
