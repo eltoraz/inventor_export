@@ -45,7 +45,7 @@
       </Image>
       <TextVisible>true</TextVisible>
       <RuleName>species_master</RuleName>
-      <RuleButtonBehavior>RunRule</RuleButtonBehavior>
+      <RuleButtonBehavior>CloseAndRunRule</RuleButtonBehavior>
       <Path>species_master.vb</Path>
     </UiElementSpec>
   </Items>
