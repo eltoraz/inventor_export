@@ -140,7 +140,7 @@ Function check_logic(ByRef app As Inventor.Application) As FormResult
         Dim description As String = design_props.Item("Description").Value
 
         If StrComp(description, "") = 0 Then
-            error_log = error_log & System.Enviornment.Newline & _
+            error_log = error_log & System.Environment.Newline & _
                         "- Enter a description"
             fails_validation = True
         End If
