@@ -1,5 +1,3 @@
-AddVbFile "inventor_common.vb"          'InventorOps.get_param_set
-
 Imports Inventor
 
 Public Class PartRevExport
@@ -7,13 +5,13 @@ Public Class PartRevExport
     End Sub
 
     Public Shared Function part_rev_export(ByRef app As Inventor.Application, _
+                                           ByRef inv_params As UserParameters, _
                                            ByRef dmt_obj As DMT)
         Dim fields, data As String
         Dim PartNum, RevisionNum, DrawNum As String
         Dim ApprovedDate As Date
 
         Dim inv_doc As Document = app.ActiveDocument
-        Dim inv_params As UserParameters = InventorOps.get_param_set(app)
         Dim summary_props, design_props, custom_props As PropertySet
 
         summary_props = inv_doc.PropertySets.Item("Inventor Summary Information")

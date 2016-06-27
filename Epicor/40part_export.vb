@@ -1,19 +1,18 @@
-﻿AddVbFile "inventor_common.vb"          'InventorOps.get_param_set
-
-Imports Inventor
+﻿Imports Inventor
 
 Public Class PartExport
     Sub Main()
     End Sub
 
-    Public Shared Function part_export(ByRef app As Inventor.Application, ByRef dmt_obj As DMT)
+    Public Shared Function part_export(ByRef app As Inventor.Application, _
+                                       ByRef inv_params As UserParameters, _
+                                       ByRef dmt_obj As DMT)
         Dim fields, data As String
         Dim PartNum, Description, PartType, UOM As String
         Dim TrackSerialNum As Boolean
         Dim SNFormat, SNBaseDataType, SNMask, SNMaskExample As String
 
         Dim inv_doc As Document = app.ActiveDocument
-        Dim inv_params As UserParameters = InventorOps.get_param_set(app)
         Dim design_props, custom_props As PropertySet
 
         design_props = inv_doc.PropertySets.Item("Design Tracking Properties")

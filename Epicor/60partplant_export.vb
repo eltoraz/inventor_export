@@ -1,4 +1,3 @@
-AddVbFile "inventor_common.vb"          'InventorOps.get_param_set
 Imports Inventor
 
 Public Class PartPlantExport
@@ -6,12 +5,12 @@ Public Class PartPlantExport
     End Sub
 
     Public Shared Function part_plant_export(ByRef app As Inventor.Application, _
+                                             ByRef inv_params As userParameters, _
                                              ByRef dmt_obj As DMT)
         Dim fields, data As String
         Dim PartNum, PartType As String
 
         Dim inv_doc As Document = app.ActiveDocument
-        Dim inv_params As UserParameters = InventorOps.get_param_set(app)
         Dim design_props, custom_props As PropertySet
 
         design_props = inv_doc.PropertySets.Item("Design Tracking Properties")
