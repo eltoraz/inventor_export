@@ -75,9 +75,6 @@ Public Class DMT
             ret_value = dmt.ExitCode
         End If
 
-        Dim event_time = DateTime.Now
-        resultmsg = event_time.ToString("HH:mm:ss") & ": " & resultmsg
-
         dmt_log_event(prefix, resultmsg)
         Return ret_value
     End Function
@@ -104,6 +101,10 @@ Public Class DMT
         Dim fso, file_path, file_name, log_file
         Dim log_date = DateTime.Now
 
+        Dim log_msg As String
+        Dim event_time = DateTime.Now
+        log_msg = event_time.ToString("HH:mm:ss") & ": " & prefix & ": " & msg
+
         'create log directory - no filesystem changes will be made if it exists already
         file_path = dmt_working_path & "log\"
         System.IO.Directory.CreateDirectory(file_path)
@@ -112,7 +113,7 @@ Public Class DMT
         file_name = file_path & log_date.ToString("yyyyMMdd") & "_dmtlog.txt"
         log_file = fso.OpenTextFile(file_name, 8, True, -2)
 
-        log_file.WriteLine(prefix & ": " & msg)
+        log_file.WriteLine(log_msg)
         log_file.Close()
     End Sub
 End Class
