@@ -19,7 +19,7 @@ Sub Main()
         Return
     End If
 
-    iLogicVb.RunExternalRule("50species_iproperties.vb")
+    iLogicVb.RunExternalRule("40species_iproperties.vb")
 
     MsgBox("Part number iProperties successfully updated.")
 End Sub
@@ -83,5 +83,5 @@ Function validate_species() As FormResult
         End If
     Loop While fails_validation
 
-    Return form_result.Result
+    Return form_result
 End Function
