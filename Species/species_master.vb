@@ -9,13 +9,13 @@ Sub Main()
     iLogicVb.RunExternalRule("10species_parameters.vb")
     form_result = iLogicForm.ShowGlobal("species_20select", FormMode.Modal).Result
 
-    If form_result = FormResult.Cancel Then
+    If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
     End If
 
     form_result = iLogicForm.ShowGlobal("species_30partnum", FormMode.Modal).Result
 
-    If form_result = FormResult.Cancel Then
+    If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
     End If
 
@@ -77,7 +77,7 @@ Function validate_species() As FormResult
             form_result = iLogicForm.ShowGlobal("species_30partnum", FormMode.Modal).Result
             iLogicVb.RunExternalRule("dummy.vb")
 
-            If form_result = FormResult.Cancel Then
+            If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
                 Exit Do
             End If
         End If

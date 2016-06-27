@@ -60,7 +60,7 @@ Sub Main()
             form_result = iLogicForm.ShowGlobal("epicor_13launch_species").Result
             iLogicVb.RunExternalRule("dummy.vb")
 
-            If form_result = FormResult.Cancel Then
+            If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
                 Return
             End If
         End If
@@ -73,7 +73,7 @@ Sub Main()
     Do
         form_result = iLogicForm.ShowGlobal("epicor_15part_select", FormMode.Modal).Result
 
-        If form_result = FormResult.Cancel Then
+        If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
             Return
         End If
 
@@ -90,13 +90,13 @@ Sub Main()
     iLogicVb.RunExternalRule("10multi_value.vb")
     form_result = iLogicForm.ShowGlobal("epicor_20part_properties", FormMode.Modal).Result
 
-    If form_result = FormResult.Cancel Then
+    If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
     End If
 
     form_result = check_logic(app)
     
-    If form_result = FormResult.Cancel Then
+    If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
     End If
 
@@ -162,7 +162,7 @@ Function check_logic(ByRef app As Inventor.Application) As FormResult
             form_result = iLogicForm.ShowGlobal("epicor_20part_properties", FormMode.Modal).Result
             iLogicVb.RunExternalRule("dummy.vb")
 
-            If form_result = FormResult.Cancel Then
+            If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
                 Exit Do
             End If
         End If
