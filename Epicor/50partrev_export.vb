@@ -18,7 +18,7 @@ Public Class PartRevExport
         design_props = inv_doc.PropertySets.Item("Design Tracking Properties")
         custom_props = inv_doc.PropertySets.Item("Inventor User Defined Properties")
 
-        PartNum = inv_params.Item("PartNumberToUse").Value
+        PartNum = inv_params.Item("PartNumberToUse").Value.ToUpper()
         DrawNum = design_props.Item("Part Number").Value
         RevisionNum = summary_props.Item("Revision Number").Value
         ApprovedDate = design_props.Item("Engr Date Approved").Value

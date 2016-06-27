@@ -16,7 +16,7 @@ Public Class PartPlantExport
         design_props = inv_doc.PropertySets.Item("Design Tracking Properties")
         custom_props = inv_doc.PropertySets.Item("Inventor User Defined Properties")
 
-        PartNum = inv_params.Item("PartNumberToUse").Value
+        PartNum = inv_params.Item("PartNumberToUse").Value.ToUpper()
 
         'fields for purchased parts
         Dim LeadTime, VendorNum, PurPoint As String

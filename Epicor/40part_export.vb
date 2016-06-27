@@ -18,7 +18,7 @@ Public Class PartExport
         design_props = inv_doc.PropertySets.Item("Design Tracking Properties")
         custom_props = inv_doc.PropertySets.Item("Inventor User Defined Properties")
 
-        PartNum = inv_params.Item("PartNumberToUse").Value
+        PartNum = inv_params.Item("PartNumberToUse").Value.ToUpper()
         Description = design_props.Item("Description").Value
         PartType = custom_props.Item("PartType").Value
 
