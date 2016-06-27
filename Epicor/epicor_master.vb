@@ -59,10 +59,9 @@ Sub Main()
 
         'can't proceed if there isn't a part number for at least one species
         If no_species Then
-            form_result = iLogicForm.ShowGlobal("epicor_13launch_species").Result
-            iLogicVb.RunExternalRule("dummy.vb")
+            form_result = iLogicForm.ShowGlobal("epicor_13launch_species", FormMode.Modal).Result
 
-            If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
+            If form_result = FormResult.None Then
                 Return
             End If
         End If
@@ -161,7 +160,6 @@ Function check_logic(ByRef app As Inventor.Application) As FormResult
             MsgBox("Please correct the following problems with the part info:" & _
                    error_log)
             form_result = iLogicForm.ShowGlobal("epicor_20part_properties", FormMode.Modal).Result
-            iLogicVb.RunExternalRule("dummy.vb")
 
             If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
                 Exit Do

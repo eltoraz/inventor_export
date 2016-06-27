@@ -53,7 +53,7 @@
     <StyleName>Default</StyleName>
   </StyleAndSkinName>
   <AllowCustomization>true</AllowCustomization>
-  <PredefinedButtons>OkCancel</PredefinedButtons>
+  <PredefinedButtons>None</PredefinedButtons>
   <Modal>false</Modal>
   <ItemBordersVisible>false</ItemBordersVisible>
   <IsLauncherPage>false</IsLauncherPage>

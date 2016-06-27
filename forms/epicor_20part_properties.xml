@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FormSpecification xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Name>20part_properties</Name>
+  <Name>epicor_20part_properties</Name>
   <Font>
     <Size>0</Size>
     <Bold>false</Bold>
