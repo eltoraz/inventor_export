@@ -73,7 +73,7 @@ Sub Main()
     Do
         form_result = iLogicForm.ShowGlobal("epicor_15part_select", FormMode.Modal).Result
 
-        If form_result.Result = FormResult.Cancel Then
+        If form_result = FormResult.Cancel Then
             Return
         End If
 
@@ -159,7 +159,7 @@ Function check_logic(ByRef app As Inventor.Application) As FormResult
         If fails_validation Then
             MsgBox("Please correct the following problems with the part info:" & _
                    error_log)
-            form_result = iLogicForm.ShowGlobal("epicor_20part_properties", FormMode.Modal)
+            form_result = iLogicForm.ShowGlobal("epicor_20part_properties", FormMode.Modal).Result
             iLogicVb.RunExternalRule("dummy.vb")
 
             If form_result = FormResult.Cancel Then
