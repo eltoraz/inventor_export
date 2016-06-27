@@ -14,7 +14,6 @@ Sub Main()
     Dim app As Inventor.Application = ThisApplication
     Dim inv_params As UserParameters = InventorOps.get_param_set(app)
 
-
     'select the part we'll be working with here
     Dim active_parts As New ArrayList()
     Dim no_species As Boolean = False
@@ -105,10 +104,10 @@ Sub Main()
     'if part export fails, abort - this will usually mean the part is already
     'in the DB and so the straight add operation failed
     Dim dmt_obj As New DMT()
-    Dim ret_value = PartExport.part_export(ThisApplication, dmt_obj)
+    Dim ret_value = PartExport.part_export(app, inv_params, dmt_obj)
     If ret_value = 0 Then
-        PartRevExport.part_rev_export(ThisApplication, dmt_obj)
-        PartPlantExport.part_plant_export(ThisApplication, dmt_obj)
+        PartRevExport.part_rev_export(app, inv_params, dmt_obj)
+        PartPlantExport.part_plant_export(app, inv_params, dmt_obj)
     ElseIf ret_value = -1 Then
         MsgBox("Error: DMT timed out. Aborting...")
     Else
