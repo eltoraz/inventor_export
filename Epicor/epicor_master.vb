@@ -20,6 +20,9 @@ Sub Main()
 
     Dim form_result As FormResult
 
+    'setup the parameters this module needs
+    iLogicVb.RunExternalRule("10multi_value.vb")
+
     Do
         Try
             For Each s As String in Species.species_list
@@ -86,7 +89,6 @@ Sub Main()
     Loop While Not part_selected
 
     'Call the other rules in order
-    iLogicVb.RunExternalRule("10multi_value.vb")
     form_result = iLogicForm.ShowGlobal("epicor_20part_properties", FormMode.Modal).Result
 
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
