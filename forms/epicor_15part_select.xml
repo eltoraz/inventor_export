@@ -45,7 +45,7 @@
     <StyleName>Default</StyleName>
   </StyleAndSkinName>
   <AllowCustomization>true</AllowCustomization>
-  <PredefinedButtons>Done</PredefinedButtons>
+  <PredefinedButtons>OkCancel</PredefinedButtons>
   <Modal>false</Modal>
   <ItemBordersVisible>false</ItemBordersVisible>
   <IsLauncherPage>false</IsLauncherPage>
