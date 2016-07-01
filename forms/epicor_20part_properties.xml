@@ -103,7 +103,7 @@
       <ReadOnly>false</ReadOnly>
       <AlwaysReadOnly>false</AlwaysReadOnly>
       <ParameterName>UsePartRev</ParameterName>
-      <EditControlType>TrueOrFalse</EditControlType>
+      <EditControlType>CheckBox</EditControlType>
     </UiElementSpec>
     <UiElementSpec xsi:type="BooleanParameterControlSpec">
       <Name>Track Serial Number</Name>
@@ -118,7 +118,7 @@
       <ReadOnly>false</ReadOnly>
       <AlwaysReadOnly>false</AlwaysReadOnly>
       <ParameterName>TrackSerialNum</ParameterName>
-      <EditControlType>TrueOrFalse</EditControlType>
+      <EditControlType>CheckBox</EditControlType>
     </UiElementSpec>
     <UiElementSpec xsi:type="EmptySpaceSpec">
       <Name>Empty Space 1</Name>
