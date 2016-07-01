@@ -1,27 +1,12 @@
-AddVbFile "dmt.vb"                  'DMT.dmt_workin_path
+AddVbFile "dmt.vb"                  'DMT.dmt_working_path
 AddVbFile "inventor_common.vb"      'InventorOps.create_param()
+AddVbFile "epicor_common.vb"        'EpicorOps.param_list
 
 'create parameters with a restricted set of accepted values for import by
 'Epicor DMT (the actual IDs the tool needs are set in set_props.vb)
 Sub Main()
-    Dim params As New Dictionary(Of String, UnitsTypeEnum)
-    'Part parameters
-    params.Add("PartType", UnitsTypeEnum.kTextUnits)
-    params.Add("ProdCode", UnitsTypeEnum.kTextUnits)
-    params.Add("ClassID", UnitsTypeEnum.kTextUnits)
-    params.Add("UsePartRev", UnitsTypeEnum.kBooleanUnits)
-    params.Add("MfgComment", UnitsTypeEnum.kTextUnits)
-    params.Add("PurComment", UnitsTypeEnum.kTextUnits)
-    params.Add("TrackSerialNum", UnitsTypeEnum.kBooleanUnits)
-
-    'Revision parameters
-    params.Add("RevDescription", UnitsTypeEnum.kTextUnits)
-    
-    'internal logic control parameters
-    params.Add("PartNumberToUse", UnitsTypeEnum.kTextUnits)
-
     Dim inv_app As Inventor.Application = ThisApplication
-    For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in params
+    For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in EpicorOps.param_list
         InventorOps.create_param(kvp.Key, kvp.Value, inv_app)
     Next
 

@@ -1,3 +1,5 @@
+AddVbFile "epicor_common.vb"        'EpicorOps.format_csv_field
+
 Imports Inventor
 
 Public Class PartRevExport
@@ -8,7 +10,7 @@ Public Class PartRevExport
                                            ByRef inv_params As UserParameters, _
                                            ByRef dmt_obj As DMT)
         Dim fields, data As String
-        Dim PartNum, RevisionNum, DrawNum As String
+        Dim PartNum, RevisionNum, RevDescription, DrawNum As String
         Dim ApprovedDate As Date
 
         Dim inv_doc As Document = app.ActiveDocument
@@ -21,6 +23,7 @@ Public Class PartRevExport
         PartNum = inv_params.Item("PartNumberToUse").Value.ToUpper()
         DrawNum = design_props.Item("Part Number").Value
         RevisionNum = summary_props.Item("Revision Number").Value
+        RevDescription = custom_props.Item("RevDescription").Value
         ApprovedDate = design_props.Item("Engr Date Approved").Value
 
         fields = "Company,PartNum,RevisionNum,RevShortDesc,RevDescription,Approved,ApprovedDate,ApprovedBy,EffectiveDate,DrawNum,Plant,ProcessMode"
@@ -28,8 +31,8 @@ Public Class PartRevExport
         data = "BBN"                        'Company name (constant)
         data = data & "," & PartNum
         data = data & "," & RevisionNum
-        data = data & "," & "Revision " & RevisionNum
-        data = data & "," & custom_props.Item("RevDescription").Value
+        data = data & "," & EpicorOps.format_csv_field("Revision " & RevisionNum)
+        data = data & "," & EpicorOps.format_csv_field(RevDescription)
 
         'Logic TODO: Approved hardcoded for now
         'Logic TODO: is there any reason for the user to specify EffectiveDate as

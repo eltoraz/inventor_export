@@ -1,4 +1,6 @@
-﻿Imports Inventor
+﻿AddVbFile "epicor_common.vb"        'EpicorOps.format_csv_field
+
+Imports Inventor
 
 Public Class PartExport
     Sub Main()
@@ -8,7 +10,8 @@ Public Class PartExport
                                        ByRef inv_params As UserParameters, _
                                        ByRef dmt_obj As DMT)
         Dim fields, data As String
-        Dim PartNum, Description, PartType, UOM As String
+        Dim PartNum, SearchWord, Description, PartType, UOM As String
+        Dim MfgComment, PurComment As String
         Dim TrackSerialNum As Boolean
         Dim SNFormat, SNBaseDataType, SNMask, SNMaskExample As String
 
@@ -18,9 +21,14 @@ Public Class PartExport
         design_props = inv_doc.PropertySets.Item("Design Tracking Properties")
         custom_props = inv_doc.PropertySets.Item("Inventor User Defined Properties")
 
+        'properties that will be used elsewhere, or need to be formatted for CSV
         PartNum = inv_params.Item("PartNumberToUse").Value.ToUpper()
         Description = design_props.Item("Description").Value
+        SearchWord = Left(Description, 8)
         PartType = custom_props.Item("PartType").Value
+        
+        MfgComment = custom_props.Item("MfgComment").Value
+        PurComment = custom_props.Item("PurComment").Value
 
         'UOM is set based on part type
         'NOTE: default is "M" (manufactured), though only "P"/"M" are expected
@@ -50,9 +58,10 @@ Public Class PartExport
         'Build string containing values in order expected by DMT (see fields string)
         data = "BBN"                                'Company name (constant)
         data = data & "," & PartNum
-
-        data = data & "," & Left(Description, 8)    'Search word, first 8 characters of description
-        data = data & "," & Description
+        
+        'Search word, first 8 characters of description
+        data = data & "," & EpicorOps.format_csv_field(SearchWord)
+        data = data & "," & EpicorOps.format_csv_field(Description)
 
         data = data & "," & custom_props.Item("ClassID").Value
 
@@ -65,8 +74,8 @@ Public Class PartExport
         data = data & "," & "E"
 
         data = data & "," & custom_props.Item("ProdCode").Value
-        data = data & "," & custom_props.Item("MfgComment").Value
-        data = data & "," & custom_props.Item("PurComment").Value
+        data = data & "," & EpicorOps.format_csv_field(MfgComment)
+        data = data & "," & EpicorOps.format_csv_field(PurComment)
         data = data & "," & TrackSerialNum
         data = data & "," & UOM
         data = data & "," & custom_props.Item("UsePartRev").Value

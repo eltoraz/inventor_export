@@ -1,11 +1,12 @@
 AddVbFile "dmt.vb"                  'DMT.dmt_working_path
 AddVbFile "inventor_common.vb"      'InventorOps.update_prop, get_param_set
+AddVbFile "epicor_common.vb"        'EpicorOps.param_list
 
 'set iProperties with values the user has defined in a form
 'note: these values will mostly be the IDs the Epicor DMT is expecting rather
 '      than the human-readable strings
 Sub Main()
-    'list of parameters that need to be converted to iProperties
+    'list of parameters that need to be converted to custom iProperties
     Dim app As Inventor.Application = ThisApplication
     Dim inv_doc As Document = app.ActiveDocument
     Dim inv_params As UserParameters = InventorOps.get_param_set(app)
@@ -17,11 +18,11 @@ Sub Main()
 
     'TODO: map approving engineers to Epicor IDs?
 
-    For i = 1 To inv_params.Count
+    For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in EpicorOps.param_list
         'if Epicor requires a short ID, convert the human-readable value via
         'the appropriate mapping (see above)
         'required for: ProdCode, ClasID
-        Dim param As Parameter = inv_params.Item(i)
+        Dim param As Parameter = inv_params.Item(kvp.Key)
         Dim param_name As String = param.Name
         Dim param_value = param.Value
 
@@ -32,15 +33,11 @@ Sub Main()
         Else If StrComp(param_name, "ClassID") = 0 Then
             param_value = ClassIDMap(param_value)
         Else If StrComp(param_name, "MfgComment") = 0 Then
-            'note: Epicor MfgComment and PurComment fields supports up to 16000 chars,
-            'and commas need to be stripped to avoid messing up the CSV
-            param_value = Replace(param_value, ",", "")
+            'note: Epicor comment fields support up to 16000 chars
             param_value = Left(param_value, 16000)
         Else If StrComp(param_name, "PurComment") = 0 Then
-            param_value = Replace(param_value, ",", "")
             param_value = Left(param_value, 16000)
         Else If StrComp(param_name, "RevDescription") = 0 Then
-            param_value = Replace(param_value, ",", "")
             param_value = Left(param_value, 16000)
         End If
 
