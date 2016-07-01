@@ -22,6 +22,16 @@
         <Italic>false</Italic>
       </Font>
     </UiElementSpec>
+    <UiElementSpec xsi:type="LabelSpec">
+      <Name>Part number</Name>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <ParameterName>PartNumberToUse</ParameterName>
+    </UiElementSpec>
     <UiElementSpec xsi:type="TextPropertyControlSpec">
       <Name>Description</Name>
       <Font>
@@ -119,6 +129,15 @@
       <AlwaysReadOnly>false</AlwaysReadOnly>
       <ParameterName>TrackSerialNum</ParameterName>
       <EditControlType>CheckBox</EditControlType>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="LabelSpec">
+      <Name>(Note: serial number will be supressed for purchased parts)</Name>
+      <Font>
+        <FamilyName>Tahoma</FamilyName>
+        <Size>6.75</Size>
+        <Bold>false</Bold>
+        <Italic>true</Italic>
+      </Font>
     </UiElementSpec>
     <UiElementSpec xsi:type="EmptySpaceSpec">
       <Name>Empty Space 1</Name>
