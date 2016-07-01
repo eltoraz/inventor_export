@@ -1,17 +1,13 @@
+Set all Inventor clients to use networked Design Data & external rule directories:
 - move Design Data folder to network, configure clients to point to new location
   - see: https://knowledge.autodesk.com/support/inventor-products/learn-explore/caas/CloudHelp/cloudhelp/2017/ENU/Inventor-Help/files/GUID-35327F99-72FC-4154-BFB0-6E46E20B9E76-htm.html
   - default directory: C:\Users\Public\Documents\Autodesk\Inventor 2016\Design Data\iLogic\UI
-- add I:\Cadd\_iLogic\Export to External Rule Directories in Tools>Options>iLogic Configuration (in dropdown) for all Inventor installations
+- add rule folders to External Rule Directories in Tools>Options>iLogic Configuration (in dropdown)
   - iLogic config file located at %USERPROFILE%\AppData\Roaming\Autodesk\Inventor 2016\iLogicPreferences
-  - simple XML file with contents of that options dialog
+  - simple XML file with contents of that options dialog, so can configure on one machine and copy the file to the others
 
-- troubleshoot 60partplant_export not adding serial numbers even though the conditions evaluate true
-- need to update process - using part numbers from species population (i.e., the Part Custom iProperties); the Part Number Project iProperty will just be the drawing number
-- will need to add a part for both the actual part and the raw material (user-input in the species selection process)
-- export logic - Inventor export will only be used to initially populate Epicor with a part, not for future revisions - so check whether the part already exists in the DB and abort if so
-  - raw materials still get added AND updated through Inventor
+note: raw materials still get added AND updated through Inventor, so need to call DMT with -Add and -Update flag for "Material" parts
 
-- expand process to include Quoting spreadsheet generation (see example in N:\CompanyResources\Quoting\Rejuvenation\Island Collection\RM Spreadsheets)
-
-- validate data input in form in 21...
-  - test that DMT accepts CSVs containing escaped commas & quotes (and write appropriate substitution code if so)
+expand process to include Quoting spreadsheet generation (see example in N:\CompanyResources\Quoting\Rejuvenation\Island Collection\RM Spreadsheets)
+  - need to figure out how this is going to be generated & populated
+  - IIRC, generation will be done beforehand, and the user will select the spreadsheet to work with
