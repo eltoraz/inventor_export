@@ -1,6 +1,4 @@
-﻿AddVbFile "epicor_common.vb"        'EpicorOps.format_csv_field
-
-Imports Inventor
+﻿Imports Inventor
 
 Public Class PartExport
     Sub Main()

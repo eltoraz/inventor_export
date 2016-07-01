@@ -1,9 +1,10 @@
-AddVbFile "dmt.vb"                      'DMT
+﻿AddVbFile "dmt.vb"                      'DMT
 AddVbFile "40part_export.vb"            'PartExport.part_export
 AddVbFile "50partrev_export.vb"         'PartRevExport.part_rev_export
 AddVbFile "60partplant_export.vb"       'PartPlantExport.part_plant_export
 AddVbFile "species_list.vb"             'Species.species_list
 AddVbFile "inventor_common.vb"          'InventorOps.get_param_set
+AddVbFile "epicor_common.vb"            'EpicorOps.format_csv_field
 
 Sub Main()
     'Pull latest data from Epicor
@@ -145,7 +146,7 @@ Function check_logic(ByRef app As Inventor.Application) As FormResult
             fails_validation = True
         End If
 
-        For Each kvp As KeyValuePair(Of String, String) in required_params
+        For Each kvp As KeyValuePair(Of String, String) In required_params
             If StrComp(inv_params.Item(kvp.Key).Value, "") = 0 Then
                 error_log = error_log & System.Environment.Newline & _
                             "- Select a value for " & kvp.Value
