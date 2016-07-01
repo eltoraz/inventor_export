@@ -140,6 +140,10 @@ Function check_logic(ByRef app As Inventor.Application) As FormResult
         Dim error_log As String = ""
         Dim description As String = design_props.Item("Description").Value
 
+        Dim appr_date, null_date As Date
+        appr_date = design_props.Item("Engr Date Approved").Value
+        null_date = #1/1/1601#
+
         If StrComp(description, "") = 0 Then
             error_log = error_log & System.Environment.Newline & _
                         "- Enter a description"
@@ -153,6 +157,12 @@ Function check_logic(ByRef app As Inventor.Application) As FormResult
                 fails_validation = True
             End If
         Next
+
+        If appr_date = null_date Then
+            error_log = error_log & System.Environment.Newline & _
+                        "- Select an approval date"
+            fails_validation = True
+        End If
 
         'set the flag to false if no errors were detected in THIS iteration
         If StrComp(error_log, "") = 0 Then
