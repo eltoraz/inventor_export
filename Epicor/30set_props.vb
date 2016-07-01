@@ -26,8 +26,6 @@ Sub Main()
         Dim param_name As String = param.Name
         Dim param_value = param.Value
 
-        'TODO: try enclosing user-entered fields in quotes (making sure to
-        '      escape entered quotes) so as not to need to strip commas
         If StrComp(param_name, "ProdCode") = 0 Then
             param_value = ProdCodeMap(param_value)
         Else If StrComp(param_name, "ClassID") = 0 Then
