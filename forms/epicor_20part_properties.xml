@@ -151,7 +151,7 @@
       <MaximumWidth>0</MaximumWidth>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Manufacturer Comments*</Name>
+      <Name>Manufacturer Comments</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -167,7 +167,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Purchaser Comments*</Name>
+      <Name>Purchaser Comments</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -219,7 +219,7 @@
       <PropertySetName>Project</PropertySetName>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Revision Comments*</Name>
+      <Name>Revision Comments</Name>
       <ToolTip />
       <Font>
         <FamilyName />
