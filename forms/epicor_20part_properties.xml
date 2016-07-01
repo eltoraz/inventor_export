@@ -22,6 +22,16 @@
         <Italic>false</Italic>
       </Font>
     </UiElementSpec>
+    <UiElementSpec xsi:type="LabelSpec">
+      <Name>Part number</Name>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <ParameterName>PartNumberToUse</ParameterName>
+    </UiElementSpec>
     <UiElementSpec xsi:type="TextPropertyControlSpec">
       <Name>Description</Name>
       <Font>
@@ -103,7 +113,7 @@
       <ReadOnly>false</ReadOnly>
       <AlwaysReadOnly>false</AlwaysReadOnly>
       <ParameterName>UsePartRev</ParameterName>
-      <EditControlType>TrueOrFalse</EditControlType>
+      <EditControlType>CheckBox</EditControlType>
     </UiElementSpec>
     <UiElementSpec xsi:type="BooleanParameterControlSpec">
       <Name>Track Serial Number</Name>
@@ -118,7 +128,16 @@
       <ReadOnly>false</ReadOnly>
       <AlwaysReadOnly>false</AlwaysReadOnly>
       <ParameterName>TrackSerialNum</ParameterName>
-      <EditControlType>TrueOrFalse</EditControlType>
+      <EditControlType>CheckBox</EditControlType>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="LabelSpec">
+      <Name>(Note: serial number will be supressed for purchased parts)</Name>
+      <Font>
+        <FamilyName>Tahoma</FamilyName>
+        <Size>6.75</Size>
+        <Bold>false</Bold>
+        <Italic>true</Italic>
+      </Font>
     </UiElementSpec>
     <UiElementSpec xsi:type="EmptySpaceSpec">
       <Name>Empty Space 1</Name>
@@ -132,7 +151,7 @@
       <MaximumWidth>0</MaximumWidth>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Manufacturer Comments*</Name>
+      <Name>Manufacturer Comments</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -148,7 +167,7 @@
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Purchaser Comments*</Name>
+      <Name>Purchaser Comments</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -200,7 +219,7 @@
       <PropertySetName>Project</PropertySetName>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Revision Comments*</Name>
+      <Name>Revision Comments</Name>
       <ToolTip />
       <Font>
         <FamilyName />
