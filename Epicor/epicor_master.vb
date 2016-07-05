@@ -36,12 +36,14 @@ Sub Main()
                     'add active parts and materials to the list to present to the user
                     Dim part_param As Parameter = inv_params.Item("Part" & subst)
                     Dim part_value As String = part_param.Value
-                    active_parts.Add(part_value)
+                    Dim part_entry As String = part_value & " - Part (" & s & ")"
+                    active_parts.Add(part_entry)
 
                     If StrComp(s, "Hardware") <> 0 Then
                         Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
                         Dim mat_value As String = mat_param.Value
-                        active_parts.Add(mat_value)
+                        Dim mat_entry As String = mat_value & " - Material (" & s & ")"
+                        active_parts.Add(mat_entry)
                     End If
                 End If
             Next

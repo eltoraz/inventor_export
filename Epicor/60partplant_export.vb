@@ -16,7 +16,16 @@ Public Class PartPlantExport
         design_props = inv_doc.PropertySets.Item("Design Tracking Properties")
         custom_props = inv_doc.PropertySets.Item("Inventor User Defined Properties")
 
-        PartNum = inv_params.Item("PartNumberToUse").Value.ToUpper()
+        Dim part_entry As String = inv_params.Item("PartNumberToUse").Value
+        Dim pn As String = Left(part_entry, 6).ToUpper()
+        Dim part_is_mat As Boolean = False
+
+        'detect whether we're working with a material, which is allowed to be updated in Epicor
+        If StrComp(part_entry.Substring(9, 3), "Mat") = 0 Then
+            part_is_mat = True
+        End If
+
+        PartNum = pn
 
         'fields for purchased parts
         Dim LeadTime, VendorNum, PurPoint As String
@@ -68,6 +77,6 @@ Public Class PartPlantExport
         Dim file_name As String
         file_name = dmt_obj.write_csv("Part_Plant.csv", fields, data)
 
-        Return dmt_obj.dmt_import("Part Plant", file_name)
+        Return dmt_obj.dmt_import("Part Plant", file_name, part_is_mat)
     End Function
 End Class
