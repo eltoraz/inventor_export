@@ -19,6 +19,12 @@ Sub Main()
         Return
     End If
 
+    form_result = validate_species()
+
+    If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
+        Return
+    End If
+
     iLogicVb.RunExternalRule("40species_iproperties.vb")
 
     MsgBox("Part number iProperties successfully updated.")
