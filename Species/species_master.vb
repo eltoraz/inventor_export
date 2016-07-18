@@ -36,8 +36,11 @@ Function validate_species() As FormResult
     Dim inv_params As UserParameters = InventorOps.get_param_set(app)
 
     'regular expression to match the part number format AZ-123
-    Dim partno_pattern As String = "^[a-zA-Z]{2}-[0-9]{3}$"
-    Dim partno_regex As New Regex(partno_pattern)
+    Dim part_pattern As String = "^[a-zA-Z]{2}-[0-9]{3}$"
+    Dim part_regex As New Regex(part_pattern)
+    Dim mat_pattern As String = "^M[lhftbpLHFTBP]-[a-zA-Z]{2}-[0-9]{3}$"
+    Dim mat_regex As New Regex(mat_pattern)
+
     Dim fails_validation As Boolean = False
 
     Dim form_result As FormResult = FormResult.OK
@@ -54,7 +57,7 @@ Function validate_species() As FormResult
                 Dim part_param As Parameter = inv_params.Item("Part" & subst)
                 Dim part_value As String = part_param.Value
 
-                If StrComp(part_value, "") = 0 OrElse Not partno_regex.IsMatch(part_value) Then
+                If StrComp(part_value, "") = 0 OrElse Not part_regex.IsMatch(part_value) Then
                     needs_reentry = needs_reentry & System.Environment.Newline & _
                                     "- " & "Part (" & s & ")"
                     fails_validation = True
@@ -64,7 +67,7 @@ Function validate_species() As FormResult
                     Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
                     Dim mat_value As String = mat_param.Value
 
-                    If StrComp(mat_value, "") = 0 OrElse Not partno_regex.IsMatch(mat_value) Then
+                    If StrComp(mat_value, "") = 0 OrElse Not mat_regex.IsMatch(mat_value) Then
                         needs_reentry = needs_reentry & System.Environment.Newline & _
                                         "- " & "Material (" & s & ")"
                         fails_validation = True
