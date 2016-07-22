@@ -11,18 +11,17 @@ Public Class InventorOps
 
         Dim test_param As UserParameter
 
+        Dim defaults As New Dictionary(Of UnitsTypeEnum, Object) From _
+                {{UnitsTypeEnum.kTextUnits, ""}, _
+                 {UnitsTypeEnum.kBooleanUnits, False}, _
+                 {UnitsTypeEnum.kUnitlessUnits, 0}, _
+                 {UnitsTypeEnum.kInchLengthUnits, 0.0}}
+
         'if the parameter doesn't already exist, UserParameters.Item will throw an error
         Try
             test_param = inv_params.Item(n)
         Catch
-            Dim default_value
-            If param_type = UnitsTypeEnum.kTextUnits Then
-                default_value = ""
-            ElseIf param_type = UnitsTypeEnum.kBooleanUnits Then
-                default_value = False
-            ElseIf param_type = UnitsTypeEnum.kUnitlessUnits Then
-                default_value = 0
-            End If
+            Dim default_value = defaults(param_type)
 
             test_param = inv_params.AddByValue(n, default_value, param_type)
             inv_doc.Update
