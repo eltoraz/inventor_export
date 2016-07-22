@@ -3,7 +3,7 @@ Imports Inventor
 
 Public Class QuotingOps
     'master list of parameters created for Quoting module
-    Public Shared param_list As New Dictionary(Of String, Tuple(UnitsTypeEnum, ArrayList)) From _
+    Public Shared param_list As New Dictionary(Of String, Tuple(Of UnitsTypeEnum, ArrayList)) From _
             {{"PartDescription", Tuple.Create(UnitsTypeEnum.kTextUnits, _
                         New ArrayList())}, _
              {"FinishedThickness", Tuple.Create(UnitsTypeEnum.kInchLengthUnits, _
