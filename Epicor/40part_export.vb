@@ -67,8 +67,8 @@ Public Class PartExport
         data = data & "," & PartNum
         
         'Search word, first 8 characters of description
-        data = data & "," & EpicorOps.format_csv_field(SearchWord)
-        data = data & "," & EpicorOps.format_csv_field(Description)
+        data = data & "," & InventorOps.format_csv_field(SearchWord)
+        data = data & "," & InventorOps.format_csv_field(Description)
 
         data = data & "," & custom_props.Item("ClassID").Value
 
@@ -81,8 +81,8 @@ Public Class PartExport
         data = data & "," & "E"
 
         data = data & "," & custom_props.Item("ProdCode").Value
-        data = data & "," & EpicorOps.format_csv_field(MfgComment)
-        data = data & "," & EpicorOps.format_csv_field(PurComment)
+        data = data & "," & InventorOps.format_csv_field(MfgComment)
+        data = data & "," & InventorOps.format_csv_field(PurComment)
         data = data & "," & TrackSerialNum
         data = data & "," & UOM
         data = data & "," & custom_props.Item("UsePartRev").Value

@@ -1,10 +1,25 @@
 ' <IsStraightVb>True</IsStraightVb>
 Imports Inventor
 
-Public Class QuotingOps
+Public Class ParameterLists
+    'parameters used by multiple modules
+    Publice Shared shared_params As New Dictionary(Of String, UnitsTypeEnum) From _
+            {{"PartNumberToUse", UnitsTypeEnum.kTextUnits}}
+
+    'master list of parameters created for Epicor module
+    Public Shared epicor_params As New Dictionary(Of String, UnitsTypeEnum) From _
+            {{"PartType", UnitsTypeEnum.kTextUnits}, _
+             {"ProdCode", UnitsTypeEnum.kTextUnits}, _
+             {"ClassID", UnitsTypeEnum.kTextUnits}, _
+             {"UsePartRev", UnitsTypeEnum.kBooleanUnits}, _
+             {"MfgComment", UnitsTypeEnum.kTextUnits}, _
+             {"PurComment", UnitsTypeEnum.kTextUnits}, _
+             {"TrackSerialNum", UnitsTypeEnum.kBooleanUnits}, _
+             {"RevDescription", UnitsTypeEnum.kTextUnits}}
+
     'master list of parameters created for Quoting module
     'empty ArrayList represents user-entered field
-    Public Shared param_list As New Dictionary(Of String, Tuple(Of UnitsTypeEnum, ArrayList)) From _
+    Public Shared quoting_params As New Dictionary(Of String, Tuple(Of UnitsTypeEnum, ArrayList)) From _
             {{"PartDescription", Tuple.Create(UnitsTypeEnum.kTextUnits, _
                         New ArrayList())}, _
              {"FinishedThickness", Tuple.Create(UnitsTypeEnum.kInchLengthUnits, _

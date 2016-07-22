@@ -71,4 +71,10 @@ Public Class InventorOps
 
         Return inv_params
     End Function
+
+    'enclose field in quotes, and escape quotes already in the field
+    Public Shared Function format_csv_field(ByVal s As String) As String
+        Dim s2 As String = Replace(s, """", """""")
+        Return """" & s2 & """"
+    End Function
 End Class

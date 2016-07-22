@@ -38,8 +38,8 @@ Public Class PartRevExport
         data = "BBN"                        'Company name (constant)
         data = data & "," & PartNum
         data = data & "," & RevisionNum
-        data = data & "," & EpicorOps.format_csv_field("Revision " & RevisionNum)
-        data = data & "," & EpicorOps.format_csv_field(RevDescription)
+        data = data & "," & InventorOps.format_csv_field("Revision " & RevisionNum)
+        data = data & "," & InventorOps.format_csv_field(RevDescription)
 
         'Logic TODO: Approved hardcoded for now
         'Logic TODO: is there any reason for the user to specify EffectiveDate as

@@ -1,12 +1,15 @@
 AddVbFile "dmt.vb"                  'DMT.dmt_working_path
 AddVbFile "inventor_common.vb"      'InventorOps.create_param()
-AddVbFile "epicor_common.vb"        'EpicorOps.param_list
+AddVbFile "parameters.vb"           'ParameterLists.epicor_params
 
 'create parameters with a restricted set of accepted values for import by
 'Epicor DMT (the actual IDs the tool needs are set in set_props.vb)
 Sub Main()
     Dim inv_app As Inventor.Application = ThisApplication
-    For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in EpicorOps.param_list
+    For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in ParameterLists.shared_params
+        InventorOps.create_param(kvp.Key, kvp.Value, inv_app)
+    Next
+    For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in ParameterLists.epicor_params
         InventorOps.create_param(kvp.Key, kvp.Value, inv_app)
     Next
 
