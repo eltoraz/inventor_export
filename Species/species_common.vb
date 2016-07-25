@@ -10,8 +10,6 @@ Public Class SpeciesOps
                                               ByRef vb_obj As ILowLevelSupport, _
                                               ByRef multivalue_obj As IMultiValueParam) _
                                               As FormResult
-        Dim inv_params As UserParameters = InventorOps.get_param_set(app)
-
         'select the part we'll be working with here
         Dim active_parts As New ArrayList()
         Dim no_species As Boolean = False
