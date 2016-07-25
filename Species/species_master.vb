@@ -38,8 +38,10 @@ Function validate_species() As FormResult
     'regular expression to match the part number format AZ-123
     Dim part_pattern As String = "^[a-zA-Z]{2}-[0-9]{3}$"
     Dim part_regex As New Regex(part_pattern)
-    Dim mat_pattern As String = "^M[lhftbpLHFTBP]-[a-zA-Z]{2}-[0-9]{3}$"
+    Dim mat_pattern As String = "^[Mm][lhftbpLHFTBP]-[a-zA-Z]{2}-[0-9]{3}$"
     Dim mat_regex As New Regex(mat_pattern)
+
+    Dim pn_list As New List(Of String)()
 
     Dim fails_validation As Boolean = False
 
@@ -47,6 +49,7 @@ Function validate_species() As FormResult
 
     Do          'loop first for initial validation, check condition later
         Dim needs_reentry As String = ""
+        pn_list.Clear()
 
         For Each s As String In Species.species_list
             Dim subst As String = Replace(s, "-", "4")
@@ -61,7 +64,13 @@ Function validate_species() As FormResult
                     needs_reentry = needs_reentry & System.Environment.Newline & _
                                     "- " & "Part (" & s & ")"
                     fails_validation = True
+                ElseIf pn_list.Contains(part_value) Then
+                    needs_reentry = needs_reentry & System.Environment.Newline & _
+                                    "- " & "Part (" & s & ") - duplicate part number"
+                    fails_validation = True
                 End If
+
+                pn_list.Add(part_value)
 
                 If StrComp(s, "Hardware") <> 0 Then
                     Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
@@ -71,7 +80,13 @@ Function validate_species() As FormResult
                         needs_reentry = needs_reentry & System.Environment.Newline & _
                                         "- " & "Material (" & s & ")"
                         fails_validation = True
+                    ElseIf pn_list.Contains(mat_value) Then
+                        needs_reentry = needs_reentry & System.Environment.Newline & _
+                                        "- " & "Material (" & s & ") - duplicate part number"
+                        fails_validation = True
                     End If
+
+                    pn_list.Add(mat_value)
                 End If
             End If
         Next
