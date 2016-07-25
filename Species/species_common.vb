@@ -1,8 +1,17 @@
 ' <IsStraightVb>True</IsStraightVb>
 Imports Inventor
+Imports Autodesk.iLogic.Interfaces
 
 Public Class SpeciesOps
-    Public Shared Function select_active_part(ByRef app As Inventor.Application) As FormResult
+    Public Shared Function select_active_part(ByRef app As Inventor.Application, _
+                                              ByRef inv_params As UserParameters, _
+                                              ByRef species_list() As String, _
+                                              ByRef form_obj As IiLogicForm, _
+                                              ByRef vb_obj As ILowLevelSupport, _
+                                              ByRef multivalue_obj As IMultiValueParam) _
+                                              As FormResult
+        Dim inv_params As UserParameters = InventorOps.get_param_set(app)
+
         'select the part we'll be working with here
         Dim active_parts As New ArrayList()
         Dim no_species As Boolean = False
@@ -11,7 +20,7 @@ Public Class SpeciesOps
 
         Do
             Try
-                For Each s As String in Species.species_list
+                For Each s As String in species_list
                     Dim subst As String = Replace(s, "-", "4")
 
                     Dim flag_param As Parameter = inv_params.Item("Flag" & subst)
@@ -47,7 +56,7 @@ Public Class SpeciesOps
 
             'can't proceed if there isn't a part number for at least one species
             If no_species Then
-                form_result = iLogicForm.ShowGlobal("epicor_13launch_species", FormMode.Modal).Result
+                form_result = form_obj.ShowGlobal("epicor_13launch_species", FormMode.Modal).Result
 
                 If form_result = FormResult.None Then
                     Return form_result
@@ -55,12 +64,12 @@ Public Class SpeciesOps
             End If
         Loop While no_species
 
-        MultiValue.List("PartNumberToUse") = active_parts
+        multivalue_obj.List("PartNumberToUse") = active_parts
 
         Dim part_selected As Boolean = False
         Dim pn As String = ""
         Do
-            form_result = iLogicForm.ShowGlobal("epicor_15part_select", FormMode.Modal).Result
+            form_result = form_obj.ShowGlobal("epicor_15part_select", FormMode.Modal).Result
 
             If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
                 Return form_result
@@ -71,7 +80,7 @@ Public Class SpeciesOps
                 part_selected = True
             Else
                 MsgBox("Please select a part to continue with the Epicor export.")
-                iLogicVb.RunExternalRule("dummy.vb")
+                vb_obj.RunExternalRule("dummy.vb")
             End If
         Loop While Not part_selected
 

@@ -1,4 +1,5 @@
 AddVbFile "inventor_common.vb"      'InventorOps.get_param_set
+AddVbFile "species_list.vb"         'Species.species_list
 AddVbFile "species_common.vb"       'SpeciesOps.select_active_part
 
 Sub Main()
@@ -11,7 +12,8 @@ Sub Main()
     iLogicVb.RunExternalRule("10quoting_parameters.vb")
 
     'select the part to work with
-    form_result = SpeciesOps.select_active_part(app)
+    form_result = SpeciesOps.select_active_part(app, inv_params, Species.species_list, _
+                                                iLogicForm, iLogicVb, MultiValue)
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
     End If
