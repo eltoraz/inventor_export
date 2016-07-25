@@ -3,7 +3,7 @@ Imports Inventor
 
 Public Class ParameterLists
     'parameters used by multiple modules
-    Publice Shared shared_params As New Dictionary(Of String, UnitsTypeEnum) From _
+    Public Shared shared_params As New Dictionary(Of String, UnitsTypeEnum) From _
             {{"PartNumberToUse", UnitsTypeEnum.kTextUnits}}
 
     'master list of parameters created for Epicor module
