@@ -21,7 +21,8 @@ Sub Main()
     iLogicVb.RunExternalRule("10multi_value.vb")
 
     'select the part to work on
-    form_result = SpeciesOps.select_active_part(app)
+    form_result = SpeciesOps.select_active_part(app, inv_params, Species.species_list, _
+                                                iLogicForm, iLogicVb, MultiValue)
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
     End If
