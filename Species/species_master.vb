@@ -1,5 +1,6 @@
 AddVbFile "inventor_common.vb"      'InventorOps.get_param_set
 AddVbFile "species_list.vb"         'Species.species_list
+AddVbFile "species_common.vb"       'SpeciesOps.part_pattern and mat_pattern
 
 Imports System.Text.RegularExpressions
 
@@ -35,10 +36,9 @@ Function validate_species() As FormResult
     Dim app As Application = ThisApplication
     Dim inv_params As UserParameters = InventorOps.get_param_set(app)
 
-    'regular expression to match the part number format AZ-123
-    Dim part_pattern As String = "^[a-zA-Z]{2}-[0-9]{3}$"
+    Dim part_pattern As String = "^" & SpeciesOps.part_pattern & "$"
     Dim part_regex As New Regex(part_pattern)
-    Dim mat_pattern As String = "^[Mm][lhftbpLHFTBP]-[a-zA-Z]{2}-[0-9]{3}$"
+    Dim mat_pattern As String = "^" & SpeciesOps.mat_pattern & "$"
     Dim mat_regex As New Regex(mat_pattern)
 
     Dim pn_list As New List(Of String)()
