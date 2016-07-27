@@ -19,13 +19,8 @@ Public Class PartRevExport
         custom_props = inv_doc.PropertySets.Item("Inventor User Defined Properties")
 
         Dim part_entry As String = inv_params.Item("PartNumberToUse").Value
-        Dim pn As String = Left(part_entry, 6).ToUpper()
-        Dim part_is_mat As Boolean = False
-
-        'detect whether we're working with a material, which is allowed to be updated in Epicor
-        If StrComp(part_entry.Substring(9, 3), "Mat") = 0 Then
-            part_is_mat = True
-        End If
+        Dim part_unpacked As Tuple(Of String, String, String) = SpeciesOps.unpack_pn(part_entry)
+        Dim pn As String = part_unpacked.Item1
 
         PartNum = pn
         DrawNum = design_props.Item("Part Number").Value
@@ -56,6 +51,6 @@ Public Class PartRevExport
         Dim file_name As String
         file_name = dmt_obj.write_csv("Part_Rev.csv", fields, data)
 
-        Return dmt_obj.dmt_import("Part Revision", file_name, part_is_mat)
+        Return dmt_obj.dmt_import("Part Revision", file_name, False)
     End Function
 End Class

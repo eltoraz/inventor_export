@@ -17,18 +17,10 @@ Public Class PartPlantExport
         custom_props = inv_doc.PropertySets.Item("Inventor User Defined Properties")
 
         Dim part_entry As String = inv_params.Item("PartNumberToUse").Value
-        Dim pn As String = Left(part_entry, 6).ToUpper()
-        Dim part_is_mat As Boolean = False
-
-        'detect whether we're working with a material, which is allowed to be updated in Epicor
-        If StrComp(part_entry.Substring(9, 3), "Mat") = 0 Then
-            part_is_mat = True
-        End If
+        Dim part_unpacked As Tuple(Of String, String, String) = SpeciesOps.unpack_pn(part_entry)
+        Dim pn As String = part_unpacked.Item1
 
         PartNum = pn
-
-        'fields for purchased parts
-        Dim LeadTime, VendorNum, PurPoint As String
 
         'fields for manufactured parts
         Dim TrackSerialNumber As Boolean
@@ -36,11 +28,6 @@ Public Class PartPlantExport
 
         PartType = custom_props.Item("PartType").Value
         TrackSerialNum = custom_props.Item("TrackSerialNum").Value
-
-        'fields that won't get filled when making the parts in Inventor
-        LeadTime = ""
-        VendorNum = ""
-        PurPoint = ""
 
         If TrackSerialNum AndAlso StrComp(PartType, "M") = 0 Then
             SNMask = "NF"
@@ -61,9 +48,10 @@ Public Class PartPlantExport
         data = data & "," & PartNum
         data = data & "," & "453"                       'PrimWhse (just one warehouse)
 
-        data = data & "," & LeadTime
-        data = data & "," & VendorNum
-        data = data & "," & PurPoint
+        'these fields won't get filled from Inventor
+        data = data & "," & ""                          'LeadTime
+        data = data & "," & ""                          'VendorNum
+        data = data & "," & ""                          'PurPoint
 
         data = data & "," & PartType
 
@@ -77,6 +65,6 @@ Public Class PartPlantExport
         Dim file_name As String
         file_name = dmt_obj.write_csv("Part_Plant.csv", fields, data)
 
-        Return dmt_obj.dmt_import("Part Plant", file_name, part_is_mat)
+        Return dmt_obj.dmt_import("Part Plant", file_name, False)
     End Function
 End Class
