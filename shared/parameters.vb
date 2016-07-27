@@ -20,9 +20,7 @@ Public Class ParameterLists
     'master list of parameters created for Quoting module
     'empty ArrayList represents user-entered field
     Public Shared quoting_params As New Dictionary(Of String, Tuple(Of UnitsTypeEnum, ArrayList)) From _
-            {{"PartDescription", Tuple.Create(UnitsTypeEnum.kTextUnits, _
-                        New ArrayList())}, _
-             {"FinishedThickness", Tuple.Create(UnitsTypeEnum.kInchLengthUnits, _
+            {{"FinishedThickness", Tuple.Create(UnitsTypeEnum.kInchLengthUnits, _
                         New ArrayList() From {0.75, 1.00, 1.25, 1.75, 1.75, 2.25, 2.75})}, _
              {"Width", Tuple.Create(UnitsTypeEnum.kInchLengthUnits, _
                         New ArrayList())}, _
@@ -52,5 +50,12 @@ Public Class ParameterLists
                         New ArrayList() From {"USEL", "WM", "R1F", "R2F", "W1F", _
                                               "W2F", "B1F", "B2F", "I", "U"})}, _
              {"GradeSpec", Tuple.Create(UnitsTypeEnum.kTextUnits, _
-                        New ArrayList() From {"C1F", "C2F", "USEL"})}}
+                        New ArrayList() From {"C1F", "C2F", "USEL"})}, _
+             {"Molded", Tuple.Create(UnitsTypeEnum.kTextUnits, _
+                        New ArrayList() From {"E2E_0.2500", "E4E_0.2500", _
+                                              "C2E_45", "C4E_45", _
+                                              "BN1E_0.5000", "BN2E_0.5000", _
+                                              "BN1E_0.5000_E2E_0.1250"})}, _
+             {"Radius", TupleCreate(UnitsTypeEnum.kInchUnits, _
+                        New ArrayList())}}
 End Class
