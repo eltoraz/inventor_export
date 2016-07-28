@@ -13,8 +13,23 @@
   </ContentsFont>
   <ContentsTextLocation>Left</ContentsTextLocation>
   <Items>
+    <UiElementSpec xsi:type="BooleanParameterControlSpec">
+      <Name>Intermediate Part</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>IntermediatePart</ParameterName>
+      <EditControlType>CheckBox</EditControlType>
+    </UiElementSpec>
     <UiElementSpec xsi:type="LabelSpec">
-      <Name>Format (Part): ZZ-###</Name>
+      <Name>Format (Intermediate Part): ZZ-###</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
