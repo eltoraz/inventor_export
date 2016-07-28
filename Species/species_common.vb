@@ -1,4 +1,5 @@
 ' <IsStraightVb>True</IsStraightVb>
+Imports System.Text.RegularExpressions
 Imports Inventor
 Imports Autodesk.iLogic.Interfaces
 
