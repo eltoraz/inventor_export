@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FormSpecification xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>quoting_20field_entry</Name>
+  <Font>
+    <Size>0</Size>
+    <Bold>false</Bold>
+    <Italic>false</Italic>
+  </Font>
+  <ContentsFont>
+    <Size>0</Size>
+    <Bold>false</Bold>
+    <Italic>false</Italic>
+  </ContentsFont>
+  <ContentsTextLocation>Left</ContentsTextLocation>
+  <Items>
+    <UiElementSpec xsi:type="LabelSpec">
+      <Name>Quoting fields</Name>
+      <Font>
+        <FamilyName>Tahoma</FamilyName>
+        <Size>8.25</Size>
+        <Bold>true</Bold>
+        <Italic>false</Italic>
+      </Font>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="MultiValueNumericParameterControlSpec">
+      <Name>Finished Thickness</Name>
+      <ToolTip>Thickness Standards:
+4/4 Stock = Sand to 0.75
+5/4 Stock = Sand to 1.00
+6/4 Stock = Sand to 1.25
+8/4 Stock = Sand to 1.75
+10/4 Stock = Sand to 2.25
+12/4 Stock = Sand to 2.75
+
+Note: it is possible to go off standards depending on project.</ToolTip>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>FinishedThickness</ParameterName>
+      <EditControlType>ComboBox</EditControlType>
+      <AllowCustomValues>false</AllowCustomValues>
+      <MinimumItemsToShow>2</MinimumItemsToShow>
+      <RadioGroupColumnCount>1</RadioGroupColumnCount>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="NumericParameterControlSpec">
+      <Name>Width</Name>
+      <ToolTip>Grain runs the Length of a board
+
+Note:  Need to add 1/2" for waste removal.  Does not apply if molded.</ToolTip>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>Width</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <TrackBarProperties>
+        <MinimumValue>1</MinimumValue>
+        <MaximumValue>10</MaximumValue>
+        <ValueIncrement>1</ValueIncrement>
+      </TrackBarProperties>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="NumericParameterControlSpec">
+      <Name>Length</Name>
+      <ToolTip>Grain runs the Length of a board
+
+Note:  Need to add 1" for waste removal when RTL.
+Length is determined by grain direction.</ToolTip>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>Length</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <TrackBarProperties>
+        <MinimumValue>1</MinimumValue>
+        <MaximumValue>10</MaximumValue>
+        <ValueIncrement>1</ValueIncrement>
+      </TrackBarProperties>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="MultiValueTextParameterControlSpec">
+      <Name>Width Spec</Name>
+      <ToolTip>RTW - Rough to Width.  Tolerence = +0.375 max / -0.375 max
+Add 1" for RTL
+
+PWT - Precision Width trim.  Tolerence = +0.015 max / -0.015 max</ToolTip>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>WidthSpec</ParameterName>
+      <EditControlType>ComboBox</EditControlType>
+      <AllowCustomValues>false</AllowCustomValues>
+      <MinimumItemsToShow>2</MinimumItemsToShow>
+      <RadioGroupColumnCount>1</RadioGroupColumnCount>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="MultiValueTextParameterControlSpec">
+      <Name>Length Spec</Name>
+      <ToolTip>RTL - Rough to length.  Tolerence = +0.375 max / -0.375 max
+Add 1" for RTL
+
+PET - Precision end trim.  Tolerence = +0.015 max / -0.015 max</ToolTip>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>LengthSpec</ParameterName>
+      <EditControlType>ComboBox</EditControlType>
+      <AllowCustomValues>false</AllowCustomValues>
+      <MinimumItemsToShow>2</MinimumItemsToShow>
+      <RadioGroupColumnCount>1</RadioGroupColumnCount>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="NumericParameterControlSpec">
+      <Name>Qty Per Unit</Name>
+      <ToolTip>If this is a child part, enter the number of units you need on the master part.</ToolTip>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>QtyPerUnit</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <TrackBarProperties>
+        <MinimumValue>1</MinimumValue>
+        <MaximumValue>10</MaximumValue>
+        <ValueIncrement>1</ValueIncrement>
+      </TrackBarProperties>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="NumericParameterControlSpec">
+      <Name>Nested Qty</Name>
+      <ToolTip>If you are nesting pieces into a panel or dimension, enter the amount of nested pieces here.</ToolTip>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>NestedQty</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <TrackBarProperties>
+        <MinimumValue>1</MinimumValue>
+        <MaximumValue>10</MaximumValue>
+        <ValueIncrement>1</ValueIncrement>
+      </TrackBarProperties>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="MultiValueTextParameterControlSpec">
+      <Name>Sanding Spec</Name>
+      <ToolTip>Sanding standards:
+S2S_150 = Sand top and bottom surface 150 grit.
+S4S_150 = Sand all 4 sides 150 grit.  Top, bottom, edges.
+S0S = No sanding or planing on all 4 sides.  Simply, saw cut.
+SDIA= Sand Diameter (used for turnings)
+SSF = Sealer/Sand Finish Coat (Plywood only)
+NSF = No Sealer/Sand Finish Coat (Plywood only)
+
+Note:  NFP's standard grit is 150.  If finer or rougher grits are required, simply change grit specified.  ie: 80, 120, 150, 220, etc.</ToolTip>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>SandingSpec</ParameterName>
+      <EditControlType>ComboBox</EditControlType>
+      <AllowCustomValues>false</AllowCustomValues>
+      <MinimumItemsToShow>2</MinimumItemsToShow>
+      <RadioGroupColumnCount>1</RadioGroupColumnCount>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="MultiValueTextParameterControlSpec">
+      <Name>Grain Direction</Name>
+      <ToolTip>Grain direction will be either:
+GDL = Grain Direction Length
+GDN = Grain Direction Not Specified</ToolTip>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>GrainDirection</ParameterName>
+      <EditControlType>ComboBox</EditControlType>
+      <AllowCustomValues>false</AllowCustomValues>
+      <MinimumItemsToShow>2</MinimumItemsToShow>
+      <RadioGroupColumnCount>1</RadioGroupColumnCount>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="MultiValueTextParameterControlSpec">
+      <Name>Certified Classification</Name>
+      <ToolTip>Certified classification for your lumber:
+FSC = Forest Stewardship Council.  Available on hardwood and plywood materials.
+FSC_CARB_93120 = Calirornia Air Resources Board 93120 control measure.  Available on plywood materials.
+NCA = No Certification Applicable.
+
+Note:  FSC_Carb_93120 deals with the glues that are used to manufacture plywood.
+In order to sell into publc buildings, most agencies have adopted this Califiornia requirement.</ToolTip>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>CertifiedClass</ParameterName>
+      <EditControlType>ComboBox</EditControlType>
+      <AllowCustomValues>false</AllowCustomValues>
+      <MinimumItemsToShow>2</MinimumItemsToShow>
+      <RadioGroupColumnCount>1</RadioGroupColumnCount>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>Wood Species</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>WoodSpecies</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="MultiValueTextParameterControlSpec">
+      <Name>Glue up or solid stock</Name>
+      <ToolTip>Glue up specifications:
+SOLID = No glueing allowed.  100% solid.
+SOLID_GLUE = Can be mixture of solid and glued up stock.
+PANEL = Edge glued panel.
+FACE_GLUE = Face glue panel or dimension.
+PLYWOOD = Plywood
+DOWEL = Turnings</ToolTip>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>GlueUpSpec</ParameterName>
+      <EditControlType>ComboBox</EditControlType>
+      <AllowCustomValues>false</AllowCustomValues>
+      <MinimumItemsToShow>2</MinimumItemsToShow>
+      <RadioGroupColumnCount>1</RadioGroupColumnCount>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="MultiValueTextParameterControlSpec">
+      <Name>Color Spec</Name>
+      <ToolTip>Cherry Specifications:
+R1F = Red one face.  
+R2F = Red two face.
+USEL = Unselected for color.
+WM = Well Matched.
+
+Hard Maple and Soft Maple Specifications:
+W1F = White one face.
+W2F = White two face. 
+USEL = Unselected for color.
+WM = Well matched.
+
+Walnut Specifications:
+B1F = Black one face.
+B2F = Black two face.
+USEL = Unselected for color.
+WM = Well matched.
+
+CP Soft Maple Specs:
+I = Intermediate Color
+U = Unspecified Color
+
+Others: eg. Oak, Poplar, Pine, etc.
+WM = Well Matched
+USEL = Unselected for Color</ToolTip>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>ColorSpec</ParameterName>
+      <EditControlType>ComboBox</EditControlType>
+      <AllowCustomValues>false</AllowCustomValues>
+      <MinimumItemsToShow>2</MinimumItemsToShow>
+      <RadioGroupColumnCount>1</RadioGroupColumnCount>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="MultiValueTextParameterControlSpec">
+      <Name>Grade Spec</Name>
+      <ToolTip>Grade specification:
+C1F = Clear one face. Sound knots ok of 1 face
+C2F = Clear two face.
+USEL= Unselected</ToolTip>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>GradeSpec</ParameterName>
+      <EditControlType>ComboBox</EditControlType>
+      <AllowCustomValues>false</AllowCustomValues>
+      <MinimumItemsToShow>2</MinimumItemsToShow>
+      <RadioGroupColumnCount>1</RadioGroupColumnCount>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="MultiValueTextParameterControlSpec">
+      <Name>Molded</Name>
+      <ToolTip>Molding specification:
+E2E_0.2500 = Eased two edges at 0.25 radius.  Good surface.
+E4E_0.2500 = Eased four edges at 0.25 radius. 
+
+C2E_45 = Champher two edges at 45 degrees.  Good surface.
+C4E_45 = Champher four edges at 45 degrees. 
+
+BN1E_0.5000 = Bullnose one edge at 0.50 radius.
+BN2E_0.5000 = Bullnose two edge at 0.50 radius.
+
+BN1E_0.5000_E2E_0.1250 = Bullnose one edge at 0.50 radius and Eased two edges 0.125 on other side
+
+NOTE = Combinations will always start with BN first
+
+Note:  Radius's are a variable and need to be modified to product requirement. For unique profiles, please send print with spreadsheet.</ToolTip>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>Molded</ParameterName>
+      <EditControlType>ComboBox</EditControlType>
+      <AllowCustomValues>false</AllowCustomValues>
+      <MinimumItemsToShow>2</MinimumItemsToShow>
+      <RadioGroupColumnCount>1</RadioGroupColumnCount>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="NumericParameterControlSpec">
+      <Name>Inside radius</Name>
+      <ToolTip>If stock is bent, enter bending radius here.  
+
+IR-?.??? = Inside radius is ?.???
+
+NA if you need to fill it in - remember if it is not bent- you don't need it
+
+Note:  Radius is a variable by product and is always determined by the inside radius.  Does not apply to rough panels or dimensions.</ToolTip>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>Radius</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <TrackBarProperties>
+        <MinimumValue>1</MinimumValue>
+        <MaximumValue>10</MaximumValue>
+        <ValueIncrement>1</ValueIncrement>
+      </TrackBarProperties>
+    </UiElementSpec>
+  </Items>
+  <StyleAndSkinName>
+    <StyleName>Default</StyleName>
+  </StyleAndSkinName>
+  <AllowCustomization>true</AllowCustomization>
+  <PredefinedButtons>OkCancel</PredefinedButtons>
+  <Modal>false</Modal>
+  <ItemBordersVisible>false</ItemBordersVisible>
+  <IsLauncherPage>false</IsLauncherPage>
+  <ShowOnPlaceComponent>false</ShowOnPlaceComponent>
+  <Guid>39bcbe1a-6a4d-4f85-80c8-2a4b5e248b32</Guid>
+</FormSpecification>
