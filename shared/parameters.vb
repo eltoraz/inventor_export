@@ -56,6 +56,6 @@ Public Class ParameterLists
                                               "C2E_45", "C4E_45", _
                                               "BN1E_0.5000", "BN2E_0.5000", _
                                               "BN1E_0.5000_E2E_0.1250"})}, _
-             {"Radius", TupleCreate(UnitsTypeEnum.kInchUnits, _
+             {"Radius", Tuple.Create(UnitsTypeEnum.kInchLengthUnits, _
                         New ArrayList())}}
 End Class
