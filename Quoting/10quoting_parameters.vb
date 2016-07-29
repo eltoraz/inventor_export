@@ -2,13 +2,15 @@ AddVbFile "inventor_common.vb"      'InventorOps.create_param
 AddVbFile "parameters.vb"           'ParameterLists.quoting_params
 AddVbFile "species_list.vb"         'Species.species_list
 
-Sub Main()
-    Dim inv_app As Inventor.Application = ThisApplication
+Imports Inventor
 
-    'create shared parameters (if they don't exist) along with this module's
-    For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) In ParameterLists.shared_params
-        InventorOps.create_param(kvp.Key, kvp.Value, inv_app)
-    Next
+'NOTE: this should only be run automatically as part of the execution of
+'      quoting_master.vb; this guarantees that the shared params have
+'      been created & populated as needed alreaday
+Sub Main()
+    Dim inv_app As Application = ThisApplication
+    Dim inv_params As UserParameters = InventorOps.get_param_set(inv_app)   
+
     For Each kvp As KeyValuePair(Of String, Tuple(Of UnitsTypeEnum, ArrayList)) In ParameterLists.quoting_params
         InventorOps.create_param(kvp.Key, kvp.Value.Item1, inv_app)
         
@@ -23,4 +25,23 @@ Sub Main()
         Dim subst As String = Replace(s, "-", "4")
         InventorOps.create_param("ColorSpec" & subst, UnitsTypeEnum.kTextUnits, inv_app)
     Next
+
+    'special cases
+    'populate the Wood Species with the value from part selection
+    Dim part_entry As String = inv_params.Item("PartNumberToUse").Value
+    Dim part_unpacked As Tuple(Of String, String, String) = SpeciesOps.unpack_pn(part_entry)
+    Dim wood_species As String = part_unpacked.Item3
+    inv_params.Item("WoodSpecies").Value = Replace(wood_species, "-", "_").ToUpper()
+
+    'set the Color Spec options correctly for the selected species
+    If ParameterLists.quoting_color_specs.ContainsKey(wood_species) Then
+        Dim color_spec_options As New ArrayList(ParameterLists.quoting_params("ColorSpec").Item2)
+        color_spec_options.AddRange(ParameterLists.quoting_color_specs(wood_species))
+    End If
+
+    'if the Color Spec has been set for this species, retrieve it from the parameter
+    Dim prev_color_spec As Parameter = inv_params.Item("ColorSpec" & Replace(wood_species, "-", "4"))
+    If StrComp(prev_color_spec.Value, "") <> 0 Then
+        inv_params.Item("ColorSpec").Value = prev_color_spec.Value
+    End If
 End Sub

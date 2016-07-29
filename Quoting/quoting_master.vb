@@ -18,15 +18,12 @@ Sub Main()
         Return
     End If
 
-    Dim part_entry As String = inv_params.Item("PartNumberToUse").Value
-    Dim part_unpacked As Tuple(Of String, String, String) = SpeciesOps.unpack_pn(part_entry)
-    Dim wood_species As String = part_unpacked.Item3
-
-    Dim species_param As Parameter = inv_params.Item("WoodSpecies")
-    species_param.Value = wood_species
-
     form_result = iLogicForm.ShowGlobal("quoting_20field_entry", FormMode.Modal).Result
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
     End If
 End Sub
+
+Function validate_quoting(ByRef app As Inventor.Application) As FormResult
+    'TODO: pop up a form to hand-enter value for "Molded" if "Custom" selected
+End Function

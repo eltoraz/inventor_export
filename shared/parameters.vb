@@ -49,8 +49,7 @@ Public Class ParameterLists
                         New ArrayList() From {"SOLID", "SOLID_GLUE", "PANEL", _
                                               "FACE_GLUE", "PLYWOOD", "DOWEL"})}, _
              {"ColorSpec", Tuple.Create(UnitsTypeEnum.kTextUnits, _
-                        New ArrayList() From {"USEL", "WM", "R1F", "R2F", "W1F", _
-                                              "W2F", "B1F", "B2F", "I", "U"})}, _
+                        New ArrayList() From {"USEL", "WM"})}, _
              {"GradeSpec", Tuple.Create(UnitsTypeEnum.kTextUnits, _
                         New ArrayList() From {"C1F", "C2F", "USEL"})}, _
              {"Molded", Tuple.Create(UnitsTypeEnum.kTextUnits, _
@@ -63,4 +62,10 @@ Public Class ParameterLists
                         New ArrayList())}, _
              {"Radius", Tuple.Create(UnitsTypeEnum.kInchLengthUnits, _
                         New ArrayList())}}
+
+    Public Shared quoting_color_specs As Dictionary(Of String, ArrayList) From _
+            {{"Cherry", New ArrayList() From {"R1F", "R2F"}}, _
+             {"Maple-Hard", New ArrayList() From {"W1F", "W2F"}}, _
+             {"Maple-Soft", New ArrayList() From {"W1F", "W2F"}}, _
+             {"Walnut", New ArrayList() From {"B1F", "B2F"}}}
 End Class
