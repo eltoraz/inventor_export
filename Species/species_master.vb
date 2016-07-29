@@ -36,6 +36,8 @@ Function validate_species() As FormResult
     Dim app As Application = ThisApplication
     Dim inv_params As UserParameters = InventorOps.get_param_set(app)
 
+    Dim inv_doc As Document = app.ActiveEditDocument
+
     Dim part_pattern As String = "^" & SpeciesOps.part_pattern & "$"
     Dim part_regex As New Regex(part_pattern)
     Dim mat_pattern As String = "^" & SpeciesOps.mat_pattern & "$"
@@ -77,7 +79,9 @@ Function validate_species() As FormResult
 
                 pn_list.Add(part_value.ToUpper())
 
-                If StrComp(s, "Hardware") <> 0 Then
+                If TypeOf inv_doc Is AssemblyDocument Then
+                    'Assemblies don't have materials associated, so skip checking
+                ElseIf StrComp(s, "Hardware") <> 0 Then
                     Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
                     Dim mat_value As String = mat_param.Value
 
