@@ -14,7 +14,16 @@
   <ContentsTextLocation>Left</ContentsTextLocation>
   <Items>
     <UiElementSpec xsi:type="LabelSpec">
-      <Name>Please select the part number to export to Epicor:</Name>
+      <Name>Please select the part</Name>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="LabelSpec">
+      <Name>number to work with:</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
