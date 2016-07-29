@@ -29,7 +29,7 @@
       <EditControlType>CheckBox</EditControlType>
     </UiElementSpec>
     <UiElementSpec xsi:type="LabelSpec">
-      <Name>Format (Intermediate Part): ZZ-###</Name>
+      <Name>WP-ZZ-### (intermediate part)</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
@@ -38,7 +38,7 @@
       </Font>
     </UiElementSpec>
     <UiElementSpec xsi:type="LabelSpec">
-      <Name>Format (Material): MX-ZZ-###</Name>
+      <Name>MX-ZZ-### (material)</Name>
       <ToolTip>Valid X values: L (Lumber), H (Hardware), F (Finishes), T (Turned), B (Bends), P (Plywood)</ToolTip>
       <Font>
         <FamilyName />
@@ -47,362 +47,1076 @@
         <Italic>false</Italic>
       </Font>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Part (Ash)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 1</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagAsh</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>PartAsh</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Part (Ash)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagAsh</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>PartAsh</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedPartAsh</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Material (Ash)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 2</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagAsh</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>MatAsh</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Material (Ash)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagAsh</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>MatAsh</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedMatAsh</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Part (Birch-Baltic)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 3</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagBirch4Baltic</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>PartBirch4Baltic</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Part (Birch-Baltic)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagBirch4Baltic</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>PartBirch4Baltic</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedPartBirch4Baltic</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Material (Birch-Baltic)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 4</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagBirch4Baltic</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>MatBirch4Baltic</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Material (Birch-Baltic)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagBirch4Baltic</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>MatBirch4Baltic</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedMatBirch4Baltic</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Part (Cherry)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 5</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagCherry</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>PartCherry</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Part (Cherry)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagCherry</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>PartCherry</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedPartCherry</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Material (Cherry)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 6</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagCherry</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>MatCherry</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Material (Cherry)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagCherry</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>MatCherry</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedMatCherry</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Part (Maple-Hard)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 7</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagMaple4Hard</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>PartMaple4Hard</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Part (Maple-Hard)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagMaple4Hard</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>PartMaple4Hard</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedPartMaple4Hard</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Material (Maple-Hard)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 8</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagMaple4Hard</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>MatMaple4Hard</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Material (Maple-Hard)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagMaple4Hard</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>MatMaple4Hard</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedMatMaple4Hard</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Part (Maple-Soft)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 9</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagMaple4Soft</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>PartMaple4Soft</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Part (Maple-Soft)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagMaple4Soft</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>PartMaple4Soft</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedPartMaple4Soft</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Material (Maple-Soft)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 10</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagMaple4Soft</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>MatMaple4Soft</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Material (Maple-Soft)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagMaple4Soft</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>MatMaple4Soft</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedMatMaple4Soft</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Part (Oak-Red)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 11</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagOak4Red</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>PartOak4Red</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Part (Oak-Red)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagOak4Red</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>PartOak4Red</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedPartOak4Red</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Material (Oak-Red)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 12</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagOak4Red</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>MatOak4Red</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Material (Oak-Red)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagOak4Red</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>MatOak4Red</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedMatOak4Red</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Part (Oak-White)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 13</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagOak4White</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>PartOak4White</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Part (Oak-White)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagOak4White</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>PartOak4White</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedPartOak4White</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Material (Oak-White)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 14</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagOak4White</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>MatOak4White</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Material (Oak-White)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagOak4White</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>MatOak4White</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedMatOak4White</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Part (Pine)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 15</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagPine</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>PartPine</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Part (Pine)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagPine</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>PartPine</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedPartPine</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Material (Pine)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 16</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagPine</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>MatPine</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Material (Pine)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagPine</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>MatPine</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedMatPine</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Part (Poplar)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 17</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagPoplar</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>PartPoplar</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Part (Poplar)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagPoplar</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>PartPoplar</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedPartPoplar</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Material (Poplar)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 18</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagPoplar</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>MatPoplar</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Material (Poplar)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagPoplar</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>MatPoplar</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedMatPoplar</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Part (Walnut)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 19</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagWalnut</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>PartWalnut</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Part (Walnut)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagWalnut</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>PartWalnut</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedPartWalnut</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Material (Walnut)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 20</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagWalnut</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>MatWalnut</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Material (Walnut)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagWalnut</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>MatWalnut</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedMatWalnut</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextParameterControlSpec">
-      <Name>Part (Hardware)</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 21</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FlagHardware</EnablingParameterName>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>PartHardware</ParameterName>
-      <EditControlType>TextBox</EditControlType>
-      <MinimumLinesToShow>2</MinimumLinesToShow>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Part (Hardware)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagHardware</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>PartHardware</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedPartHardware</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
   </Items>
   <StyleAndSkinName>
