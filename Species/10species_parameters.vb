@@ -19,10 +19,12 @@ Sub Main()
         Dim subst As String = Replace(s, "-", "4")
         InventorOps.create_param("Flag" & subst, UnitsTypeEnum.kBooleanUnits, inv_app)
         InventorOps.create_param("Part" & subst, UnitsTypeEnum.kTextUnits, inv_app)
+        InventorOps.create_param("ExportedPart" & subst, UnitsTypeEnum.kBooleanUnits, inv_app)
 
         '"Hardware" doesn't have a material associated
         If StrComp(s, "Hardware") <> 0 Then
             InventorOps.create_param("Mat" & subst, UnitsTypeEnum.kTextUnits, inv_app)
+            InventorOps.create_param("ExportedMat" & subst, UnitsTypeEnum.kBooleanUnits, inv_app)
         End If
     Next
 End Sub
