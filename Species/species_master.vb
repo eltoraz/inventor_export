@@ -62,7 +62,7 @@ Function validate_species() As FormResult
                 Dim part_param As Parameter = inv_params.Item("Part" & subst)
                 Dim part_value As String = part_param.Value
 
-                If pn_list.Contains(part_value) Then
+                If pn_list.Contains(part_value.ToUpper()) Then
                     needs_reentry = needs_reentry & System.Environment.Newline & _
                                     "- " & "Part (" & s & ") - duplicate part number"
                     fails_validation = True
@@ -75,7 +75,7 @@ Function validate_species() As FormResult
                     fails_validation = True
                 End If
 
-                pn_list.Add(part_value)
+                pn_list.Add(part_value.ToUpper())
 
                 If StrComp(s, "Hardware") <> 0 Then
                     Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
