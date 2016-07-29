@@ -4,9 +4,9 @@ Imports Inventor
 Imports Autodesk.iLogic.Interfaces
 
 Public Class SpeciesOps
-    'regular expressions to match the part number format ZZ-123, and
+    'regular expressions to match the part number format WP-ZZ-123, and
     ' material part number MX-ZZ-123
-    Public Shared part_pattern As String = "[a-zA-Z]{2}-[0-9]{3}"
+    Public Shared part_pattern As String = "[Ww][Pp]-[a-zA-Z]{2}-[0-9]{3}"
     Public Shared mat_pattern As String = "[Mm][lhftbpLHFTBP]-[a-zA-Z]{2}-[0-9]{3}"
 
     Public Shared Function select_active_part(ByRef app As Inventor.Application, _
