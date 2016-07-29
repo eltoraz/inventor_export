@@ -22,7 +22,9 @@ Public Class ParameterLists
     'master list of parameters created for Quoting module
     'empty ArrayList represents user-entered field
     Public Shared quoting_params As New Dictionary(Of String, Tuple(Of UnitsTypeEnum, ArrayList)) From _
-            {{"FinishedThickness", Tuple.Create(UnitsTypeEnum.kInchLengthUnits, _
+            {{"QuotingSpreadsheet", Tuple.Create(UnitsTypeEnum.kTextUnits, _
+                        New ArrayList())}, _
+             {"FinishedThickness", Tuple.Create(UnitsTypeEnum.kInchLengthUnits, _
                         New ArrayList() From {0.75, 1.00, 1.25, 1.75, 1.75, 2.25, 2.75})}, _
              {"Width", Tuple.Create(UnitsTypeEnum.kInchLengthUnits, _
                         New ArrayList())}, _
@@ -63,7 +65,7 @@ Public Class ParameterLists
              {"Radius", Tuple.Create(UnitsTypeEnum.kInchLengthUnits, _
                         New ArrayList())}}
 
-    Public Shared quoting_color_specs As Dictionary(Of String, ArrayList) From _
+    Public Shared quoting_color_specs As New Dictionary(Of String, ArrayList) From _
             {{"Cherry", New ArrayList() From {"R1F", "R2F"}}, _
              {"Maple-Hard", New ArrayList() From {"W1F", "W2F"}}, _
              {"Maple-Soft", New ArrayList() From {"W1F", "W2F"}}, _
