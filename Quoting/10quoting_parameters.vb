@@ -1,6 +1,7 @@
 AddVbFile "inventor_common.vb"      'InventorOps.create_param
 AddVbFile "parameters.vb"           'ParameterLists.quoting_params
 AddVbFile "species_list.vb"         'Species.species_list
+AddVbFile "species_common.vb"       'SpeciesOps.unpack_pn
 
 Imports Inventor
 

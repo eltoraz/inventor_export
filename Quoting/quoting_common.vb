@@ -28,7 +28,7 @@ Public Class QuotingOps
                 GoExcel.Open(file_picker.FileName, sheet_name)
                 GoExcel.Close()
             Catch ex As Exception
-                MsgBox("Cannot open file. Error: " & ex.Message
+                MsgBox("Cannot open file. Error: " & ex.Message)
                 Return DialogResult.Cancel
             End Try
         End If
