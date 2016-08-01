@@ -38,6 +38,7 @@ Sub Main()
     If ParameterLists.quoting_color_specs.ContainsKey(wood_species) Then
         Dim color_spec_options As New ArrayList(ParameterLists.quoting_params("ColorSpec").Item2)
         color_spec_options.AddRange(ParameterLists.quoting_color_specs(wood_species))
+        MultiValue.List("ColorSpec") = color_spec_options
     End If
 
     'if the Color Spec has been set for this species, retrieve it from the parameter
