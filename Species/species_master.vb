@@ -1,5 +1,6 @@
 AddVbFile "inventor_common.vb"      'InventorOps.get_param_set
 AddVbFile "species_list.vb"         'Species.species_list
+AddVbFile "species_common.vb"       'SpeciesOps.part_pattern and mat_pattern
 
 Imports System.Text.RegularExpressions
 
@@ -19,6 +20,12 @@ Sub Main()
         Return
     End If
 
+    form_result = validate_species()
+
+    If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
+        Return
+    End If
+
     iLogicVb.RunExternalRule("40species_iproperties.vb")
 
     MsgBox("Part number iProperties successfully updated.")
@@ -29,40 +36,66 @@ Function validate_species() As FormResult
     Dim app As Application = ThisApplication
     Dim inv_params As UserParameters = InventorOps.get_param_set(app)
 
-    'regular expression to match the part number format AZ-123
-    Dim partno_pattern As String = "^[a-zA-Z]{2}-[0-9]{3}$"
-    Dim partno_regex As New Regex(partno_pattern)
+    Dim inv_doc As Document = app.ActiveEditDocument
+
+    Dim part_pattern As String = "^" & SpeciesOps.part_pattern & "$"
+    Dim part_regex As New Regex(part_pattern)
+    Dim mat_pattern As String = "^" & SpeciesOps.mat_pattern & "$"
+    Dim mat_regex As New Regex(mat_pattern)
+
+    Dim pn_list As New List(Of String)()
+
     Dim fails_validation As Boolean = False
 
     Dim form_result As FormResult = FormResult.OK
 
     Do          'loop first for initial validation, check condition later
         Dim needs_reentry As String = ""
+        pn_list.Clear()
 
         For Each s As String In Species.species_list
             Dim subst As String = Replace(s, "-", "4")
             Dim flag_param As Parameter = inv_params.Item("Flag" & subst)
             Dim flag_value = flag_param.Value
+            
+            Dim is_intermediate_part As Boolean = inv_params.Item("IntermediatePart").Value
 
             If flag_value Then
                 Dim part_param As Parameter = inv_params.Item("Part" & subst)
                 Dim part_value As String = part_param.Value
 
-                If StrComp(part_value, "") = 0 OrElse Not partno_regex.IsMatch(part_value) Then
+                If pn_list.Contains(part_value.ToUpper()) Then
+                    needs_reentry = needs_reentry & System.Environment.Newline & _
+                                    "- " & "Part (" & s & ") - duplicate part number"
+                    fails_validation = True
+                ElseIf Not is_intermediate_part Then
+                    'if it's not an intermediate part, skip the regex check (since the part number
+                    ' will be specified by the customer
+                ElseIf StrComp(part_value, "") = 0 OrElse Not part_regex.IsMatch(part_value) Then
                     needs_reentry = needs_reentry & System.Environment.Newline & _
                                     "- " & "Part (" & s & ")"
                     fails_validation = True
                 End If
 
-                If StrComp(s, "Hardware") <> 0 Then
+                pn_list.Add(part_value.ToUpper())
+
+                If TypeOf inv_doc Is AssemblyDocument Then
+                    'Assemblies don't have materials associated, so skip checking
+                ElseIf StrComp(s, "Hardware") <> 0 Then
                     Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
                     Dim mat_value As String = mat_param.Value
 
-                    If StrComp(mat_value, "") = 0 OrElse Not partno_regex.IsMatch(mat_value) Then
+                    If StrComp(mat_value, "") = 0 OrElse Not mat_regex.IsMatch(mat_value) Then
                         needs_reentry = needs_reentry & System.Environment.Newline & _
                                         "- " & "Material (" & s & ")"
                         fails_validation = True
+                    ElseIf pn_list.Contains(mat_value) Then
+                        needs_reentry = needs_reentry & System.Environment.Newline & _
+                                        "- " & "Material (" & s & ") - duplicate part number"
+                        fails_validation = True
                     End If
+
+                    pn_list.Add(mat_value)
                 End If
             End If
         Next

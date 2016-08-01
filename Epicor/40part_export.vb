@@ -19,11 +19,15 @@ Public Class PartExport
         design_props = inv_doc.PropertySets.Item("Design Tracking Properties")
         custom_props = inv_doc.PropertySets.Item("Inventor User Defined Properties")
 
+        Dim part_entry As String = inv_params.Item("PartNumberToUse").Value
+        Dim part_unpacked As Tuple(Of String, String, String) = SpeciesOps.unpack_pn(part_entry)
+        Dim pn As String = part_unpacked.Item1
+
         'properties that will be used elsewhere, or need to be formatted for CSV
-        PartNum = inv_params.Item("PartNumberToUse").Value.ToUpper()
+        PartNum = pn
         Description = design_props.Item("Description").Value
         SearchWord = Left(Description, 8)
-        PartType = custom_props.Item("PartType").Value
+        PartType = part_unpacked.Item2
         
         MfgComment = custom_props.Item("MfgComment").Value
         PurComment = custom_props.Item("PurComment").Value
@@ -58,8 +62,8 @@ Public Class PartExport
         data = data & "," & PartNum
         
         'Search word, first 8 characters of description
-        data = data & "," & EpicorOps.format_csv_field(SearchWord)
-        data = data & "," & EpicorOps.format_csv_field(Description)
+        data = data & "," & InventorOps.format_csv_field(SearchWord)
+        data = data & "," & InventorOps.format_csv_field(Description)
 
         data = data & "," & custom_props.Item("ClassID").Value
 
@@ -72,8 +76,8 @@ Public Class PartExport
         data = data & "," & "E"
 
         data = data & "," & custom_props.Item("ProdCode").Value
-        data = data & "," & EpicorOps.format_csv_field(MfgComment)
-        data = data & "," & EpicorOps.format_csv_field(PurComment)
+        data = data & "," & InventorOps.format_csv_field(MfgComment)
+        data = data & "," & InventorOps.format_csv_field(PurComment)
         data = data & "," & TrackSerialNum
         data = data & "," & UOM
         data = data & "," & custom_props.Item("UsePartRev").Value
@@ -97,6 +101,6 @@ Public Class PartExport
         Dim file_name As String
         file_name = dmt_obj.write_csv("Part_Level.csv", fields, data)
 
-        Return dmt_obj.dmt_import("Part", file_name)
+        Return dmt_obj.dmt_import("Part", file_name, False)
     End Function
 End Class

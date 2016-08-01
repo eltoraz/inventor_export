@@ -16,10 +16,11 @@ Public Class PartPlantExport
         design_props = inv_doc.PropertySets.Item("Design Tracking Properties")
         custom_props = inv_doc.PropertySets.Item("Inventor User Defined Properties")
 
-        PartNum = inv_params.Item("PartNumberToUse").Value.ToUpper()
+        Dim part_entry As String = inv_params.Item("PartNumberToUse").Value
+        Dim part_unpacked As Tuple(Of String, String, String) = SpeciesOps.unpack_pn(part_entry)
+        Dim pn As String = part_unpacked.Item1
 
-        'fields for purchased parts
-        Dim LeadTime, VendorNum, PurPoint As String
+        PartNum = pn
 
         'fields for manufactured parts
         Dim TrackSerialNumber As Boolean
@@ -27,11 +28,6 @@ Public Class PartPlantExport
 
         PartType = custom_props.Item("PartType").Value
         TrackSerialNum = custom_props.Item("TrackSerialNum").Value
-
-        'fields that won't get filled when making the parts in Inventor
-        LeadTime = ""
-        VendorNum = ""
-        PurPoint = ""
 
         If TrackSerialNum AndAlso StrComp(PartType, "M") = 0 Then
             SNMask = "NF"
@@ -52,9 +48,10 @@ Public Class PartPlantExport
         data = data & "," & PartNum
         data = data & "," & "453"                       'PrimWhse (just one warehouse)
 
-        data = data & "," & LeadTime
-        data = data & "," & VendorNum
-        data = data & "," & PurPoint
+        'these fields won't get filled from Inventor
+        data = data & "," & ""                          'LeadTime
+        data = data & "," & ""                          'VendorNum
+        data = data & "," & ""                          'PurPoint
 
         data = data & "," & PartType
 
@@ -68,6 +65,6 @@ Public Class PartPlantExport
         Dim file_name As String
         file_name = dmt_obj.write_csv("Part_Plant.csv", fields, data)
 
-        Return dmt_obj.dmt_import("Part Plant", file_name)
+        Return dmt_obj.dmt_import("Part Plant", file_name, False)
     End Function
 End Class

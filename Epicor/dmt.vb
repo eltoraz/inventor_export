@@ -15,7 +15,9 @@ Public Class DMT
 
     'Run the DMT to import the specified CSV into Epicor
     'pass along the return code from the DMT (-1 if it timed out)
-    Public Function dmt_import(csv As String, filename As String)
+    'if the 3rd arg is true, have DMT update the part in Epicor
+    '(just try adding it as a new entry otherwise)
+    Public Function dmt_import(csv As String, filename As String, update_on As Boolean)
         Dim psi As New ProcessStartInfo(dmt_loc)
         psi.RedirectStandardOutput = True
         psi.WindowStyle = ProcessWindowStyle.Hidden
@@ -23,6 +25,10 @@ Public Class DMT
 
         psi.Arguments = dmt_base_args & " -Import=""" & csv & """ -Source="""
         psi.Arguments = psi.Arguments & filename & """ -Add=True"
+
+        If update_on Then
+            psi.Arguments = psi.Arguments & """ -Update=True"
+        End If
 
         Dim msg_succ As String = "Successfully imported into Epicor!"
 

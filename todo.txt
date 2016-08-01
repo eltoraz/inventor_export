@@ -6,8 +6,6 @@ Set all Inventor clients to use networked Design Data & external rule directorie
   - iLogic config file located at %USERPROFILE%\AppData\Roaming\Autodesk\Inventor 2016\iLogicPreferences
   - simple XML file with contents of that options dialog, so can configure on one machine and copy the file to the others
 
-note: raw materials still get added AND updated through Inventor, so need to call DMT with -Add and -Update flag for "Material" parts
-
 expand process to include Quoting spreadsheet generation (see example in N:\CompanyResources\Quoting\Rejuvenation\Island Collection\RM Spreadsheets)
   - need to figure out how this is going to be generated & populated
   - IIRC, generation will be done beforehand, and the user will select the spreadsheet to work with

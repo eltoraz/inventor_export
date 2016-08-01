@@ -18,7 +18,11 @@ Public Class PartRevExport
         design_props = inv_doc.PropertySets.Item("Design Tracking Properties")
         custom_props = inv_doc.PropertySets.Item("Inventor User Defined Properties")
 
-        PartNum = inv_params.Item("PartNumberToUse").Value.ToUpper()
+        Dim part_entry As String = inv_params.Item("PartNumberToUse").Value
+        Dim part_unpacked As Tuple(Of String, String, String) = SpeciesOps.unpack_pn(part_entry)
+        Dim pn As String = part_unpacked.Item1
+
+        PartNum = pn
         DrawNum = design_props.Item("Part Number").Value
         RevisionNum = summary_props.Item("Revision Number").Value
         RevDescription = custom_props.Item("RevDescription").Value
@@ -29,8 +33,8 @@ Public Class PartRevExport
         data = "BBN"                        'Company name (constant)
         data = data & "," & PartNum
         data = data & "," & RevisionNum
-        data = data & "," & EpicorOps.format_csv_field("Revision " & RevisionNum)
-        data = data & "," & EpicorOps.format_csv_field(RevDescription)
+        data = data & "," & InventorOps.format_csv_field("Revision " & RevisionNum)
+        data = data & "," & InventorOps.format_csv_field(RevDescription)
 
         'Logic TODO: Approved hardcoded for now
         'Logic TODO: is there any reason for the user to specify EffectiveDate as
@@ -47,6 +51,6 @@ Public Class PartRevExport
         Dim file_name As String
         file_name = dmt_obj.write_csv("Part_Rev.csv", fields, data)
 
-        Return dmt_obj.dmt_import("Part Revision", file_name)
+        Return dmt_obj.dmt_import("Part Revision", file_name, False)
     End Function
 End Class

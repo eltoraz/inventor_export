@@ -1,6 +1,6 @@
 AddVbFile "dmt.vb"                  'DMT.dmt_working_path
 AddVbFile "inventor_common.vb"      'InventorOps.update_prop, get_param_set
-AddVbFile "epicor_common.vb"        'EpicorOps.param_list
+AddVbFile "parameters.vb"           'ParameterLists.epicor_params
 
 'set iProperties with values the user has defined in a form
 'note: these values will mostly be the IDs the Epicor DMT is expecting rather
@@ -18,7 +18,7 @@ Sub Main()
 
     'TODO: map approving engineers to Epicor IDs?
 
-    For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in EpicorOps.param_list
+    For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in ParameterLists.epicor_params
         'if Epicor requires a short ID, convert the human-readable value via
         'the appropriate mapping (see above)
         'required for: ProdCode, ClasID

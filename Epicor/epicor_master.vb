@@ -3,8 +3,8 @@ AddVbFile "40part_export.vb"            'PartExport.part_export
 AddVbFile "50partrev_export.vb"         'PartRevExport.part_rev_export
 AddVbFile "60partplant_export.vb"       'PartPlantExport.part_plant_export
 AddVbFile "species_list.vb"             'Species.species_list
+AddVbFile "species_common.vb"           'SpeciesOps.select_active_part
 AddVbFile "inventor_common.vb"          'InventorOps.get_param_set
-AddVbFile "epicor_common.vb"            'EpicorOps.format_csv_field
 
 Sub Main()
     'Pull latest data from Epicor
@@ -15,88 +15,25 @@ Sub Main()
     Dim app As Inventor.Application = ThisApplication
     Dim inv_params As UserParameters = InventorOps.get_param_set(app)
 
-    'select the part we'll be working with here
-    Dim active_parts As New ArrayList()
-    Dim no_species As Boolean = False
-
     Dim form_result As FormResult = FormResult.OK
 
     'setup the parameters this module needs
     iLogicVb.RunExternalRule("10multi_value.vb")
 
-    Do
-        Try
-            For Each s As String in Species.species_list
-                Dim subst As String = Replace(s, "-", "4")
-
-                Dim flag_param As Parameter = inv_params.Item("Flag" & subst)
-                Dim flag_value = flag_param.Value
-
-                If flag_value Then
-                    'add active parts and materials to the list to present to the user
-                    Dim part_param As Parameter = inv_params.Item("Part" & subst)
-                    Dim part_value As String = part_param.Value
-                    active_parts.Add(part_value)
-
-                    If StrComp(s, "Hardware") <> 0 Then
-                        Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
-                        Dim mat_value As String = mat_param.Value
-                        active_parts.Add(mat_value)
-                    End If
-                End If
-            Next
-        Catch e As ArgumentException
-            'exception thrown when using UserParameters.Item above and trying to
-            'get a parameter that doesn't exist
-            no_species = True
-        End Try
-        
-        'check whether the species parameters have been created but none selected
-        If active_parts.Count = 0 Then
-            no_species = True
-        Else
-            no_species = False
-        End If
-
-        'can't proceed if there isn't a part number for at least one species
-        If no_species Then
-            form_result = iLogicForm.ShowGlobal("epicor_13launch_species", FormMode.Modal).Result
-
-            If form_result = FormResult.None Then
-                Return
-            End If
-        End If
-    Loop While no_species
-
-    MultiValue.List("PartNumberToUse") = active_parts
-
-    Dim part_selected As Boolean = False
-    Dim pn As String = ""
-    Do
-        form_result = iLogicForm.ShowGlobal("epicor_15part_select", FormMode.Modal).Result
-
-        If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
-            Return
-        End If
-
-        pn = inv_params.Item("PartNumberToUse").Value
-        If StrComp(pn, "") <> 0 Then
-            part_selected = True
-        Else
-            MsgBox("Please select a part to continue with the Epicor export.")
-            iLogicVb.RunExternalRule("dummy.vb")
-        End If
-    Loop While Not part_selected
+    'select the part to work on
+    form_result = SpeciesOps.select_active_part(app, inv_params, Species.species_list, _
+                                                iLogicForm, iLogicVb, MultiValue)
+    If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
+        Return
+    End If
 
     'Call the other rules in order
     form_result = iLogicForm.ShowGlobal("epicor_20part_properties", FormMode.Modal).Result
-
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
     End If
 
     form_result = check_logic(app)
-    
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
     End If

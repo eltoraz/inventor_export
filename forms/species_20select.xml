@@ -44,6 +44,21 @@
       <EditControlType>CheckBox</EditControlType>
     </UiElementSpec>
     <UiElementSpec xsi:type="BooleanParameterControlSpec">
+      <Name>Birch-White</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>FlagBirch4White</ParameterName>
+      <EditControlType>CheckBox</EditControlType>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="BooleanParameterControlSpec">
       <Name>Cherry</Name>
       <ToolTip />
       <Font>
