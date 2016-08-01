@@ -252,6 +252,108 @@
       </Items>
     </UiElementSpec>
     <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 22</Name>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Part (Birch-White)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagBirch4White</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>PartBirch4White</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedPartBirch4White</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 23</Name>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Material (Birch-White)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagBirch4White</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>MatBirch4White</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedMatBirch4White</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="ControlRowSpec">
       <Name>Row 5</Name>
       <Font>
         <FamilyName />

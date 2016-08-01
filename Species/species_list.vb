@@ -6,5 +6,5 @@ Public Class Species
     '      won't have a "Material" associated with it
     Public Shared species_list = New String() {"Ash", "Birch-Baltic", "Cherry", _
                                  "Maple-Hard", "Maple-Soft", "Oak-Red", "Oak-White", _
-                                 "Pine", "Poplar", "Walnut", "Hardware"}
+                                 "Pine", "Poplar", "Walnut", "Hardware", "Birch-White"}
 End Class
