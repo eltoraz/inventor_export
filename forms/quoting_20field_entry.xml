@@ -13,6 +13,39 @@
   </ContentsFont>
   <ContentsTextLocation>Left</ContentsTextLocation>
   <Items>
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>Quoting Spreadsheet</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Top</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>QuotingSpreadsheet</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="iLogicExternalRuleControlSpec">
+      <Name>Browse...</Name>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <Image>
+        <BitmapByteArray />
+      </Image>
+      <TextVisible>true</TextVisible>
+      <RuleName>15quoting_filepicker</RuleName>
+      <RuleButtonBehavior>RunRule</RuleButtonBehavior>
+      <Path>15quoting_filepicker.vb</Path>
+    </UiElementSpec>
     <UiElementSpec xsi:type="LabelSpec">
       <Name>Quoting fields</Name>
       <Font>
