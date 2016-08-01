@@ -11,15 +11,15 @@ Sub Main()
 
     Dim form_result As FormResult = FormResult.OK
 
-    'setup the parameters this module needs
-    iLogicVb.RunExternalRule("10quoting_parameters.vb")
-
     'select the part to work with
     form_result = SpeciesOps.select_active_part(app, inv_params, Species.species_list, _
                                                 iLogicForm, iLogicVb, MultiValue)
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
     End If
+
+    'setup the parameters for the form
+    iLogicVb.RunExternalRule("10quoting_parameters.vb")
 
     form_result = iLogicForm.ShowGlobal("quoting_20field_entry", FormMode.Modal).Result
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then

@@ -46,7 +46,7 @@ Public Class InventorOps
             inv_custom_props.Add(param_val, n)
         Else
             'got the property so update the value
-            prop.value = param_val
+            prop.Value = param_val
         End If
     End Sub
 
