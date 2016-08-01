@@ -25,8 +25,19 @@ Sub Main()
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
     End If
+
+    'validate form data
+    form_result = validate_quoting(app)
+    If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
+        Return
+    End If
+
+    'write data to spreadsheet
+    iLogicVb.RunExternalRule("30quoting_writespreadsheet.vb")
 End Sub
 
 Function validate_quoting(ByRef app As Inventor.Application) As FormResult
     'TODO: pop up a form to hand-enter value for "Molded" if "Custom" selected
+    Dim form_result As FormResult = FormResult.OK
+    Return form_result
 End Function
