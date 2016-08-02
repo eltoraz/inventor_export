@@ -123,7 +123,7 @@
             <Bold>false</Bold>
             <Italic>false</Italic>
           </Font>
-          <EnablingParameterName>FlagAsh</EnablingParameterName>
+          <EnablingParameterName>FlagMatAsh</EnablingParameterName>
           <TextLocation>Left</TextLocation>
           <ReadOnly>false</ReadOnly>
           <AlwaysReadOnly>false</AlwaysReadOnly>
@@ -225,7 +225,7 @@
             <Bold>false</Bold>
             <Italic>false</Italic>
           </Font>
-          <EnablingParameterName>FlagBirch4Baltic</EnablingParameterName>
+          <EnablingParameterName>FlagMatBirch4Baltic</EnablingParameterName>
           <TextLocation>Left</TextLocation>
           <ReadOnly>false</ReadOnly>
           <AlwaysReadOnly>false</AlwaysReadOnly>
@@ -327,7 +327,7 @@
             <Bold>false</Bold>
             <Italic>false</Italic>
           </Font>
-          <EnablingParameterName>FlagBirch4White</EnablingParameterName>
+          <EnablingParameterName>FlagMatBirch4White</EnablingParameterName>
           <TextLocation>Left</TextLocation>
           <ReadOnly>false</ReadOnly>
           <AlwaysReadOnly>false</AlwaysReadOnly>
@@ -429,7 +429,7 @@
             <Bold>false</Bold>
             <Italic>false</Italic>
           </Font>
-          <EnablingParameterName>FlagCherry</EnablingParameterName>
+          <EnablingParameterName>FlagMatCherry</EnablingParameterName>
           <TextLocation>Left</TextLocation>
           <ReadOnly>false</ReadOnly>
           <AlwaysReadOnly>false</AlwaysReadOnly>
@@ -531,7 +531,7 @@
             <Bold>false</Bold>
             <Italic>false</Italic>
           </Font>
-          <EnablingParameterName>FlagMaple4Hard</EnablingParameterName>
+          <EnablingParameterName>FlagMatMaple4Hard</EnablingParameterName>
           <TextLocation>Left</TextLocation>
           <ReadOnly>false</ReadOnly>
           <AlwaysReadOnly>false</AlwaysReadOnly>
@@ -633,7 +633,7 @@
             <Bold>false</Bold>
             <Italic>false</Italic>
           </Font>
-          <EnablingParameterName>FlagMaple4Soft</EnablingParameterName>
+          <EnablingParameterName>FlagMatMaple4Soft</EnablingParameterName>
           <TextLocation>Left</TextLocation>
           <ReadOnly>false</ReadOnly>
           <AlwaysReadOnly>false</AlwaysReadOnly>
@@ -735,7 +735,7 @@
             <Bold>false</Bold>
             <Italic>false</Italic>
           </Font>
-          <EnablingParameterName>FlagOak4Red</EnablingParameterName>
+          <EnablingParameterName>FlagMatOak4Red</EnablingParameterName>
           <TextLocation>Left</TextLocation>
           <ReadOnly>false</ReadOnly>
           <AlwaysReadOnly>false</AlwaysReadOnly>
@@ -837,7 +837,7 @@
             <Bold>false</Bold>
             <Italic>false</Italic>
           </Font>
-          <EnablingParameterName>FlagOak4White</EnablingParameterName>
+          <EnablingParameterName>FlagMatOak4White</EnablingParameterName>
           <TextLocation>Left</TextLocation>
           <ReadOnly>false</ReadOnly>
           <AlwaysReadOnly>false</AlwaysReadOnly>
@@ -939,7 +939,7 @@
             <Bold>false</Bold>
             <Italic>false</Italic>
           </Font>
-          <EnablingParameterName>FlagPine</EnablingParameterName>
+          <EnablingParameterName>FlagMatPine</EnablingParameterName>
           <TextLocation>Left</TextLocation>
           <ReadOnly>false</ReadOnly>
           <AlwaysReadOnly>false</AlwaysReadOnly>
@@ -1041,7 +1041,7 @@
             <Bold>false</Bold>
             <Italic>false</Italic>
           </Font>
-          <EnablingParameterName>FlagPoplar</EnablingParameterName>
+          <EnablingParameterName>FlagMatPoplar</EnablingParameterName>
           <TextLocation>Left</TextLocation>
           <ReadOnly>false</ReadOnly>
           <AlwaysReadOnly>false</AlwaysReadOnly>
@@ -1143,7 +1143,7 @@
             <Bold>false</Bold>
             <Italic>false</Italic>
           </Font>
-          <EnablingParameterName>FlagWalnut</EnablingParameterName>
+          <EnablingParameterName>FlagMatWalnut</EnablingParameterName>
           <TextLocation>Left</TextLocation>
           <ReadOnly>false</ReadOnly>
           <AlwaysReadOnly>false</AlwaysReadOnly>

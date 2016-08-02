@@ -23,6 +23,7 @@ Sub Main()
 
         '"Hardware" doesn't have a material associated
         If StrComp(s, "Hardware") <> 0 Then
+            InventorOps.create_param("FlagMat" & subst, UnitsTypeEnum.kBooleanUnits, inv_app)
             InventorOps.create_param("Mat" & subst, UnitsTypeEnum.kTextUnits, inv_app)
             InventorOps.create_param("ExportedMat" & subst, UnitsTypeEnum.kBooleanUnits, inv_app)
         End If

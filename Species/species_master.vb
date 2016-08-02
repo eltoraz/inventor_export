@@ -14,14 +14,26 @@ Sub Main()
         Return
     End If
 
-    form_result = iLogicForm.ShowGlobal("species_30partnum", FormMode.Modal).Result
+    'enable materials only if the species is selected AND we're working on a part doc
+    Dim inv_app As Inventor.Application = ThisApplication
+    Dim inv_doc As Document = inv_app.ActiveEditDocument
+    Dim inv_params As UserParameters = InventorOps.get_param_set(inv_app)
+    Dim is_part_doc As Boolean = TypeOf inv_doc Is PartDocument
+    For Each s As String in Species.species_list
+        Dim subst As String = Replace(s, "-", "4")
 
+        If Not String.Equals(s, "Hardware") Then
+            inv_params.Item("FlagMat" & subst).Value = is_part_doc AndAlso _
+                    inv_params.Item("Flag" & subst).Value
+        End If
+    Next
+
+    form_result = iLogicForm.ShowGlobal("species_30partnum", FormMode.Modal).Result
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
     End If
 
     form_result = validate_species()
-
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
     End If
@@ -37,6 +49,7 @@ Function validate_species() As FormResult
     Dim inv_params As UserParameters = InventorOps.get_param_set(app)
 
     Dim inv_doc As Document = app.ActiveEditDocument
+    Dim is_part_doc As Boolean = TypeOf inv_doc Is PartDocument
 
     Dim part_pattern As String = "^" & SpeciesOps.part_pattern & "$"
     Dim part_regex As New Regex(part_pattern)
@@ -79,8 +92,8 @@ Function validate_species() As FormResult
 
                 pn_list.Add(part_value.ToUpper())
 
-                If TypeOf inv_doc Is AssemblyDocument Then
-                    'Assemblies don't have materials associated, so skip checking
+                If Not is_part_doc Then
+                    'Assemblies (etc.?) don't have materials associated, so skip checking
                 ElseIf StrComp(s, "Hardware") <> 0 Then
                     Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
                     Dim mat_value As String = mat_param.Value

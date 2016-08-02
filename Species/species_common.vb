@@ -83,7 +83,7 @@ Public Class SpeciesOps
             If StrComp(pn, "") <> 0 Then
                 part_selected = True
             Else
-                MsgBox("Please select a part to continue with the Epicor export.")
+                MsgBox("Please select a part to continue.")
                 vb_obj.RunExternalRule("dummy.vb")
             End If
         Loop While Not part_selected
