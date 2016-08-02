@@ -17,7 +17,7 @@ Sub Main()
     Dim working_row As Integer = 17
 
     'write the quoting fields to their respective cells
-    Dim pn As String = SpeciesOps.unpack_pn(inv_params.Item("PartNumberToUse").Value).Item1
+    Dim pn As String = SpeciesOps.unpack_pn(inv_params.Item("PartNumberToUse").Value).Item1.ToUpper()
     GoExcel.CellValue("A" & working_row) = pn
 
     GoExcel.CellValue("C" & working_row) = inv_params.Item("FinishedThickness").Value

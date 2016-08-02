@@ -21,6 +21,12 @@ Public Class QuotingOps
         file_picker.Filter = "Microsoft Excel Spreadsheets (*.xls, *.xlsx)|*.xls;*.xlsx|All Files (*.*)|*.*"
         file_picker.FilterIndex = 1
 
+        Dim current_param_value As String = inv_params.Item("QuotingSpreadsheet").Value
+        If StrComp(current_param_value, "") <> 0 Then
+            file_picker.FileName = System.IO.Path.GetFileName(current_param_value)
+            file_picker.InitialDirectory = System.IO.Path.GetDirectoryName(current_param_value)
+        End If
+
         Dim dialog_result As DialogResult = file_picker.ShowDialog()
         If dialog_result = DialogResult.OK Then
             inv_params.Item("QuotingSpreadsheet").Value = file_picker.FileName
