@@ -42,6 +42,6 @@ Sub Main()
     ' so don't need to construct/write it here (though the formula will be used
     ' in the Epicor module for raw material desc)
 
-    GoExcel.Save()
-    GoExcel.Close()
+    GoExcel.Save
+    GoExcel.Close
 End Sub
