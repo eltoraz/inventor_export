@@ -23,7 +23,7 @@
         <Italic>false</Italic>
       </Font>
       <TextLocation>Top</TextLocation>
-      <ReadOnly>false</ReadOnly>
+      <ReadOnly>true</ReadOnly>
       <AlwaysReadOnly>false</AlwaysReadOnly>
       <ParameterName>QuotingSpreadsheet</ParameterName>
       <EditControlType>TextBox</EditControlType>
@@ -287,9 +287,9 @@ In order to sell into publc buildings, most agencies have adopted this Califiorn
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>FalseParam</EnablingParameterName>
+      <EnablingParameterName />
       <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
+      <ReadOnly>true</ReadOnly>
       <AlwaysReadOnly>false</AlwaysReadOnly>
       <ParameterName>WoodSpecies</ParameterName>
       <EditControlType>TextBox</EditControlType>

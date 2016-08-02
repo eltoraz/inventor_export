@@ -43,13 +43,13 @@ Function validate_quoting(ByRef app As Inventor.Application) As FormResult
 
     Dim fails_validation As Boolean = False
     Dim required_text_fields As New Dictionary(Of String, String) From _
-            {{"QuotingSpreadsheet", "Quoting Spreadsheet"}, {"WidthSpec", "Width Spec"}, _
+            {{"WidthSpec", "Width Spec"}, _
              {"LengthSpec", "Length Spec"}, {"SandingSpec", "Sanding Spec"}, _
              {"GrainDirection", "Grain Direction"}, {"CertifiedClass", "Certified Classification"}, _
              {"GlueUpSpec", "Glue up or solid stock"}, {"GradeSpec", "Grade Spec"}, _
              {"Molded", "Molded"}}
     Dim required_num_fields As New Dictionary(Of String, String) From _
-            {{"FinshedThickness", "Finished Thickness"}, {"Width", "Width"}, _
+            {{"FinishedThickness", "Finished Thickness"}, {"Width", "Width"}, _
              {"Length", "Length"}, {"QtyPerUnit", "Qty Per Unit"}, _
              {"NestedQty", "Nested Qty"}}
 
@@ -73,6 +73,13 @@ Function validate_quoting(ByRef app As Inventor.Application) As FormResult
             Else
                 molded_param.Value = molded_val
             End If
+        End If
+
+        'different log message for spreadsheet path
+        If String.IsNullOrEmpty(inv_params.Item("QuotingSpreadsheet").Value) Then
+            error_log = error_log & System.Environment.NewLine & _
+                        "- Select a spreadsheet to use for quoting"
+            fails_validation = True
         End If
 
         'check required text parameters
