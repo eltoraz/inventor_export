@@ -40,6 +40,23 @@ Sub Main()
 
     iLogicVb.RunExternalRule("30set_props.vb")
 
+    'if the flag for the current part/mat shows it's already been exported, abort
+    Dim flag As String = "Exported"
+    Dim part As Tuple(Of String, String, String) = SpeciesOps.unpack_pn(inv_params.Item("PartNumberToUse").Value)
+    Dim part_type As String = part.Item2
+    Dim part_species As String = part.Item3
+    If String.Equals(part_type, "P") Then
+        flag = flag & "Part"
+    Else
+        flag = flag & "Mat"
+    End If
+    flag = flag & Replace(part_species, "-", "4")
+    If inv_params.Item(flag).Value Then
+        MsgBox("Part/species combination """ & part.Item1 & "/" & part_species & _
+               """ has already been exported into Epicor from this document. Aborting...")
+        Return
+    End If
+
     'if part export fails, abort - this will usually mean the part is already
     'in the DB and so the straight add operation failed
     Dim dmt_obj As New DMT()
@@ -47,6 +64,7 @@ Sub Main()
     If ret_value = 0 Then
         PartRevExport.part_rev_export(app, inv_params, dmt_obj)
         PartPlantExport.part_plant_export(app, inv_params, dmt_obj)
+        inv_params.Item(flag).Value = True
     ElseIf ret_value = -1 Then
         MsgBox("Error: DMT timed out. Aborting...")
     Else
