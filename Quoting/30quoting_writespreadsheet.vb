@@ -5,19 +5,32 @@ AddVbFile "species_common.vb"       'SpeciesOps.unpack_pn
 Sub Main()
     Dim app As Application = ThisApplication
     Dim inv_params As UserParameters = InventorOps.get_param_set(app)
+    Dim quoting_spreadsheet As String = inv_params.Item("QuotingSpreadsheet").Value
+    Dim pn As String = SpeciesOps.unpack_pn(inv_params.Item("PartNumberToUse").Value).Item1.ToUpper()
 
     Try
-        GoExcel.Open(inv_params.Item("QuotingSpreadsheet").Value, QuotingOps.sheet_name)
+        GoExcel.Open(quoting_spreadsheet, QuotingOps.sheet_name)
     Catch ex As Exception
         MsgBox("Cannot open file. Error: " & ex.Message)
         Return
     End Try
 
-    'TODO: find an open row, or this part's existing entry
-    Dim working_row As Integer = 17
+    'find an open row, or this part's existing entry
+    'TODO: need to account for spreadsheet schema, since GoExcel.FindRow stops
+    '       searching on the first empty cell in the column
+    Dim working_row As Integer
+    GoExcel.TitleRow = 2
+    GoExcel.FindRowStart = 4
+    working_row = GoExcel.FindRow(quoting_spreadsheet, QuotingOps.sheet_name, "Stock Name", "=", pn)
+
+    'DEBUG
+    MsgBox(quoting_spreadsheet & "; " & QuotingOps.sheet_name & System.Environment.NewLine & _ 
+            pn & "; " & working_row)
+    If working_row = -1 Then
+        working_row = 17
+    End If
 
     'write the quoting fields to their respective cells
-    Dim pn As String = SpeciesOps.unpack_pn(inv_params.Item("PartNumberToUse").Value).Item1.ToUpper()
     GoExcel.CellValue("A" & working_row) = pn
 
     GoExcel.CellValue("C" & working_row) = inv_params.Item("FinishedThickness").Value
