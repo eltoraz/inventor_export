@@ -7,7 +7,7 @@ Imports System.Windows.Forms
 Imports Inventor
 
 Sub Main()
-    Dim app As Application = ThisApplication
+    Dim app As Inventor.Application = ThisApplication
     Dim inv_params As UserParameters = InventorOps.get_param_set(app)   
 
     Dim form_result As FormResult = FormResult.OK
@@ -38,7 +38,7 @@ Sub Main()
 End Sub
 
 'validate quoting form data, prompting for reentry of required fields
-Function validate_quoting(ByRef app As Application) As FormResult
+Function validate_quoting(ByRef app As Inventor.Application) As FormResult
     Dim inv_params As UserParameters = InventorOps.get_param_set(app)
 
     Dim fails_validation As Boolean = False
