@@ -24,11 +24,11 @@ Public Class ParameterLists
     Public Shared quoting_params As New Dictionary(Of String, Tuple(Of UnitsTypeEnum, ArrayList)) From _
             {{"QuotingSpreadsheet", Tuple.Create(UnitsTypeEnum.kTextUnits, _
                         New ArrayList())}, _
-             {"FinishedThickness", Tuple.Create(UnitsTypeEnum.kInchLengthUnits, _
+             {"FinishedThickness", Tuple.Create(UnitsTypeEnum.kUnitlessUnits, _
                         New ArrayList() From {0.75, 1.00, 1.25, 1.75, 1.75, 2.25, 2.75})}, _
-             {"Width", Tuple.Create(UnitsTypeEnum.kInchLengthUnits, _
+             {"Width", Tuple.Create(UnitsTypeEnum.kUnitlessUnits, _
                         New ArrayList())}, _
-             {"Length", Tuple.Create(UnitsTypeEnum.kInchLengthUnits, _
+             {"Length", Tuple.Create(UnitsTypeEnum.kUnitlessUnits, _
                         New ArrayList())}, _
              {"WidthSpec", Tuple.Create(UnitsTypeEnum.kTextUnits, _
                         New ArrayList() From {"RTW", "PWT"})}, _
@@ -62,7 +62,7 @@ Public Class ParameterLists
                                               "Custom"})}, _
              {"MoldedCustom", Tuple.Create(UnitsTypeEnum.kTextUnits, _
                         New ArrayList())}, _
-             {"Radius", Tuple.Create(UnitsTypeEnum.kInchLengthUnits, _
+             {"Radius", Tuple.Create(UnitsTypeEnum.kUnitlessUnits, _
                         New ArrayList())}}
 
     Public Shared quoting_color_specs As New Dictionary(Of String, ArrayList) From _

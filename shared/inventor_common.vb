@@ -14,8 +14,7 @@ Public Class InventorOps
         Dim defaults As New Dictionary(Of UnitsTypeEnum, Object) From _
                 {{UnitsTypeEnum.kTextUnits, ""}, _
                  {UnitsTypeEnum.kBooleanUnits, False}, _
-                 {UnitsTypeEnum.kUnitlessUnits, 0}, _
-                 {UnitsTypeEnum.kInchLengthUnits, 0.0}}
+                 {UnitsTypeEnum.kUnitlessUnits, 0}}
 
         'if the parameter doesn't already exist, UserParameters.Item will throw an error
         Try
