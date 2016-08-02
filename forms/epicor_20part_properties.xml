@@ -22,15 +22,37 @@
         <Italic>false</Italic>
       </Font>
     </UiElementSpec>
-    <UiElementSpec xsi:type="LabelSpec">
-      <Name>Part number</Name>
+    <UiElementSpec xsi:type="MultiValueTextParameterControlSpec">
+      <Name>Part Number</Name>
+      <ToolTip />
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>true</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
       <ParameterName>PartNumberToUse</ParameterName>
+      <EditControlType>ComboBox</EditControlType>
+      <AllowCustomValues>false</AllowCustomValues>
+      <MinimumItemsToShow>2</MinimumItemsToShow>
+      <RadioGroupColumnCount>1</RadioGroupColumnCount>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="TextPropertyControlSpec">
+      <Name>Revision Number</Name>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <PropertyName>Revision Number</PropertyName>
+      <PropertySetName>Project</PropertySetName>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextPropertyControlSpec">
       <Name>Description</Name>
@@ -203,20 +225,6 @@
       </Font>
       <MinimumWidth>0</MinimumWidth>
       <MaximumWidth>0</MaximumWidth>
-    </UiElementSpec>
-    <UiElementSpec xsi:type="TextPropertyControlSpec">
-      <Name>Revision Number</Name>
-      <Font>
-        <FamilyName />
-        <Size>0</Size>
-        <Bold>false</Bold>
-        <Italic>false</Italic>
-      </Font>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>true</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <PropertyName>Revision Number</PropertyName>
-      <PropertySetName>Project</PropertySetName>
     </UiElementSpec>
     <UiElementSpec xsi:type="TextParameterControlSpec">
       <Name>Revision Comments</Name>

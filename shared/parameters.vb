@@ -58,8 +58,7 @@ Public Class ParameterLists
                         New ArrayList() From {"E2E_0.2500", "E4E_0.2500", _
                                               "C2E_45", "C4E_45", _
                                               "BN1E_0.5000", "BN2E_0.5000", _
-                                              "BN1E_0.5000_E2E_0.1250", _
-                                              "Custom"})}, _
+                                              "BN1E_0.5000_E2E_0.1250"})}, _
              {"MoldedCustom", Tuple.Create(UnitsTypeEnum.kTextUnits, _
                         New ArrayList())}, _
              {"Radius", Tuple.Create(UnitsTypeEnum.kUnitlessUnits, _

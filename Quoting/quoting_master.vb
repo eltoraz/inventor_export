@@ -60,21 +60,6 @@ Function validate_quoting(ByRef app As Inventor.Application) As FormResult
     Do
         Dim error_log = ""
 
-        'pop up a form to hand-enter value for "Molded" if "Custom" selected
-        Dim molded_param As Parameter = inv_params.Item("Molded")
-        If String.Equals(molded_param.Value, "Custom") Then
-            Dim molded_val As String = InputBox("Enter custom molding specification." & _
-                            System.Environment.NewLine & _
-                            "(Clear the input box to abort spreadsheet generation.)", _
-                            "Custom molding specification")
-            If String.IsNullOrEmpty(molded_val) Then
-                form_result = FormResult.Cancel
-                Exit Do
-            Else
-                molded_param.Value = molded_val
-            End If
-        End If
-
         'different log message for spreadsheet path
         If String.IsNullOrEmpty(inv_params.Item("QuotingSpreadsheet").Value) Then
             error_log = error_log & System.Environment.NewLine & _

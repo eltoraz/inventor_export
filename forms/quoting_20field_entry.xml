@@ -410,7 +410,7 @@ Note:  Radius's are a variable and need to be modified to product requirement. F
       <AlwaysReadOnly>false</AlwaysReadOnly>
       <ParameterName>Molded</ParameterName>
       <EditControlType>ComboBox</EditControlType>
-      <AllowCustomValues>false</AllowCustomValues>
+      <AllowCustomValues>true</AllowCustomValues>
       <MinimumItemsToShow>2</MinimumItemsToShow>
       <RadioGroupColumnCount>1</RadioGroupColumnCount>
     </UiElementSpec>
