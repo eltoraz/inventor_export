@@ -33,6 +33,12 @@ Sub Main()
         Return
     End If
 
+    'set species' stored color spec to the one just selected & verified
+    Dim part As Tuple(Of String, String, String) = SpeciesOps.unpack_pn(inv_params.Item("PartNumberToUse").Value)
+    Dim part_species As String = part.Item3
+    inv_params.Item("ColorSpec" & Replace(part_species, "-", "4")).Value = _
+            inv_params.Item("ColorSpec").Value
+
     'write data to spreadsheet
     iLogicVb.RunExternalRule("30quoting_writespreadsheet.vb")
 End Sub
