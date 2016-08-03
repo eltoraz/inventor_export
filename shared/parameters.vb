@@ -6,6 +6,7 @@ Public Class ParameterLists
     Public Shared shared_params As New Dictionary(Of String, UnitsTypeEnum) From _
             {{"PartNumberToUse", UnitsTypeEnum.kTextUnits}, _
              {"IntermediatePart", UnitsTypeEnum.kBooleanUnits}, _
+             {"MaterialsOnly", UnitsTypeEnum.kBooleanUnits}, _
              {"FalseParam", UnitsTypeEnum.kBooleanUnits}}
 
     'master list of parameters created for Epicor module

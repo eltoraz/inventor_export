@@ -13,20 +13,53 @@
   </ContentsFont>
   <ContentsTextLocation>Left</ContentsTextLocation>
   <Items>
-    <UiElementSpec xsi:type="BooleanParameterControlSpec">
-      <Name>Intermediate Part</Name>
-      <ToolTip />
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 24</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>IntermediatePart</ParameterName>
-      <EditControlType>CheckBox</EditControlType>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Intermediate Part</Name>
+          <ToolTip>Check this if this part is only used as a component of a larger assembly and so needs to adhere to the "WP-..." numbering scheme.</ToolTip>
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>IntermediatePart</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Materials Only</Name>
+          <ToolTip>Check this if the part in this document only corresponds to raw materials.</ToolTip>
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>MaterialsOnly</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
     <UiElementSpec xsi:type="LabelSpec">
       <Name>WP-ZZ-### (intermediate part)</Name>

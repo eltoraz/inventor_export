@@ -71,12 +71,15 @@ Function validate_species() As FormResult
             Dim flag_param As Parameter = inv_params.Item("Flag" & subst)
             Dim flag_value = flag_param.Value
             
+            Dim materials_only As Boolean = inv_params.Item("MaterialsOnly").Value
             Dim is_intermediate_part As Boolean = inv_params.Item("IntermediatePart").Value
 
             If flag_value Then
                 Dim part_param As Parameter = inv_params.Item("Part" & subst)
                 Dim part_value As String = part_param.Value
 
+                If materials_only Then
+                    'skip checking Part fields since only materials are relevant
                 If pn_list.Contains(part_value.ToUpper()) Then
                     needs_reentry = needs_reentry & System.Environment.Newline & _
                                     "- " & "Part (" & s & ") - duplicate part number"
