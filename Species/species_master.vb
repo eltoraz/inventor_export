@@ -80,7 +80,7 @@ Function validate_species() As FormResult
 
                 If materials_only Then
                     'skip checking Part fields since only materials are relevant
-                If pn_list.Contains(part_value.ToUpper()) Then
+                ElseIf pn_list.Contains(part_value.ToUpper()) Then
                     needs_reentry = needs_reentry & System.Environment.Newline & _
                                     "- " & "Part (" & s & ") - duplicate part number"
                     fails_validation = True
