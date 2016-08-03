@@ -339,10 +339,6 @@ B2F = Black two face.
 USEL = Unselected for color.
 WM = Well matched.
 
-CP Soft Maple Specs:
-I = Intermediate Color
-U = Unspecified Color
-
 Others: eg. Oak, Poplar, Pine, etc.
 WM = Well Matched
 USEL = Unselected for Color</ToolTip>
@@ -383,20 +379,20 @@ USEL= Unselected</ToolTip>
       <RadioGroupColumnCount>1</RadioGroupColumnCount>
     </UiElementSpec>
     <UiElementSpec xsi:type="MultiValueTextParameterControlSpec">
-      <Name>Molded</Name>
-      <ToolTip>Molding specification:
-E2E_0.2500 = Eased two edges at 0.25 radius.  Good surface.
-E4E_0.2500 = Eased four edges at 0.25 radius. 
+      <Name>Custom Spec</Name>
+      <ToolTip>Enter molding specifications:
+E2E = Eased two edges
+E4E = Eased four edges
 
-C2E_45 = Champher two edges at 45 degrees.  Good surface.
-C4E_45 = Champher four edges at 45 degrees. 
+C2E = Champher two edges
+C4E = Champher four edges
 
-BN1E_0.5000 = Bullnose one edge at 0.50 radius.
-BN2E_0.5000 = Bullnose two edge at 0.50 radius.
+BN1E = Bullnose one edge
+BN2E = Bullnose two edge
 
-BN1E_0.5000_E2E_0.1250 = Bullnose one edge at 0.50 radius and Eased two edges 0.125 on other side
+Bend = Bent product
 
-NOTE = Combinations will always start with BN first
+Custom = Free Hand - Example: Custom_MT-MJR-458_KL4568
 
 Note:  Radius's are a variable and need to be modified to product requirement. For unique profiles, please send print with spreadsheet.</ToolTip>
       <Font>
@@ -408,21 +404,20 @@ Note:  Radius's are a variable and need to be modified to product requirement. F
       <TextLocation>Left</TextLocation>
       <ReadOnly>false</ReadOnly>
       <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>Molded</ParameterName>
+      <ParameterName>CustomSpec</ParameterName>
       <EditControlType>ComboBox</EditControlType>
-      <AllowCustomValues>true</AllowCustomValues>
+      <AllowCustomValues>false</AllowCustomValues>
       <MinimumItemsToShow>2</MinimumItemsToShow>
       <RadioGroupColumnCount>1</RadioGroupColumnCount>
     </UiElementSpec>
-    <UiElementSpec xsi:type="NumericParameterControlSpec">
-      <Name>Inside radius</Name>
-      <ToolTip>If stock is bent, enter bending radius here.  
+    <UiElementSpec xsi:type="TextParameterControlSpec">
+      <Name>Custom Details</Name>
+      <ToolTip>Enter molding details:
+0.2500 = 0.25 radius or bullnose
 
-IR-?.??? = Inside radius is ?.???
+45 = 45 degrees (chamfer)
 
-NA if you need to fill it in - remember if it is not bent- you don't need it
-
-Note:  Radius is a variable by product and is always determined by the inside radius.  Does not apply to rough panels or dimensions.</ToolTip>
+Free Hand - Example: Custom_MT-MJR-458_KL4568</ToolTip>
       <Font>
         <FamilyName />
         <Size>0</Size>
@@ -432,13 +427,9 @@ Note:  Radius is a variable by product and is always determined by the inside ra
       <TextLocation>Left</TextLocation>
       <ReadOnly>false</ReadOnly>
       <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>Radius</ParameterName>
+      <ParameterName>CustomDetails</ParameterName>
       <EditControlType>TextBox</EditControlType>
-      <TrackBarProperties>
-        <MinimumValue>1</MinimumValue>
-        <MaximumValue>10</MaximumValue>
-        <ValueIncrement>1</ValueIncrement>
-      </TrackBarProperties>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
   </Items>
   <StyleAndSkinName>
