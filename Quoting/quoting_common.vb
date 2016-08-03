@@ -5,7 +5,7 @@ Imports Autodesk.iLogic.Interfaces
 
 Public Class QuotingOps
     Public Shared starting_path As String = "N:\CompanyResources\Quoting\"
-    Public Shared sheet_name As String = "NFP Quote Sheet"
+    Public Shared sheet_name As String = "BBN Quote Sheet"
 
     'display a dialog to select the quoting spreadsheet to use for the current part
     'set the QuotingSpreadsheet parameter to the path & filename, and test opening it

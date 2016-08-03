@@ -53,7 +53,7 @@ Function validate_quoting(ByRef app As Inventor.Application) As FormResult
              {"LengthSpec", "Length Spec"}, {"SandingSpec", "Sanding Spec"}, _
              {"GrainDirection", "Grain Direction"}, {"CertifiedClass", "Certified Classification"}, _
              {"GlueUpSpec", "Glue up or solid stock"}, {"GradeSpec", "Grade Spec"}, _
-             {"Molded", "Molded"}}
+             {"CustomSpec", "Custom Spec"}, {"CustomDetails", "Custom Details"}}
     Dim required_num_fields As New Dictionary(Of String, String) From _
             {{"FinishedThickness", "Finished Thickness"}, {"Width", "Width"}, _
              {"Length", "Length"}, {"QtyPerUnit", "Qty Per Unit"}, _

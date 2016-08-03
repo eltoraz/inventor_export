@@ -54,14 +54,10 @@ Public Class ParameterLists
                         New ArrayList() From {"USEL", "WM"})}, _
              {"GradeSpec", Tuple.Create(UnitsTypeEnum.kTextUnits, _
                         New ArrayList() From {"C1F", "C2F", "USEL"})}, _
-             {"Molded", Tuple.Create(UnitsTypeEnum.kTextUnits, _
-                        New ArrayList() From {"E2E_0.2500", "E4E_0.2500", _
-                                              "C2E_45", "C4E_45", _
-                                              "BN1E_0.5000", "BN2E_0.5000", _
-                                              "BN1E_0.5000_E2E_0.1250"})}, _
-             {"MoldedCustom", Tuple.Create(UnitsTypeEnum.kTextUnits, _
-                        New ArrayList())}, _
-             {"Radius", Tuple.Create(UnitsTypeEnum.kUnitlessUnits, _
+             {"CustomSpec", Tuple.Create(UnitsTypeEnum.kTextUnits, _
+                        New ArrayList() From {"E2E", "E4E", "C2E", "C4E", _
+                                              "BN1E", "BN2E", "Bend", "Custom"})}, _
+             {"CustomDetails", Tuple.Create(UnitsTypeEnum.kTextUnits, _
                         New ArrayList())}}
 
     Public Shared quoting_color_specs As New Dictionary(Of String, ArrayList) From _
