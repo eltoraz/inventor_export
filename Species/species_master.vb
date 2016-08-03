@@ -68,8 +68,8 @@ Function validate_species() As FormResult
 
         For Each s As String In Species.species_list
             Dim subst As String = Replace(s, "-", "4")
-            Dim flag_param As Parameter = inv_params.Item("Flag" & subst)
-            Dim flag_value = flag_param.Value
+            Dim flag_value = inv_params.Item("Flag" & subst).Value
+            Dim mat_flag_value = inv_params.Item("FlagMat" & subst).Value
             
             Dim materials_only As Boolean = inv_params.Item("MaterialsOnly").Value
             Dim is_intermediate_part As Boolean = inv_params.Item("IntermediatePart").Value
@@ -95,9 +95,8 @@ Function validate_species() As FormResult
 
                 pn_list.Add(part_value.ToUpper())
 
-                If Not is_part_doc Then
-                    'Assemblies (etc.?) don't have materials associated, so skip checking
-                ElseIf StrComp(s, "Hardware") <> 0 Then
+                'Hardware parts and Assemblies don't have materials associated, so skip those
+                ElseIf StrComp(s, "Hardware") <> 0 AndAlso mat_flag_value Then
                     Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
                     Dim mat_value As String = mat_param.Value
 

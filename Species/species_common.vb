@@ -20,6 +20,8 @@ Public Class SpeciesOps
         Dim active_parts As New ArrayList()
         Dim no_species As Boolean = False
 
+        Dim materials_only As Boolean = inv_params.Item("MaterialsOnly").Value
+
         Dim form_result As FormResult = FormResult.OK
 
         Do
@@ -32,12 +34,15 @@ Public Class SpeciesOps
 
                     If flag_value Then
                         'add active parts and materials to the list to present to the user
-                        Dim part_param As Parameter = inv_params.Item("Part" & subst)
-                        Dim part_value As String = part_param.Value
-                        Dim part_entry As String = part_value & " - " & s
-                        active_parts.Add(part_entry)
+                        If Not materials_only Then
+                            Dim part_param As Parameter = inv_params.Item("Part" & subst)
+                            Dim part_value As String = part_param.Value
+                            Dim part_entry As String = part_value & " - " & s
+                            active_parts.Add(part_entry)
+                        End If
 
-                        If StrComp(s, "Hardware") <> 0 Then
+                        Dim mat_flag_value = inv_params.Item("FlagMat" & subst)
+                        If StrComp(s, "Hardware") <> 0 AndAlso mat_flag_value Then
                             Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
                             Dim mat_value As String = mat_param.Value
                             Dim mat_entry As String = mat_value & " - " & s
