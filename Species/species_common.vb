@@ -14,13 +14,12 @@ Public Class SpeciesOps
                                               ByRef species_list() As String, _
                                               ByRef form_obj As IiLogicForm, _
                                               ByRef vb_obj As ILowLevelSupport, _
-                                              ByRef multivalue_obj As IMultiValueParam) _
+                                              ByRef multivalue_obj As IMultiValueParam, _
+                                              ByVal materials_only As Boolean) _
                                               As FormResult
         'select the part we'll be working with here
         Dim active_parts As New ArrayList()
         Dim no_species As Boolean = False
-
-        Dim materials_only As Boolean = inv_params.Item("MaterialsOnly").Value
 
         Dim form_result As FormResult = FormResult.OK
 
@@ -41,8 +40,7 @@ Public Class SpeciesOps
                             active_parts.Add(part_entry)
                         End If
 
-                        Dim mat_flag_value = inv_params.Item("FlagMat" & subst)
-                        If StrComp(s, "Hardware") <> 0 AndAlso mat_flag_value Then
+                        If StrComp(s, "Hardware") <> 0 AndAlso inv_params.Item("FlagMat" & subst).Value Then
                             Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
                             Dim mat_value As String = mat_param.Value
                             Dim mat_entry As String = mat_value & " - " & s

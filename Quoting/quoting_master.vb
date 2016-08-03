@@ -14,7 +14,7 @@ Sub Main()
 
     'select the part to work with
     form_result = SpeciesOps.select_active_part(app, inv_params, Species.species_list, _
-                                                iLogicForm, iLogicVb, MultiValue)
+                                                iLogicForm, iLogicVb, MultiValue, True)
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
     End If

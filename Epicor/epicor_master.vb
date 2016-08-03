@@ -21,8 +21,9 @@ Sub Main()
     iLogicVb.RunExternalRule("10multi_value.vb")
 
     'select the part to work on
+    Dim materials_only As Boolean = inv_params.Item("MaterialsOnly").Value
     form_result = SpeciesOps.select_active_part(app, inv_params, Species.species_list, _
-                                                iLogicForm, iLogicVb, MultiValue)
+                                                iLogicForm, iLogicVb, MultiValue, materials_only)
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
     End If

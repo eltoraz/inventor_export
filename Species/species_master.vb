@@ -8,8 +8,8 @@ Sub Main()
     Dim form_result As FormResult = FormResult.OK
     'call the rules/open the forms in order to setup the iProperties properly
     iLogicVb.RunExternalRule("10species_parameters.vb")
-    form_result = iLogicForm.ShowGlobal("species_20select", FormMode.Modal).Result
 
+    form_result = iLogicForm.ShowGlobal("species_20select", FormMode.Modal).Result
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
     End If
@@ -69,7 +69,6 @@ Function validate_species() As FormResult
         For Each s As String In Species.species_list
             Dim subst As String = Replace(s, "-", "4")
             Dim flag_value = inv_params.Item("Flag" & subst).Value
-            Dim mat_flag_value = inv_params.Item("FlagMat" & subst).Value
             
             Dim materials_only As Boolean = inv_params.Item("MaterialsOnly").Value
             Dim is_intermediate_part As Boolean = inv_params.Item("IntermediatePart").Value
@@ -96,7 +95,7 @@ Function validate_species() As FormResult
                 pn_list.Add(part_value.ToUpper())
 
                 'Hardware parts and Assemblies don't have materials associated, so skip those
-                ElseIf StrComp(s, "Hardware") <> 0 AndAlso mat_flag_value Then
+                If StrComp(s, "Hardware") <> 0 AndAlso inv_params.Item("FlagMat" & subst).Value Then
                     Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
                     Dim mat_value As String = mat_param.Value
 

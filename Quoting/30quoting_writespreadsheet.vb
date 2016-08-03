@@ -42,7 +42,7 @@ Sub Main()
         'entry not present, so look for a blank row
         Do
             For i = start_search To max_search
-                If String.IsNullOrEmpty(GoExcel.CellValue("A" & count)) Then
+                If String.IsNullOrEmpty(GoExcel.CellValue("A" & i)) Then
                     working_row = i
                     Exit For
                 End If
