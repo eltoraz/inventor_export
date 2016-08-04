@@ -61,7 +61,7 @@ Sub Main()
 
     'if the flag for the current part/mat shows it's already been exported, abort
     Dim flag As String = "Exported"
-    If is_mat Then
+    If is_part Then
         flag = flag & "Part"
     Else
         flag = flag & "Mat"
@@ -101,8 +101,7 @@ Function check_logic(ByRef app As Inventor.Application) As FormResult
 
     Dim fails_validation As Boolean = False
     Dim required_params As New Dictionary(Of String, String) From _
-            {{"PartType", "Part Type"}, {"ProdCode", "Group"}, _
-             {"ClassID", "Class"}}
+            {{"ProdCode", "Group"}, {"ClassID", "Class"}}
 
     'do the actual validation - there aren't many keyboard-entered fields, so
     'the most important thing to check for is that values were selected from
@@ -122,7 +121,7 @@ Function check_logic(ByRef app As Inventor.Application) As FormResult
         End If
 
         For Each kvp As KeyValuePair(Of String, String) In required_params
-            If String.IsNullOrEmpty(inv_params.Item(kvp.Key).Value) = 0 Then
+            If String.IsNullOrEmpty(inv_params.Item(kvp.Key).Value) Then
                 error_log = error_log & System.Environment.Newline & _
                             "- Select a value for " & kvp.Value
                 fails_validation = True

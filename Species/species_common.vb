@@ -113,7 +113,7 @@ Public Class SpeciesOps
 
         'use regex match groups to capture the part number and species
         'infer the part type from which pattern matches
-        Dim general_part_patter As String = "[\w\-]+"
+        Dim general_part_pattern As String = "[\w\-]+"
         Dim part_grouped As String = "^(" & general_part_pattern & ") - (\w+-?\w+)$"
         Dim part_regex As New Regex(part_grouped)
         Dim mat_grouped As String = "^(" & mat_pattern & ") - (\w+-?\w+)$"

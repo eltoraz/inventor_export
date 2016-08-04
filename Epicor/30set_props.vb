@@ -23,7 +23,7 @@ Sub Main()
     ' rather than a raw material
     Dim design_props As PropertySet = app.ActiveDocument.PropertySets.Item("Design Tracking Properties")
     Dim is_part As Boolean = inv_params.Item("ActiveIsPart").Value
-    If isPart Then
+    If is_part Then
         design_props.Item("Description").Value = inv_params.Item("Description").Value
     End If
 
