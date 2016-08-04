@@ -20,9 +20,8 @@ Public Class PartRevExport
 
         Dim part_entry As String = inv_params.Item("PartNumberToUse").Value
         Dim part_unpacked As Tuple(Of String, String, String) = SpeciesOps.unpack_pn(part_entry)
-        Dim pn As String = part_unpacked.Item1
 
-        PartNum = pn
+        PartNum = part_unpacked.Item1.ToUpper()
         DrawNum = design_props.Item("Part Number").Value
         RevisionNum = summary_props.Item("Revision Number").Value
         RevDescription = custom_props.Item("RevDescription").Value

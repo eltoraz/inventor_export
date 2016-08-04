@@ -18,10 +18,9 @@ Public Class PartExport
 
         Dim part_entry As String = inv_params.Item("PartNumberToUse").Value
         Dim part_unpacked As Tuple(Of String, String, String) = SpeciesOps.unpack_pn(part_entry)
-        Dim pn As String = part_unpacked.Item1
 
         'properties that will be used elsewhere, or need to be formatted for CSV
-        PartNum = pn
+        PartNum = part_unpacked.Item1.ToUpper()
         Description = inv_params.Item("Description").Value
         SearchWord = Left(Description, 8)
         PartType = part_unpacked.Item2
