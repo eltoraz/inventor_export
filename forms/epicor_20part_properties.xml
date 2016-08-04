@@ -116,6 +116,7 @@
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
+      <EnablingParameterName>ActiveIsPart</EnablingParameterName>
       <TextLocation>Left</TextLocation>
       <ReadOnly>false</ReadOnly>
       <AlwaysReadOnly>false</AlwaysReadOnly>
@@ -131,7 +132,7 @@
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <EnablingParameterName>ActivePartIsMaterial</EnablingParameterName>
+      <EnablingParameterName>ActiveIsPart</EnablingParameterName>
       <TextLocation>Left</TextLocation>
       <ReadOnly>false</ReadOnly>
       <AlwaysReadOnly>false</AlwaysReadOnly>

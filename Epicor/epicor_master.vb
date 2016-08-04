@@ -39,6 +39,8 @@ Sub Main()
     Else
         Try
             inv_params.Item("Description").Value = QuotingOps.generate_desc(part_species, inv_params)
+            inv_params.Item("UsePartRev").Value = False
+            inv_params.Item("TrackSerialNum").Value = False
         Catch ex As Exception
             MsgBox("Warning: the fields for this raw material haven't been setup. " & _
                    "Try running the Quoting Spreadsheet export first.")
