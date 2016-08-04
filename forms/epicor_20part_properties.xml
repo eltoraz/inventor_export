@@ -54,22 +54,8 @@
       <PropertyName>Revision Number</PropertyName>
       <PropertySetName>Project</PropertySetName>
     </UiElementSpec>
-    <UiElementSpec xsi:type="TextPropertyControlSpec">
+    <UiElementSpec xsi:type="TextParameterControlSpec">
       <Name>Description</Name>
-      <Font>
-        <FamilyName />
-        <Size>0</Size>
-        <Bold>false</Bold>
-        <Italic>false</Italic>
-      </Font>
-      <TextLocation>Left</TextLocation>
-      <ReadOnly>false</ReadOnly>
-      <AlwaysReadOnly>false</AlwaysReadOnly>
-      <PropertyName>Description</PropertyName>
-      <PropertySetName>Project</PropertySetName>
-    </UiElementSpec>
-    <UiElementSpec xsi:type="MultiValueTextParameterControlSpec">
-      <Name>Part Type</Name>
       <ToolTip />
       <Font>
         <FamilyName />
@@ -77,14 +63,13 @@
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
+      <EnablingParameterName>ActiveIsPart</EnablingParameterName>
       <TextLocation>Left</TextLocation>
       <ReadOnly>false</ReadOnly>
       <AlwaysReadOnly>false</AlwaysReadOnly>
-      <ParameterName>PartType</ParameterName>
-      <EditControlType>ComboBox</EditControlType>
-      <AllowCustomValues>false</AllowCustomValues>
-      <MinimumItemsToShow>2</MinimumItemsToShow>
-      <RadioGroupColumnCount>1</RadioGroupColumnCount>
+      <ParameterName>Description</ParameterName>
+      <EditControlType>TextBox</EditControlType>
+      <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
     <UiElementSpec xsi:type="MultiValueTextParameterControlSpec">
       <Name>Group</Name>
@@ -146,6 +131,7 @@
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
+      <EnablingParameterName>ActivePartIsMaterial</EnablingParameterName>
       <TextLocation>Left</TextLocation>
       <ReadOnly>false</ReadOnly>
       <AlwaysReadOnly>false</AlwaysReadOnly>

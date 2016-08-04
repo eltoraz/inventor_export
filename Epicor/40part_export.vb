@@ -14,10 +14,7 @@ Public Class PartExport
         Dim SNFormat, SNBaseDataType, SNMask, SNMaskExample As String
 
         Dim inv_doc As Document = app.ActiveDocument
-        Dim design_props, custom_props As PropertySet
-
-        design_props = inv_doc.PropertySets.Item("Design Tracking Properties")
-        custom_props = inv_doc.PropertySets.Item("Inventor User Defined Properties")
+        Dim custom_props As PropertySet = inv_doc.PropertySets.Item("Inventor User Defined Properties")
 
         Dim part_entry As String = inv_params.Item("PartNumberToUse").Value
         Dim part_unpacked As Tuple(Of String, String, String) = SpeciesOps.unpack_pn(part_entry)
@@ -25,7 +22,7 @@ Public Class PartExport
 
         'properties that will be used elsewhere, or need to be formatted for CSV
         PartNum = pn
-        Description = design_props.Item("Description").Value
+        Description = inv_params.Item("Description").Value
         SearchWord = Left(Description, 8)
         PartType = part_unpacked.Item2
         
