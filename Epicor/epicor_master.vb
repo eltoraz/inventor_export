@@ -4,6 +4,7 @@ AddVbFile "50partrev_export.vb"         'PartRevExport.part_rev_export
 AddVbFile "60partplant_export.vb"       'PartPlantExport.part_plant_export
 AddVbFile "species_list.vb"             'Species.species_list
 AddVbFile "species_common.vb"           'SpeciesOps.select_active_part
+AddVbFile "quoting_common.vb"           'QuotingOps.generate_desc
 AddVbFile "inventor_common.vb"          'InventorOps.get_param_set
 
 Sub Main()
@@ -20,12 +21,29 @@ Sub Main()
     'setup the parameters this module needs
     iLogicVb.RunExternalRule("10multi_value.vb")
 
-    'select the part to work on
+    'select the part to work on (placed in "PartNumberToUse" Inventor User Parameter)
     Dim materials_only As Boolean = inv_params.Item("MaterialsOnly").Value
     form_result = SpeciesOps.select_active_part(app, inv_params, Species.species_list, _
                                                 iLogicForm, iLogicVb, MultiValue, materials_only)
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
+    End If
+
+    'set some parameters based on the type of the selected part
+    Dim design_props As PropertySet = app.ActiveDocument.PropertySets.Item("Design Tracking Properties")
+    Dim part As Tuple(Of String, String, String) = SpeciesOps.unpack_pn(inv_params.Item("PartNumberToUse").Value)
+    Dim part_species As String = part.Item3
+    Dim is_part As Boolean = inv_params.Item("ActiveIsPart").Value
+    If is_part Then
+        inv_params.Item("Description").Value = design_props.Item("Description").Value
+    Else
+        Try
+            inv_params.Item("Description").Value = QuotingOps.generate_desc(part_species, inv_params)
+        Catch ex As Exception
+            MsgBox("Warning: the fields for this raw material haven't been setup. " & _
+                   "Try running the Quoting Spreadsheet export first.")
+            Return
+        End Try
     End If
 
     'Call the other rules in order
@@ -43,10 +61,7 @@ Sub Main()
 
     'if the flag for the current part/mat shows it's already been exported, abort
     Dim flag As String = "Exported"
-    Dim part As Tuple(Of String, String, String) = SpeciesOps.unpack_pn(inv_params.Item("PartNumberToUse").Value)
-    Dim part_type As String = part.Item2
-    Dim part_species As String = part.Item3
-    If String.Equals(part_type, "P") Then
+    If is_mat Then
         flag = flag & "Part"
     Else
         flag = flag & "Mat"
@@ -94,7 +109,7 @@ Function check_logic(ByRef app As Inventor.Application) As FormResult
     'the dropdowns
     Do
         Dim error_log As String = ""
-        Dim description As String = design_props.Item("Description").Value
+        Dim description As String = inv_params.Item("Description").Value
 
         Dim appr_date, null_date As Date
         appr_date = design_props.Item("Engr Date Approved").Value

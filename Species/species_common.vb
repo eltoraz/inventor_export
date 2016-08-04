@@ -91,6 +91,15 @@ Public Class SpeciesOps
             End If
         Loop While Not part_selected
 
+        'set some parameters based on the part selected
+        Dim part_fields As Tuple(Of String, String, String) = unpack_pn(pn)
+        inv_params.Item("PartType").Value = part_fields.Item2
+        If String.Equals(part_fields.Item2, "P") Then
+            inv_params.Item("ActiveIsPart").Value = False
+        Else
+            inv_params.Item("ActiveIsPart").Value = True
+        End If
+
         Return form_result
     End Function
 

@@ -42,4 +42,32 @@ Public Class QuotingOps
 
         Return dialog_result
     End Function
+
+    'return a string containing the description for the given raw material
+    'note: this uses parameters populated in the quoting module for the specified species
+    Public Shared Function generate_desc(ByVal species As String, _
+                                         ByRef inv_params As UserParameters) As String
+        Dim desc As String = ""
+        Dim subst As String = Replace(species, "-", "4")
+
+        'desc1 (in old format)
+        desc = desc & String.Format("{0:#.0000}", inv_params.Item("FinishedThickness").Value) & "T_X_"
+        desc = desc & String.Format("{0:#.0000}", inv_params.Item("Width").Value) & "W_X_"
+        desc = desc & String.Format("{0:#.0000}", inv_params.Item("Length").Value) & "L-"
+        desc = desc & inv_params.Item("WidthSpec").Value & "-"
+        desc = desc & inv_params.Item("LengthSpec").Value & "-"
+        desc = desc & inv_params.Item("SandingSpec").Value & "-"
+        desc = desc & inv_params.Item("GrainDirection").Value & "-"
+
+        'desc2 (in old format)
+        desc = desc & inv_params.Item("CertifiedClass").Value & "-"
+        desc = desc & inv_params.Item("WoodSpecies").Value & "-"
+        desc = desc & inv_params.Item("GlueUpSpec").Value & "-"
+        desc = desc & inv_params.Item("ColorSpec" & subst).Value & "-"
+        desc = desc & inv_params.Item("GradeSpec").Value & "-MLD_"
+        desc = desc & inv_params.Item("CustomSpec").Value & "_"
+        desc = desc & inv_params.Item("CustomDetails").Value
+
+        Return desc
+    End Function
 End Class

@@ -5,13 +5,14 @@ AddVbFile "species_common.vb"       'SpeciesOps.unpack_pn
 
 Imports Inventor
 
-'NOTE: this should only be run automatically as part of the execution of
-'      quoting_master.vb; this guarantees that the shared params have
-'      been created & populated as needed alreaday
 Sub Main()
     Dim inv_app As Application = ThisApplication
     Dim inv_params As UserParameters = InventorOps.get_param_set(inv_app)   
 
+    'run through shared parameters to make sure they're set up
+    For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in ParameterLists.shared_params
+        InventorOps.create_param(kvp.Key, kvp.Value, inv_app)
+    Next
     For Each kvp As KeyValuePair(Of String, Tuple(Of UnitsTypeEnum, ArrayList)) In ParameterLists.quoting_params
         InventorOps.create_param(kvp.Key, kvp.Value.Item1, inv_app)
         

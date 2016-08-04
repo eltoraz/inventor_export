@@ -4,14 +4,16 @@ Imports Inventor
 Public Class ParameterLists
     'parameters used by multiple modules
     Public Shared shared_params As New Dictionary(Of String, UnitsTypeEnum) From _
-            {{"PartNumberToUse", UnitsTypeEnum.kTextUnits}, _
+            {{"PartType", UnitsTypeEnum.kTextUnits}, _
+             {"PartNumberToUse", UnitsTypeEnum.kTextUnits}, _
              {"IntermediatePart", UnitsTypeEnum.kBooleanUnits}, _
              {"MaterialsOnly", UnitsTypeEnum.kBooleanUnits}, _
+             {"ActiveIsPart", UnitsTypeEnum.kBooleanUnits}, _
              {"FalseParam", UnitsTypeEnum.kBooleanUnits}}
 
     'master list of parameters created for Epicor module
     Public Shared epicor_params As New Dictionary(Of String, UnitsTypeEnum) From _
-            {{"PartType", UnitsTypeEnum.kTextUnits}, _
+            {{"Description", UnitsTypeEnum.kTextUnits}, _
              {"ProdCode", UnitsTypeEnum.kTextUnits}, _
              {"ClassID", UnitsTypeEnum.kTextUnits}, _
              {"UsePartRev", UnitsTypeEnum.kBooleanUnits}, _
