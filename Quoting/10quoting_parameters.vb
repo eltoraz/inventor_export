@@ -44,7 +44,7 @@ Sub Main()
 
     'if the Color Spec has been set for this species, retrieve it from the parameter
     Dim prev_color_spec As Parameter = inv_params.Item("ColorSpec" & Replace(wood_species, "-", "4"))
-    If StrComp(prev_color_spec.Value, "") <> 0 Then
+    If Not String.IsNullOrEmpty(prev_color_spec.Value) Then
         inv_params.Item("ColorSpec").Value = prev_color_spec.Value
     End If
 End Sub

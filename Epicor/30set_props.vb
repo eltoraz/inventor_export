@@ -26,16 +26,16 @@ Sub Main()
         Dim param_name As String = param.Name
         Dim param_value = param.Value
 
-        If StrComp(param_name, "ProdCode") = 0 Then
+        If String.Equals(param_name, "ProdCode") Then
             param_value = ProdCodeMap(param_value)
-        Else If StrComp(param_name, "ClassID") = 0 Then
+        Else If String.Equals(param_name, "ClassID") Then
             param_value = ClassIDMap(param_value)
-        Else If StrComp(param_name, "MfgComment") = 0 Then
+        Else If String.Equals(param_name, "MfgComment") Then
             'note: Epicor comment fields support up to 16000 chars
             param_value = Left(param_value, 16000)
-        Else If StrComp(param_name, "PurComment") = 0 Then
+        Else If String.Equals(param_name, "PurComment") Then
             param_value = Left(param_value, 16000)
-        Else If StrComp(param_name, "RevDescription") = 0 Then
+        Else If String.Equals(param_name, "RevDescription") Then
             param_value = Left(param_value, 16000)
         End If
 

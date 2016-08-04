@@ -40,7 +40,7 @@ Public Class SpeciesOps
                             active_parts.Add(part_entry)
                         End If
 
-                        If StrComp(s, "Hardware") <> 0 AndAlso inv_params.Item("FlagMat" & subst).Value Then
+                        If Not String.Equals(s, "Hardware") AndAlso inv_params.Item("FlagMat" & subst).Value Then
                             Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
                             Dim mat_value As String = mat_param.Value
                             Dim mat_entry As String = mat_value & " - " & s
@@ -83,7 +83,7 @@ Public Class SpeciesOps
             End If
 
             pn = inv_params.Item("PartNumberToUse").Value
-            If StrComp(pn, "") <> 0 Then
+            If Not String.IsNullOrEmpty(pn) Then
                 part_selected = True
             Else
                 MsgBox("Please select a part to continue.")

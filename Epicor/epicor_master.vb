@@ -115,14 +115,14 @@ Function check_logic(ByRef app As Inventor.Application) As FormResult
         appr_date = design_props.Item("Engr Date Approved").Value
         null_date = #1/1/1601#
 
-        If StrComp(description, "") = 0 Then
+        If String.IsNullOrEmpty(description) Then
             error_log = error_log & System.Environment.Newline & _
                         "- Enter a description"
             fails_validation = True
         End If
 
         For Each kvp As KeyValuePair(Of String, String) In required_params
-            If StrComp(inv_params.Item(kvp.Key).Value, "") = 0 Then
+            If String.IsNullOrEmpty(inv_params.Item(kvp.Key).Value) = 0 Then
                 error_log = error_log & System.Environment.Newline & _
                             "- Select a value for " & kvp.Value
                 fails_validation = True
@@ -136,7 +136,7 @@ Function check_logic(ByRef app As Inventor.Application) As FormResult
         End If
 
         'set the flag to false if no errors were detected in THIS iteration
-        If StrComp(error_log, "") = 0 Then
+        If String.IsNullOrEmpty(error_log) Then
             fails_validation = False
         End If
 

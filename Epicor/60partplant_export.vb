@@ -29,7 +29,7 @@ Public Class PartPlantExport
         PartType = custom_props.Item("PartType").Value
         TrackSerialNum = custom_props.Item("TrackSerialNum").Value
 
-        If TrackSerialNum AndAlso StrComp(PartType, "M") = 0 Then
+        If TrackSerialNum AndAlso String.Equals(PartType, "M") Then
             SNMask = "NF"
             SNMaskExample = "NF9999999"
             SNBaseDataType = "MASK"

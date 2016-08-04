@@ -25,7 +25,7 @@ Sub Main()
             End If
 
             'material: skip for "Hardware"
-            If is_part_doc AndAlso StrComp(s, "Hardware") <> 0 Then
+            If is_part_doc AndAlso Not String.Equals(s, "Hardware") Then
                 Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
                 Dim mat_value As String = mat_param.Value.ToUpper()
                 InventorOps.update_prop("Material (" & s & ")", mat_value, app)

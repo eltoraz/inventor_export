@@ -86,7 +86,7 @@ Function validate_species() As FormResult
                 ElseIf Not is_intermediate_part Then
                     'if it's not an intermediate part, skip the regex check (since the part number
                     ' will be specified by the customer
-                ElseIf StrComp(part_value, "") = 0 OrElse Not part_regex.IsMatch(part_value) Then
+                ElseIf String.IsNullOrEmpty(part_value) OrElse Not part_regex.IsMatch(part_value) Then
                     needs_reentry = needs_reentry & System.Environment.Newline & _
                                     "- " & "Part (" & s & ")"
                     fails_validation = True
@@ -95,11 +95,11 @@ Function validate_species() As FormResult
                 pn_list.Add(part_value.ToUpper())
 
                 'Hardware parts and Assemblies don't have materials associated, so skip those
-                If StrComp(s, "Hardware") <> 0 AndAlso inv_params.Item("FlagMat" & subst).Value Then
+                If Not String.Equals(s, "Hardware") AndAlso inv_params.Item("FlagMat" & subst).Value Then
                     Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
                     Dim mat_value As String = mat_param.Value
 
-                    If StrComp(mat_value, "") = 0 OrElse Not mat_regex.IsMatch(mat_value) Then
+                    If String.IsNullOrEmpty(mat_value) OrElse Not mat_regex.IsMatch(mat_value) Then
                         needs_reentry = needs_reentry & System.Environment.Newline & _
                                         "- " & "Material (" & s & ")"
                         fails_validation = True
@@ -114,7 +114,7 @@ Function validate_species() As FormResult
             End If
         Next
 
-        If StrComp(needs_reentry, "") = 0 Then
+        If String.IsNullOrEmpty(needs_reentry) Then
             fails_validation = False
         End If
 

@@ -31,7 +31,7 @@ Public Class PartExport
 
         'UOM is set based on part type
         'NOTE: default is "M" (manufactured), though only "P"/"M" are expected
-        If StrComp(PartType, "P") = 0 Then
+        If String.Equals(PartType, "P") Then
             UOM = "EAP"
         Else
             UOM = "EAM"
@@ -40,7 +40,7 @@ Public Class PartExport
         TrackSerialNum = custom_props.Item("TrackSerialNum").Value
 
         'if serial number is being tracked, a bunch of fields are enabled
-        If TrackSerialNum AndAlso StrComp(PartType, "M") = 0 Then
+        If TrackSerialNum AndAlso String.Equals(PartType, "M") Then
             SNFormat = "NF#######"
             SNBaseDataType = "MASK"
             SNMask = "NF"
@@ -89,7 +89,7 @@ Public Class PartExport
         data = data & "," & SNMaskExample
 
         'Net Weight UOM: only needed for manufactured parts
-        If StrComp(PartType, "M") = 0 Then
+        If String.Equals(PartType, "M") Then
             data = data & "," & "LB"
         Else
             data = data & ","
