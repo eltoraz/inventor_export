@@ -97,10 +97,15 @@ Public Class SpeciesOps
     'parse the part number into a tuple in the format (partnumber, parttype, species)
     '(or a tuple of empty strings if the input doesn't match the expected format)
     Public Shared Function unpack_pn(ByVal pn As String) As Tuple(Of String, String, String)
-        'pn is in the format `ZZ-123 - Species` (part), or `MX-ZZZ-123 - Species` (raw material)
+        'pn is in the format `MX-ZZ-123 - Species` for raw materials
+        'manufactured parts will usually be `WP-ZZ-123`, but that only applies
+        ' for intermediate parts (parts that are specified by customers will
+        ' have customer-specified pn that may not fit this format)
+
         'use regex match groups to capture the part number and species
         'infer the part type from which pattern matches
-        Dim part_grouped As String = "^(" & part_pattern & ") - (\w+-?\w+)$"
+        Dim general_part_patter As String = "[\w\-]+"
+        Dim part_grouped As String = "^(" & general_part_pattern & ") - (\w+-?\w+)$"
         Dim part_regex As New Regex(part_grouped)
         Dim mat_grouped As String = "^(" & mat_pattern & ") - (\w+-?\w+)$"
         Dim mat_regex As New Regex(mat_grouped)
