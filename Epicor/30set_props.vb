@@ -18,6 +18,19 @@ Sub Main()
 
     'TODO: map approving engineers to Epicor IDs?
 
+    'update description separately since it's in a different property set AND
+    ' the iProperty only gets changed if we're working with an actual part
+    ' rather than a raw material
+    Dim design_props As PropertySet = app.ActiveDocument.PropertySets.Item("Design Tracking Properties")
+    Dim is_part As Boolean = inv_params.Item("ActiveIsPart").Value
+    If isPart Then
+        design_props.Item("Description").Value = inv_params.Item("Description").Value
+    End If
+
+    'part type is a shared parameter now, so it wouldn't get updated in the loop
+    InventorOps.update_prop("PartType", inv_params.Item("PartType").Value, app)
+    inv_doc.Update
+
     For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in ParameterLists.epicor_params
         'if Epicor requires a short ID, convert the human-readable value via
         'the appropriate mapping (see above)
