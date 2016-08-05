@@ -12,9 +12,9 @@ Sub Main()
 
     Dim form_result As FormResult = FormResult.OK
 
-    'select the part to work with
+    'select the part to work with (only raw materials/purchased parts)
     form_result = SpeciesOps.select_active_part(app, inv_params, Species.species_list, _
-                                                iLogicForm, iLogicVb, MultiValue, True)
+                                                iLogicForm, iLogicVb, MultiValue, "P")
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
     End If

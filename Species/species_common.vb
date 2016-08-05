@@ -9,13 +9,15 @@ Public Class SpeciesOps
     Public Shared part_pattern As String = "[Ww][Pp]-[a-zA-Z]{2}-[0-9]{3}"
     Public Shared mat_pattern As String = "[Mm][lhftbpLHFTBP]-[a-zA-Z]{2}-[0-9]{3}"
 
+    'parts_and_mats: "M" for just manufactured parts, "P" for just purchased 
+    '                parts (raw materials), "MP" for both
     Public Shared Function select_active_part(ByRef app As Inventor.Application, _
                                               ByRef inv_params As UserParameters, _
                                               ByRef species_list() As String, _
                                               ByRef form_obj As IiLogicForm, _
                                               ByRef vb_obj As ILowLevelSupport, _
                                               ByRef multivalue_obj As IMultiValueParam, _
-                                              ByVal materials_only As Boolean) _
+                                              ByVal parts_and_mats As String) _
                                               As FormResult
         'select the part we'll be working with here
         Dim active_parts As New ArrayList()
@@ -33,18 +35,20 @@ Public Class SpeciesOps
 
                     If flag_value Then
                         'add active parts and materials to the list to present to the user
-                        If Not materials_only Then
+                        If String.Equals(parts_and_mats, "M") OrElse String.Equals(parts_and_mats, "MP") Then
                             Dim part_param As Parameter = inv_params.Item("Part" & subst)
                             Dim part_value As String = part_param.Value
                             Dim part_entry As String = part_value & " - " & s
                             active_parts.Add(part_entry)
                         End If
 
-                        If Not String.Equals(s, "Hardware") AndAlso inv_params.Item("FlagMat" & subst).Value Then
-                            Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
-                            Dim mat_value As String = mat_param.Value
-                            Dim mat_entry As String = mat_value & " - " & s
-                            active_parts.Add(mat_entry)
+                        If String.Equals(parts_and_mats, "P"), OrElse String.Equals(parts_and_mats, "MP") Then
+                            If Not String.Equals(s, "Hardware") AndAlso inv_params.Item("FlagMat" & subst).Value Then
+                                Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
+                                Dim mat_value As String = mat_param.Value
+                                Dim mat_entry As String = mat_value & " - " & s
+                                active_parts.Add(mat_entry)
+                            End If
                         End If
                     End If
                 Next

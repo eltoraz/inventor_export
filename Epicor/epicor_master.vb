@@ -22,9 +22,10 @@ Sub Main()
     iLogicVb.RunExternalRule("10multi_value.vb")
 
     'select the part to work on (placed in "PartNumberToUse" Inventor User Parameter)
-    Dim materials_only As Boolean = inv_params.Item("MaterialsOnly").Value
+    Dim parts_and_mats = "MP"
+    If inv_params.Item("MaterialsOnly").Value Then parts_and_mats = "P"
     form_result = SpeciesOps.select_active_part(app, inv_params, Species.species_list, _
-                                                iLogicForm, iLogicVb, MultiValue, materials_only)
+                                                iLogicForm, iLogicVb, MultiValue, parts_and_mats)
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
     End If
