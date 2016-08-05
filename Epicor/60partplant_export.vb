@@ -6,7 +6,8 @@ Public Class PartPlantExport
 
     Public Shared Function part_plant_export(ByRef app As Inventor.Application, _
                                              ByRef inv_params As userParameters, _
-                                             ByRef dmt_obj As DMT)
+                                             ByRef dmt_obj As DMT) _
+                                             As Integer
         Dim fields, data As String
         Dim PartNum, PartType As String
 

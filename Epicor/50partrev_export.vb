@@ -6,7 +6,8 @@ Public Class PartRevExport
 
     Public Shared Function part_rev_export(ByRef app As Inventor.Application, _
                                            ByRef inv_params As UserParameters, _
-                                           ByRef dmt_obj As DMT)
+                                           ByRef dmt_obj As DMT) _
+                                           As Integer
         Dim fields, data As String
         Dim PartNum, RevisionNum, RevDescription, DrawNum As String
         Dim ApprovedDate As Date

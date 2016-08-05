@@ -17,7 +17,8 @@ Public Class DMT
     'pass along the return code from the DMT (-1 if it timed out)
     'if the 3rd arg is true, have DMT update the part in Epicor
     '(just try adding it as a new entry otherwise)
-    Public Function dmt_import(csv As String, filename As String, update_on As Boolean)
+    Public Function dmt_import(csv As String, filename As String, update_on As Boolean) _
+                               As Integer
         Dim psi As New ProcessStartInfo(dmt_loc)
         psi.RedirectStandardOutput = True
         psi.WindowStyle = ProcessWindowStyle.Hidden
@@ -38,7 +39,7 @@ Public Class DMT
     'use the DMT to export data from Epicor based on existing BAQs
     'the results of the queries is stored in the paired CSV files for later reading
     'pass along the return code from the DMT (-1 if it timed out)
-    Public Function dmt_export()
+    Public Sub dmt_export()
         Dim export_path = dmt_working_path & "ref\"
 
         'Mapping of queries in Epicor and the corresponding output files
@@ -58,11 +59,12 @@ Public Class DMT
             msg_succ = "Successfully exported CSV from Epicor"
             exec_dmt(psi, kvp.Key, msg_succ)
         Next
-    End Function
+    End Sub
 
     'return -1 if DMT times out, otherwise pass on DMT's return value (as per
     'convention, 0 is success and >0 is an error, though I've only ever seen 1)
-    Public Function exec_dmt(psi As ProcessStartInfo, prefix As String, msg_succ As String)
+    Public Function exec_dmt(psi As ProcessStartInfo, prefix As String, msg_succ As String) _
+                             As Integer
         Dim dmt As Process
         dmt = Process.Start(psi)
         'Wait 30s (worst case) for DMT to exit - if it takes this long, something's wrong
@@ -86,8 +88,10 @@ Public Class DMT
     End Function
 
     'return the full path & filename
-    Public Function write_csv(csv_name As String, fields As String, data As String)
-        Dim fso, file_name, csv
+    Public Function write_csv(csv_name As String, fields As String, data As String) _
+                              As String
+        Dim fso, csv As Object
+        Dim file_name As string
 
         'Open the CSV file (note: this will overwrite the file if it exists!)
         fso = CreateObject("Scripting.FileSystemObject")
