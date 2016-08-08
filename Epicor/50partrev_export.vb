@@ -1,4 +1,4 @@
-﻿Imports System.Environment
+﻿Imports System.Text.RegularExpressions
 Imports Inventor
 
 Public Class PartRevExport
@@ -10,7 +10,7 @@ Public Class PartRevExport
                                            ByRef dmt_obj As DMT) _
                                            As Integer
         Dim fields, data As String
-        Dim PartNum, RevisionNum, RevDescription, DrawNum As String
+        Dim PartNum, RevisionNum, RevDescription, DrawNum, UserName As String
         Dim ApprovedDate As Date
 
         Dim inv_doc As Document = app.ActiveDocument
@@ -29,6 +29,13 @@ Public Class PartRevExport
         RevDescription = custom_props.Item("RevDescription").Value
         ApprovedDate = design_props.Item("Engr Date Approved").Value
 
+        'set username to use in approving engineer field
+        UserName = System.Environment.UserName
+        Dim regex_match As Match = New Regex("^\w\.\w+$").Match(UserName)
+        If Not regex_match.Success Then
+            UserName = InputBox("Please enter your Epicor username:", "Epicor username")
+        End If
+
         fields = "Company,PartNum,RevisionNum,RevShortDesc,RevDescription,Approved,ApprovedDate,ApprovedBy,EffectiveDate,DrawNum,Plant,ProcessMode"
 
         data = "BBN"                        'Company name (constant)
@@ -42,7 +49,7 @@ Public Class PartRevExport
         '            anything different from ApprovedDate?
         data = data & "," & "True"          'Approved
         data = data & "," & ApprovedDate    'ApprovedDate
-        data = data & "," & UserName        'ApprovedBy (from System.Environment)
+        data = data & "," & UserName        'ApprovedBy
         data = data & "," & ApprovedDate    'EffectiveDate
 
         data = data & "," & DrawNum         'DrawNum
