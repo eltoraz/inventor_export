@@ -1,4 +1,4 @@
-AddVbFile "dmt.vb"                      'DMT
+﻿AddVbFile "dmt.vb"                      'DMT
 AddVbFile "inventor_common.vb"          'InventorOps.get_param_set
 AddVbFile "species_common.vb"           'SpeciesOps.select_active_part
 AddVbFile "bom_common.vb"               'BomOps.bom_fields
@@ -14,12 +14,12 @@ Sub Main()
             SpeciesOps.unpack_pn(inv_params.Item("PartNumberToUse").Value)
 
     Dim PartNum, RevisionNum, MtlPartNum As String
-    Dim MtlSeq As Integer = MtlSeqStart 
+    Dim MtlSeq As Integer = BomOps.MtlSeqStart 
 
     'get the part number of the associated material
     Dim part_species As String = selected_part.Item3
     Dim subst As String = Replace(part_species, "-", "4")
-    MtlPartNum = inv_params.Item("Material (" & subst & ")").Value
+    MtlPartNum = inv_params.Item("Mat" & subst).Value
 
     'naively assume that the quantity of materials needed for the part only
     ' depends on the nested quantity from quoting (eg, ignoring cases where
