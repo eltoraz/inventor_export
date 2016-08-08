@@ -1,4 +1,5 @@
-﻿Imports Inventor
+﻿Imports System.Environment
+Imports Inventor
 
 Public Class PartRevExport
     Sub Main()
@@ -41,7 +42,7 @@ Public Class PartRevExport
         '            anything different from ApprovedDate?
         data = data & "," & "True"          'Approved
         data = data & "," & ApprovedDate    'ApprovedDate
-        data = data & "," & "d.laforce"     'ApprovedBy
+        data = data & "," & UserName        'ApprovedBy (from System.Environment)
         data = data & "," & ApprovedDate    'EffectiveDate
 
         data = data & "," & DrawNum         'DrawNum
