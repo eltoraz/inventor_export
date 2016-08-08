@@ -18,8 +18,8 @@ Sub Main()
 
     'get the part number of the associated material
     Dim part_species As String = selected_part.Item3
-    Dim subst As String = Replace(part_species, "-" "4")
-    MtlPartNum = inv_params.Item("Material (" & subst  ")").Value
+    Dim subst As String = Replace(part_species, "-", "4")
+    MtlPartNum = inv_params.Item("Material (" & subst & ")").Value
 
     'naively assume that the quantity of materials needed for the part only
     ' depends on the nested quantity from quoting (eg, ignoring cases where
