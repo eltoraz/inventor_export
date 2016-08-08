@@ -1,4 +1,5 @@
 AddVbFile "dmt.vb"                      'DMT
+AddVbFile "inventor_common.vb"          'InventorOps.get_param_set
 AddVbFile "species_common.vb"           'SpeciesOps.select_active_part
 AddVbFile "bom_common.vb"               'BomOps.bom_fields
 
@@ -33,9 +34,9 @@ Sub Main()
     data = data & "," & BomOps.bom_values("Plant")              'Plant (constant)
     data = data & "," & BomOps.bom_values("ECOGroupID")         'ECO Group (constant)
 
+    Dim dmt_obj As New DMT()
     Dim file_name As String
     file_name = dmt_obj.write_csv("Bill_Of_Materials.csv", BomOps.bom_fields, data)
 
-    Dim dmt_obj As New DMT()
     Dim ret_code As Integer = dmt_obj.dmt_import("Bill Of Materials", file_name, False)
 End Sub

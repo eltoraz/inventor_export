@@ -28,7 +28,7 @@ Public Class ParameterLists
             {{"QuotingSpreadsheet", Tuple.Create(UnitsTypeEnum.kTextUnits, _
                         New ArrayList())}, _
              {"FinishedThickness", Tuple.Create(UnitsTypeEnum.kUnitlessUnits, _
-                        New ArrayList() From {0.75, 1.00, 1.25, 1.75, 1.75, 2.25, 2.75})}, _
+                        New ArrayList())} _
              {"Width", Tuple.Create(UnitsTypeEnum.kUnitlessUnits, _
                         New ArrayList())}, _
              {"Length", Tuple.Create(UnitsTypeEnum.kUnitlessUnits, _

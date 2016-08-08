@@ -42,7 +42,7 @@ Public Class SpeciesOps
                             active_parts.Add(part_entry)
                         End If
 
-                        If String.Equals(parts_and_mats, "P"), OrElse String.Equals(parts_and_mats, "MP") Then
+                        If String.Equals(parts_and_mats, "P") OrElse String.Equals(parts_and_mats, "MP") Then
                             If Not String.Equals(s, "Hardware") AndAlso inv_params.Item("FlagMat" & subst).Value Then
                                 Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
                                 Dim mat_value As String = mat_param.Value
