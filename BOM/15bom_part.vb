@@ -14,7 +14,11 @@ Sub Main()
 
     Dim PartNum, RevisionNum, MtlPartNum As String
     Dim MtlSeq As Integer = MtlSeqStart 
-    Dim QtyPer As Double
+
+    'naively assume that the quantity of materials needed for the part only
+    ' depends on the nested quantity from quoting (eg, ignoring cases where
+    ' multiple *different* parts use a *single* raw material)
+    Dim QtyPer As Double = 1 / inv_params.Item("NestedQty").Value
 
     PartNum = selected_part.Item1
     RevisionNum = summary_props.Item("Revision Number").Value
