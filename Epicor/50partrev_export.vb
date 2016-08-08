@@ -25,7 +25,7 @@ Public Class PartRevExport
 
         PartNum = part_unpacked.Item1.ToUpper()
         DrawNum = design_props.Item("Part Number").Value
-        RevisionNum = summary_props.Item("Revision Number").Value
+        RevisionNum = summary_props.Item("Revision Number").Value.ToUpper()
         RevDescription = custom_props.Item("RevDescription").Value
         ApprovedDate = design_props.Item("Engr Date Approved").Value
 

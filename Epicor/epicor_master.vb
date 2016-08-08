@@ -97,8 +97,10 @@ End Sub
 ' lets the user abort
 Function check_logic(ByRef app As Inventor.Application) As FormResult
     'set a few parameters depending on data entered in first form
+    Dim inv_doc As Document = app.ActiveDocument
     Dim inv_params As UserParameters = InventorOps.get_param_set(app)
-    Dim design_props As PropertySet = app.ActiveDocument.PropertySets.Item("Design Tracking Properties")
+    Dim design_props As PropertySet = inv_doc.PropertySets.Item("Design Tracking Properties")
+    Dim summary_props As PropertySet = inv_doc.PropertySets.Item("Inventor Summary Information")
 
     Dim form_result As FormResult = FormResult.OK
 
@@ -118,21 +120,30 @@ Function check_logic(ByRef app As Inventor.Application) As FormResult
         null_date = #1/1/1601#
 
         If String.IsNullOrEmpty(description) Then
-            error_log = error_log & System.Environment.Newline & _
+            error_log = error_log & System.Environment.NewLine & _
                         "- Enter a description"
+            fails_validation = True
+        End If
+
+        'validate revision number as two homogenous characters
+        Dim rev_regex As New System.Text.RegularExpressions.Regex("^(\d{2}|[A-Za-z]{2})$")
+        Dim rev_match As System.Text.RegularExpressions.Match = rev_regex.Match(summary_props.Item("Revision Number").Value)
+        If Not rev_match.Success Then
+            error_log = error_log & System.Environment.NewLine & _
+                        "- Enter a 2-digit or 2-letter revision ID"
             fails_validation = True
         End If
 
         For Each kvp As KeyValuePair(Of String, String) In required_params
             If String.IsNullOrEmpty(inv_params.Item(kvp.Key).Value) Then
-                error_log = error_log & System.Environment.Newline & _
+                error_log = error_log & System.Environment.NewLine & _
                             "- Select a value for " & kvp.Value
                 fails_validation = True
             End If
         Next
 
         If appr_date = null_date Then
-            error_log = error_log & System.Environment.Newline & _
+            error_log = error_log & System.Environment.NewLine & _
                         "- Select an approval date"
             fails_validation = True
         End If
