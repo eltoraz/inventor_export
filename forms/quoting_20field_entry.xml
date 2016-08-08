@@ -55,7 +55,7 @@
         <Italic>false</Italic>
       </Font>
     </UiElementSpec>
-    <UiElementSpec xsi:type="MultiValueNumericParameterControlSpec">
+    <UiElementSpec xsi:type="NumericParameterControlSpec">
       <Name>Finished Thickness</Name>
       <ToolTip>Thickness Standards:
 4/4 Stock = Sand to 0.75
@@ -76,10 +76,12 @@ Note: it is possible to go off standards depending on project.</ToolTip>
       <ReadOnly>false</ReadOnly>
       <AlwaysReadOnly>false</AlwaysReadOnly>
       <ParameterName>FinishedThickness</ParameterName>
-      <EditControlType>ComboBox</EditControlType>
-      <AllowCustomValues>false</AllowCustomValues>
-      <MinimumItemsToShow>2</MinimumItemsToShow>
-      <RadioGroupColumnCount>1</RadioGroupColumnCount>
+      <EditControlType>TextBox</EditControlType>
+      <TrackBarProperties>
+        <MinimumValue>1</MinimumValue>
+        <MaximumValue>10</MaximumValue>
+        <ValueIncrement>1</ValueIncrement>
+      </TrackBarProperties>
     </UiElementSpec>
     <UiElementSpec xsi:type="NumericParameterControlSpec">
       <Name>Width</Name>
