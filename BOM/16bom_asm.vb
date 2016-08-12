@@ -11,15 +11,11 @@ Sub Main()
     'BOM objects
     Dim comp_def As AssemblyComponentDefinition
     comp_def = inv_doc.ComponentDefinition
-    Dim part_list As New List(Of String)()      'iLogic doesn't seem to support HashSet
+    Dim bom_obj As BOM = comp_def.BOM
+    bom_obj.PartsOnlyViewEnabled = True
 
-    'get unique part numbers
-    For Each occ in comp_def.Occurrences
-        Dim occ_name As String = occ.Name
-        Dim colon_pos As Integer = occ_name.IndexOf(":")
-        occ_name = occ_name.Substring(0, colon_pos)
-        If Not part_list.Contains(occ_name) Then part_list.Add(occ_name)
-    Next
+    Dim bom_view As BOMView = bom_obj.BOMViews.Item("Parts Only")
+    Dim bom_row As BOMRow
 
     Dim summary_props As PropertySet = inv_doc.PropertySets.Item("Inventor Summary Information")
 
@@ -29,7 +25,6 @@ Sub Main()
     Dim PartNum, RevisionNum, MtlPartNum As String
     Dim MtlSeq As Integer = BomOps.MtlSeqStart 
 
-    'get the part number of the associated material
     Dim part_species As String = selected_part.Item3
     Dim subst As String = Replace(part_species, "-", "4")
 
@@ -37,9 +32,14 @@ Sub Main()
     RevisionNum = summary_props.Item("Revison Number").Value
 
     Dim data As String = ""
-    For Each unique_part in part_list
-        'TODO: grab the iProperty corresponding to the species; this string is the drawing number
-        MtlPartNum = unique_part
+    For Each bom_row In bom_view.BOMRows
+        Dim child_comp_def As ComponentDefinition
+        child_comp_def = bom_row.ComponentDefinitions.Item(1)
+
+        Dim child_doc_path As String = child_comp_def.Document.FullDocumentName
+        Dim child_filename As String = System.IO.Path.GetFileName(child_doc_path)
+        MtlPartNum = iProperties.Value(child_filename, "Custom", "Part (" & part_species & ")")
+
         Dim QtyPer As Integer = ThisBOM.CalculateQuantity("Model Data", unique_part)
 
         data = data & BomOps.bom_values("Company")                  'Company name (constant)
