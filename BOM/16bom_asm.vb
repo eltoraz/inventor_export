@@ -33,5 +33,27 @@ Sub Main()
     Dim part_species As String = selected_part.Item3
     Dim subst As String = Replace(part_species, "-", "4")
 
+    PartNum = selected_part.Item1
+    RevisionNum = summary_props.Item("Revison Number").Value
+
     Dim data As String = ""
+    For Each unique_part in part_list
+        'TODO: grab the iProperty corresponding to the species; this string is the drawing number
+        MtlPartNum = unique_part
+        Dim QtyPer As Integer = ThisBOM.CalculateQuantity("Model Data", unique_part)
+
+        data = data & BomOps.bom_values("Company")                  'Company name (constant)
+        data = data & "," & PartNum
+        data = data & "," & RevisionNum
+        data = data & "," & MtlSeq
+        data = data & "," & MtlPartNum
+        data = data & "," & QtyPer
+        data = data & "," & BomOps.bom_values("Plant")              'Plant (constant)
+        data = data & "," & BomOps.bom_values("ECOGroupID")         'ECO Group (constant)
+        data = data & System.Environment.NewLine
+    Next
+
+    Dim dmt_obj As New DMT()
+    Dim file_name As String
+    file_name = dmt_obj.write_csv("Bill_Of_Materials.csv", BomOps.bom_fields, data)
 End Sub

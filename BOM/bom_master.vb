@@ -19,6 +19,8 @@ Sub Main()
 
     'check `Exported` flags for part and associated material, warn if both aren't True
     'TODO: consider other cases (eg, abort in cases where only materials are defined)
+    'TODO: validate other values (eg, revision number, though this should be caught
+    '      in Epicor export)
     Dim selected_part As Tuple(Of String, String, String) = _
             SpeciesOps.unpack_pn(inv_params.Item("PartNumberToUse").Value)
     Dim part_species As String = selected_part.Item3
@@ -60,7 +62,7 @@ Sub Main()
     If TypeOf inv_doc Is PartDocument Then
         iLogicVb.RunExternalRule("15bom_part.vb")
     ElseIf TypeOf inv_doc Is AssemblyDocument Then
-        iLogicVb.RunExternalRule("16_bom_asm.vb")
+        iLogicVb.RunExternalRule("16bom_asm.vb")
     Else
         MsgBox("Error: MOM can only be exported from a Part or Assembly. Aborting...")
         Return
