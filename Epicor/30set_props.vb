@@ -1,6 +1,6 @@
 AddVbFile "dmt.vb"                  'DMT.dmt_working_path
-AddVbFile "inventor_common.vb"      'InventorOps.update_prop, get_param_set
-AddVbFile "parameters.vb"           'ParameterLists.epicor_params
+AddVbFile "inventor_common.vb"      'InventorOps.update_prop
+AddVbFile "parameters.vb"           'ParameterOps.get_param_set
 
 'set iProperties with values the user has defined in a form
 'note: these values will mostly be the IDs the Epicor DMT is expecting rather
@@ -9,7 +9,7 @@ Sub Main()
     'list of parameters that need to be converted to custom iProperties
     Dim app As Inventor.Application = ThisApplication
     Dim inv_doc As Document = app.ActiveDocument
-    Dim inv_params As UserParameters = InventorOps.get_param_set(app)
+    Dim inv_params As UserParameters = ParameterOps.get_param_set(app)
 
     'mappings for human-readable values (i.e. in the dropdown boxes) -> keys
     'only necessary for ProdCode and ClassID
@@ -31,7 +31,7 @@ Sub Main()
     InventorOps.update_prop("PartType", inv_params.Item("PartType").Value, app)
     inv_doc.Update
 
-    For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in ParameterLists.epicor_params
+    For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in ParameterOps.epicor_params
         'if Epicor requires a short ID, convert the human-readable value via
         'the appropriate mapping (see above)
         'required for: ProdCode, ClasID

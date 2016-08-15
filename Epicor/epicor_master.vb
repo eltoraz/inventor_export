@@ -2,10 +2,9 @@
 AddVbFile "40part_export.vb"            'PartExport.part_export
 AddVbFile "50partrev_export.vb"         'PartRevExport.part_rev_export
 AddVbFile "60partplant_export.vb"       'PartPlantExport.part_plant_export
-AddVbFile "species_list.vb"             'Species.species_list
 AddVbFile "species_common.vb"           'SpeciesOps.select_active_part
 AddVbFile "quoting_common.vb"           'QuotingOps.generate_desc
-AddVbFile "inventor_common.vb"          'InventorOps.get_param_set
+AddVbFile "parameters.vb"               'ParameterOps.get_param_set, species_list
 
 Sub Main()
     'Pull latest data from Epicor
@@ -14,7 +13,7 @@ Sub Main()
 
     'populate the PartNumberToUse param multi-value with the activated part numbers
     Dim app As Inventor.Application = ThisApplication
-    Dim inv_params As UserParameters = InventorOps.get_param_set(app)
+    Dim inv_params As UserParameters = ParameterOps.get_param_set(app)
 
     Dim form_result As FormResult = FormResult.OK
 
@@ -24,7 +23,7 @@ Sub Main()
     'select the part to work on (placed in "PartNumberToUse" Inventor User Parameter)
     Dim parts_and_mats = "MP"
     If inv_params.Item("MaterialsOnly").Value Then parts_and_mats = "P"
-    form_result = SpeciesOps.select_active_part(app, inv_params, Species.species_list, _
+    form_result = SpeciesOps.select_active_part(app, inv_params, ParameterOps.species_list, _
                                                 iLogicForm, iLogicVb, MultiValue, parts_and_mats)
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
@@ -98,7 +97,7 @@ End Sub
 Function check_logic(ByRef app As Inventor.Application) As FormResult
     'set a few parameters depending on data entered in first form
     Dim inv_doc As Document = app.ActiveDocument
-    Dim inv_params As UserParameters = InventorOps.get_param_set(app)
+    Dim inv_params As UserParameters = ParameterOps.get_param_set(app)
     Dim design_props As PropertySet = inv_doc.PropertySets.Item("Design Tracking Properties")
     Dim summary_props As PropertySet = inv_doc.PropertySets.Item("Inventor Summary Information")
 

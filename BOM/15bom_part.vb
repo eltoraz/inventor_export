@@ -1,12 +1,12 @@
 ﻿AddVbFile "dmt.vb"                      'DMT
-AddVbFile "inventor_common.vb"          'InventorOps.get_param_set
+AddVbFile "parameters.vb"               'ParameterOps.get_param_set
 AddVbFile "species_common.vb"           'SpeciesOps.select_active_part
 AddVbFile "bom_common.vb"               'BomOps.bom_fields
 
 Sub Main()
     Dim inv_app As Inventor.Application = ThisApplication
     Dim inv_doc As Document = inv_app.ActiveDocument
-    Dim inv_params As UserParameters = InventorOps.get_param_set(inv_app)
+    Dim inv_params As UserParameters = ParameterOps.get_param_set(inv_app)
 
     Dim summary_props As PropertySet = inv_doc.PropertySets.Item("Inventor Summary Information")
 

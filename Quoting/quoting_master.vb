@@ -1,5 +1,4 @@
-AddVbFile "inventor_common.vb"      'InventorOps.get_param_set
-AddVbFile "species_list.vb"         'Species.species_list
+AddVbFile "parameters.vb"           'ParameterOps.get_param_set, species_list
 AddVbFile "species_common.vb"       'SpeciesOps.select_active_part
 AddVbFile "quoting_common.vb"       'QuotingOps.starting_path
 
@@ -8,12 +7,12 @@ Imports Inventor
 
 Sub Main()
     Dim app As Inventor.Application = ThisApplication
-    Dim inv_params As UserParameters = InventorOps.get_param_set(app)   
+    Dim inv_params As UserParameters = ParameterOps.get_param_set(app)
 
     Dim form_result As FormResult = FormResult.OK
 
     'select the part to work with (only raw materials/purchased parts)
-    form_result = SpeciesOps.select_active_part(app, inv_params, Species.species_list, _
+    form_result = SpeciesOps.select_active_part(app, inv_params, ParameterOps.species_list, _
                                                 iLogicForm, iLogicVb, MultiValue, "P")
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
@@ -45,7 +44,7 @@ End Sub
 
 'validate quoting form data, prompting for reentry of required fields
 Function validate_quoting(ByRef app As Inventor.Application) As FormResult
-    Dim inv_params As UserParameters = InventorOps.get_param_set(app)
+    Dim inv_params As UserParameters = ParameterOps.get_param_set(app)
 
     Dim fails_validation As Boolean = False
     Dim required_text_fields As New Dictionary(Of String, String) From _

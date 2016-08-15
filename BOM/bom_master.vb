@@ -1,20 +1,19 @@
 AddVbFile "species_common.vb"           'SpeciesOps.select_active_part
-AddVbFile "species_list.vb"             'Species.species_list
-AddVbFile "inventor_common.vb"          'InventorOps.get_param_set
+AddVbFile "parameters.vb"               'ParameterOps.create_all_params, get_param_set, species_list
 
 Sub Main()
     Dim inv_app As Inventor.Application = ThisApplication
     Dim inv_doc As Document = inv_app.ActiveEditDocument
-    Dim inv_params As UserParameters = InventorOps.get_param_set(inv_app)
+    Dim inv_params As UserParameters = ParameterOps.get_param_set(inv_app)
 
     Dim form_result As FormResult = FormResult.OK
 
-    'need the same parameters as the species module
-    iLogicVb.RunExternalRule("10species_parameters.vb")
+    'create missing parameters
+    ParameterOps.create_all_params(inv_app)
 
     'select the part to export the BOM for (only manufactured parts, which will
     ' pull in their associated raw materials/component parts anyway)
-    form_result = SpeciesOps.select_active_part(app, inv_params, Species.species_list, _
+    form_result = SpeciesOps.select_active_part(app, inv_params, ParameterOps.species_list, _
                                                 iLogicForm, iLogicVb, MultiValue, "M")
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return

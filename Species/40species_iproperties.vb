@@ -1,16 +1,16 @@
-AddVbFile "inventor_common.vb"      'InventorOps.update_prop, get_param_set
-AddVbFile "species_list.vb"         'Species.species_list
+AddVbFile "inventor_common.vb"      'InventorOps.update_prop
+AddVbFile "parameters.vb"           'ParameterOps.get_param_set, species_list
 
 'create/update iProperties with the values entered in form 30 (enabled in form 20)
 Sub Main()
     Dim app As Inventor.Application = ThisApplication
     Dim inv_doc As Document = app.ActiveEditDocument
-    Dim inv_params As UserParameters = InventorOps.get_param_set(app)
+    Dim inv_params As UserParameters = ParameterOps.get_param_set(app)
 
     Dim materials_only As Boolean = inv_params.Item("MaterialsOnly").Value
     Dim is_part_doc As Boolean = TypeOf inv_doc Is PartDocument
 
-    For Each s As String In Species.species_list
+    For Each s As String In ParameterOps.species_list
         Dim subst As String = Replace(s, "-", "4")
 
         Dim flag_param As Parameter = inv_params.Item("Flag" & subst)

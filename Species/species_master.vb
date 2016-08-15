@@ -1,13 +1,17 @@
-AddVbFile "inventor_common.vb"      'InventorOps.get_param_set
-AddVbFile "species_list.vb"         'Species.species_list
+AddVbFile "parameters.vb"           'ParameterOps.create_all_params, get_param_set
 AddVbFile "species_common.vb"       'SpeciesOps.part_pattern and mat_pattern
 
 Imports System.Text.RegularExpressions
 
 Sub Main()
+    Dim inv_app As Inventor.Application = ThisApplication
+    Dim inv_doc As Document = inv_app.ActiveEditDocument
+    Dim inv_params As UserParameters = ParameterOps.get_param_set(inv_app)
+    Dim is_part_doc As Boolean = TypeOf inv_doc Is PartDocument
     Dim form_result As FormResult = FormResult.OK
+
     'call the rules/open the forms in order to setup the iProperties properly
-    iLogicVb.RunExternalRule("10species_parameters.vb")
+    ParameterOps.create_all_params(inv_app)
 
     form_result = iLogicForm.ShowGlobal("species_20select", FormMode.Modal).Result
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
@@ -15,11 +19,7 @@ Sub Main()
     End If
 
     'enable materials only if the species is selected AND we're working on a part doc
-    Dim inv_app As Inventor.Application = ThisApplication
-    Dim inv_doc As Document = inv_app.ActiveEditDocument
-    Dim inv_params As UserParameters = InventorOps.get_param_set(inv_app)
-    Dim is_part_doc As Boolean = TypeOf inv_doc Is PartDocument
-    For Each s As String in Species.species_list
+    For Each s As String in ParameterOps.species_list
         Dim subst As String = Replace(s, "-", "4")
 
         If Not String.Equals(s, "Hardware") Then
@@ -46,7 +46,7 @@ End Sub
 'validate the parameters for enabled species, and relaunch the form if necessary
 Function validate_species() As FormResult
     Dim app As Application = ThisApplication
-    Dim inv_params As UserParameters = InventorOps.get_param_set(app)
+    Dim inv_params As UserParameters = ParameterOps.get_param_set(app)
 
     Dim inv_doc As Document = app.ActiveEditDocument
     Dim is_part_doc As Boolean = TypeOf inv_doc Is PartDocument
@@ -66,7 +66,7 @@ Function validate_species() As FormResult
         Dim needs_reentry As String = ""
         pn_list.Clear()
 
-        For Each s As String In Species.species_list
+        For Each s As String In ParameterOps.species_list
             Dim subst As String = Replace(s, "-", "4")
             Dim flag_value = inv_params.Item("Flag" & subst).Value
             

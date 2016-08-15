@@ -1,7 +1,8 @@
 ' <IsStraightVb>True</IsStraightVb>
 Imports Inventor
+Imports System.Collections.Generic
 
-Public Class ParameterLists
+Public Class ParameterOps
     'parameters used by multiple modules
     Public Shared shared_params As New Dictionary(Of String, UnitsTypeEnum) From _
             {{"PartType", UnitsTypeEnum.kTextUnits}, _
@@ -21,6 +22,11 @@ Public Class ParameterLists
              {"PurComment", UnitsTypeEnum.kTextUnits}, _
              {"TrackSerialNum", UnitsTypeEnum.kBooleanUnits}, _
              {"RevDescription", UnitsTypeEnum.kTextUnits}}
+
+    'valid species parts will use (encoded in parameter names)
+    Public Shared species_list = New String() {"Ash", "Birch-Baltic", "Cherry", _
+                                 "Maple-Hard", "Maple-Soft", "Oak-Red", "Oak-White", _
+                                 "Pine", "Poplar", "Walnut", "Hardware", "Birch-White"}
 
     'master list of parameters created for Quoting module
     'empty ArrayList represents user-entered field
@@ -68,4 +74,94 @@ Public Class ParameterLists
              {"Maple-Hard", New ArrayList() From {"W1F", "W2F"}}, _
              {"Maple-Soft", New ArrayList() From {"W1F", "W2F"}}, _
              {"Walnut", New ArrayList() From {"B1F", "B2F"}}}
+
+
+    '----------------------Methods-------------------------------------------
+
+    'initialize parameter `n` as type `param_type`
+    Public Shared Sub create_param(ByVal n As String, ByVal param_type As UnitsTypeEnum, _
+                                   ByRef app As Inventor.Application)
+        Dim inv_doc As Document = app.ActiveDocument
+        Dim inv_params As UserParameters = get_param_set(app)
+
+        Dim test_param As UserParameter
+
+        Dim defaults As New Dictionary(Of UnitsTypeEnum, Object) From _
+                {{UnitsTypeEnum.kTextUnits, ""}, _
+                 {UnitsTypeEnum.kBooleanUnits, False}, _
+                 {UnitsTypeEnum.kUnitlessUnits, 0}}
+
+        'if the parameter doesn't already exist, UserParameters.Item will throw an error
+        Try
+            test_param = inv_params.Item(n)
+        Catch
+            Dim default_value = defaults(param_type)
+
+            test_param = inv_params.AddByValue(n, default_value, param_type)
+            inv_doc.Update
+        End Try
+    End Sub
+
+    'create all parameters needed for the suite
+    Public Shared Sub create_all_params(ByRef inv_app As Inventor.Application)
+        'shared
+        For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in shared_params
+            create_param(kvp.Key, kvp.Value, inv_app)
+        Next
+
+        'Epicor module
+        For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in epicor_params
+            create_param(kvp.Key, kvp.Value, inv_app)
+        Next
+
+        'species module
+        For Each s As String in species_list
+            'note: Inventor parameters don't support spaces or special characters, so
+            'need to do a character substitution on the `-`, then switch back when
+            'converting to iproperties
+            Dim subst As String = Replace(s, "-", "4")
+            create_param("Flag" & subst, UnitsTypeEnum.kBooleanUnits, inv_app)
+            create_param("Part" & subst, UnitsTypeEnum.kTextUnits, inv_app)
+            create_param("ExportedPart" & subst, UnitsTypeEnum.kBooleanUnits, inv_app)
+
+            '"Hardware" doesn't have a material associated
+            If Not String.Equals(s, "Hardware") Then
+                create_param("FlagMat" & subst, UnitsTypeEnum.kBooleanUnits, inv_app)
+                create_param("Mat" & subst, UnitsTypeEnum.kTextUnits, inv_app)
+                create_param("ExportedMat" & subst, UnitsTypeEnum.kBooleanUnits, inv_app)
+            End If
+        Next
+
+        'quoting module
+        For Each kvp As KeyValuePair(Of String, Tuple(Of UnitsTypeEnum, ArrayList)) In quoting_params
+            create_param(kvp.Key, kvp.Value.Item1, inv_app)
+        Next
+        'create color spec parameters for each species
+        For Each s As String in species_list
+            Dim subst As String = Replace(s, "-", "4")
+            create_param("ColorSpec" & subst, UnitsTypeEnum.kTextUnits, inv_app)
+        Next
+    End Sub
+
+    'common method to get the document's custom parameter set
+    Public Shared Function get_param_set(ByRef app As Inventor.Application) As UserParameters
+        Dim inv_doc As Document = app.ActiveEditDocument
+        Dim part_doc As PartDocument
+        Dim assm_doc As AssemblyDocument
+        Dim inv_params As UserParameters
+
+        'need to treat part and assembly documents slightly differently
+        If TypeOf inv_doc Is PartDocument Then
+            part_doc = app.ActiveEditDocument
+            inv_params = part_doc.ComponentDefinition.Parameters.UserParameters
+        ElseIf TypeOf inv_doc Is AssemblyDocument Then
+            assm_doc = app.ActiveEditDocument
+            inv_params = assm_doc.ComponentDefinition.Parameters.UserParameters
+        Else
+            'MsgBox("Warning: this is neither a part nor assembly document. Things may misbehave.")
+            inv_params = inv_doc.ComponentDefinition.Parameters.UserParameters
+        End If
+
+        Return inv_params
+    End Function
 End Class

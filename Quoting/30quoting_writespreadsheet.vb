@@ -1,10 +1,10 @@
-AddVbFile "inventor_common.vb"      'InventorOps.get_param_set
+AddVbFile "parameters.vb"           'ParameterOps.get_param_set
 AddVbFile "quoting_common.vb"       'QuotingOps.sheet_name
 AddVbFile "species_common.vb"       'SpeciesOps.unpack_pn
 
 Sub Main()
     Dim app As Application = ThisApplication
-    Dim inv_params As UserParameters = InventorOps.get_param_set(app)
+    Dim inv_params As UserParameters = ParameterOps.get_param_set(app)
     Dim quoting_spreadsheet As String = inv_params.Item("QuotingSpreadsheet").Value
     Dim pn As String = SpeciesOps.unpack_pn(inv_params.Item("PartNumberToUse").Value).Item1.ToUpper()
 

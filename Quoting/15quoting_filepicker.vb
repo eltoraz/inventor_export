@@ -1,10 +1,10 @@
-﻿AddVbFile "inventor_common.vb"      'InventorOps.get_param_set
+﻿AddVbFile "parameters.vb"           'ParameterOps.get_param_set
 AddVbFile "quoting_common.vb"       'QuotingOps.pick_spreadsheet
 
 Imports System.Windows.Forms
 Imports Inventor
 
 Sub Main()
-    Dim inv_params As UserParameters = InventorOps.get_param_set(ThisApplication)
+    Dim inv_params As UserParameters = ParameterOps.get_param_set(ThisApplication)
     QuotingOps.pick_spreadsheet(inv_params, GoExcel)
 End Sub
