@@ -38,7 +38,15 @@ Sub Main()
 
         Dim custom_props As PropertySet
         custom_props = child_comp_def.Document.PropertySets.Item("Inventor User Defined Properties")
-        MtlPartNum = custom_props.Item("Part (" & part_species & ")").Value
+        Try
+            MtlPartNum = custom_props.Item("Part (" & part_species & ")").Value
+        Catch e As Exception
+            Dim child_filename As String = child_comp_def.Document.FullDocumentName
+            MsgBox("The part number is not defined for the specified species for child part " & _
+                   child_filename & ". Please run BBN Species Setup on that part, save the " & _
+                   "document, and rerun this BOM export.")
+            Return
+        End Try
 
         Dim QtyPer As Integer = ThisBOM.CalculateQuantity("Model Data", unique_part)
 
@@ -56,4 +64,6 @@ Sub Main()
     Dim dmt_obj As New DMT()
     Dim file_name As String
     file_name = dmt_obj.write_csv("Bill_Of_Materials.csv", BomOps.bom_fields, data)
+
+    Dim ret_code As Integer = dmt_obj.dmt_import("Bill of Materials", file_name, False)
 End Sub
