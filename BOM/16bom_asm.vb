@@ -36,9 +36,9 @@ Sub Main()
         Dim child_comp_def As ComponentDefinition
         child_comp_def = bom_row.ComponentDefinitions.Item(1)
 
-        Dim child_doc_path As String = child_comp_def.Document.FullDocumentName
-        Dim child_filename As String = System.IO.Path.GetFileName(child_doc_path)
-        MtlPartNum = iProperties.Value(child_filename, "Custom", "Part (" & part_species & ")")
+        Dim custom_props As PropertySet
+        custom_props = child_comp_def.Document.PropertySets.Item("Inventor User Defined Properties")
+        MtlPartNum = custom_props.Item("Part (" & part_species & ")").Value
 
         Dim QtyPer As Integer = ThisBOM.CalculateQuantity("Model Data", unique_part)
 
