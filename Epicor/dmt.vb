@@ -1,5 +1,6 @@
 ' <IsStraightVb>True</IsStraightVb>
 Imports System.Diagnostics
+Imports System.IO
 
 'call the DMT to add/update the specified part/revision (etc.)
 Public Class DMT
@@ -88,27 +89,30 @@ Public Class DMT
     End Function
 
     'return the full path & filename
+    'WARNING: overwrites existing file of same name
+    'display a message and return empty string on IO error
     Public Function write_csv(csv_name As String, fields As String, data As String) _
                               As String
-        Dim fso, csv As Object
-        Dim file_name As string
-
-        'Open the CSV file (note: this will overwrite the file if it exists!)
-        fso = CreateObject("Scripting.FileSystemObject")
-        file_name = dmt_working_path & csv_name
-        csv = fso.OpenTextFile(file_name, 2, True, -2)
+        'full path + filename
+        Dim file_name As String = dmt_working_path & csv_name
 
         'Write field headers & data to file
-        csv.WriteLine(fields)
-        csv.WriteLine(data)
-        csv.Close()
+        Try
+            Using sw As New StreamWriter(file_name)
+                sw.WriteLine(fields)
+                sw.Write(data)
+            End Using
+        Catch e As Exception
+            MsgBox("The CSV file could not be writtern: " & e.Message)
+            Return ""
+        End Try
 
         'need to return the full path & filename to pass to DMT
         Return file_name
     End Function
 
     Public Sub dmt_log_event(prefix As String, msg As String)
-        Dim fso, file_path, file_name, log_file
+        Dim file_path, file_name
         Dim log_date = DateTime.Now
 
         Dim log_msg As String
@@ -117,13 +121,15 @@ Public Class DMT
 
         'create log directory - no filesystem changes will be made if it exists already
         file_path = dmt_working_path & "log\"
-        System.IO.Directory.CreateDirectory(file_path)
+        Directory.CreateDirectory(file_path)
 
-        fso = CreateObject("Scripting.FileSystemObject")
         file_name = file_path & log_date.ToString("yyyyMMdd") & "_dmtlog.txt"
-        log_file = fso.OpenTextFile(file_name, 8, True, -2)
-
-        log_file.WriteLine(log_msg)
-        log_file.Close()
+        Try
+            Using sw As StreamWriter = File.AppendText(file_name)
+                sw.WriteLine(log_msg)
+            End Using
+        Catch e As Exception
+            MsgBox("Couldn't write to DMT log file: " & e.Message)
+        End Try
     End Sub
 End Class
