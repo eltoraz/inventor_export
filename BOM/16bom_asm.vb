@@ -29,15 +29,17 @@ Sub Main()
     Dim subst As String = Replace(part_species, "-", "4")
 
     PartNum = selected_part.Item1
-    RevisionNum = summary_props.Item("Revison Number").Value
+    RevisionNum = summary_props.Item("Revision Number").Value
 
     Dim data As String = ""
     For Each bom_row In bom_view.BOMRows
         Dim child_comp_def As ComponentDefinition
         child_comp_def = bom_row.ComponentDefinitions.Item(1)
 
-        Dim custom_props As PropertySet
-        custom_props = child_comp_def.Document.PropertySets.Item("Inventor User Defined Properties")
+        Dim child_doc As Document = child_comp_def.Document
+        Dim custom_props, design_props As PropertySet
+        custom_props = child_doc.PropertySets.Item("Inventor User Defined Properties")
+        design_props = child_doc.PropertySets.Item("Design Tracking Properties")
         Try
             MtlPartNum = custom_props.Item("Part (" & part_species & ")").Value
         Catch e As Exception
@@ -48,7 +50,8 @@ Sub Main()
             Return
         End Try
 
-        Dim QtyPer As Integer = ThisBOM.CalculateQuantity("Model Data", unique_part)
+        Dim draw_num As String = design_props.Item("Part Number").Value
+        Dim QtyPer As Integer = ThisBOM.CalculateQuantity("Model Data", draw_num)
 
         data = data & BomOps.bom_values("Company")                  'Company name (constant)
         data = data & "," & PartNum
