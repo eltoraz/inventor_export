@@ -9,6 +9,9 @@ Sub Main()
 
     Dim form_result As FormResult = FormResult.OK
 
+    'need the same parameters as the species module
+    iLogicVb.RunExternalRule("10species_parameters.vb")
+
     'select the part to export the BOM for (only manufactured parts, which will
     ' pull in their associated raw materials/component parts anyway)
     form_result = SpeciesOps.select_active_part(app, inv_params, Species.species_list, _
