@@ -5,6 +5,7 @@ AddVbFile "60partplant_export.vb"       'PartPlantExport.part_plant_export
 AddVbFile "species_common.vb"           'SpeciesOps.select_active_part
 AddVbFile "quoting_common.vb"           'QuotingOps.generate_desc
 AddVbFile "parameters.vb"               'ParameterOps.get_param_set, species_list
+AddVbFile "inventor_common.vb"          'InventorOps.format_csv_field
 
 Sub Main()
     'Pull latest data from Epicor

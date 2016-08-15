@@ -21,13 +21,13 @@ Sub Main()
     Dim subst As String = Replace(part_species, "-", "4")
     MtlPartNum = inv_params.Item("Mat" & subst).Value
 
+    PartNum = selected_part.Item1
+    RevisionNum = summary_props.Item("Revision Number").Value
+
     'naively assume that the quantity of materials needed for the part only
     ' depends on the nested quantity from quoting (eg, ignoring cases where
     ' multiple *different* parts use a *single* raw material)
     Dim QtyPer As Double = 1 / inv_params.Item("NestedQty").Value
-
-    PartNum = selected_part.Item1
-    RevisionNum = summary_props.Item("Revision Number").Value
 
     Dim data As String
     data = BomOps.bom_values("Company")                         'Company name (constant)
