@@ -85,7 +85,7 @@ Function validate_quoting(ByRef app As Inventor.Application) As FormResult
         For Each kvp As KeyValuePair(Of String, String) In required_num_fields
             If inv_params.Item(kvp.Key).Value <= 0.0 Then
                 error_log = error_log & System.Environment.NewLine & _
-                            "- Set a value for " & kvp.Value
+                            "- Set a nonzero value for " & kvp.Value
                 fails_validation = True
             End If
         Next

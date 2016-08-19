@@ -141,6 +141,11 @@ Public Class ParameterOps
             Dim subst As String = Replace(s, "-", "4")
             create_param("ColorSpec" & subst, UnitsTypeEnum.kTextUnits, inv_app)
         Next
+
+        'set some parameters to safe defaults (eg, prevent div by 0)
+        '(but only if they haven't already been modified in their respective modules!)
+        Dim inv_params = get_param_set(inv_app)
+        If inv_params.Item("NestedQty").Value = 0 Then inv_params.Item("NestedQty").Value = 1
     End Sub
 
     'common method to get the document's custom parameter set
