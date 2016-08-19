@@ -21,50 +21,34 @@ Public Class PartPlantExport
         Dim part_unpacked As Tuple(Of String, String, String) = SpeciesOps.unpack_pn(part_entry)
 
         PartNum = part_unpacked.Item1.ToUpper()
+        PartType = part_unpacked.Item2
 
         'fields for manufactured parts
-        Dim TrackSerialNumber As Boolean
         Dim SNMask, SNMaskExample, SNBaseDataType, SNFormat As String
 
-        PartType = custom_props.Item("PartType").Value
-        TrackSerialNum = custom_props.Item("TrackSerialNum").Value
-
-        If TrackSerialNum AndAlso String.Equals(PartType, "M") Then
-            SNMask = "NF"
-            SNMaskExample = "NF9999999"
-            SNBaseDataType = "MASK"
-            SNFormat = "NF#######"
-        Else
-            SNMask = ""
-            SNMaskExample = ""
-            SNBaseDataType = ""
-            SNFormat = ""
-        End If
-
-        fields = "Company,Plant,PartNum,PrimWhse,LeadTime,VendorNum,PurPoint,SourceType,CostMethod,SNMask,SNMaskExample,SNBaseDataType,SNFormat"
+        fields = "Company,Plant,PartNum,PrimWhse,SourceType,CostMethod"
 
         data = "BBN"                                    'Company name (constant)
         data = data & "," & "MfgSys"                    'Plant (only one for this company)
         data = data & "," & PartNum
         data = data & "," & "453"                       'PrimWhse (just one warehouse)
 
-        'these fields won't get filled from Inventor
-        data = data & "," & ""                          'LeadTime
-        data = data & "," & ""                          'VendorNum
-        data = data & "," & ""                          'PurPoint
-
         data = data & "," & PartType
 
         data = data & "," & "F"                         'CostMethod (constant)
 
-        data = data & "," & SNMask
-        data = data & "," & SNMaskExample
-        data = data & "," & SNBaseDataType
-        data = data & "," & SNFormat
+        Dim TrackSerialNum As Boolean = custom_props.Item("TrackSerialNum").Value
+        If TrackSerialNum AndAlso String.Equals(PartType, "M") Then
+            fields = fields & ",SNMask,SNMaskExample,SNBaseDataType,SNFormat"
+            data = data & "," & "NF"
+            data = data & "," & "NF9999999"
+            data = data & "," & "MASK"
+            data = data & "," & "NF#######"
+        End If
 
         Dim file_name As String
         file_name = dmt_obj.write_csv("Part_Plant.csv", fields, data)
 
-        Return dmt_obj.dmt_import("Part Plant", file_name, False)
+        Return dmt_obj.dmt_import("Part Plant", file_name, True)
     End Function
 End Class

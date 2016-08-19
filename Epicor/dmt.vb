@@ -26,10 +26,10 @@ Public Class DMT
         psi.UseShellExecute = False
 
         psi.Arguments = dmt_base_args & " -Import=""" & csv & """ -Source="""
-        psi.Arguments = psi.Arguments & filename & """ -Add=True"
+        psi.Arguments = psi.Arguments & filename & """ -Add"
 
         If update_on Then
-            psi.Arguments = psi.Arguments & """ -Update=True"
+            psi.Arguments = psi.Arguments & """ -Update"
         End If
 
         Dim msg_succ As String = "Successfully imported into Epicor!"
