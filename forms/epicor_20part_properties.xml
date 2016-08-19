@@ -140,7 +140,7 @@
       <EditControlType>CheckBox</EditControlType>
     </UiElementSpec>
     <UiElementSpec xsi:type="LabelSpec">
-      <Name>(Note: serial number will be supressed for purchased parts)</Name>
+      <Name>(Note: serial number will be supressed for raw materials)</Name>
       <Font>
         <FamilyName>Tahoma</FamilyName>
         <Size>6.75</Size>
