@@ -1,4 +1,5 @@
 ' <IsStraightVb>True</IsStraightVb>
+Imports System.Text.RegularExpressions
 Imports System.Diagnostics
 Imports System.IO
 
@@ -132,4 +133,101 @@ Public Class DMT
             MsgBox("Couldn't write to DMT log file: " & e.Message)
         End Try
     End Sub
+
+    'takes 1 argument: filename as fully-qualified filename of DMT-generated error file
+    'returns: String containing user-actionable error conditions
+    Public Function parse_dmt_error_log(ByVal filename As String) As String
+        'regex groups to parse: `date` `related fields` `error message`
+        '                group:  (1)          (2)             (3)
+        Dim error_line_pattern As String = "^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}) (.+?) (Table.*|Column.*)$"
+        Dim error_regex As New Regex(error_line_pattern)
+
+        Dim return_string As String = ""
+
+        Try
+            Using sr As New StreamReader(filename)
+                Do while sr.Peek() >= 0
+                    Dim log_line As String = sr.ReadLine()
+                    Dim line_match As Match = error_regex.Match(log_line)
+
+                    If Not line_match.Success Then
+                        return_string = return_string & System.Environment.NewLine & _
+                                        "Unrecognized error in log; please give this " & _
+                                        "error message to your system administrator: " & log_line
+                        Continue Do
+                    End If
+
+                    'parse the error
+                    return_string = return_string & System.Environment.NewLine & _
+                                    parse_error_line(log_line, line_match)
+                Loop
+            End Using
+        Catch ex As FileNotFoundException
+            'note: DMT removes existing error file of same name if rerun w/ no errors
+            return_string = "DMT ran without errors"
+        Catch ex As DirectoryNotFoundException
+            return_string = "Log file directory not found: " & ex.Message
+        Catch ex As IOException
+            return_string = "DMT error file exists but cannot be read: " & ex.Message
+        Catch ex As Exception
+            'other possible exceptions for StreamReader:
+            ' - `ArgumentException`/`ArgumentNullException` (empty/null filename, which shouldn't happen here)
+            return_string = "Uncaught catastrophic failure. Contact your system " & _
+                            "administrator with this error message: " & ex.Message
+        End Try
+
+        Return return_string
+    End Function
+
+    Private Function parse_error_line(ByVal log_line As String, ByRef line_match As Match) As String
+        Dim return_string As String = ""
+
+        Dim error_msg_pattern As String = "Table: (\w*) {0,1}Msg: (.+)$"
+        Dim error_msg_regex As New Regex(error_msg_pattern)
+
+        'the fields to notify the user about are conveniently space-delimited
+        Dim error_fields As String()
+        error_fields = line_match.Groups(2).Value.Split(New String() {" "}, StringSplitOptions.None)
+
+        Dim msg_match As Match = error_msg_regex.Match(line_match.Groups(3).Value)
+        If Not msg_match.Success AndAlso log_line.Contains("constrained to be unique") Then
+            'if the above string is present in the DMT error message, then we're
+            ' working with a BOM, and the row in the CSV corresponding to this
+            ' error was rejected because the fields matching the compound primary
+            ' key in Epicor match one already in the DB
+            return_string = "Entry for part " & error_field(0) & ", revision " & _
+                            error_field(1) & ", material " & error_field(2) & _
+                            "already exists in the BOM in Epicor. It can " &_
+                            "only be updated directly from Epicor ERP."
+        ElseIf Not msg_match.Success
+            return_string = "Unknown DMT error. Please show this error message to " & _
+                            "your system administrator: " & log_line
+        End If
+
+        'if return string has already been populated above, return early
+        ' (I just don't want the rest of this function in the Else block above)
+        If Not String.IsNullOrEmpty(return_string) Then Return return_string
+
+        Dim table As String = msg_match.Groups(1).Value
+        Dim msg As String = msg_match.Groups(2).Value
+
+        If String.IsNullOrEmpty(table) Then
+            If String.Equals(msg, "Your software license does not allow this feature.") Then
+                'pass: this error shouldn't appear anymore, but if it does it should be ignorable
+                '      (eg, from an earlier version of the software)
+            End If
+        ElseIf String.Equals(table, "Part") Then
+            If String.Equals(msg, "Part Number already exists.") Then
+                return_string = "Part " & error_fields(0) & " has already been " & _
+                                "exported into Epicor."
+            Else
+                return_string = "DMT has encountered an error exporting your part " & _
+                                "that wasn't caught by validation: " & msg
+            End If
+        ElseIf String.Equals(table, "PartRev") Then
+        ElseIf String.Equals(table, "ECOMtl") Then
+        End If
+
+        Return return_string
+    End Function
 End Class
