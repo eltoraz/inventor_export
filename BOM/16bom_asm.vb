@@ -62,6 +62,9 @@ Sub Main()
         data = data & "," & BomOps.bom_values("Plant")              'Plant (constant)
         data = data & "," & BomOps.bom_values("ECOGroupID")         'ECO Group (constant)
         data = data & System.Environment.NewLine
+
+        'increment the material sequence for the next item
+        MtlSeq += 10
     Next
 
     Dim dmt_obj As New DMT()
