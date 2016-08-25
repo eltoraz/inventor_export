@@ -211,22 +211,38 @@ Public Class DMT
         Dim table As String = msg_match.Groups(1).Value
         Dim msg As String = msg_match.Groups(2).Value
 
-        If String.IsNullOrEmpty(table) Then
-            If String.Equals(msg, "Your software license does not allow this feature.") Then
-                'pass: this error shouldn't appear anymore, but if it does it should be ignorable
-                '      (eg, from an earlier version of the software)
-            End If
-        ElseIf String.Equals(table, "Part") Then
-            If String.Equals(msg, "Part Number already exists.") Then
-                return_string = "Part " & error_fields(0) & " has already been " & _
-                                "exported into Epicor."
-            Else
-                return_string = "DMT has encountered an error exporting your part " & _
-                                "that wasn't caught by validation: " & msg
-            End If
-        ElseIf String.Equals(table, "PartRev") Then
-        ElseIf String.Equals(table, "ECOMtl") Then
-        End If
+        Dim catchall_error As String = "DMT has encountered an unexpected error. " & _
+                "Please forward this message to your system administrator: "
+        return_string = catchall_error & msg
+
+        Select Case table
+            Case ""
+                If String.Equals(msg, "Your software license does not allow this feature.") Then
+                    'pass: this error shouldn't appear anymore, but if it does it should be ignorable
+                    '      (eg, from an earlier version of the software)
+                End If
+            Case "Part"
+                If String.Equals(msg, "Part Number already exists.") Then
+                    return_string = "Part " & error_fields(0) & " has already been " & _
+                                    "exported into Epicor."
+                End If
+            Case "PartRev"
+                If String.Equals(msg, "Record not available.") Then
+                    If String.IsNullOrEmpty(error_fields(1)) Then
+                        return_string = "You need to specify a revision number to export " & _
+                                        "this Bill of Materials."
+                    Else
+                        return_string = "The part or revision for this Bill of Materials " & _
+                                        "hasn't been entered into Epicor inventory yet."
+                    End If
+                End If
+            Case "ECOMtl"
+                If msg.Contains("Invalid Component Part Number") Then
+                    return_string = "Material " & error_fields(2) & " referenced in this " & _
+                                    "Bill of Materials hasn't been entered into Epicor " & _
+                                    "inventory yet."
+                End If
+        End Select
 
         Return return_string
     End Function
