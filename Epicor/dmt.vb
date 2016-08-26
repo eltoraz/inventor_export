@@ -72,7 +72,7 @@ Public Class DMT
         psi.WindowStyle = ProcessWindowStyle.Hidden
         psi.UseShellExecute = False
 
-        For Each kvp As KeyValuePair(Of String, String) in query_map
+        For Each kvp As KeyValuePair(Of String, String) In query_map
             psi.Arguments = dmt_base_args & " -Export -BAQ=""" & kvp.Key
             psi.Arguments = psi.Arguments & """ -Target=""" & export_path & kvp.Value & """"
 
@@ -173,7 +173,7 @@ Public Class DMT
 
         Try
             Using sr As New StreamReader(filename & error_log_suffix)
-                Do while sr.Peek() >= 0
+                Do While sr.Peek() >= 0
                     Dim log_line As String = sr.ReadLine()
                     Dim line_match As Match = error_regex.Match(log_line)
 
@@ -229,8 +229,8 @@ Public Class DMT
             ' working with a BOM, and the row in the CSV corresponding to this
             ' error was rejected because the fields matching the compound primary
             ' key in Epicor match one already in the DB
-            return_string = "Entry for part " & error_field(0) & ", revision " & _
-                            error_field(1) & ", material " & error_field(2) & _
+            return_string = "Entry for part " & error_fields(0) & ", revision " & _
+                            error_fields(1) & ", material " & error_fields(2) & _
                             "already exists in the BOM in Epicor. It can " &_
                             "only be updated directly from Epicor ERP."
         ElseIf Not msg_match.Success

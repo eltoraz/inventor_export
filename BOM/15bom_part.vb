@@ -1,5 +1,6 @@
-﻿AddVbFile "species_common.vb"           'SpeciesOps.select_active_part
-AddVbFile "bom_common.vb"               'BomOps.bom_fields
+﻿Imports Inventor
+Imports SpeciesOps                      'unpack_pn
+Imports BomOps                          'MtlSeqStart, bom_values
 
 Public Module PartBOMExport
     Sub Main()
@@ -13,10 +14,10 @@ Public Module PartBOMExport
         Dim summary_props As PropertySet = inv_doc.PropertySets.Item("Inventor Summary Information")
 
         Dim selected_part As Tuple(Of String, String, String) = _
-                SpeciesOps.unpack_pn(inv_params.Item("PartNumberToUse").Value)
+                unpack_pn(inv_params.Item("PartNumberToUse").Value)
 
         Dim PartNum, RevisionNum, MtlPartNum As String
-        Dim MtlSeq As Integer = BomOps.MtlSeqStart 
+        Dim MtlSeq As Integer = MtlSeqStart
 
         'get the part number of the associated material
         Dim part_species As String = selected_part.Item3
@@ -32,17 +33,17 @@ Public Module PartBOMExport
         Dim QtyPer As Double = 1 / inv_params.Item("NestedQty").Value
 
         Dim data As String
-        data = BomOps.bom_values("Company")                         'Company name (constant)
+        data = bom_values("Company")                         'Company name (constant)
         data = data & "," & PartNum
         data = data & "," & RevisionNum
         data = data & "," & MtlSeq
         data = data & "," & MtlPartNum
         data = data & "," & QtyPer
-        data = data & "," & BomOps.bom_values("Plant")              'Plant (constant)
-        data = data & "," & BomOps.bom_values("ECOGroupID")         'ECO Group (constant)
+        data = data & "," & bom_values("Plant")              'Plant (constant)
+        data = data & "," & bom_values("ECOGroupID")         'ECO Group (constant)
 
         Dim file_name As String
-        file_name = dmt_obj.write_csv("Bill_Of_Materials.csv", BomOps.bom_fields, data)
+        file_name = dmt_obj.write_csv("Bill_Of_Materials.csv", bom_fields, data)
 
         Return dmt_obj.dmt_import("Bill of Materials", file_name, False)
     End Function

@@ -70,7 +70,7 @@ Sub Main()
     If TypeOf inv_doc Is PartDocument Then
         bom_return_code = PartBOMExport.part_bom_export(inv_app, inv_params, dmt_obj)
     ElseIf TypeOf inv_doc Is AssemblyDocument Then
-        bom_return_code = AssmBOMExport.assm_bom_export(inv_app, inv_params, dmt_obj)
+        bom_return_code = AssmBOMExport.assm_bom_export(inv_app, inv_params, ThisBOM, dmt_obj)
     Else
         MsgBox("Error: MOM can only be exported from a Part or Assembly. Aborting...")
         Return
