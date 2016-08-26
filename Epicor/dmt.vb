@@ -280,4 +280,13 @@ Public Class DMT
 
         Return return_string
     End Function
+
+    Public Sub check_errors(ByVal ret_value As Integer, ByVal export_type As String)
+        If ret_value = -1 Then
+            MsgBox("Error: DMT timed out when processing the " & export_type & ". Aborting...")
+        Else
+            MsgBox("Aborting due to the following errors DMT experienced while processing the " & _
+                export_type & ": "& System.Environment.NewLine & dmt_parsed_log)
+        End If
+    End Sub
 End Class

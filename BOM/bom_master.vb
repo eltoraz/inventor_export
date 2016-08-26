@@ -66,13 +66,24 @@ Sub Main()
     Dim dmt_obj As New DMT()
 
     Dim bom_return_code As Integer
+    Dim export_type As String = "Bill of Materials"
     'BOM export procedure for parts and assemblies is different
     If TypeOf inv_doc Is PartDocument Then
+        export_type = "Part " & export_type
         bom_return_code = PartBOMExport.part_bom_export(inv_app, inv_params, dmt_obj)
     ElseIf TypeOf inv_doc Is AssemblyDocument Then
+        export_type = "Assembly " & export_type
         bom_return_code = AssmBOMExport.assm_bom_export(inv_app, inv_params, ThisBOM, dmt_obj)
     Else
-        MsgBox("Error: MOM can only be exported from a Part or Assembly. Aborting...")
+        MsgBox("Error: Bill of Materials can only be exported from a Part or Assembly. Aborting...")
         Return
     End If
+
+    If bom_return_code <> 0 Then
+        dmt_obj.check_errors(bom_return_code, export_type)
+        Return
+    End If
+
+    MsgBox("DMT has successfully imported the " & export_type " for part " & _
+           selected_part.Item1 & " into Epicor.")
 End Sub

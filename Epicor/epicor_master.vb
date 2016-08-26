@@ -78,20 +78,27 @@ Sub Main()
 
     'if part export fails, abort - this will usually mean the part is already
     'in the DB and so the straight add operation failed
-    'TODO: make use of parsed errors in dmt_obj.dmt_parsed_log
     Dim dmt_obj As New DMT()
     Dim ret_value = PartExport.part_export(app, inv_params, dmt_obj)
-    If ret_value = 0 Then
-        PartRevExport.part_rev_export(app, inv_params, dmt_obj)
-        PartPlantExport.part_plant_export(app, inv_params, dmt_obj)
-        inv_params.Item(flag).Value = True
-    ElseIf ret_value = -1 Then
-        MsgBox("Error: DMT timed out. Aborting...")
-    Else
-        MsgBox("Warning: this part is already present in Epicor. Aborting...")
+    If ret_value <> 0 Then
+        dmt_obj.check_errors(ret_value, "Part")
+        Return
     End If
 
-    'TODO: display message box about DMT state - maybe last 3 lines of logfile
+    ret_value = PartRevExport.part_rev_export(app, inv_params, dmt_obj)
+    If ret_value <> 0 Then
+        dmt_obj.check_errors(ret_value, "Part Revision")
+        Return
+    End If
+
+    ret_value = PartPlantExport.part_plant_export(app, inv_params, dmt_obj)
+    If ret_value <> 0 Then
+        dmt_obj.check_errors(ret_value, "Part Plant")
+        Return
+    End If
+
+    inv_params.Item(flag).Value = True
+    MsgBox("DMT has successfully imported part " & part.Item1 & " into Epicor.")
 End Sub
 
 'validate the form logic, and return a form result (if reentry required) that
