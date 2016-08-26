@@ -144,8 +144,10 @@ Public Class DMT
 
         Dim return_string As String = ""
 
+        Dim error_log_suffix As String = ".Errors.txt"
+
         Try
-            Using sr As New StreamReader(filename)
+            Using sr As New StreamReader(filename & error_log_suffix)
                 Do while sr.Peek() >= 0
                     Dim log_line As String = sr.ReadLine()
                     Dim line_match As Match = error_regex.Match(log_line)
