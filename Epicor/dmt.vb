@@ -8,12 +8,24 @@ Public Class DMT
     Public Shared dmt_loc As String = "C:\Epicor\ERP10.1Client\Client\DMT.exe"
     Public Shared dmt_working_path As String = "I:\Cadd\_Epicor\"
 
-    'TODO: change in production to DMT user/password/environment
-    Private username As String = "DMT_USERNAME"
-    Private password As String = "DMT_PASSWORD"
-    Private configfile As String = "EpicorPilot10"
-    Private connection As String = "net.tcp://CHERRY/EpicorPilot10"
-    Private dmt_base_args As String = "-NoUI -User=" & username & " -Pass=" & password & " -ConnectionURL=""" & connection & """ -ConfigValue=""" & configfile & """"
+    Private username As String
+    Private password As String
+    Private configfile As String
+    Private connection As String
+    Private dmt_base_args As String
+
+    Private dmt_parsed_log As String
+
+    Public Sub New()
+        'TODO: change in production to DMT user/password/environment
+        username = "DMT_USERNAME"
+        password = "DMT_PASSWORD"
+        configfile = "EpicorPilot10"
+        connection = "net.tcp://CHERRY/EpicorPilot10"
+        dmt_base_args = "-NoUI -User=" & username & " -Pass=" & password & " -ConnectionURL=""" & connection & """ -ConfigValue=""" & configfile & """"
+
+        dmt_parsed_log = ""
+    End Sub
 
     'Run the DMT to import the specified CSV into Epicor
     'pass along the return code from the DMT (-1 if it timed out)
