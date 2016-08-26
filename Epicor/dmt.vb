@@ -14,7 +14,7 @@ Public Class DMT
     Private connection As String
     Private dmt_base_args As String
 
-    Private dmt_parsed_log As String
+    Public dmt_parsed_log As String
 
     Public Sub New()
         'TODO: change in production to DMT user/password/environment
@@ -146,14 +146,21 @@ Public Class DMT
         End Try
     End Sub
 
-    'takes 1 argument: filename as fully-qualified filename of DMT-generated error file
-    'returns: String containing user-actionable error conditions
-    Public Function parse_dmt_error_log(ByVal filename As String) As String
+    'takes 1 argument: fully-qualified filename of CSV passed to DMT
+    'parses the DMT error log corresponding to the specified file and stores more
+    ' readable versions of the errors in the DMT object's `dmt_parsed_log` member variable
+    'returns: Integer corresponding to DMT return state
+    '         - 0 = no errors
+    '         - 1 = at least one error parsed in log file
+    '         - 2 = I/O error
+    '         - 3 = other unhandled error
+    Public Function parse_dmt_error_log(ByVal filename As String) As Integer
         'regex groups to parse: `date` `related fields` `error message`
         '                group:  (1)          (2)             (3)
         Dim error_line_pattern As String = "^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}) (.+?) (Table.*|Column.*)$"
         Dim error_regex As New Regex(error_line_pattern)
 
+        Dim return_code As Integer = 0
         Dim return_string As String = ""
 
         Dim error_log_suffix As String = ".Errors.txt"
@@ -175,22 +182,29 @@ Public Class DMT
                     return_string = return_string & System.Environment.NewLine & _
                                     parse_error_line(log_line, line_match)
                 Loop
+
+                If Not String.IsNullOrEmpty(return_string) Then return_code = 1
             End Using
         Catch ex As FileNotFoundException
             'note: DMT removes existing error file of same name if rerun w/ no errors
+            return_code = 0
             return_string = "DMT ran without errors"
         Catch ex As DirectoryNotFoundException
+            return_code = 2
             return_string = "Log file directory not found: " & ex.Message
         Catch ex As IOException
-            return_string = "DMT error file exists but cannot be read: " & ex.Message
+            return_code = 2
+            return_string = return_string & "DMT error file exists but cannot be read: " & ex.Message
         Catch ex As Exception
             'other possible exceptions for StreamReader:
             ' - `ArgumentException`/`ArgumentNullException` (empty/null filename, which shouldn't happen here)
+            return_code = 3
             return_string = "Uncaught catastrophic failure. Contact your system " & _
                             "administrator with this error message: " & ex.Message
         End Try
 
-        Return return_string
+        dmt_parsed_log = return_string
+        Return return_code
     End Function
 
     Private Function parse_error_line(ByVal log_line As String, ByRef line_match As Match) As String
