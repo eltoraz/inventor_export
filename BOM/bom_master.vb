@@ -1,5 +1,8 @@
+AddVbFile "15bom_part.vb"               'PartBOMExport.part_bom_export
+AddVbFile "16bom_asm.vb"                'AssmBOMExport.assm_bom_export
 AddVbFile "species_common.vb"           'SpeciesOps.select_active_part
 AddVbFile "parameters.vb"               'ParameterOps.create_all_params, get_param_set, species_list
+AddVbFile "dmt.vb"                      'DMT
 
 Sub Main()
     Dim inv_app As Inventor.Application = ThisApplication
@@ -60,11 +63,14 @@ Sub Main()
     If warn_before_continue Then msg_result = MsgBox(warn_message, MsgBoxStyle.YesNo)
     If msg_result = 7 Then Return
 
+    Dim dmt_obj As New DMT()
+
+    Dim bom_return_code As Integer
     'BOM export procedure for parts and assemblies is different
     If TypeOf inv_doc Is PartDocument Then
-        iLogicVb.RunExternalRule("15bom_part.vb")
+        bom_return_code = PartBOMExport.part_bom_export(inv_app, inv_params, dmt_obj)
     ElseIf TypeOf inv_doc Is AssemblyDocument Then
-        iLogicVb.RunExternalRule("16bom_asm.vb")
+        bom_return_code = AssmBOMExport.assm_bom_export(inv_app, inv_params, dmt_obj)
     Else
         MsgBox("Error: MOM can only be exported from a Part or Assembly. Aborting...")
         Return

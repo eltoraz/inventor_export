@@ -22,13 +22,14 @@ Public Class DMT
         password = "DMT_PASSWORD"
         configfile = "EpicorPilot10"
         connection = "net.tcp://CHERRY/EpicorPilot10"
-        dmt_base_args = "-NoUI -User=" & username & " -Pass=" & password & " -ConnectionURL=""" & connection & """ -ConfigValue=""" & configfile & """"
+        dmt_base_args = "-NoUI -User=" & username & " -Pass=" & password & " -ConnectionURL=""" & _
+                        connection & """ -ConfigValue=""" & configfile & """"
 
         dmt_parsed_log = ""
     End Sub
 
     'Run the DMT to import the specified CSV into Epicor
-    'pass along the return code from the DMT (-1 if it timed out)
+    'Return values > 0 are passed along from log parser; < 0 signifies DMT exec timeout
     'if the 3rd arg is true, have DMT update the part in Epicor
     '(just try adding it as a new entry otherwise)
     Public Function dmt_import(csv As String, filename As String, update_on As Boolean) _
@@ -47,7 +48,12 @@ Public Class DMT
 
         Dim msg_succ As String = "Successfully imported into Epicor!"
 
-        Return exec_dmt(psi, csv, msg_succ)
+        Dim return_code As Integer = exec_dmt(psi, csv, msg_succ)
+        If return_code > 0 Then
+            return_code = parse_dmt_error_log(filename)
+        End If
+
+        Return return_code
     End Function
 
     'use the DMT to export data from Epicor based on existing BAQs
@@ -154,7 +160,7 @@ Public Class DMT
     '         - 1 = at least one error parsed in log file
     '         - 2 = I/O error
     '         - 3 = other unhandled error
-    Public Function parse_dmt_error_log(ByVal filename As String) As Integer
+    Private Function parse_dmt_error_log(ByVal filename As String) As Integer
         'regex groups to parse: `date` `related fields` `error message`
         '                group:  (1)          (2)             (3)
         Dim error_line_pattern As String = "^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}) (.+?) (Table.*|Column.*)$"

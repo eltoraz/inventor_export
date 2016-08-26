@@ -78,6 +78,7 @@ Sub Main()
 
     'if part export fails, abort - this will usually mean the part is already
     'in the DB and so the straight add operation failed
+    'TODO: make use of parsed errors in dmt_obj.dmt_parsed_log
     Dim dmt_obj As New DMT()
     Dim ret_value = PartExport.part_export(app, inv_params, dmt_obj)
     If ret_value = 0 Then
