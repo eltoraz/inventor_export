@@ -2,9 +2,9 @@
 Imports Inventor
 Imports System.Collections.Generic
 
-Public Class ParameterOps
+Public Module ParameterOps
     'parameters used by multiple modules
-    Public Shared shared_params As New Dictionary(Of String, UnitsTypeEnum) From _
+    Public shared_params As New Dictionary(Of String, UnitsTypeEnum) From _
             {{"PartType", UnitsTypeEnum.kTextUnits}, _
              {"Description", UnitsTypeEnum.kTextUnits}, _
              {"PartNumberToUse", UnitsTypeEnum.kTextUnits}, _
@@ -14,7 +14,7 @@ Public Class ParameterOps
              {"FalseParam", UnitsTypeEnum.kBooleanUnits}}
 
     'master list of parameters created for Epicor module
-    Public Shared epicor_params As New Dictionary(Of String, UnitsTypeEnum) From _
+    Public epicor_params As New Dictionary(Of String, UnitsTypeEnum) From _
             {{"ProdCode", UnitsTypeEnum.kTextUnits}, _
              {"ClassID", UnitsTypeEnum.kTextUnits}, _
              {"UsePartRev", UnitsTypeEnum.kBooleanUnits}, _
@@ -24,13 +24,13 @@ Public Class ParameterOps
              {"RevDescription", UnitsTypeEnum.kTextUnits}}
 
     'valid species parts will use (encoded in parameter names)
-    Public Shared species_list = New String() {"Ash", "Birch-Baltic", "Cherry", _
+    Public species_list = New String() {"Ash", "Birch-Baltic", "Cherry", _
                                  "Maple-Hard", "Maple-Soft", "Oak-Red", "Oak-White", _
                                  "Pine", "Poplar", "Walnut", "Hardware", "Birch-White"}
 
     'master list of parameters created for Quoting module
     'empty ArrayList represents user-entered field
-    Public Shared quoting_params As New Dictionary(Of String, Tuple(Of UnitsTypeEnum, ArrayList)) From _
+    Public quoting_params As New Dictionary(Of String, Tuple(Of UnitsTypeEnum, ArrayList)) From _
             {{"QuotingSpreadsheet", Tuple.Create(UnitsTypeEnum.kTextUnits, _
                         New ArrayList())}, _
              {"FinishedThickness", Tuple.Create(UnitsTypeEnum.kUnitlessUnits, _
@@ -69,7 +69,7 @@ Public Class ParameterOps
              {"CustomDetails", Tuple.Create(UnitsTypeEnum.kTextUnits, _
                         New ArrayList())}}
 
-    Public Shared quoting_color_specs As New Dictionary(Of String, ArrayList) From _
+    Public quoting_color_specs As New Dictionary(Of String, ArrayList) From _
             {{"Cherry", New ArrayList() From {"R1F", "R2F"}}, _
              {"Maple-Hard", New ArrayList() From {"W1F", "W2F"}}, _
              {"Maple-Soft", New ArrayList() From {"W1F", "W2F"}}, _
@@ -79,8 +79,8 @@ Public Class ParameterOps
     '----------------------Methods-------------------------------------------
 
     'initialize parameter `n` as type `param_type`
-    Public Shared Sub create_param(ByVal n As String, ByVal param_type As UnitsTypeEnum, _
-                                   ByRef app As Inventor.Application)
+    Public Sub create_param(ByVal n As String, ByVal param_type As UnitsTypeEnum, _
+                            ByRef app As Inventor.Application)
         Dim inv_doc As Document = app.ActiveDocument
         Dim inv_params As UserParameters = get_param_set(app)
 
@@ -103,7 +103,7 @@ Public Class ParameterOps
     End Sub
 
     'create all parameters needed for the suite
-    Public Shared Sub create_all_params(ByRef inv_app As Inventor.Application)
+    Public Sub create_all_params(ByRef inv_app As Inventor.Application)
         'shared
         For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in shared_params
             create_param(kvp.Key, kvp.Value, inv_app)
@@ -149,7 +149,7 @@ Public Class ParameterOps
     End Sub
 
     'common method to get the document's custom parameter set
-    Public Shared Function get_param_set(ByRef app As Inventor.Application) As UserParameters
+    Public Function get_param_set(ByRef app As Inventor.Application) As UserParameters
         Dim inv_doc As Document = app.ActiveEditDocument
         Dim part_doc As PartDocument
         Dim assm_doc As AssemblyDocument
@@ -169,4 +169,4 @@ Public Class ParameterOps
 
         Return inv_params
     End Function
-End Class
+End Module

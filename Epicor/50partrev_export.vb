@@ -1,14 +1,14 @@
 ﻿Imports System.Text.RegularExpressions
 Imports Inventor
 
-Public Class PartRevExport
+Public Module PartRevExport
     Sub Main()
     End Sub
 
-    Public Shared Function part_rev_export(ByRef app As Inventor.Application, _
-                                           ByRef inv_params As UserParameters, _
-                                           ByRef dmt_obj As DMT) _
-                                           As Integer
+    Public Function part_rev_export(ByRef app As Inventor.Application, _
+                                    ByRef inv_params As UserParameters, _
+                                    ByRef dmt_obj As DMT) _
+                                    As Integer
         Dim fields, data As String
         Dim PartNum, RevisionNum, RevDescription, DrawNum, UserName As String
         Dim ApprovedDate As Date
@@ -61,4 +61,4 @@ Public Class PartRevExport
 
         Return dmt_obj.dmt_import("Part Revision", file_name, False)
     End Function
-End Class
+End Module

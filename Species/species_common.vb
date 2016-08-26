@@ -3,22 +3,22 @@ Imports System.Text.RegularExpressions
 Imports Inventor
 Imports Autodesk.iLogic.Interfaces
 
-Public Class SpeciesOps
+Public Module SpeciesOps
     'regular expressions to match the part number format WP-ZZ-123, and
     ' material part number MX-ZZ-123
-    Public Shared part_pattern As String = "[Ww][Pp]-[a-zA-Z]{2}-[0-9]{3}"
-    Public Shared mat_pattern As String = "[Mm][lhftbpLHFTBP]-[a-zA-Z]{2}-[0-9]{3}"
+    Public part_pattern As String = "[Ww][Pp]-[a-zA-Z]{2}-[0-9]{3}"
+    Public mat_pattern As String = "[Mm][lhftbpLHFTBP]-[a-zA-Z]{2}-[0-9]{3}"
 
     'parts_and_mats: "M" for just manufactured parts, "P" for just purchased 
     '                parts (raw materials), "MP" for both
-    Public Shared Function select_active_part(ByRef app As Inventor.Application, _
-                                              ByRef inv_params As UserParameters, _
-                                              ByRef species_list() As String, _
-                                              ByRef form_obj As IiLogicForm, _
-                                              ByRef vb_obj As ILowLevelSupport, _
-                                              ByRef multivalue_obj As IMultiValueParam, _
-                                              ByVal parts_and_mats As String) _
-                                              As FormResult
+    Public Function select_active_part(ByRef app As Inventor.Application, _
+                                       ByRef inv_params As UserParameters, _
+                                       ByRef species_list() As String, _
+                                       ByRef form_obj As IiLogicForm, _
+                                       ByRef vb_obj As ILowLevelSupport, _
+                                       ByRef multivalue_obj As IMultiValueParam, _
+                                       ByVal parts_and_mats As String) _
+                                       As FormResult
         'select the part we'll be working with here
         Dim active_parts As New ArrayList()
         Dim no_species As Boolean = False
@@ -109,7 +109,7 @@ Public Class SpeciesOps
 
     'parse the part number into a tuple in the format (partnumber, parttype, species)
     '(or a tuple of empty strings if the input doesn't match the expected format)
-    Public Shared Function unpack_pn(ByVal pn As String) As Tuple(Of String, String, String)
+    Public Function unpack_pn(ByVal pn As String) As Tuple(Of String, String, String)
         'pn is in the format `MX-ZZ-123 - Species` for raw materials
         'manufactured parts will usually be `WP-ZZ-123`, but that only applies
         ' for intermediate parts (parts that are specified by customers will
@@ -143,4 +143,4 @@ Public Class SpeciesOps
 
         Return Tuple.Create(part_num, part_type, part_species)
     End Function
-End Class
+End Module

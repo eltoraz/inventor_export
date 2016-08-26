@@ -2,10 +2,10 @@
 'Inventor parameter/iProperty manipulation functions
 Imports Inventor
 
-Public Class InventorOps
+Public Module InventorOps
     'update iProperty `n` with value `param_val`, creating it if it doesn't exist
-    Public Shared Sub update_prop(ByVal n As String, ByVal param_val As Object, _
-                                  ByRef app As Inventor.Application)
+    Public Sub update_prop(ByVal n As String, ByVal param_val As Object, _
+                           ByRef app As Inventor.Application)
         'get the custom property collection
         Dim inv_doc As Document = app.ActiveDocument
         Dim inv_custom_props As PropertySet 
@@ -26,8 +26,8 @@ Public Class InventorOps
     End Sub
 
     'enclose field in quotes, and escape quotes already in the field
-    Public Shared Function format_csv_field(ByVal s As String) As String
+    Public Function format_csv_field(ByVal s As String) As String
         Dim s2 As String = Replace(s, """", """""")
         Return """" & s2 & """"
     End Function
-End Class
+End Module

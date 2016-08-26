@@ -1,13 +1,13 @@
 Imports Inventor
 
-Public Class PartPlantExport
+Public Module PartPlantExport
     Sub Main()
     End Sub
 
-    Public Shared Function part_plant_export(ByRef app As Inventor.Application, _
-                                             ByRef inv_params As userParameters, _
-                                             ByRef dmt_obj As DMT) _
-                                             As Integer
+    Public Function part_plant_export(ByRef app As Inventor.Application, _
+                                      ByRef inv_params As userParameters, _
+                                      ByRef dmt_obj As DMT) _
+                                      As Integer
         Dim fields, data As String
         Dim PartNum, PartType As String
 
@@ -51,4 +51,4 @@ Public Class PartPlantExport
 
         Return dmt_obj.dmt_import("Part Plant", file_name, True)
     End Function
-End Class
+End Module

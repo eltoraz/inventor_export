@@ -3,16 +3,16 @@ Imports System.Windows.Forms
 Imports Inventor
 Imports Autodesk.iLogic.Interfaces
 
-Public Class QuotingOps
-    Public Shared starting_path As String = "N:\CompanyResources\Quoting\"
-    Public Shared sheet_name As String = "BBN Quote Sheet"
+Public Module QuotingOps
+    Public starting_path As String = "N:\CompanyResources\Quoting\"
+    Public sheet_name As String = "BBN Quote Sheet"
 
     'display a dialog to select the quoting spreadsheet to use for the current part
     'set the QuotingSpreadsheet parameter to the path & filename, and test opening it
     'return DialogResult.OK if successful, DialogResult.Cancel if the user cancels
     ' (or the file can't be opened)
-    Public Shared Function pick_spreadsheet(ByRef inv_params As UserParameters, _
-                                            ByRef GoExcel As IGoExcel) As DialogResult
+    Public Function pick_spreadsheet(ByRef inv_params As UserParameters, _
+                                     ByRef GoExcel As IGoExcel) As DialogResult
         'open the quoting spreadsheet
         'using VB-native dialog instead of Inventor since navigating network drives is easier
         Dim file_picker As New OpenFileDialog()
@@ -45,8 +45,8 @@ Public Class QuotingOps
 
     'return a string containing the description for the given raw material
     'note: this uses parameters populated in the quoting module for the specified species
-    Public Shared Function generate_desc(ByVal species As String, _
-                                         ByRef inv_params As UserParameters) As String
+    Public Function generate_desc(ByVal species As String, _
+                                  ByRef inv_params As UserParameters) As String
         Dim desc As String = ""
         Dim subst As String = Replace(species, "-", "4")
 
@@ -70,4 +70,4 @@ Public Class QuotingOps
 
         Return desc
     End Function
-End Class
+End Module
