@@ -29,22 +29,57 @@
       <EditControlType>TextBox</EditControlType>
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
-    <UiElementSpec xsi:type="iLogicExternalRuleControlSpec">
-      <Name>Browse...</Name>
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 1</Name>
       <Font>
         <FamilyName />
         <Size>0</Size>
         <Bold>false</Bold>
         <Italic>false</Italic>
       </Font>
-      <TextLocation>Left</TextLocation>
-      <Image>
-        <BitmapByteArray />
-      </Image>
-      <TextVisible>true</TextVisible>
-      <RuleName>15quoting_filepicker</RuleName>
-      <RuleButtonBehavior>RunRule</RuleButtonBehavior>
-      <Path>15quoting_filepicker.vb</Path>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="iLogicExternalRuleControlSpec">
+          <Name>Browse...</Name>
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <TextLocation>Left</TextLocation>
+          <Image>
+            <BitmapByteArray />
+          </Image>
+          <TextVisible>true</TextVisible>
+          <RuleName>15quoting_filepicker</RuleName>
+          <RuleButtonBehavior>RunRule</RuleButtonBehavior>
+          <Path>15quoting_filepicker.vb</Path>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="iLogicExternalRuleControlSpec">
+          <Name>View XLS</Name>
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <TextLocation>Left</TextLocation>
+          <Image>
+            <BitmapByteArray />
+          </Image>
+          <TextVisible>true</TextVisible>
+          <RuleName>16quoting_openspreadsheet</RuleName>
+          <RuleButtonBehavior>RunRule</RuleButtonBehavior>
+          <Path>16quoting_openspreadsheet.vb</Path>
+        </UiElementSpec>
+      </Items>
     </UiElementSpec>
     <UiElementSpec xsi:type="LabelSpec">
       <Name>Quoting fields</Name>
