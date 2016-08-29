@@ -8,10 +8,6 @@ AddVbFile "parameters.vb"               'ParameterOps.get_param_set, species_lis
 AddVbFile "inventor_common.vb"          'InventorOps.format_csv_field
 
 Sub Main()
-    'Pull latest data from Epicor
-    'this data shouldn't change often, so the rule shouldn't need to be called often
-    'DMT.dmt_export()
-
     'populate the PartNumberToUse param multi-value with the activated part numbers
     Dim app As Inventor.Application = ThisApplication
     Dim inv_params As UserParameters = ParameterOps.get_param_set(app)
