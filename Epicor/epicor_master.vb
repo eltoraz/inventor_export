@@ -1,4 +1,5 @@
 ﻿AddVbFile "dmt.vb"                      'DMT
+AddVbFile "epicor_common.vb"            'EpicorOps.fetch_list_values
 AddVbFile "40part_export.vb"            'PartExport.part_export
 AddVbFile "50partrev_export.vb"         'PartRevExport.part_rev_export
 AddVbFile "60partplant_export.vb"       'PartPlantExport.part_plant_export
@@ -44,6 +45,14 @@ Sub Main()
             Return
         End Try
     End If
+
+    'set multi-value lists for ProdCode & ClassID based on the selected part type
+    MultiValue.List("ProdCode") = EpicorOps.fetch_list_values("ProdCode.csv", _
+                                                              DMT.dmt_working_path, _
+                                                              part.Item2)
+    MultiValue.List("ClassID") = EpicorOps.fetch_list_values("ClassID.csv", _
+                                                             DMT.dmt_working_path, _
+                                                             part.Item2)
 
     'Call the other rules in order
     form_result = iLogicForm.ShowGlobal("epicor_20part_properties", FormMode.Modal).Result

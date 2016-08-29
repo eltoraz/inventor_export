@@ -1,6 +1,7 @@
 AddVbFile "dmt.vb"                  'DMT.dmt_working_path
 AddVbFile "inventor_common.vb"      'InventorOps.update_prop
 AddVbFile "parameters.vb"           'ParameterOps.get_param_set
+AddVbFile "epicor_common.vb"        'EpicorOps.fetch_list_mappings
 
 'set iProperties with values the user has defined in a form
 'note: these values will mostly be the IDs the Epicor DMT is expecting rather
@@ -13,10 +14,10 @@ Sub Main()
 
     'mappings for human-readable values (i.e. in the dropdown boxes) -> keys
     'only necessary for ProdCode and ClassID
-    Dim ProdCodeMap As Dictionary(Of String, String) = fetch_list_mappings("ProdCode.csv")
-    Dim ClassIDMap As Dictionary(Of String, String) = fetch_list_mappings("ClassID.csv")
-
-    'TODO: map approving engineers to Epicor IDs?
+    Dim ProdCodeMap As Dictionary(Of String, String) = _
+                EpicorOps.fetch_list_mappings("ProdCode.csv", DMT.dmt_working_path)
+    Dim ClassIDMap As Dictionary(Of String, String) = _
+                EpicorOps.fetch_list_mappings("ClassID.csv", DMT.dmt_working_path)
 
     'update description separately since it's in a different property set AND
     ' the iProperty only gets changed if we're working with an actual part
@@ -57,33 +58,3 @@ Sub Main()
         inv_doc.Update
     Next
 End Sub
-
-'Map the description in the parameter to the DB friendly ID expected by Epicor
-Function fetch_list_mappings(ByVal f As String) As Dictionary(Of String, String)
-    Dim file_name As String = DMT.dmt_working_path & "ref\" & f
-    Dim mapping As New Dictionary(Of String, String)
-
-    Using csv_reader As New FileIO.TextFieldParser(file_name)
-        csv_reader.TextFieldType = FileIO.FieldType.Delimited
-        csv_reader.SetDelimiters(",")
-
-        Dim current_row As String()
-        Dim first_line As Boolean = True
-        While Not csv_reader.EndOfData
-            Try
-                current_row = csv_reader.ReadFields()
-            Catch ex As FileIO.MalformedLineException
-                Debug.Write("CSV contained invalid line:" & ex.Message)
-            End Try
-
-            If first_line Then
-                'skip headers
-                first_line = False
-            Else
-                mapping.Add(current_row(0), current_row(1))
-            End If
-        End While
-    End Using
-
-    Return mapping
-End Function
