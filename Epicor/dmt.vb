@@ -231,7 +231,7 @@ Public Class DMT
             ' key in Epicor match one already in the DB
             return_string = "Entry for part " & error_fields(0) & ", revision " & _
                             error_fields(1) & ", material " & error_fields(2) & _
-                            "already exists in the BOM in Epicor. It can " &_
+                            "already exists in the BOM in Epicor. It can " & _
                             "only be updated directly from Epicor ERP."
         ElseIf Not msg_match.Success
             return_string = "Unknown DMT error. Please show this error message to " & _

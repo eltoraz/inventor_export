@@ -8,6 +8,12 @@ Sub Main()
     Dim quoting_spreadsheet As String = inv_params.Item("QuotingSpreadsheet").Value
     Dim pn As String = SpeciesOps.unpack_pn(inv_params.Item("PartNumberToUse").Value).Item1.ToUpper()
 
+    If check_xls_open(quoting_spreadsheet) Then
+        MsgBox("Error: another user has the spreadsheet open, so changes " & _
+               "cannot be saved.")
+        Return
+    End If
+
     Try
         GoExcel.Open(quoting_spreadsheet, QuotingOps.sheet_name)
     Catch ex As Exception
@@ -88,3 +94,19 @@ Sub Main()
     GoExcel.Save
     GoExcel.Close
 End Sub
+
+Function check_xls_open(ByVal filename As String) As Boolean
+    Dim locked = False
+
+    Try
+        Dim fs As System.IO.FileStream = _
+                    System.IO.File.Open(filename, System.IO.FileMode.OpenOrCreate, _
+                                        System.IO.FileAccess.ReadWrite, _
+                                        System.IO.FileShare.None)
+        fs.Close()
+    Catch ex As IOException
+        locked = True
+    End Try
+
+    Return locked
+End Function
