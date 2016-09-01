@@ -42,7 +42,7 @@ Public Module PartExport
         End If
 
         'note: serial number fields may get appended
-        fields = "Company,PartNum,SearchWord,PartDescription,ClassID,IUM,PUM,TypeCode,PricePerCode,ProdCode,MfgComment,PurComment,TrackSerialNum,SalesUM,UsePartRev,UOMClassID,NetWeightUOM"
+        fields = "Company,PartNum,SearchWord,PartDescription,ClassID,IUM,PUM,TypeCode,PricePerCode,ProdCode,MfgComment,PurComment,TrackSerialNum,SalesUM,UsePartRev,UOMClassID"
 
         'Build string containing values in order expected by DMT (see fields string)
         data = "BBN"                                'Company name (constant)
@@ -74,9 +74,8 @@ Public Module PartExport
 
         'Net Weight UOM: only needed for manufactured parts
         If String.Equals(PartType, "M") Then
+            fields = fields & ",NetWeightUOM"
             data = data & "," & "LB"
-        Else
-            data = data & ","
         End If
 
         'if serial number is being tracked, a bunch of fields are enabled
