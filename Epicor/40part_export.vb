@@ -4,6 +4,12 @@ Public Module PartExport
     Sub Main()
     End Sub
 
+    'create a CSV with the user-entered part data and run the DMT on it
+    'returns:
+    '   - 0 on success
+    '   - 1 on fixable error
+    '   - 2 on I/O error with log file
+    '   - 3 on other error (see message box)
     Public Function part_export(ByRef app As Inventor.Application, _
                                 ByRef inv_params As UserParameters, _
                                 ByRef dmt_obj As DMT) _
@@ -11,8 +17,6 @@ Public Module PartExport
         Dim fields, data As String
         Dim PartNum, SearchWord, Description, PartType, UOM As String
         Dim MfgComment, PurComment As String
-        Dim TrackSerialNum As Boolean
-        Dim SNFormat, SNBaseDataType, SNMask, SNMaskExample As String
 
         Dim inv_doc As Document = app.ActiveDocument
         Dim custom_props As PropertySet = inv_doc.PropertySets.Item("Inventor User Defined Properties")
@@ -37,22 +41,8 @@ Public Module PartExport
             UOM = "EAM"
         End If
 
-        TrackSerialNum = custom_props.Item("TrackSerialNum").Value
-
-        'if serial number is being tracked, a bunch of fields are enabled
-        If TrackSerialNum AndAlso String.Equals(PartType, "M") Then
-            SNFormat = "NF#######"
-            SNBaseDataType = "MASK"
-            SNMask = "NF"
-            SNMaskExample = "NF9999999"
-        Else
-            SNFormat = ""
-            SNBaseDataType = ""
-            SNMask = ""
-            SNMaskExample = ""
-        End If
-
-        fields = "Company,PartNum,SearchWord,PartDescription,ClassID,IUM,PUM,TypeCode,PricePerCode,ProdCode,MfgComment,PurComment,TrackSerialNum,SalesUM,UsePartRev,SNFormat,SNBaseDataType,UOMClassID,SNMask,SNMaskExample,NetWeightUOM"
+        'note: serial number fields may get appended
+        fields = "Company,PartNum,SearchWord,PartDescription,ClassID,IUM,PUM,TypeCode,PricePerCode,ProdCode,MfgComment,PurComment,TrackSerialNum,SalesUM,UsePartRev,UOMClassID,NetWeightUOM"
 
         'Build string containing values in order expected by DMT (see fields string)
         data = "BBN"                                'Company name (constant)
@@ -78,21 +68,25 @@ Public Module PartExport
         data = data & "," & TrackSerialNum
         data = data & "," & UOM
         data = data & "," & custom_props.Item("UsePartRev").Value
-
-        data = data & "," & SNFormat
-        data = data & "," & SNBaseDataType
-
+        
         'UOMClassID
         data = data & "," & "BBN"
-
-        data = data & "," & SNMask
-        data = data & "," & SNMaskExample
 
         'Net Weight UOM: only needed for manufactured parts
         If String.Equals(PartType, "M") Then
             data = data & "," & "LB"
         Else
             data = data & ","
+        End If
+
+        'if serial number is being tracked, a bunch of fields are enabled
+        Dim TrackSerialNum As Boolean = custom_props.Item("TrackSerialNum").Value
+        If TrackSerialNum AndAlso String.Equals(PartType, "M") Then
+            fields = fields & ",SNFormat,SNBaseDataType,SNMask,SNMaskExample"
+            data = data & "," & "NF#######"
+            data = data & "," & "MASK"
+            data = data & "," & "NF"
+            data = data & "," & "NF9999999"
         End If
 
         Dim file_name As String
