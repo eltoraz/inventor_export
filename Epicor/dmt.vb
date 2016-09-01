@@ -3,7 +3,8 @@ Imports System.Text.RegularExpressions
 Imports System.Diagnostics
 Imports System.IO
 
-'call the DMT to add/update the specified part/revision (etc.)
+'class representing the DMT - stores config info, working paths, etc.
+'responsible for setting up and calling the process
 Public Class DMT
     Public Shared dmt_loc As String = "C:\Epicor\ERP10.1Client\Client\DMT.exe"
     Public Shared dmt_working_path As String = "I:\Cadd\_Epicor\"
@@ -16,6 +17,7 @@ Public Class DMT
 
     Public dmt_parsed_log As String
 
+    'constructor
     Public Sub New()
         'TODO: change in production to DMT user/password/environment
         username = "DMT_USERNAME"
@@ -30,8 +32,8 @@ Public Class DMT
 
     'Run the DMT to import the specified CSV into Epicor
     'Return values > 0 are passed along from log parser; < 0 signifies DMT exec timeout
-    'if the 3rd arg is true, have DMT update the part in Epicor
-    '(just try adding it as a new entry otherwise)
+    '`update_on` controls whether DMT only attempts to add the record as a new entry,
+    ' or update any existing ones
     Public Function dmt_import(csv As String, filename As String, update_on As Boolean) _
                                As Integer
         Dim psi As New ProcessStartInfo(dmt_loc)
@@ -58,7 +60,7 @@ Public Class DMT
 
     'use the DMT to export data from Epicor based on existing BAQs
     'the results of the queries is stored in the paired CSV files for later reading
-    'pass along the return code from the DMT (-1 if it timed out)
+    'TODO: pass along the return code from the DMT (-1 if it timed out)
     Public Sub dmt_export()
         Dim export_path = dmt_working_path & "ref\"
 
@@ -81,8 +83,9 @@ Public Class DMT
         Next
     End Sub
 
-    'return -1 if DMT times out, otherwise pass on DMT's return value (as per
-    'convention, 0 is success and >0 is an error, though I've only ever seen 1)
+    'return -1 if DMT times out, otherwise pass on DMT's return value
+    '0 = success
+    '1 = error
     Public Function exec_dmt(psi As ProcessStartInfo, prefix As String, msg_succ As String) _
                              As Integer
         Dim dmt As Process
@@ -107,11 +110,13 @@ Public Class DMT
         Return ret_value
     End Function
 
-    'return the full path & filename
-    'WARNING: overwrites existing file of same name
+    'write a csv with filename `csv_name` in the DMT's working directory, with
+    ' `fields` as the first row and `data` as the, uh, data
     'display a message and return empty string on IO error
-    Public Function write_csv(csv_name As String, fields As String, data As String) _
-                              As String
+    'WARNING: overwrites existing file of same name
+    'return the full path & filename
+    Public Function write_csv(csv_name As String, fields As String, _
+                              data As String) As String
         'full path + filename
         Dim file_name As String = dmt_working_path & csv_name
 
@@ -130,6 +135,8 @@ Public Class DMT
         Return file_name
     End Function
 
+    'write the specified `msg` to the module's logfile,
+    ' timestamped and marked with the caller's `prefix`
     Public Sub dmt_log_event(prefix As String, msg As String)
         Dim file_path, file_name
         Dim log_date = DateTime.Now
@@ -161,6 +168,7 @@ Public Class DMT
     '         - 2 = I/O error
     '         - 3 = other unhandled error
     Private Function parse_dmt_error_log(ByVal filename As String) As Integer
+        'DMT error file lines have a consistent formula
         'regex groups to parse: `date` `related fields` `error message`
         '                group:  (1)          (2)             (3)
         Dim error_line_pattern As String = "^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}) (.+?) (Table.*|Column.*)$"
@@ -209,13 +217,17 @@ Public Class DMT
                             "administrator with this error message: " & ex.Message
         End Try
 
+        'the compiled message is stored in a member variable of the DMT object
         dmt_parsed_log = return_string
         Return return_code
     End Function
 
+    'helper function to parse individual lines of a DMT error log
+    'returns string containing more user-actionable error message
     Private Function parse_error_line(ByVal log_line As String, ByRef line_match As Match) As String
         Dim return_string As String = ""
 
+        'the most common pattern that I've seen
         Dim error_msg_pattern As String = "Table: (\w*) {0,1}Msg: (.+)$"
         Dim error_msg_regex As New Regex(error_msg_pattern)
 
@@ -249,6 +261,7 @@ Public Class DMT
                 "Please forward this message to your system administrator: "
         return_string = catchall_error & msg
 
+        'handle error messages originating from different tables in Epicor
         Select Case table
             Case ""
                 If String.Equals(msg, "Your software license does not allow this feature.") Then
@@ -281,6 +294,8 @@ Public Class DMT
         Return return_string
     End Function
 
+    'pop up a message box to provide the user feedback based on
+    ' the error code and parsed message
     Public Sub check_errors(ByVal ret_value As Integer, ByVal export_type As String)
         If ret_value = -1 Then
             MsgBox("Error: DMT timed out when processing the " & export_type & ". Aborting...")

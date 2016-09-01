@@ -8,6 +8,7 @@ AddVbFile "quoting_common.vb"           'QuotingOps.generate_desc
 AddVbFile "parameters.vb"               'ParameterOps.get_param_set, species_list
 AddVbFile "inventor_common.vb"          'InventorOps.format_csv_field
 
+'master rule to export part to Epicor inventory, calling the others
 Sub Main()
     'populate the PartNumberToUse param multi-value with the activated part numbers
     Dim app As Inventor.Application = ThisApplication
@@ -15,7 +16,7 @@ Sub Main()
 
     Dim form_result As FormResult = FormResult.OK
 
-    'setup the parameters this module needs
+    'setup the suite's parameters
     iLogicVb.RunExternalRule("10multi_value.vb")
 
     'select the part to work on (placed in "PartNumberToUse" Inventor User Parameter)
@@ -81,8 +82,8 @@ Sub Main()
         Return
     End If
 
-    'if part export fails, abort - this will usually mean the part is already
-    'in the DB and so the straight add operation failed
+    'if any part of the export fails, abort - this will usually mean
+    ' the part is already in the DB and so the straight add operation failed
     Dim dmt_obj As New DMT()
     Dim ret_value = PartExport.part_export(app, inv_params, dmt_obj)
     If ret_value <> 0 Then
@@ -106,10 +107,9 @@ Sub Main()
     MsgBox("DMT has successfully imported part " & part.Item1 & " into Epicor.")
 End Sub
 
-'validate the form logic, and return a form result (if reentry required) that
-' lets the user abort
+'validate the form logic, and return a form result
+' (if reentry required) that lets the user abort
 Function check_logic(ByRef app As Inventor.Application) As FormResult
-    'set a few parameters depending on data entered in first form
     Dim inv_doc As Document = app.ActiveDocument
     Dim inv_params As UserParameters = ParameterOps.get_param_set(app)
     Dim design_props As PropertySet = inv_doc.PropertySets.Item("Design Tracking Properties")
@@ -128,6 +128,7 @@ Function check_logic(ByRef app As Inventor.Application) As FormResult
         Dim error_log As String = ""
         Dim description As String = inv_params.Item("Description").Value
 
+        '1/1/1601 = Win32 epoch = null date for Inventor date fields
         Dim appr_date, null_date As Date
         appr_date = design_props.Item("Engr Date Approved").Value
         null_date = #1/1/1601#

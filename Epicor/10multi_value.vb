@@ -1,7 +1,6 @@
 AddVbFile "parameters.vb"           'ParameterOps.create_all_params
 
-'create parameters with a restricted set of accepted values for import by
-'Epicor DMT (the actual IDs the tool needs are set in set_props.vb)
+'set up base parameters required by Epicor inventory export module
 Sub Main()
     Dim inv_app As Inventor.Application = ThisApplication
 

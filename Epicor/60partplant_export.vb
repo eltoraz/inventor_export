@@ -4,6 +4,14 @@ Public Module PartPlantExport
     Sub Main()
     End Sub
 
+    'create a CSV with the manufacturing details for the part and export it via DMT
+    'note: these fields are largely static
+    'returns:
+    '   - 0 on success
+    '   - 1 on fixable error
+    '   - 2 on I/O error with log file
+    '   - 3 on other error (see message box)
+    '   - -1 on DMT timeout
     Public Function part_plant_export(ByRef app As Inventor.Application, _
                                       ByRef inv_params As userParameters, _
                                       ByRef dmt_obj As DMT) _
@@ -22,9 +30,6 @@ Public Module PartPlantExport
 
         PartNum = part_unpacked.Item1.ToUpper()
         PartType = part_unpacked.Item2
-
-        'fields for manufactured parts
-        Dim SNMask, SNMaskExample, SNBaseDataType, SNFormat As String
 
         fields = "Company,Plant,PartNum,PrimWhse,SourceType,CostMethod"
 

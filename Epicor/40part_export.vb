@@ -10,6 +10,7 @@ Public Module PartExport
     '   - 1 on fixable error
     '   - 2 on I/O error with log file
     '   - 3 on other error (see message box)
+    '   - -1 on DMT timeout
     Public Function part_export(ByRef app As Inventor.Application, _
                                 ByRef inv_params As UserParameters, _
                                 ByRef dmt_obj As DMT) _
@@ -54,8 +55,8 @@ Public Module PartExport
 
         data = data & "," & custom_props.Item("ClassID").Value
 
-        data = data & "," & UOM
-        data = data & "," & UOM
+        data = data & "," & UOM                     'IUM
+        data = data & "," & UOM                     'PUM
 
         data = data & "," & PartType
 
@@ -66,11 +67,10 @@ Public Module PartExport
         data = data & "," & InventorOps.format_csv_field(MfgComment)
         data = data & "," & InventorOps.format_csv_field(PurComment)
         data = data & "," & TrackSerialNum
-        data = data & "," & UOM
+        data = data & "," & UOM                     'SalesUM
         data = data & "," & custom_props.Item("UsePartRev").Value
         
-        'UOMClassID
-        data = data & "," & "BBN"
+        data = data & "," & "BBN"                   'UOMClassID
 
         'Net Weight UOM: only needed for manufactured parts
         If String.Equals(PartType, "M") Then
