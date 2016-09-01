@@ -32,6 +32,8 @@ Public Module QuotingOps
             inv_params.Item("QuotingSpreadsheet").Value = file_picker.FileName
             Try
                 GoExcel.Open(file_picker.FileName, sheet_name)
+                'even though we're not making changes, need to save before closing
+                ' for Inventor to properly release the file
                 GoExcel.Save
                 GoExcel.Close
             Catch ex As Exception

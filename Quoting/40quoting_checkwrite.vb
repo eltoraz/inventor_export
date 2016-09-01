@@ -1,6 +1,7 @@
 AddVbFile "parameters.vb"           'ParameterOps.get_param_set
 AddVbFile "quoting_common.vb"       'QuotingOps.sheet_name
 
+'verify that the fields have been written to the spreadsheet
 Sub Main()
     Dim inv_app As Inventor.Application = ThisApplication
     Dim inv_params As UserParameters = ParameterOps.get_param_set(inv_app)
@@ -22,6 +23,8 @@ Sub Main()
     GoExcel.FindRowStart = data_start_row
     working_row = GoExcel.FindRow(quoting_spreadsheet, QuotingOps.sheet_name, "Stock Name", "=", pn)
 
+    'find the part in the spreadsheet, and check the columns against the parameters
+    'TODO: determine whether floating-point comparisons may cause problems
     Dim failed = False
     Dim fail_msg As String = ""
     If working_row = -1 Then

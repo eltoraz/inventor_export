@@ -3,12 +3,18 @@ AddVbFile "species_common.vb"       'SpeciesOps.unpack_pn
 
 Imports Inventor
 
+'setup suite's parameters, along with multi-value lists of options
+' for this module's parameters
+'prerequisite: part selection must have already been run to populate
+' "PartNumberToUse" parameter
 Sub Main()
     Dim inv_app As Application = ThisApplication
 
     ParameterOps.create_all_params(inv_app)
     Dim inv_params As UserParameters = ParameterOps.get_param_set(inv_app)
 
+    'set multi-value lists for parameters that need them
+    'empty arraylist in the tuple indicates a free-entry field
     For Each kvp As KeyValuePair(Of String, Tuple(Of UnitsTypeEnum, ArrayList)) In ParameterOps.quoting_params
         Dim valid_values As ArrayList = kvp.Value.Item2
         If valid_values.Count > 0 Then

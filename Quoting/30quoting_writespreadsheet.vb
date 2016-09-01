@@ -2,12 +2,17 @@ AddVbFile "parameters.vb"           'ParameterOps.get_param_set
 AddVbFile "quoting_common.vb"       'QuotingOps.sheet_name
 AddVbFile "species_common.vb"       'SpeciesOps.unpack_pn
 
+'write the collected data to the specified spreadsheet
+' in the "QuotingSpreadsheet" parameter
 Sub Main()
     Dim app As Application = ThisApplication
     Dim inv_params As UserParameters = ParameterOps.get_param_set(app)
     Dim quoting_spreadsheet As String = inv_params.Item("QuotingSpreadsheet").Value
     Dim pn As String = SpeciesOps.unpack_pn(inv_params.Item("PartNumberToUse").Value).Item1.ToUpper()
 
+    'TODO: while this code runs quickly, the fact that this check isn't atomic with
+    ' writing/saving the spreadsheet still leaves open a possible race condition
+    ' (especially in networked environments)
     If check_xls_open(quoting_spreadsheet) Then
         MsgBox("Error: another user has the spreadsheet open, so changes " & _
                "cannot be saved.")
@@ -68,7 +73,7 @@ Sub Main()
 
     'write the quoting fields to their respective cells
     GoExcel.CellValue("A" & working_row) = pn
-
+    'column B contains a description field that's for human use only
     GoExcel.CellValue("C" & working_row) = inv_params.Item("FinishedThickness").Value
     GoExcel.CellValue("D" & working_row) = inv_params.Item("Width").Value
     GoExcel.CellValue("E" & working_row) = inv_params.Item("Length").Value
@@ -95,6 +100,11 @@ Sub Main()
     GoExcel.Close
 End Sub
 
+'try opening the spreadsheet `filename` with exclusive access
+' if this fails, it means that either someone else has it open
+' or there's some other I/O problem that would prevent us from
+' opening it at all
+'return True if we can open it exclusively, or False otherwise
 Function check_xls_open(ByVal filename As String) As Boolean
     Dim locked = False
 
