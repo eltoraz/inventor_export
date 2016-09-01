@@ -7,14 +7,22 @@ Public Module AssmBOMExport
     Sub Main()
     End Sub
 
-    'pass along dmt_import return values, except when runtime prereqs aren't met (-> 10)
+    'create a CSV for the assembly bill of materials and export it with DMT
+    'this is one of the more complex DMT operations in that it usually has
+    ' multiple rows of data
+    'returns:
+    '   - 0 on success
+    '   - 1 on fixable error
+    '   - 2 on I/O error with log file
+    '   - 3 on other error (see message box)
+    '   - -1 on DMT timeout
     Public Function assm_bom_export(ByRef inv_app As Inventor.Application, _
                                     ByRef inv_params As UserParameters, _
                                     ByRef thisbom_obj As ICadBom, _
                                     ByRef dmt_obj As DMT) As Integer
         Dim inv_doc As AssemblyDocument = inv_app.ActiveDocument
 
-        'BOM objects
+        'Inventor BOM API objects
         Dim comp_def As AssemblyComponentDefinition
         comp_def = inv_doc.ComponentDefinition
         Dim bom_obj As BOM = comp_def.BOM
@@ -37,6 +45,7 @@ Public Module AssmBOMExport
         PartNum = selected_part.Item1
         RevisionNum = summary_props.Item("Revision Number").Value
 
+        'generate the data block, looping over each unique child part
         Dim data As String = ""
         For Each bom_row In bom_view.BOMRows
             Dim child_comp_def As ComponentDefinition
@@ -46,6 +55,9 @@ Public Module AssmBOMExport
             Dim custom_props, design_props As PropertySet
             custom_props = child_doc.PropertySets.Item("Inventor User Defined Properties")
             design_props = child_doc.PropertySets.Item("Design Tracking Properties")
+
+            'this process requires that the children have part numbers specified
+            ' for the species we're exporting!
             Try
                 MtlPartNum = custom_props.Item("Part (" & part_species & ")").Value
             Catch e As Exception

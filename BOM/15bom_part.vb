@@ -6,6 +6,15 @@ Public Module PartBOMExport
     Sub Main()
     End Sub
 
+    'create a CSV with the part's BOM and export it via DMT
+    'parts present a simple case, where the BOM just serves to
+    ' associate the part with its raw material
+    'returns:
+    '   - 0 on success
+    '   - 1 on fixable error
+    '   - 2 on I/O error with log file
+    '   - 3 on other error (see message box)
+    '   - -1 on DMT timeout
     Public Function part_bom_export(ByRef inv_app As Inventor.Application, _
                                     ByRef inv_params As UserParameters, _
                                     ByRef dmt_obj As DMT) As Integer
