@@ -10,6 +10,8 @@ Sub Main()
     Dim materials_only As Boolean = inv_params.Item("MaterialsOnly").Value
     Dim is_part_doc As Boolean = TypeOf inv_doc Is PartDocument
 
+    'loop through each species in the list, but process
+    ' only those whose flag is enabled
     For Each s As String In ParameterOps.species_list
         Dim subst As String = Replace(s, "-", "4")
 
@@ -17,14 +19,14 @@ Sub Main()
         Dim flag_value = flag_param.Value
 
         If flag_value Then
-            'part (convert lower-case to upper on the way too)
             If Not materials_only Then
+                'part (convert lower-case to upper on the way too)
                 Dim part_param As Parameter = inv_params.Item("Part" & subst)
                 Dim part_value As String = part_param.Value.ToUpper()
                 InventorOps.update_prop("Part (" & s & ")", part_value, app)
             End If
 
-            'material: skip for "Hardware"
+            'material: skip for "Hardware" species, as well as assemblies
             If is_part_doc AndAlso Not String.Equals(s, "Hardware") Then
                 Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
                 Dim mat_value As String = mat_param.Value.ToUpper()

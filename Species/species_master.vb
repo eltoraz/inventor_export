@@ -3,6 +3,7 @@ AddVbFile "species_common.vb"       'SpeciesOps.part_pattern and mat_pattern
 
 Imports System.Text.RegularExpressions
 
+'master control for species selection and part number definition
 Sub Main()
     Dim inv_app As Inventor.Application = ThisApplication
     Dim inv_doc As Document = inv_app.ActiveEditDocument
@@ -10,7 +11,8 @@ Sub Main()
     Dim is_part_doc As Boolean = TypeOf inv_doc Is PartDocument
     Dim form_result As FormResult = FormResult.OK
 
-    'call the rules/open the forms in order to setup the iProperties properly
+    'this is important even when running the module again since earlier
+    ' versions didn't create all the parameters later versions use
     ParameterOps.create_all_params(inv_app)
 
     form_result = iLogicForm.ShowGlobal("species_20select", FormMode.Modal).Result
@@ -28,6 +30,7 @@ Sub Main()
         End If
     Next
 
+    'flags above disable fields for species not selected
     form_result = iLogicForm.ShowGlobal("species_30partnum", FormMode.Modal).Result
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
@@ -38,6 +41,7 @@ Sub Main()
         Return
     End If
 
+    'populate iProperties with part numbers specified for the selected species
     iLogicVb.RunExternalRule("40species_iproperties.vb")
 
     MsgBox("Part number iProperties successfully updated.")
@@ -66,6 +70,7 @@ Function validate_species() As FormResult
         Dim needs_reentry As String = ""
         pn_list.Clear()
 
+        'loop over all the species, but only need to check the enabled ones
         For Each s As String In ParameterOps.species_list
             Dim subst As String = Replace(s, "-", "4")
             Dim flag_value = inv_params.Item("Flag" & subst).Value
@@ -114,6 +119,7 @@ Function validate_species() As FormResult
             End If
         Next
 
+        'if nothing needs to be fixed, set this flag to false to break the loop
         If String.IsNullOrEmpty(needs_reentry) Then
             fails_validation = False
         End If

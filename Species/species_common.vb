@@ -6,6 +6,8 @@ Imports Autodesk.iLogic.Interfaces
 Public Module SpeciesOps
     'regular expressions to match the part number format WP-ZZ-123, and
     ' material part number MX-ZZ-123
+    'however: non-intermediate parts can have non-standard part number
+    ' (as they'll be defined by clients who may have their own numbering scheme)
     Public part_pattern As String = "[Ww][Pp]-[a-zA-Z]{2}-[0-9]{3}"
     Public mat_pattern As String = "[Mm][lhftbpLHFTBP]-[a-zA-Z]{2}-[0-9]{3}"
 
@@ -25,8 +27,12 @@ Public Module SpeciesOps
 
         Dim form_result As FormResult = FormResult.OK
 
+        'the user can still cancel, breaking the loop
+        'it's up to the caller to catch this and abort though!
         Do
             Try
+                'find which species are active and add the associated
+                ' part numbers to the list
                 For Each s As String in species_list
                     Dim subst As String = Replace(s, "-", "4")
 
@@ -77,6 +83,7 @@ Public Module SpeciesOps
 
         multivalue_obj.List("PartNumberToUse") = active_parts
 
+        'prompt the user to select a part from the list generated above
         Dim part_selected As Boolean = False
         Dim pn As String = ""
         Do
@@ -125,6 +132,7 @@ Public Module SpeciesOps
 
         Dim part_num, part_type, part_species As String
 
+        'note: checking the more restrictive pattern first!
         Dim p_match As Match = part_regex.Match(pn)
         Dim m_match As Match = mat_regex.Match(pn)
         If m_match.Success Then
