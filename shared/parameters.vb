@@ -69,6 +69,7 @@ Public Module ParameterOps
              {"CustomDetails", Tuple.Create(UnitsTypeEnum.kTextUnits, _
                         New ArrayList())}}
 
+    'species-specific option lists for color spec in Quoting module
     Public quoting_color_specs As New Dictionary(Of String, ArrayList) From _
             {{"Cherry", New ArrayList() From {"R1F", "R2F"}}, _
              {"Maple-Hard", New ArrayList() From {"W1F", "W2F"}}, _
@@ -103,6 +104,7 @@ Public Module ParameterOps
     End Sub
 
     'create all parameters needed for the suite
+    'note: this doesn't necessarily initialize them to default values that make sense!
     Public Sub create_all_params(ByRef inv_app As Inventor.Application)
         'shared
         For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in shared_params
@@ -143,7 +145,7 @@ Public Module ParameterOps
         Next
 
         'set some parameters to safe defaults (eg, prevent div by 0)
-        '(but only if they haven't already been modified in their respective modules!)
+        ' (but only if they haven't already been modified in their respective modules!)
         Dim inv_params = get_param_set(inv_app)
         If inv_params.Item("NestedQty").Value = 0 Then inv_params.Item("NestedQty").Value = 1
     End Sub
