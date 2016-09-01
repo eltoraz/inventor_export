@@ -30,8 +30,6 @@ Sub Main()
         design_props.Item("Description").Value = inv_params.Item("Description").Value
     End If
 
-    'part type is a shared parameter now, so it wouldn't get updated in the loop
-    InventorOps.update_prop("PartType", inv_params.Item("PartType").Value, app)
     inv_doc.Update
 
     For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in ParameterOps.epicor_params
