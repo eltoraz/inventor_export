@@ -27,28 +27,25 @@ Sub Main()
     'TODO: determine whether floating-point comparisons may cause problems
     Dim failed = False
     Dim fail_msg As String = ""
-    If working_row = -1 Then
+    If working_row = -1 OrElse _
+            GoExcel.CellValue("A" & working_row) <> pn OrElse _
+            GoExcel.CellValue("C" & working_row) <> inv_params.Item("FinishedThickness").Value OrElse _
+            GoExcel.CellValue("D" & working_row) <> inv_params.Item("Width").Value OrElse _
+            GoExcel.CellValue("E" & working_row) <> inv_params.Item("Length").Value OrElse _
+            GoExcel.CellValue("F" & working_row) <> inv_params.Item("WidthSpec").Value OrElse _
+            GoExcel.CellValue("G" & working_row) <> inv_params.Item("LengthSpec").Value OrElse _
+            GoExcel.CellValue("H" & working_row) <> inv_params.Item("QtyPerUnit").Value OrElse _
+            GoExcel.CellValue("I" & working_row) <> inv_params.Item("NestedQty").Value OrElse _
+            GoExcel.CellValue("J" & working_row) <> inv_params.Item("SandingSpec").Value OrElse _
+            GoExcel.CellValue("K" & working_row) <> inv_params.Item("GrainDirection").Value OrElse _
+            GoExcel.CellValue("L" & working_row) <> inv_params.Item("CertifiedClass").Value OrElse _
+            GoExcel.CellValue("M" & working_row) <> inv_params.Item("WoodSpecies").Value OrElse _
+            GoExcel.CellValue("N" & working_row) <> inv_params.Item("GlueUpSpec").Value OrElse _
+            GoExcel.CellValue("O" & working_row) <> inv_params.Item("ColorSpec").Value OrElse _
+            GoExcel.CellValue("P" & working_row) <> inv_params.Item("GradeSpec").Value OrElse _
+            GoExcel.CellValue("Q" & working_row) <> inv_params.Item("CustomSpec").Value OrElse _
+            GoExcel.CellValue("R" & working_row) <> inv_params.Item("CustomDetails").Value Then
         failed = True
-    Else
-        If GoExcel.CellValue("A" & working_row) <> pn OrElse _
-                GoExcel.CellValue("C" & working_row) <> inv_params.Item("FinishedThickness").Value OrElse _
-                GoExcel.CellValue("D" & working_row) <> inv_params.Item("Width").Value OrElse _
-                GoExcel.CellValue("E" & working_row) <> inv_params.Item("Length").Value OrElse _
-                GoExcel.CellValue("F" & working_row) <> inv_params.Item("WidthSpec").Value OrElse _
-                GoExcel.CellValue("G" & working_row) <> inv_params.Item("LengthSpec").Value OrElse _
-                GoExcel.CellValue("H" & working_row) <> inv_params.Item("QtyPerUnit").Value OrElse _
-                GoExcel.CellValue("I" & working_row) <> inv_params.Item("NestedQty").Value OrElse _
-                GoExcel.CellValue("J" & working_row) <> inv_params.Item("SandingSpec").Value OrElse _
-                GoExcel.CellValue("K" & working_row) <> inv_params.Item("GrainDirection").Value OrElse _
-                GoExcel.CellValue("L" & working_row) <> inv_params.Item("CertifiedClass").Value OrElse _
-                GoExcel.CellValue("M" & working_row) <> inv_params.Item("WoodSpecies").Value OrElse _
-                GoExcel.CellValue("N" & working_row) <> inv_params.Item("GlueUpSpec").Value OrElse _
-                GoExcel.CellValue("O" & working_row) <> inv_params.Item("ColorSpec").Value OrElse _
-                GoExcel.CellValue("P" & working_row) <> inv_params.Item("GradeSpec").Value OrElse _
-                GoExcel.CellValue("Q" & working_row) <> inv_params.Item("CustomSpec").Value OrElse _
-                GoExcel.CellValue("R" & working_row) <> inv_params.Item("CustomDetails").Value Then
-            failed = True
-        End If
     End If
 
     If failed Then
