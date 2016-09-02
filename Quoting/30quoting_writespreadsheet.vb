@@ -114,7 +114,7 @@ Function check_xls_open(ByVal filename As String) As Boolean
                                         System.IO.FileAccess.ReadWrite, _
                                         System.IO.FileShare.None)
         fs.Close()
-    Catch ex As IOException
+    Catch ex As System.IO.IOException
         locked = True
     End Try
 

@@ -42,6 +42,8 @@ Public Module PartExport
             UOM = "EAM"
         End If
 
+        Dim TrackSerialNum As Boolean = custom_props.Item("TrackSerialNum").Value
+
         'note: serial number fields may get appended
         fields = "Company,PartNum,SearchWord,PartDescription,ClassID,IUM,PUM,TypeCode,PricePerCode,ProdCode,MfgComment,PurComment,TrackSerialNum,SalesUM,UsePartRev,UOMClassID"
 
@@ -79,7 +81,6 @@ Public Module PartExport
         End If
 
         'if serial number is being tracked, a bunch of fields are enabled
-        Dim TrackSerialNum As Boolean = custom_props.Item("TrackSerialNum").Value
         If TrackSerialNum AndAlso String.Equals(PartType, "M") Then
             fields = fields & ",SNFormat,SNBaseDataType,SNMask,SNMaskExample"
             data = data & "," & "NF#######"
