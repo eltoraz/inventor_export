@@ -171,7 +171,7 @@ Public Class DMT
         'DMT error file lines have a consistent formula
         'regex groups to parse: `date` `related fields` `error message`
         '                group:  (1)          (2)             (3)
-        Dim error_line_pattern As String = "^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}) (.+?) (Table.*|Column.*)$"
+        Dim error_line_pattern As String = "^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})\s*(.+?)\s*(Table.*|Column.*)$"
         Dim error_regex As New Regex(error_line_pattern)
 
         Dim return_code As Integer = 0
@@ -243,7 +243,7 @@ Public Class DMT
             ' key in Epicor match one already in the DB
             return_string = "Entry for part " & error_fields(0) & ", revision " & _
                             error_fields(1) & ", material " & error_fields(2) & _
-                            "already exists in the BOM in Epicor. It can " & _
+                            " already exists in the BOM in Epicor. It can " & _
                             "only be updated directly from Epicor ERP."
         ElseIf Not msg_match.Success
             return_string = "Unknown DMT error. Please show this error message to " & _

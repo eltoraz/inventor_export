@@ -1,5 +1,6 @@
 AddVbFile "15bom_part.vb"               'PartBOMExport.part_bom_export
 AddVbFile "16bom_asm.vb"                'AssmBOMExport.assm_bom_export
+AddVbFile "bom_common.vb"               'BomOps.bom_values
 AddVbFile "species_common.vb"           'SpeciesOps.select_active_part
 AddVbFile "parameters.vb"               'ParameterOps.create_all_params, get_param_set, species_list
 AddVbFile "dmt.vb"                      'DMT
@@ -47,7 +48,7 @@ Sub Main()
             warn_message = warn_message & System.Environment.NewLine & _
                            "- Part (" & part_species & ")"
         End If
-        If Not exported_mat Then
+        If (TypeOf inv_doc Is PartDocument) AndAlso (Not exported_mat) Then
             warn_before_continue = True
             warn_message = warn_message & System.Environment.NewLine & _
                            "- Material (" & part_species & ")"
@@ -89,6 +90,6 @@ Sub Main()
         Return
     End If
 
-    MsgBox("DMT has successfully imported the " & export_type " for part " & _
+    MsgBox("DMT has successfully imported the " & export_type & " for part " & _
            selected_part.Item1 & " into Epicor.")
 End Sub
