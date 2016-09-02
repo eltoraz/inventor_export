@@ -16,8 +16,23 @@ Sub Main()
 
     Dim form_result As FormResult = FormResult.OK
 
+    'figure out if this is the first time this module is run
+    ' so we know whether it's safe to set parameters to default values
+    Dim first_run As Boolean = False
+    Try
+        Dim test As Boolean = inv_params.Item("TrackSerialNum").Value
+    Catch e As Exception
+        first_run = True
+    End Try
+
     'setup the suite's parameters
     ParameterOps.create_all_params(app)
+
+    'parameters that need different default values than 0/False/""
+    If first_run Then
+        inv_params.Item("UserPartRev").Value = True
+        inv_params.Item("TrackSerialNum").Value = True
+    End If
 
     'select the part to work on (placed in "PartNumberToUse" Inventor User Parameter)
     Dim parts_and_mats = "MP"
