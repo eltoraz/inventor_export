@@ -17,7 +17,7 @@ Sub Main()
     Dim form_result As FormResult = FormResult.OK
 
     'setup the suite's parameters
-    iLogicVb.RunExternalRule("10multi_value.vb")
+    ParameterOps.create_all_params(app)
 
     'select the part to work on (placed in "PartNumberToUse" Inventor User Parameter)
     Dim parts_and_mats = "MP"
