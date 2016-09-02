@@ -27,6 +27,15 @@ Public Module SpeciesOps
 
         Dim form_result As FormResult = FormResult.OK
 
+        'forget previous part selection (in case that part isn't valid
+        ' in the current list)
+        Try
+            inv_params.Item("PartNumberToUse").Value = ""
+        Catch ex As Exception
+            MsgBox("Error resetting part.")
+            Return FormResult.None
+        End Try
+
         'the user can still cancel, breaking the loop
         'it's up to the caller to catch this and abort though!
         Do

@@ -11,9 +11,23 @@ Sub Main()
     Dim is_part_doc As Boolean = TypeOf inv_doc Is PartDocument
     Dim form_result As FormResult = FormResult.OK
 
+    'figure out if this is the first time this module is run
+    ' so we know whether it's safe to set parameters to default values
+    Dim first_run As Boolean = False
+    Try
+        Dim test As Boolean = inv_params.Item("IntermediatePart").Value
+    Catch e As Exception
+        first_run = True
+    End Try
+
     'this is important even when running the module again since earlier
     ' versions didn't create all the parameters later versions use
     ParameterOps.create_all_params(inv_app)
+
+    'parameters that need different default values than 0/False/""
+    If first_run Then
+        inv_params.Item("IntermediatePart").Value = True
+    End If
 
     form_result = iLogicForm.ShowGlobal("species_20select", FormMode.Modal).Result
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
