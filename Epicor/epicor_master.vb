@@ -46,6 +46,7 @@ Sub Main()
     'set some parameters based on the type of the selected part
     Dim design_props As PropertySet = app.ActiveDocument.PropertySets.Item("Design Tracking Properties")
     Dim part As Tuple(Of String, String, String) = SpeciesOps.unpack_pn(inv_params.Item("PartNumberToUse").Value)
+    Dim part_type As String = part.Item2
     Dim part_species As String = part.Item3
     Dim is_part As Boolean = inv_params.Item("ActiveIsPart").Value
     If is_part Then
@@ -62,13 +63,18 @@ Sub Main()
         End Try
     End If
 
+    'set product code/group to the correct value if it's been selected before
+    ' (otherwise it'll be set to "")
+    inv_params.Item("ProdCode").Value = inv_params.Item("ProdCode" & part_type).Value
+    inv_params.Item("ClassID").Value = inv_params.Item("ClassID" & part_type).Value
+
     'set multi-value lists for ProdCode & ClassID based on the selected part type
     MultiValue.List("ProdCode") = EpicorOps.fetch_list_values("ProdCode.csv", _
                                                               DMT.dmt_working_path, _
-                                                              part.Item2)
+                                                              part_type)
     MultiValue.List("ClassID") = EpicorOps.fetch_list_values("ClassID.csv", _
                                                              DMT.dmt_working_path, _
-                                                             part.Item2)
+                                                             part_type)
 
     'Call the other rules in order
     form_result = iLogicForm.ShowGlobal("epicor_20part_properties", FormMode.Modal).Result

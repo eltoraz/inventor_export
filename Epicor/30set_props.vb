@@ -2,6 +2,7 @@ AddVbFile "dmt.vb"                  'DMT.dmt_working_path
 AddVbFile "inventor_common.vb"      'InventorOps.update_prop
 AddVbFile "parameters.vb"           'ParameterOps.get_param_set
 AddVbFile "epicor_common.vb"        'EpicorOps.fetch_list_mappings
+AddVbFile "species_common.vb"       'SpeciesOps.unpack_pn
 
 'set iProperties with values the user has defined in a form (epicor_20)
 'note: these values will mostly be the IDs the Epicor DMT is expecting rather
@@ -29,6 +30,11 @@ Sub Main()
     If is_part Then
         design_props.Item("Description").Value = inv_params.Item("Description").Value
     End If
+
+    'store product code/group separately for part/material
+    Dim part_type As String = SpeciesOps.unpack_pn(inv_params.Item("PartNumberToUse").Value).Item2
+    inv_params.Item("ProdCode" & part_type).Value = inv_params.Item("ProdCode")
+    inv_params.Item("ClassID" & part_type).Value = inv_params.Item("ClassID")
 
     inv_doc.Update
 

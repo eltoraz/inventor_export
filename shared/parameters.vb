@@ -15,7 +15,11 @@ Public Module ParameterOps
     'master list of parameters created for Epicor module
     Public epicor_params As New Dictionary(Of String, UnitsTypeEnum) From _
             {{"ProdCode", UnitsTypeEnum.kTextUnits}, _
+             {"ProdCodeM", UnitsTypeEnum.kTextUnits}, _
+             {"ProdCodeP", UnitsTypeEnum.kTextUnits}, _
              {"ClassID", UnitsTypeEnum.kTextUnits}, _
+             {"ClassIDM", UnitsTypeEnum.kTextUnits}, _
+             {"ClassIDP", UnitsTypeEnum.kTextUnits}, _
              {"UsePartRev", UnitsTypeEnum.kBooleanUnits}, _
              {"MfgComment", UnitsTypeEnum.kTextUnits}, _
              {"PurComment", UnitsTypeEnum.kTextUnits}, _
