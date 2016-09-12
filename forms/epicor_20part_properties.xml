@@ -71,6 +71,74 @@
       <EditControlType>TextBox</EditControlType>
       <MinimumLinesToShow>2</MinimumLinesToShow>
     </UiElementSpec>
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 2</Name>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="EmptySpaceSpec">
+          <Name>Empty Space 5</Name>
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <MinimumWidth>0</MinimumWidth>
+          <MaximumWidth>0</MaximumWidth>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="EmptySpaceSpec">
+          <Name>Empty Space 6</Name>
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <MinimumWidth>0</MinimumWidth>
+          <MaximumWidth>0</MaximumWidth>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="iLogicExternalRuleControlSpec">
+          <Name>Enter quoting data (materials)</Name>
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <TextLocation>Left</TextLocation>
+          <Image>
+            <BitmapByteArray />
+          </Image>
+          <TextVisible>true</TextVisible>
+          <RuleName>25epicor_runquoting</RuleName>
+          <RuleButtonBehavior>RunRule</RuleButtonBehavior>
+          <Path>25epicor_runquoting.vb</Path>
+        </UiElementSpec>
+      </Items>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="EmptySpaceSpec">
+      <Name>Empty Space 4</Name>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <MinimumWidth>0</MinimumWidth>
+      <MaximumWidth>0</MaximumWidth>
+    </UiElementSpec>
     <UiElementSpec xsi:type="MultiValueTextParameterControlSpec">
       <Name>Group</Name>
       <ToolTip />
@@ -138,15 +206,6 @@
       <AlwaysReadOnly>false</AlwaysReadOnly>
       <ParameterName>TrackSerialNum</ParameterName>
       <EditControlType>CheckBox</EditControlType>
-    </UiElementSpec>
-    <UiElementSpec xsi:type="LabelSpec">
-      <Name>(Note: serial number will be supressed for raw materials)</Name>
-      <Font>
-        <FamilyName>Tahoma</FamilyName>
-        <Size>6.75</Size>
-        <Bold>false</Bold>
-        <Italic>true</Italic>
-      </Font>
     </UiElementSpec>
     <UiElementSpec xsi:type="EmptySpaceSpec">
       <Name>Empty Space 1</Name>
