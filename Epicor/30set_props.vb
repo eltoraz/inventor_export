@@ -33,8 +33,8 @@ Sub Main()
 
     'store product code/group separately for part/material
     Dim part_type As String = SpeciesOps.unpack_pn(inv_params.Item("PartNumberToUse").Value).Item2
-    inv_params.Item("ProdCode" & part_type).Value = inv_params.Item("ProdCode")
-    inv_params.Item("ClassID" & part_type).Value = inv_params.Item("ClassID")
+    inv_params.Item("ProdCode" & part_type).Value = inv_params.Item("ProdCode").Value
+    inv_params.Item("ClassID" & part_type).Value = inv_params.Item("ClassID").VAlue
 
     inv_doc.Update
 

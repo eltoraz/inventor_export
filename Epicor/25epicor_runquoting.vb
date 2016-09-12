@@ -8,6 +8,8 @@ Sub Main()
     Dim inv_app As Inventor.Application = ThisApplication
     Dim inv_params As UserParameters = ParameterOps.get_param_set(inv_app)
 
+    inv_app.ActiveDocument.Update
+
     'check whether the part is a material; abort if not
     If inv_params.Item("ActiveIsPart").Value Then
         MsgBox("The selected part is not a raw material, and so the quoting " & _
