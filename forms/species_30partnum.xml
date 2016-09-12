@@ -1219,7 +1219,7 @@
       <ContentsTextLocation>Left</ContentsTextLocation>
       <Items>
         <UiElementSpec xsi:type="TextParameterControlSpec">
-          <Name>Part (Hardware)</Name>
+          <Name>Material (Hardware)</Name>
           <ToolTip />
           <Font>
             <FamilyName />
@@ -1227,11 +1227,11 @@
             <Bold>false</Bold>
             <Italic>false</Italic>
           </Font>
-          <EnablingParameterName>FlagHardware</EnablingParameterName>
+          <EnablingParameterName>FlagMatHardware</EnablingParameterName>
           <TextLocation>Left</TextLocation>
           <ReadOnly>false</ReadOnly>
           <AlwaysReadOnly>false</AlwaysReadOnly>
-          <ParameterName>PartHardware</ParameterName>
+          <ParameterName>MatHardware</ParameterName>
           <EditControlType>TextBox</EditControlType>
           <MinimumLinesToShow>2</MinimumLinesToShow>
         </UiElementSpec>

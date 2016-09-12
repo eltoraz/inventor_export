@@ -45,26 +45,31 @@ Public Module SpeciesOps
                 For Each s As String in species_list
                     Dim subst As String = Replace(s, "-", "4")
 
-                    Dim flag_param As Parameter = inv_params.Item("Flag" & subst)
-                    Dim flag_value = flag_param.Value
+                    'note: "Hardware" doesn't have a part and thus plain Flag parameter associated
+                    ' but every species has a FlagMat parameter
+                    Dim flag_value As Boolean
+                    If String.Equals(s, "Hardware") Then
+                        flag_value = False
+                    Else
+                        flag_value = inv_params.Item("Flag" & subst).Value
+                    End If
+                    Dim mat_flag_value As Boolean = inv_params.Item("FlagMat" & subst).Value
 
-                    If flag_value Then
+                    If flag_value AndAlso (String.Equals(parts_and_mats, "M") OrElse _
+                                           String.Equals(parts_and_mats, "MP")) Then
                         'add active parts and materials to the list to present to the user
-                        If String.Equals(parts_and_mats, "M") OrElse String.Equals(parts_and_mats, "MP") Then
-                            Dim part_param As Parameter = inv_params.Item("Part" & subst)
-                            Dim part_value As String = part_param.Value
-                            Dim part_entry As String = part_value & " - " & s
-                            active_parts.Add(part_entry)
-                        End If
+                        Dim part_param As Parameter = inv_params.Item("Part" & subst)
+                        Dim part_value As String = part_param.Value
+                        Dim part_entry As String = part_value & " - " & s
+                        active_parts.Add(part_entry)
+                    End If
 
-                        If String.Equals(parts_and_mats, "P") OrElse String.Equals(parts_and_mats, "MP") Then
-                            If Not String.Equals(s, "Hardware") AndAlso inv_params.Item("FlagMat" & subst).Value Then
-                                Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
-                                Dim mat_value As String = mat_param.Value
-                                Dim mat_entry As String = mat_value & " - " & s
-                                active_parts.Add(mat_entry)
-                            End If
-                        End If
+                    If mat_flag_value AndAlso (String.Equals(parts_and_mats, "P") OrElse _
+                                               String.Equals(parts_and_mats, "MP")) Then
+                        Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
+                        Dim mat_value As String = mat_param.Value
+                        Dim mat_entry As String = mat_value & " - " & s
+                        active_parts.Add(mat_entry)
                     End If
                 Next
             Catch e As ArgumentException

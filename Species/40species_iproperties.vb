@@ -15,23 +15,30 @@ Sub Main()
     For Each s As String In ParameterOps.species_list
         Dim subst As String = Replace(s, "-", "4")
 
-        Dim flag_param As Parameter = inv_params.Item("Flag" & subst)
-        Dim flag_value = flag_param.Value
+        'note: "Hardware" doesn't have a part and thus plain Flag parameter associated
+        ' but every species has a FlagMat parameter
+        Dim flag_value As Boolean
+        If String.Equals(s, "Hardware") Then
+            flag_value = False
+        Else
+            flag_value = inv_params.Item("Flag" & subst).Value
+        End If
+        Dim mat_flag_value As Boolean = inv_params.Item("FlagMat" & subst).Value
 
-        If flag_value Then
-            If Not materials_only Then
-                'part (convert lower-case to upper on the way too)
-                Dim part_param As Parameter = inv_params.Item("Part" & subst)
-                Dim part_value As String = part_param.Value.ToUpper()
-                InventorOps.update_prop("Part (" & s & ")", part_value, app)
-            End If
+        'part (convert lower-case to upper on the way too)
+        'note: "Hardware" is a material category and doesn't have a Part associated
+        ' but don't need to check for it here since the flag's set to False above in that case
+        If flag_value AndAlso Not materials_only Then
+            Dim part_param As Parameter = inv_params.Item("Part" & subst)
+            Dim part_value As String = part_param.Value.ToUpper()
+            InventorOps.update_prop("Part (" & s & ")", part_value, app)
+        End If
 
-            'material: skip for "Hardware" species, as well as assemblies
-            If is_part_doc AndAlso Not String.Equals(s, "Hardware") Then
-                Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
-                Dim mat_value As String = mat_param.Value.ToUpper()
-                InventorOps.update_prop("Material (" & s & ")", mat_value, app)
-            End If
+        'material: skip for assemblies
+        If mat_flag_value AndAlso is_part_doc Then
+            Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
+            Dim mat_value As String = mat_param.Value.ToUpper()
+            InventorOps.update_prop("Material (" & s & ")", mat_value, app)
         End If
     Next
 End Sub

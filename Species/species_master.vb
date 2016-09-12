@@ -37,11 +37,14 @@ Sub Main()
     'enable materials only if the species is selected AND we're working on a part doc
     For Each s As String in ParameterOps.species_list
         Dim subst As String = Replace(s, "-", "4")
-
-        If Not String.Equals(s, "Hardware") Then
-            inv_params.Item("FlagMat" & subst).Value = is_part_doc AndAlso _
-                    inv_params.Item("Flag" & subst).Value
+        Dim mat_flag_value As Boolean
+        If String.Equals(s, "Hardware") Then
+            mat_flag_value = is_part_doc
+        Else
+            mat_flag_value = is_part_doc AndAlso inv_params.Item("Flag" & subst).Value
         End If
+
+        inv_params.Item("FlagMat" & subst).Value = mat_flag_value
     Next
 
     'flags above disable fields for species not selected
@@ -87,14 +90,22 @@ Function validate_species() As FormResult
         'loop over all the species, but only need to check the enabled ones
         For Each s As String In ParameterOps.species_list
             Dim subst As String = Replace(s, "-", "4")
-            Dim flag_value = inv_params.Item("Flag" & subst).Value
+
+            'note: "Hardware" doesn't have a part and thus plain Flag parameter associated
+            ' but every species has a FlagMat parameter
+            Dim flag_value As Boolean
+            If String.Equals(s, "Hardware") Then
+                flag_value = False
+            Else
+                flag_value = inv_params.Item("Flag" & subst).Value
+            End If
+            Dim mat_flag_value As Boolean = inv_params.Item("FlagMat" & subst).Value
             
             Dim materials_only As Boolean = inv_params.Item("MaterialsOnly").Value
             Dim is_intermediate_part As Boolean = inv_params.Item("IntermediatePart").Value
 
             If flag_value Then
-                Dim part_param As Parameter = inv_params.Item("Part" & subst)
-                Dim part_value As String = part_param.Value
+                Dim part_value As String = inv_params.Item("Part" & subst).Value
 
                 If materials_only Then
                     'skip checking Part fields since only materials are relevant
@@ -112,24 +123,24 @@ Function validate_species() As FormResult
                 End If
 
                 pn_list.Add(part_value.ToUpper())
+            End If
 
-                'Hardware parts and Assemblies don't have materials associated, so skip those
-                If Not String.Equals(s, "Hardware") AndAlso inv_params.Item("FlagMat" & subst).Value Then
-                    Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
-                    Dim mat_value As String = mat_param.Value
+            'Assemblies don't have materials associated
+            If mat_flag_value And is_part_doc Then
+                Dim mat_param As Parameter = inv_params.Item("Mat" & subst)
+                Dim mat_value As String = mat_param.Value
 
-                    If String.IsNullOrEmpty(mat_value) OrElse Not mat_regex.IsMatch(mat_value) Then
-                        needs_reentry = needs_reentry & System.Environment.Newline & _
-                                        "- " & "Material (" & s & ")"
-                        fails_validation = True
-                    ElseIf pn_list.Contains(mat_value) Then
-                        needs_reentry = needs_reentry & System.Environment.Newline & _
-                                        "- " & "Material (" & s & ") - duplicate part number"
-                        fails_validation = True
-                    End If
-
-                    pn_list.Add(mat_value)
+                If String.IsNullOrEmpty(mat_value) OrElse Not mat_regex.IsMatch(mat_value) Then
+                    needs_reentry = needs_reentry & System.Environment.Newline & _
+                                    "- " & "Material (" & s & ")"
+                    fails_validation = True
+                ElseIf pn_list.Contains(mat_value) Then
+                    needs_reentry = needs_reentry & System.Environment.Newline & _
+                                    "- " & "Material (" & s & ") - duplicate part number"
+                    fails_validation = True
                 End If
+
+                pn_list.Add(mat_value)
             End If
         Next
 

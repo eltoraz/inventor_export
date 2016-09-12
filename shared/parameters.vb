@@ -125,16 +125,17 @@ Public Module ParameterOps
             'need to do a character substitution on the `-`, then switch back when
             'converting to iproperties
             Dim subst As String = Replace(s, "-", "4")
-            create_param("Flag" & subst, UnitsTypeEnum.kBooleanUnits, inv_app)
-            create_param("Part" & subst, UnitsTypeEnum.kTextUnits, inv_app)
-            create_param("ExportedPart" & subst, UnitsTypeEnum.kBooleanUnits, inv_app)
 
-            '"Hardware" doesn't have a material associated
+            '"Hardware" doesn't have a part associated
             If Not String.Equals(s, "Hardware") Then
-                create_param("FlagMat" & subst, UnitsTypeEnum.kBooleanUnits, inv_app)
-                create_param("Mat" & subst, UnitsTypeEnum.kTextUnits, inv_app)
-                create_param("ExportedMat" & subst, UnitsTypeEnum.kBooleanUnits, inv_app)
+                create_param("Flag" & subst, UnitsTypeEnum.kBooleanUnits, inv_app)
+                create_param("Part" & subst, UnitsTypeEnum.kTextUnits, inv_app)
+                create_param("ExportedPart" & subst, UnitsTypeEnum.kBooleanUnits, inv_app)
             End If
+
+            create_param("FlagMat" & subst, UnitsTypeEnum.kBooleanUnits, inv_app)
+            create_param("Mat" & subst, UnitsTypeEnum.kTextUnits, inv_app)
+            create_param("ExportedMat" & subst, UnitsTypeEnum.kBooleanUnits, inv_app)
         Next
 
         'quoting module
