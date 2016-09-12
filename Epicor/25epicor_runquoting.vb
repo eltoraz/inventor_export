@@ -27,7 +27,7 @@ Sub Main()
     End If
 
     'validate form data (except for spreadsheet itself)
-    form_result = QuotingOps.validate_quoting(False, inv_params, inv_app)
+    form_result = QuotingOps.validate_quoting(False, inv_params, inv_app, iLogicForm)
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
     End If

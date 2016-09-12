@@ -28,7 +28,7 @@ Sub Main()
     End If
 
     'validate form data
-    form_result = QuotingOps.validate_quoting(True, inv_params, app)
+    form_result = QuotingOps.validate_quoting(True, inv_params, app, iLogicForm)
     If form_result = FormResult.Cancel OrElse form_result = FormResult.None Then
         Return
     End If

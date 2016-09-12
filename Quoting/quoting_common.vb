@@ -76,7 +76,8 @@ Public Module QuotingOps
     'validate quoting form data, prompting for reentry of required fields
     Function validate_quoting(ByVal require_spreadsheet As Boolean, _
                               ByRef inv_params As UserParameters, _
-                              ByRef app As Inventor.Application) As FormResult
+                              ByRef app As Inventor.Application, _
+                              ByRef iLogicForm As IiLogicForm) As FormResult
         Dim fails_validation As Boolean = False
         Dim required_text_fields As New Dictionary(Of String, String) From _
                 {{"WidthSpec", "Width Spec"}, _
