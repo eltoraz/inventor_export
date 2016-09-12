@@ -1248,7 +1248,7 @@
           <TextLocation>Left</TextLocation>
           <ReadOnly>true</ReadOnly>
           <AlwaysReadOnly>false</AlwaysReadOnly>
-          <ParameterName>ExportedPartHardware</ParameterName>
+          <ParameterName>ExportedMatHardware</ParameterName>
           <EditControlType>CheckBox</EditControlType>
         </UiElementSpec>
       </Items>
