@@ -39,7 +39,8 @@ Sub Main()
         Dim subst As String = Replace(s, "-", "4")
         Dim mat_flag_value As Boolean
         If String.Equals(s, "Hardware") Then
-            mat_flag_value = is_part_doc
+            'enable hardware field only when working on a part, and when the box is checked
+            mat_flag_value = is_part_doc AndAlso inv_params.Item("FlagMat" & subst).Value
         Else
             mat_flag_value = is_part_doc AndAlso inv_params.Item("Flag" & subst).Value
         End If
