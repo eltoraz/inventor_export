@@ -29,6 +29,21 @@
       <EditControlType>CheckBox</EditControlType>
     </UiElementSpec>
     <UiElementSpec xsi:type="BooleanParameterControlSpec">
+      <Name>Accoya</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>FlagAccoya</ParameterName>
+      <EditControlType>CheckBox</EditControlType>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="BooleanParameterControlSpec">
       <Name>Birch-Baltic</Name>
       <ToolTip />
       <Font>

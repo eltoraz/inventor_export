@@ -27,7 +27,7 @@ Public Module ParameterOps
              {"RevDescription", UnitsTypeEnum.kTextUnits}}
 
     'valid species parts will use (encoded in parameter names)
-    Public species_list = New String() {"Ash", "Birch-Baltic", "Cherry", _
+    Public species_list = New String() {"Ash", "Accoya", "Birch-Baltic", "Cherry", _
                                  "Maple-Hard", "Maple-Soft", "Oak-Red", "Oak-White", _
                                  "Pine", "Poplar", "Walnut", "Hardware", "Birch-White"}
 
@@ -77,6 +77,7 @@ Public Module ParameterOps
             {{"Cherry", New ArrayList() From {"R1F", "R2F"}}, _
              {"Maple-Hard", New ArrayList() From {"W1F", "W2F"}}, _
              {"Maple-Soft", New ArrayList() From {"W1F", "W2F"}}, _
+             {"Accoya", New ArrayList() From {"W1F", "W2F"}}, _
              {"Walnut", New ArrayList() From {"B1F", "B2F"}}}
 
 
@@ -110,12 +111,12 @@ Public Module ParameterOps
     'note: this doesn't necessarily initialize them to default values that make sense!
     Public Sub create_all_params(ByRef inv_app As Inventor.Application)
         'shared
-        For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in shared_params
+        For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) In shared_params
             create_param(kvp.Key, kvp.Value, inv_app)
         Next
 
         'Epicor module
-        For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) in epicor_params
+        For Each kvp As KeyValuePair(Of String, UnitsTypeEnum) In epicor_params
             create_param(kvp.Key, kvp.Value, inv_app)
         Next
 

@@ -183,6 +183,108 @@
       </Items>
     </UiElementSpec>
     <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 25</Name>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Part (Accoya)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagAccoya</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>PartAccoya</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedPartAccoya</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="ControlRowSpec">
+      <Name>Row 26</Name>
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <ContentsFont>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </ContentsFont>
+      <ContentsTextLocation>Left</ContentsTextLocation>
+      <Items>
+        <UiElementSpec xsi:type="TextParameterControlSpec">
+          <Name>Material (Accoya)</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FlagMatAccoya</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>false</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>MatAccoya</ParameterName>
+          <EditControlType>TextBox</EditControlType>
+          <MinimumLinesToShow>2</MinimumLinesToShow>
+        </UiElementSpec>
+        <UiElementSpec xsi:type="BooleanParameterControlSpec">
+          <Name>Already exported:</Name>
+          <ToolTip />
+          <Font>
+            <FamilyName />
+            <Size>0</Size>
+            <Bold>false</Bold>
+            <Italic>false</Italic>
+          </Font>
+          <EnablingParameterName>FalseParam</EnablingParameterName>
+          <TextLocation>Left</TextLocation>
+          <ReadOnly>true</ReadOnly>
+          <AlwaysReadOnly>false</AlwaysReadOnly>
+          <ParameterName>ExportedMatAccoya</ParameterName>
+          <EditControlType>CheckBox</EditControlType>
+        </UiElementSpec>
+      </Items>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="ControlRowSpec">
       <Name>Row 3</Name>
       <Font>
         <FamilyName />
