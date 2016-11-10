@@ -43,5 +43,6 @@ Sub Main()
     'write data to spreadsheet
     iLogicVb.RunExternalRule("30quoting_writespreadsheet.vb")
     
-    'TODO: verify data was saved
+    'verify data was saved
+    iLogicVb.RunExternalRule("40quoting_checkwrite.vb")
 End Sub
