@@ -16,7 +16,8 @@ Public Module PartExport
                                 ByRef dmt_obj As DMT) _
                                 As Integer
         Dim fields, data As String
-        Dim PartNum, SearchWord, Description, PartType, UOM As String
+        Dim PartNum, SearchWord, Description, PartType, UOM, CostMethod As String
+        Dim TrackLots As Boolean
         Dim MfgComment, PurComment As String
 
         Dim inv_doc As Document = app.ActiveDocument
@@ -38,14 +39,22 @@ Public Module PartExport
         'NOTE: default is "M" (manufactured), though only "P"/"M" are expected
         If String.Equals(PartType, "P") Then
             UOM = "EAP"
+            CostMethod = "L"
+            TrackLots = True
         Else
             UOM = "EAM"
+            CostMethod = "S"
+            TrackLots = False
         End If
 
         Dim TrackSerialNum As Boolean = custom_props.Item("TrackSerialNum").Value
 
+        If String.Equals(PartType, "P") Then
+        Else
+        End If
+
         'note: serial number fields may get appended
-        fields = "Company,PartNum,SearchWord,PartDescription,ClassID,IUM,PUM,TypeCode,PricePerCode,ProdCode,MfgComment,PurComment,TrackSerialNum,SalesUM,UsePartRev,UOMClassID"
+        fields = "Company,PartNum,SearchWord,PartDescription,ClassID,IUM,PUM,TypeCode,NonStock,PricePerCode,ProdCode,CostMethod,TrackLots,MfgComment,PurComment,TrackSerialNum,SalesUM,UsePartRev,UOMClassID"
 
         'Build string containing values in order expected by DMT (see fields string)
         data = "BBN"                                'Company name (constant)
@@ -61,11 +70,14 @@ Public Module PartExport
         data = data & "," & UOM                     'PUM
 
         data = data & "," & PartType
+        data = data & "," & True                    'NonStock
 
         'Price per grouping (currently: "E", but will this always be the case?)
         data = data & "," & "E"
 
         data = data & "," & custom_props.Item("ProdCode").Value
+        data = data & "," & CostMethod
+        data = data & "," & TrackLots
         data = data & "," & InventorOps.format_csv_field(MfgComment)
         data = data & "," & InventorOps.format_csv_field(PurComment)
         data = data & "," & TrackSerialNum

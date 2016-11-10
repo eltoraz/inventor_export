@@ -17,7 +17,7 @@ Public Module PartPlantExport
                                       ByRef dmt_obj As DMT) _
                                       As Integer
         Dim fields, data As String
-        Dim PartNum, PartType As String
+        Dim PartNum, PartType, CostMethod As String
 
         Dim inv_doc As Document = app.ActiveDocument
         Dim design_props, custom_props As PropertySet
@@ -31,7 +31,13 @@ Public Module PartPlantExport
         PartNum = part_unpacked.Item1.ToUpper()
         PartType = part_unpacked.Item2
 
-        fields = "Company,Plant,PartNum,PrimWhse,SourceType,CostMethod"
+        If String.Equals(PartType, "M") Then
+            CostMethod = "S"
+        Else
+            CostMethod = "L"
+        End If
+
+        fields = "Company,Plant,PartNum,PrimWhse,SourceType,NonStock,CostMethod"
 
         data = "BBN"                                    'Company name (constant)
         data = data & "," & "MfgSys"                    'Plant (only one for this company)
@@ -40,7 +46,8 @@ Public Module PartPlantExport
 
         data = data & "," & PartType
 
-        data = data & "," & "F"                         'CostMethod (constant)
+        data = data & "," & True                        'NonStock
+        data = data & "," & CostMethod
 
         Dim TrackSerialNum As Boolean = custom_props.Item("TrackSerialNum").Value
         If TrackSerialNum AndAlso String.Equals(PartType, "M") Then
