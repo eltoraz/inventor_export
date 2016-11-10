@@ -83,8 +83,7 @@ Public Module QuotingOps
                 {{"WidthSpec", "Width Spec"}, _
                 {"LengthSpec", "Length Spec"}, {"SandingSpec", "Sanding Spec"}, _
                 {"GrainDirection", "Grain Direction"}, {"CertifiedClass", "Certified Classification"}, _
-                {"GlueUpSpec", "Glue up or solid stock"}, {"GradeSpec", "Grade Spec"}, _
-                {"CustomSpec", "Custom Spec"}, {"CustomDetails", "Custom Details"}}
+                {"GlueUpSpec", "Glue up or solid stock"}, {"GradeSpec", "Grade Spec"}}
         Dim required_num_fields As New Dictionary(Of String, String) From _
                 {{"FinishedThickness", "Finished Thickness"}, {"Width", "Width"}, _
                 {"Length", "Length"}, {"QtyPerUnit", "Qty Per Unit"}, _
