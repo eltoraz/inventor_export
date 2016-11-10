@@ -73,24 +73,23 @@ Sub Main()
 
     'write the quoting fields to their respective cells
     GoExcel.CellValue("A" & working_row) = pn
-    'column B contains a description field that's for human use only
-    GoExcel.CellValue("C" & working_row) = inv_params.Item("FinishedThickness").Value
-    GoExcel.CellValue("D" & working_row) = inv_params.Item("Width").Value
-    GoExcel.CellValue("E" & working_row) = inv_params.Item("Length").Value
-    GoExcel.CellValue("F" & working_row) = inv_params.Item("WidthSpec").Value
-    GoExcel.CellValue("G" & working_row) = inv_params.Item("LengthSpec").Value
+    GoExcel.CellValue("B" & working_row) = inv_params.Item("FinishedThickness").Value
+    GoExcel.CellValue("C" & working_row) = inv_params.Item("Width").Value
+    GoExcel.CellValue("D" & working_row) = inv_params.Item("Length").Value
+    GoExcel.CellValue("E" & working_row) = inv_params.Item("WidthSpec").Value
+    GoExcel.CellValue("F" & working_row) = inv_params.Item("LengthSpec").Value
 
-    GoExcel.CellValue("H" & working_row) = inv_params.Item("QtyPerUnit").Value
-    GoExcel.CellValue("I" & working_row) = inv_params.Item("NestedQty").Value
-    GoExcel.CellValue("J" & working_row) = inv_params.Item("SandingSpec").Value
-    GoExcel.CellValue("K" & working_row) = inv_params.Item("GrainDirection").Value
-    GoExcel.CellValue("L" & working_row) = inv_params.Item("CertifiedClass").Value
-    GoExcel.CellValue("M" & working_row) = inv_params.Item("WoodSpecies").Value
-    GoExcel.CellValue("N" & working_row) = inv_params.Item("GlueUpSpec").Value
-    GoExcel.CellValue("O" & working_row) = inv_params.Item("ColorSpec").Value
-    GoExcel.CellValue("P" & working_row) = inv_params.Item("GradeSpec").Value
-    GoExcel.CellValue("Q" & working_row) = inv_params.Item("CustomSpec").Value
-    GoExcel.CellValue("R" & working_row) = inv_params.Item("CustomDetails").Value
+    GoExcel.CellValue("G" & working_row) = inv_params.Item("QtyPerUnit").Value
+    GoExcel.CellValue("H" & working_row) = inv_params.Item("NestedQty").Value
+    GoExcel.CellValue("I" & working_row) = inv_params.Item("SandingSpec").Value
+    GoExcel.CellValue("J" & working_row) = inv_params.Item("GrainDirection").Value
+    GoExcel.CellValue("K" & working_row) = inv_params.Item("CertifiedClass").Value
+    GoExcel.CellValue("L" & working_row) = inv_params.Item("WoodSpecies").Value
+    GoExcel.CellValue("M" & working_row) = inv_params.Item("GlueUpSpec").Value
+    GoExcel.CellValue("N" & working_row) = inv_params.Item("ColorSpec").Value
+    GoExcel.CellValue("O" & working_row) = inv_params.Item("GradeSpec").Value
+    GoExcel.CellValue("P" & working_row) = inv_params.Item("CustomSpec").Value
+    GoExcel.CellValue("Q" & working_row) = inv_params.Item("CustomDetails").Value
 
     'description string is built from the other fields via an Excel formula,
     ' so don't need to construct/write it here (though the formula will be used
