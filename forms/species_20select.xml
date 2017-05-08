@@ -179,6 +179,21 @@
       <EditControlType>CheckBox</EditControlType>
     </UiElementSpec>
     <UiElementSpec xsi:type="BooleanParameterControlSpec">
+      <Name>Tricoya</Name>
+      <ToolTip />
+      <Font>
+        <FamilyName />
+        <Size>0</Size>
+        <Bold>false</Bold>
+        <Italic>false</Italic>
+      </Font>
+      <TextLocation>Left</TextLocation>
+      <ReadOnly>false</ReadOnly>
+      <AlwaysReadOnly>false</AlwaysReadOnly>
+      <ParameterName>FlagTricoya</ParameterName>
+      <EditControlType>CheckBox</EditControlType>
+    </UiElementSpec>
+    <UiElementSpec xsi:type="BooleanParameterControlSpec">
       <Name>Walnut</Name>
       <ToolTip />
       <Font>

@@ -29,7 +29,7 @@ Public Module ParameterOps
     'valid species parts will use (encoded in parameter names)
     Public species_list = New String() {"Ash", "Accoya", "Birch-Baltic", "Cherry", _
                                  "Maple-Hard", "Maple-Soft", "Oak-Red", "Oak-White", _
-                                 "Pine", "Poplar", "Walnut", "Hardware", "Birch-White"}
+                                 "Pine", "Poplar", "Tricoya", "Walnut", "Hardware", "Birch-White"}
 
     'master list of parameters created for Quoting module
     'empty ArrayList represents user-entered field
@@ -78,6 +78,7 @@ Public Module ParameterOps
              {"Maple-Hard", New ArrayList() From {"W1F", "W2F"}}, _
              {"Maple-Soft", New ArrayList() From {"W1F", "W2F"}}, _
              {"Accoya", New ArrayList() From {"W1F", "W2F"}}, _
+             {"Tricoya", New ArrayList() From {"W1F", "W2F"}}, _
              {"Walnut", New ArrayList() From {"B1F", "B2F"}}}
 
 
