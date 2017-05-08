@@ -66,9 +66,14 @@ Public Module QuotingOps
         desc = desc & inv_params.Item("WoodSpecies").Value & "-"
         desc = desc & inv_params.Item("GlueUpSpec").Value & "-"
         desc = desc & inv_params.Item("ColorSpec" & subst).Value & "-"
-        desc = desc & inv_params.Item("GradeSpec").Value & "-MLD_"
-        desc = desc & inv_params.Item("CustomSpec").Value & "_"
-        desc = desc & inv_params.Item("CustomDetails").Value
+        desc = desc & inv_params.Item("GradeSpec").Value & "-MLD"
+
+        If Not String.IsNullOrEmpty(inv_params.Item("CustomSpec").Value) Then
+            desc = desc & "_" & inv_params.Item("CustomSpec").Value
+        End If
+        If Not String.IsNullOrEmpty(inv_params.Item("CustomDetails").Value) Then
+            desc = desc & "_" & inv_params.Item("CustomDetails").Value
+        End If
 
         Return desc
     End Function
@@ -85,7 +90,7 @@ Public Module QuotingOps
                 {"GrainDirection", "Grain Direction"}, {"CertifiedClass", "Certified Classification"}, _
                 {"GlueUpSpec", "Glue up or solid stock"}, {"GradeSpec", "Grade Spec"}}
         Dim required_num_fields As New Dictionary(Of String, String) From _
-                {{"FinishedThickness", "Finished Thickness"}, {"Width", "Width"}, _
+                {{"FinishedThickness", "Finished Thickness"}, _
                 {"Length", "Length"}, {"QtyPerUnit", "Qty Per Unit"}, _
                 {"NestedQty", "Nested Qty"}}
 
