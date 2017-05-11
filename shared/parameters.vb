@@ -80,6 +80,8 @@ Public Module ParameterOps
              {"Maple-Soft", New ArrayList() From {"W1F", "W2F"}}, _
              {"Accoya", New ArrayList() From {"W1F", "W2F"}}, _
              {"Tricoya", New ArrayList() From {"W1F", "W2F"}}, _
+             {"Oak-White", New ArrayList() From {"W1F", "W2F"}}, _
+             {"Ash", New ArrayList() From {"W1F", "W2F"}}, _
              {"Walnut", New ArrayList() From {"B1F", "B2F"}}}
 
 
