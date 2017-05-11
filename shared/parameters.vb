@@ -51,8 +51,9 @@ Public Module ParameterOps
              {"NestedQty", Tuple.Create(UnitsTypeEnum.kUnitlessUnits, _
                         New ArrayList())}, _
              {"SandingSpec", Tuple.Create(UnitsTypeEnum.kTextUnits, _
-                        New ArrayList() From {"S2S_150", "S4S_150", "S0S", _
-                                              "SDIA", "SSF", "NSF"})}, _
+                        New ArrayList() From {"S0S", "S2S_150", "S2S_220", _
+                                              "S4S_150", "S4S_220", _
+                                              "SSF", "NSF", "SDIA_150"})}, _
              {"GrainDirection", Tuple.Create(UnitsTypeEnum.kTextUnits, _
                         New ArrayList() From {"GDL", "GDN"})}, _
              {"CertifiedClass", Tuple.Create(UnitsTypeEnum.kTextUnits, _

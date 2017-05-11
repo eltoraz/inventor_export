@@ -96,6 +96,10 @@ Public Module QuotingOps
 
         Dim form_result As FormResult = FormResult.OK
 
+        If Not String.Equals(inv_params.Item("SandingSpec").Value, "SDIA_150") Then
+            required_num_fields.Add("Width", "Width")
+        End If
+
         'validation loop - most values are selected from multi-value lists, and the
         ' default values tend to be "" or 0.0
         Do
